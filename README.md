@@ -1,6 +1,6 @@
-# Angular11-12
+# Angular12
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.13.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
 
 ## Development server
 
