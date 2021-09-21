@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+PROJECT=$1
+shift
+SOURCES="git diff --cached --name-only"
+DESTINATIONS=""
+DELIMITER=""
+
+for src in $SOURCES
+do
+    DELIMITER=" --files "
+    DESTINATIONS="$DESTINATIONS$DELIMITER${src}"
+done
+
+cd angular11-12 && ng lint $PROJECT $DESTINATIONS

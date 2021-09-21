@@ -1,0 +1,11 @@
+@import "~src/assets/scss/colors";
+
+mat-sidenav-container {
+  height:100vh;
+}
+mat-sidenav, mat-sidenav-conetent {
+  padding: 16px;
+}
+mat-sidenav {
+  width: 300px;
+}

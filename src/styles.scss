@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+// regular style toast
+@import '~ngx-toastr/toastr';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* importing necessary scss files to global setup*/
+
+@import './assets/scss/colors';
+
+@import './assets/scss/fonts';
+
+@import './assets/scss/_bootstrap';
+
+@import './assets/scss/_material';
+
+@import './assets/scss/_custom';

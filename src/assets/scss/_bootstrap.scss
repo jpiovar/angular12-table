@@ -1,0 +1,8 @@
+@import "~src/assets/scss/colors";
+@import "~src/assets/scss/fonts";
+
+$theme-colors: (
+  "primary": $bs-color-primary,
+  "danger": $bs-color-danger
+);
+@import '~bootstrap/scss/bootstrap';

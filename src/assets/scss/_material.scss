@@ -1,0 +1,94 @@
+@import "~src/assets/scss/colors";
+@import "~src/assets/scss/fonts";
+
+/* Material theme */
+@import '~src/assets/scss/_theme';
+
+$material-design-icons-font-directory-path: '~material-design-icons-iconfont/dist/fonts/';
+@import '~material-design-icons-iconfont/src/material-design-icons';
+
+// .mat-accordion {
+//   .mat-expansion-panel-header {
+//     padding: 0 !important;
+//   }
+//   .mat-expansion-panel-body {
+//     padding: 0 5px !important;
+//   }
+//   .mat-expansion-panel:not([class*=mat-elevation-z]) {
+//     box-shadow: none !important;
+//   }
+// }
+
+.material-dialog {
+  // font-family: $fonty-poppins;
+  .mat-dialog-container {
+    // padding: 0px;
+  }
+  .mat-dialog-title {
+    background: $color-primary;
+    color: $color7;
+    margin: -24px -24px 0px -24px;
+    padding: 10px 10px;
+    height: 40px;
+    h6 {
+      font-size: 1rem;
+      line-height: 2rem;
+      font-weight: 400;
+      font-family: $fonty-poppins;
+      margin-top: 5px;
+      margin-bottom: 0px;
+    }
+    button {
+      outline: none;
+      width: 1.6rem;
+      height: 1.6rem;
+      line-height: 1rem;
+      font-size: 1rem;
+      .mat-button-wrapper {
+        line-height: 1rem;
+        padding: 0;
+        .mat-icon {
+          font-size: 1rem;
+          // padding-right: 4px;
+          padding-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+.mat-select-panel{
+  &.fullwidth-select-panel{
+    max-width: 100%;
+  }
+}
+
+.mat-autocomplete-panel{
+  .mat-option{
+    font-size: 0.7rem;
+    height: 40px;
+  }
+}
+
+/* star icon in required form fields*/
+.mat-focused{
+  .mat-form-field-required-marker{
+    color: $color9;
+   }
+}
+
+.popover{
+  max-width: 400px;
+}
+
+.mat-form-field-suffix {
+  .mat-icon{
+    font-size: 1rem;
+  }
+}
+
+.mat-form-field{
+  &.align{
+    padding-left: 0px !important;
+  }
+}

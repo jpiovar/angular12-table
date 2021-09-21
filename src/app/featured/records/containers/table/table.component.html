@@ -1,0 +1,81 @@
+<div class="container" id="table-records">
+  <div class="row">
+    <div class="col-md-12">
+      <div id="global-search">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
+          </div>
+          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" (keyup)="globalSearch()"
+            placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+          <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
+        </div>
+        <div class="filter-item">
+          <button mat-raised-button color="accent" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
+            Reset filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th id="firstname">
+              <span class="th-link" (click)="sortByColumn('firstname')">Firstname
+                <mat-icon *ngIf="sortByCol?.firstname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.firstname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th id="surname">
+              <span class="th-link" (click)="sortByColumn('surname')">Surname
+                <mat-icon *ngIf="sortByCol?.surname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.surname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th id="age">
+              <span class="th-link" (click)="sortByColumn('age')">Age
+                <mat-icon *ngIf="sortByCol?.age==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.age==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th id="details">
+              <span>
+                Details
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of records">
+            <td>{{item.firstname}}</td>
+            <td>{{item.surname}}</td>
+            <td>{{item.age}}</td>
+            <td class="td-link">
+              <span (click)="triggerOpenViewEditDialog(item)">
+                <mat-icon aria-label="view-edit">preview</mat-icon>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="pagination">
+        <li class="page-item">
+          <span class="page-link" (click)="previousPage()">Previous</span>
+        </li>
+        <li *ngFor="let itemP of pages; let i = index" class="page-item" [ngClass]="{'active': activePage === i}">
+          <span class="page-link" (click)="jumpToPage(i)">{{i+1}}</span>
+        </li>
+        <li class="page-item">
+          <span class="page-link" (click)="nextPage()">Next</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

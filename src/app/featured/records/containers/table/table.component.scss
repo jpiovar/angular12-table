@@ -1,0 +1,36 @@
+#table-records {
+  #global-search {
+
+    .input-group {
+      max-width: 200px;
+      float: left;
+
+      .spinner-border {
+        z-index: 10;
+        position: absolute;
+        bottom: 10px;
+        right: 12px;
+      }
+
+      #search-addon {
+        width: 45px;
+        height: 100%;
+      }
+    }
+    .filter-item {
+      float: left;
+    }
+  }
+  .th-link {
+    cursor: pointer;
+  }
+  .td-link {
+    cursor: pointer;
+  }
+  .pagination {
+    float: right;
+    .page-link {
+      cursor: pointer;
+    }
+  }
+}

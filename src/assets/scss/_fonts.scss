@@ -1,0 +1,109 @@
+@font-face {
+	font-family: "pvs-icons";
+	src: url("../fonts/icons/pvs-icons.ttf?v=3") format("truetype"),
+		url("../fonts/icons/pvs-icons.woff?v=3") format("woff"),
+		url("../fonts/icons/pvs-icons.svg?v=3#icon") format("svg");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/roboto/roboto-thin.woff?v=1") format("woff"),
+		url("../fonts/roboto/roboto-thin.ttf?v=1") format("truetype");
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/roboto/roboto-light.woff?v=1") format("woff"),
+		url("../fonts/roboto/roboto-light.ttf?v=1") format("truetype");
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/roboto/roboto-regular.woff?v=1") format("woff"),
+		url("../fonts/roboto/roboto-regular.ttf?v=1") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/roboto/roboto-medium.woff?v=1") format("woff"),
+		url("../fonts/roboto/roboto-medium.ttf?v=1") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("../fonts/roboto/roboto-bold.woff?v=1") format("woff"),
+		url("../fonts/roboto/roboto-bold.ttf?v=1") format("truetype");
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-regular.woff?v=1") format("woff"),
+		url("../fonts/poppins/poppins-regular.woff2?v=1") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-medium.woff?v=1") format("woff"),
+		url("../fonts/poppins/poppins-medium.woff2?v=1") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url("../fonts/poppins/poppins-bold.woff?v=1") format("woff"),
+		url("../fonts/poppins/poppins-bold.woff2?v=1") format("woff2");
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Material Icons";
+	font-style: normal;
+	font-weight: 400;
+	src: local("Material Icons"), local("MaterialIcons-Regular"),
+		// url("../fonts/material/materialicons-regular.woff2") format("woff2"),
+	// 	url("../fonts/material/materialicons-regular.woff") format("woff"),
+		// url("../fonts/material/materialicons-regular.ttf") format("truetype");
+}
+
+.material-icons {
+	font-family: "Material Icons";
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px; /* Preferred icon size */
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing: antialiased;
+	/* Support for Safari and Chrome. */
+	text-rendering: optimizeLegibility;
+
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing: grayscale;
+
+	/* Support for IE. */
+	font-feature-settings: "liga";
+}
+$fonty-roboto: "Roboto", helvetica, arial, sans-serif;
+$fonty-poppins: "Poppins", sans-serif;
