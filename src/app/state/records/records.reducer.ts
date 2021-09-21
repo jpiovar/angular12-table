@@ -4,6 +4,7 @@ import { getIndexBasedId } from 'src/app/shared/utils/helper';
 
 export const initialState: RecordsState = {
   data: null,
+  pages: 0,
   loading: false,
   error: null
 };

@@ -14,7 +14,6 @@ export class DialogComponent implements OnInit {
   content: any;
   modifiedContent: any;
   origin: string;
-  tableRecordEndPoint: string;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -22,7 +21,6 @@ export class DialogComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.origin = environment.beOrigin;
-    this.tableRecordEndPoint = environment.beTableRecordEndPoint;
   }
 
   ngOnInit(): void {
@@ -41,13 +39,13 @@ export class DialogComponent implements OnInit {
   }
 
   submit() {
-    // debugger;
-    const endPoint = `${this.origin}${this.tableRecordEndPoint}`;
-    const record = this.content.details;
-    const actionType = 'update';
-    console.log('confirmed');
-    this.dialogRef.close('submitBtn');
-    this.store.dispatch(new RecordSave({ endPoint, record, actionType }));
+  //   // debugger;
+  //   const endPoint = `${this.origin}${this.tableRecordEndPoint}`;
+  //   const record = this.content.details;
+  //   const actionType = 'update';
+  //   console.log('confirmed');
+  //   this.dialogRef.close('submitBtn');
+  //   this.store.dispatch(new RecordSave({ endPoint, record, actionType }));
   }
 
   close() {

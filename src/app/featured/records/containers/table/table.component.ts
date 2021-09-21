@@ -28,6 +28,7 @@ export class TableComponent implements OnInit, OnDestroy {
   activePage: number = 0;
   sortBy: string = 'firstname';
   sortByCol: any = {};
+  direction: 'asc' | 'desc' = 'asc';
   dialogRef: MatDialogRef<any>;
   recordId: string = '';
   dialogAction: string = '';
@@ -37,13 +38,16 @@ export class TableComponent implements OnInit, OnDestroy {
   isSearching: boolean = false;
   searchTextChanged: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
+  recordsPerPage: number = 5;
+  currentPage: number = 1;
+  paginationPages: number = 0;
+
   constructor(
     private store: Store<AppState>,
     public dialog: MatDialog
   ) {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
-    this.tableRecordEndPoint = environment.beTableRecordEndPoint;
     this.tableMode = 'init';
     this.searchMode = 'init';
     this.triggerTableLoad();
@@ -60,7 +64,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   triggerTableLoad(): void {
     // debugger;
-    const url = `${this.origin}${this.tableDataEndPoint}`;
+    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
     this.store.dispatch(new RecordsLoad(url));
   }
 
@@ -79,17 +83,20 @@ export class TableComponent implements OnInit, OnDestroy {
           if (res && !res.loading && res.data) {
             // debugger;
             this.originalRecords = JSON.parse(JSON.stringify(res.data));
-            if (this.tableMode === 'init') {
-              this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
-              this.sortByColumn(this.sortBy);
-              this.setPagesRecords();
-            } else if (this.tableMode === 'load' && this.recordId) {
-              // debugger;
-              this.setTargetSortedRecord(this.recordId);
-              this.openViewEditDialog(this.recordId);
-            } else if (this.tableMode === 'save' && this.recordId) {
-              this.setTargetSortedRecord(this.recordId);
-            }
+
+            this.records = JSON.parse(JSON.stringify(this.originalRecords));
+
+            // if (this.tableMode === 'init') {
+            //   // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
+            //   // this.sortByColumn(this.sortBy);
+            //   // this.setPagesRecords();
+            // } else if (this.tableMode === 'load' && this.recordId) {
+            //   // debugger;
+            //   this.setTargetSortedRecord(this.recordId);
+            //   this.openViewEditDialog(this.recordId);
+            // } else if (this.tableMode === 'save' && this.recordId) {
+            //   this.setTargetSortedRecord(this.recordId);
+            // }
           }
         })
     );
@@ -143,28 +150,29 @@ export class TableComponent implements OnInit, OnDestroy {
   sortByColumn(colname: string) {
     // debugger;
     this.sortByCol = {};
-    let direction: 'asc' | 'desc';
+
     if (this.sortBy !== colname) {
-      direction = 'asc';
       this.sortBy = colname;
-      this.sortByCol[colname] = 'asc';
+      this.direction = 'asc';
     } else {
-      direction = 'desc';
-      this.sortBy = '';
-      this.sortByCol[colname] = 'desc';
+      if (this.direction === 'asc') {
+        this.direction = 'desc';
+      } else {
+        this.direction = 'asc';
+      }
     }
-    // this.records.sort(compareValues(colname, direction));
-    // this.sortedOriginalRecords.sort(compareValues(colname, direction));
-    this.sortedOriginalRecords.sort((a, b) => compare({ order: direction })(a[colname], b[colname]));
-    this.setPagesRecords();
+    this.sortByCol[colname] = this.direction;
+
+    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+    this.store.dispatch(new RecordsLoad(url));
   }
 
-  triggerOpenViewEditDialog(item: any) {
-    // debugger;
-    this.recordId = item.id;
-    this.tableMode = 'load';
-    this.triggerTableRecordLoad(this.origin, this.tableRecordEndPoint, item.id);
-  }
+  // triggerOpenViewEditDialog(item: any) {
+  //   // debugger;
+  //   this.recordId = item.id;
+  //   this.tableMode = 'load';
+  //   this.triggerTableRecordLoad(this.origin, this.tableRecordEndPoint, item.id);
+  // }
 
   openViewEditDialog(id: string) {
     // debugger;
@@ -222,28 +230,32 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   processGlobalSearch() {
-    // debugger;
+    debugger;
     this.subscription.add(
       this.searchTextChanged.pipe(debounceTime(1000)).subscribe(
         response => {
-          // debugger;
+          debugger;
           this.isSearching = false;
           const res = response.trim();
           if (res) {
             if (this.searchMode === 'global') {
-              this.sortedOriginalRecords = this.getFilteredRecords(this.originalRecords, res);
-              this.sortBy = '';
-              this.activePage = 0;
-              this.sortByColumn(this.sortBy);
-              this.setPagesRecords();
+              const url = `${this.origin}${this.tableDataEndPoint}?q=${res}&_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+              this.store.dispatch(new RecordsLoad(url));
+              // this.sortedOriginalRecords = this.getFilteredRecords(this.originalRecords, res);
+              // this.sortBy = '';
+              // this.activePage = 0;
+              // this.sortByColumn(this.sortBy);
+              // this.setPagesRecords();
             }
             // const url = `${this.origin}${this.tableDataEndPoint}`;
             // this.store.dispatch(new RecordsLoad(url));
           } else {
             if (this.searchMode === 'global') {
-              this.activePage = 0;
-              this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
-              this.setPagesRecords();
+              const url = `${this.origin}${this.tableDataEndPoint}?_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+              this.store.dispatch(new RecordsLoad(url));
+              // this.activePage = 0;
+              // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
+              // this.setPagesRecords();
             }
             // const url = `${this.origin}${this.tableDataEndPoint}`;
             // this.store.dispatch(new RecordsLoad(url));
