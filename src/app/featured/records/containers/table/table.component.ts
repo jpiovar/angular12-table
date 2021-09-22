@@ -33,7 +33,7 @@ export class TableComponent implements OnInit, OnDestroy {
   dialogRef: MatDialogRef<any>;
   recordId: string = '';
   dialogAction: string = '';
-  tableMode: 'init' | 'load' | 'save' | '' = '';
+  tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | '' = '';
   searchMode: 'init' | 'global' | '';
   globalFilter: string = '';
   isSearching: boolean = false;
@@ -92,7 +92,6 @@ export class TableComponent implements OnInit, OnDestroy {
           if (res && !res.loading && res.totalRecords > 0) {
             if (this.tableMode === 'init') {
               this.totalRecords = res?.totalRecords;
-              this.activePage = 0;
               this.setPagesRecords();
             }
           }
@@ -104,6 +103,9 @@ export class TableComponent implements OnInit, OnDestroy {
             this.originalRecords = JSON.parse(JSON.stringify(res.data));
 
             this.records = JSON.parse(JSON.stringify(this.originalRecords));
+
+            this.extendByProperty(this.records, 'edit', false);
+            debugger;
 
             // if (this.tableMode === 'init') {
             //   // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
@@ -119,6 +121,12 @@ export class TableComponent implements OnInit, OnDestroy {
           }
         })
     );
+  }
+
+  extendByProperty(records: any, propertyName: string, propertyValue: any) {
+    for (let index = 0; index < records.length; index++) {
+      records[index][propertyName] = propertyValue;
+    }
   }
 
   setTargetSortedRecord(recordId: string) {
@@ -172,6 +180,7 @@ export class TableComponent implements OnInit, OnDestroy {
   sortByColumn(colname: string) {
     // debugger;
     this.sortByCol = {};
+    this.activePage = 0;
 
     if (this.sortBy !== colname) {
       this.sortBy = colname;
@@ -238,6 +247,18 @@ export class TableComponent implements OnInit, OnDestroy {
         this.tableMode = 'save';
       }
     });
+  }
+
+  switchToEditMode(item: any) {
+    this.recordId = item.id;
+    this.tableMode = 'edit';
+    item.edit = true;
+  }
+
+  switchToReadMode(item: any) {
+    this.recordId = item.id;
+    this.tableMode = 'read';
+    item.edit = false;
   }
 
   globalSearch() {

@@ -41,21 +41,34 @@
                 <mat-icon *ngIf="sortByCol?.age==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th id="details">
+            <th id="action">
               <span>
-                Details
+                Action
               </span>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of records">
-            <td>{{item.firstname}}</td>
-            <td>{{item.surname}}</td>
-            <td>{{item.age}}</td>
+            <td>
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}">
+              <span *ngIf="!item.edit">{{item.firstname}}</span>
+            </td>
+            <td>
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}">
+              <span *ngIf="!item.edit">{{item.surname}}</span>
+            </td>
+            <td>
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}">
+              <span *ngIf="!item.edit">{{item.age}}</span>
+            </td>
             <td class="td-link">
-              <span (click)="triggerOpenViewEditDialog(item)">
-                <mat-icon aria-label="view-edit">preview</mat-icon>
+              <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
+              <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
+                <mat-icon aria-label="mode_edit_outline">mode_edit_outline</mat-icon>
+              </span>
+              <span *ngIf="item.edit" (click)="switchToReadMode(item)">
+                <mat-icon aria-label="edit_off">edit_off</mat-icon>
               </span>
             </td>
           </tr>
