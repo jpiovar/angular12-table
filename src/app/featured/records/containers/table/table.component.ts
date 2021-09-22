@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
-import { RecordLoadDetail, RecordsLoad } from 'src/app/state/records/records.actions';
+import { MetaLoad, RecordsLoad } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -18,7 +18,8 @@ import { debounceTime } from 'rxjs/operators';
 export class TableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tableDataEndPoint: string;
-  tableRecordEndPoint: string;
+  metaDataEndPoint: string;
+  // tableRecordEndPoint: string;
   origin: string;
   originalRecords: any[];
   sortedOriginalRecords: any[];
@@ -39,8 +40,8 @@ export class TableComponent implements OnInit, OnDestroy {
   searchTextChanged: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   recordsPerPage: number = 5;
-  currentPage: number = 1;
   paginationPages: number = 0;
+  totalRecords: number = 0;
 
   constructor(
     private store: Store<AppState>,
@@ -48,9 +49,11 @@ export class TableComponent implements OnInit, OnDestroy {
   ) {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
+    this.metaDataEndPoint = environment.beMetaDataEndPoint;
     this.tableMode = 'init';
     this.searchMode = 'init';
-    this.triggerTableLoad();
+    this.triggerMetaLoad();
+    // this.triggerTableLoad();
     this.tableDataSubscription();
     this.processGlobalSearch();
   }
@@ -62,24 +65,40 @@ export class TableComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  triggerMetaLoad(): void {
+    debugger;
+    const url = `${this.origin}${this.metaDataEndPoint}`;
+    this.store.dispatch(new MetaLoad(url));
+  }
+
   triggerTableLoad(): void {
     // debugger;
-    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage+1}&_limit=${this.recordsPerPage}`;
     this.store.dispatch(new RecordsLoad(url));
   }
 
-  triggerTableRecordLoad(origin: string, dataEndPoint: string, id: string): void {
-    // debugger;
-    const url = `${origin}${dataEndPoint}/${id}`;
-    this.store.dispatch(new RecordLoadDetail({ id, detail: url, storeMode: true }));
-  }
+  // triggerTableRecordLoad(origin: string, dataEndPoint: string, id: string): void {
+  //   // debugger;
+  //   const url = `${origin}${dataEndPoint}/${id}`;
+  //   this.store.dispatch(new RecordLoadDetail({ id, detail: url, storeMode: true }));
+  // }
 
   tableDataSubscription() {
     this.subscription.add(
       this.store.select('records')
         // .pipe(last())
         .subscribe((res: any) => {
-          //  debugger;
+           debugger;
+          if (res && !res.loading && res.totalRecords > 0) {
+            if (this.tableMode === 'init') {
+              this.totalRecords = res?.totalRecords;
+              this.activePage = 0;
+              this.setPagesRecords();
+            }
+          }
+          // else if (res && !res.loading && res.totalRecords === 0) {
+
+          // }
           if (res && !res.loading && res.data) {
             // debugger;
             this.originalRecords = JSON.parse(JSON.stringify(res.data));
@@ -121,8 +140,11 @@ export class TableComponent implements OnInit, OnDestroy {
   setPagesRecords() {
     // debugger;
     this.tableMode = '';
-    this.pages = new Array(Math.ceil(this.sortedOriginalRecords.length / this.itemsPerPage));
-    this.records = this.sortedOriginalRecords.slice(this.activePage * this.itemsPerPage, this.activePage * this.itemsPerPage + this.itemsPerPage);
+    this.pages = new Array(Math.ceil(this.totalRecords / this.recordsPerPage));
+
+    this.triggerTableLoad();
+    // this.pages = new Array(Math.ceil(this.sortedOriginalRecords.length / this.itemsPerPage));
+    // this.records = this.sortedOriginalRecords.slice(this.activePage * this.itemsPerPage, this.activePage * this.itemsPerPage + this.itemsPerPage);
   }
 
   jumpToPage(page: number): void {
@@ -163,7 +185,7 @@ export class TableComponent implements OnInit, OnDestroy {
     }
     this.sortByCol[colname] = this.direction;
 
-    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage+1}&_limit=${this.recordsPerPage}`;
     this.store.dispatch(new RecordsLoad(url));
   }
 
@@ -239,7 +261,7 @@ export class TableComponent implements OnInit, OnDestroy {
           const res = response.trim();
           if (res) {
             if (this.searchMode === 'global') {
-              const url = `${this.origin}${this.tableDataEndPoint}?q=${res}&_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+              const url = `${this.origin}${this.tableDataEndPoint}?q=${res}&_page=${this.activePage+1}&_limit=${this.recordsPerPage}`;
               this.store.dispatch(new RecordsLoad(url));
               // this.sortedOriginalRecords = this.getFilteredRecords(this.originalRecords, res);
               // this.sortBy = '';
@@ -251,7 +273,7 @@ export class TableComponent implements OnInit, OnDestroy {
             // this.store.dispatch(new RecordsLoad(url));
           } else {
             if (this.searchMode === 'global') {
-              const url = `${this.origin}${this.tableDataEndPoint}?_page=${this.currentPage}&_limit=${this.recordsPerPage}`;
+              const url = `${this.origin}${this.tableDataEndPoint}?_page=${this.activePage+1}&_limit=${this.recordsPerPage}`;
               this.store.dispatch(new RecordsLoad(url));
               // this.activePage = 0;
               // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));

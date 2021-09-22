@@ -5,17 +5,17 @@ import { forkJoin, Observable, Observer, of, throwError, zip } from 'rxjs';
 
 import {
   RECORDS_LOAD,
-  RECORD_LOAD_DETAIL,
   RecordsLoad,
   RecordsLoadSuccess,
   RecordsLoadFail,
-  RecordLoadDetailSuccess,
-  RecordLoadDetailFail,
-  RecordLoadDetail,
   RECORD_SAVE,
   RecordSave,
   RecordSaveSuccess,
-  RecordSaveFail
+  RecordSaveFail,
+  META_LOAD,
+  MetaLoad,
+  MetaLoadSuccess,
+  MetaLoadFail
 } from './records.actions';
 
 import { RecordsState } from './records.models';
@@ -38,6 +38,27 @@ export class RecordsEffects {
     this.origin = environment.beOrigin;
   }
   origin: string;
+
+  metaLoad$ = createEffect(() => this.actions$.pipe(
+    ofType(META_LOAD),
+    switchMap(
+      (action: MetaLoad) => {
+        // debugger;
+        const urlRecords: any = action.payload;
+        return this.httpBase.getCommon(`${urlRecords}`).pipe(
+          map((res: any) => {
+            // debugger;
+            return new MetaLoadSuccess(res?.total)
+          }),
+          catchError(error => {
+            // debugger;
+            return of(new MetaLoadFail(error));
+          })
+        );
+      }
+    )
+  )
+  );
 
   // @Effect()
   // recordsLoad$ = this.actions$.pipe(
@@ -87,39 +108,39 @@ export class RecordsEffects {
   // );
 
 
-  recordLoadDetails$ = createEffect(() => this.actions$.pipe(
-    ofType(RECORD_LOAD_DETAIL),
-    withLatestFrom(this.store.select('records')),
-    mergeMap(([action, selector]) => {
-      // debugger;
-      const urlRecords: any = action?.payload?.detail;
-      const id = action?.payload?.id;
-      const recordsData = selector?.data;
-      const itemRecord = getItemBasedId(recordsData, id);
-      if (action?.payload?.storeMode && itemRecord?.data) {
-        const detail = JSON.parse(JSON.stringify(itemRecord.data));
-        if (detail['executed']) {
-          detail['executed']++;
-        } else {
-          detail['executed'] = 1;
-        }
-        return of(new RecordLoadDetailSuccess({ id, detail }));
-      }
-      return this.httpBase.getCommon(`${urlRecords}`).pipe(
-        map(
-          (response: any) => {
-            // debugger;
-            const detail = response;
-            return new RecordLoadDetailSuccess({ id, detail });
-          }
-        ),
-        catchError(error => {
-          // debugger;
-          return of(new RecordLoadDetailFail(error));
-        })
-      );
-    })
-  ));
+  // recordLoadDetails$ = createEffect(() => this.actions$.pipe(
+  //   ofType(RECORD_LOAD_DETAIL),
+  //   withLatestFrom(this.store.select('records')),
+  //   mergeMap(([action, selector]) => {
+  //     // debugger;
+  //     const urlRecords: any = action?.payload?.detail;
+  //     const id = action?.payload?.id;
+  //     const recordsData = selector?.data;
+  //     const itemRecord = getItemBasedId(recordsData, id);
+  //     if (action?.payload?.storeMode && itemRecord?.data) {
+  //       const detail = JSON.parse(JSON.stringify(itemRecord.data));
+  //       if (detail['executed']) {
+  //         detail['executed']++;
+  //       } else {
+  //         detail['executed'] = 1;
+  //       }
+  //       return of(new RecordLoadDetailSuccess({ id, detail }));
+  //     }
+  //     return this.httpBase.getCommon(`${urlRecords}`).pipe(
+  //       map(
+  //         (response: any) => {
+  //           // debugger;
+  //           const detail = response;
+  //           return new RecordLoadDetailSuccess({ id, detail });
+  //         }
+  //       ),
+  //       catchError(error => {
+  //         // debugger;
+  //         return of(new RecordLoadDetailFail(error));
+  //       })
+  //     );
+  //   })
+  // ));
 
 
   // @Effect()

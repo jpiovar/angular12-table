@@ -4,7 +4,7 @@ import { getIndexBasedId } from 'src/app/shared/utils/helper';
 
 export const initialState: RecordsState = {
   data: null,
-  pages: 0,
+  totalRecords: 0,
   loading: false,
   error: null
 };
@@ -36,7 +36,8 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
       };
     }
 
-    case RecordsActions.RECORD_LOAD_DETAIL: {
+
+    case RecordsActions.META_LOAD: {
       return {
         ...state,
         loading: true,
@@ -44,28 +45,24 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
       };
     }
 
-    case RecordsActions.RECORD_LOAD_DETAIL_SUCCESS: {
-      // debugger;
-      const rowId = action.payload.id;
-      const detailData = action.payload.detail;
-      const newState = JSON.parse(JSON.stringify(state?.data));
-      const index = getIndexBasedId(newState, rowId);
-      newState[index]['data'] = detailData;
+    case RecordsActions.META_LOAD_SUCCESS: {
+      debugger;
       return {
         ...state,
         loading: false,
-        error: null,
-        data: newState
+        totalRecords: action.payload,
+        error: null
       };
     }
 
-    case RecordsActions.RECORD_LOAD_DETAIL_FAIL: {
+    case RecordsActions.META_LOAD_FAIL: {
       return {
         ...state,
         loading: false,
         error: action.payload
       };
     }
+
 
     case RecordsActions.RECORD_SAVE: {
       return {

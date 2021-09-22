@@ -1,6 +1,6 @@
 export interface RecordsState {
   data: any;
-  pages: number;
+  totalRecords: number;
   loading: boolean;
   error: any;
 }

@@ -4,9 +4,11 @@ import { RecordsState } from './records.models';
 export const RECORDS_LOAD = '[Records] Load data';
 export const RECORDS_LOAD_SUCCESS = '[Records] Load data success';
 export const RECORDS_LOAD_FAIL = '[Records] Load data fail';
-export const RECORD_LOAD_DETAIL = '[Records] Load data detail';
-export const RECORD_LOAD_DETAIL_SUCCESS = '[Records] Load data detail success';
-export const RECORD_LOAD_DETAIL_FAIL = '[Records] Load data detail fail';
+
+export const META_LOAD = '[Meta] Load meta';
+export const META_LOAD_SUCCESS = '[Meta] Load meta success';
+export const META_LOAD_FAIL = '[Meta] Load meta fail';
+
 export const RECORD_SAVE = '[Records] Save record';
 export const RECORD_SAVE_SUCCESS = '[Records] Save record success';
 export const RECORD_SAVE_FAIL = '[Records] Save record fail';
@@ -28,24 +30,24 @@ export class RecordsLoadFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class RecordLoadDetail implements Action {
-  readonly type = RECORD_LOAD_DETAIL;
-  constructor(public payload: { id: string, detail: any, storeMode?: boolean}) {
-    // debugger;
-  }
-}
-
-export class RecordLoadDetailSuccess implements Action {
-  readonly type = RECORD_LOAD_DETAIL_SUCCESS;
-  constructor(public payload: { id: string, detail: any }) {
-    // debugger;
-  }
-}
-
-export class RecordLoadDetailFail implements Action {
-  readonly type = RECORD_LOAD_DETAIL_FAIL;
+export class MetaLoad implements Action {
+  readonly type = META_LOAD;
   constructor(public payload: any) {
-    // debugger;
+    debugger;
+  }
+}
+
+export class MetaLoadSuccess implements Action {
+  readonly type = META_LOAD_SUCCESS;
+  constructor(public payload: any) {
+    debugger;
+  }
+}
+
+export class MetaLoadFail implements Action {
+  readonly type = META_LOAD_FAIL;
+  constructor(public payload: any) {
+    debugger;
   }
 }
 
@@ -71,5 +73,5 @@ export class RecordSaveFail implements Action {
 }
 
 export type Actions = RecordsLoad | RecordsLoadSuccess | RecordsLoadFail |
-                      RecordLoadDetail | RecordLoadDetailSuccess | RecordLoadDetailFail |
+                      MetaLoad | MetaLoadSuccess | MetaLoadFail |
                       RecordSave | RecordSaveSuccess | RecordSaveFail;
