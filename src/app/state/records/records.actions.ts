@@ -33,21 +33,21 @@ export class RecordsLoadFail implements Action {
 export class MetaLoad implements Action {
   readonly type = META_LOAD;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 
 export class MetaLoadSuccess implements Action {
   readonly type = META_LOAD_SUCCESS;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 
 export class MetaLoadFail implements Action {
   readonly type = META_LOAD_FAIL;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 

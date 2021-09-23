@@ -46,7 +46,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
     case RecordsActions.META_LOAD_SUCCESS: {
-      debugger;
+      // debugger;
       return {
         ...state,
         loading: false,

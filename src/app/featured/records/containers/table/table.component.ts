@@ -42,6 +42,7 @@ export class TableComponent implements OnInit, OnDestroy {
   recordsPerPage: number = 5;
   paginationPages: number = 0;
   totalRecords: number = 0;
+  recordsDiff: boolean = false;
 
   constructor(
     private store: Store<AppState>,
@@ -102,11 +103,9 @@ export class TableComponent implements OnInit, OnDestroy {
 
             if (res.data) {
               // debugger;
-              this.originalRecords = JSON.parse(JSON.stringify(res.data));
-
+              this.originalRecords = this.getSetPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
 
-              this.extendByProperty(this.records, 'edit', false);
               debugger;
 
               // if (this.tableMode === 'init') {
@@ -129,10 +128,12 @@ export class TableComponent implements OnInit, OnDestroy {
     );
   }
 
-  extendByProperty(records: any, propertyName: string, propertyValue: any) {
-    for (let index = 0; index < records.length; index++) {
-      records[index][propertyName] = propertyValue;
+  getSetPropertyByValue(records: any, propertyName: string, propertyValue: any) {
+    let res = JSON.parse(JSON.stringify(records));
+    for (let index = 0; index < res.length; index++) {
+      res[index][propertyName] = propertyValue;
     }
+    return res;
   }
 
   // setTargetSortedRecord(recordId: string) {
@@ -264,6 +265,21 @@ export class TableComponent implements OnInit, OnDestroy {
     this.recordId = item.id;
     this.tableMode = 'read';
     item.edit = false;
+  }
+
+  onInputChange(evt: any) {
+    debugger;
+    this.recordsDiff = this.recordsChanged();
+  }
+
+  recordsChanged() {
+    debugger;
+    const records = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', false);
+    const originalRecords = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.originalRecords)), 'edit', false);
+    if(JSON.stringify(records) != JSON.stringify(originalRecords)) {
+      return true;
+    }
+    return false;
   }
 
   globalSearch() {
