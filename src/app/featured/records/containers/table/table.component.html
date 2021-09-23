@@ -49,25 +49,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of records">
+          <tr *ngFor="let item of records; let i = index">
             <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange($event)">
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange(item, i)">
               <span *ngIf="!item.edit">{{item.firstname}}</span>
             </td>
             <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange($event)">
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange(item, i)">
               <span *ngIf="!item.edit">{{item.surname}}</span>
             </td>
             <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange($event)">
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange(item, i)">
               <span *ngIf="!item.edit">{{item.age}}</span>
             </td>
-            <td class="td-link">
+            <td>
               <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
-              <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
+              <span class="td-link" *ngIf="!item.edit" (click)="switchToEditMode(item)">
                 <mat-icon aria-label="mode_edit_outline">mode_edit_outline</mat-icon>
               </span>
-              <span *ngIf="item.edit" (click)="switchToReadMode(item)">
+              <span class="td-link" *ngIf="item.edit" (click)="switchToReadMode(item)">
                 <mat-icon aria-label="edit_off">edit_off</mat-icon>
               </span>
             </td>
@@ -78,7 +78,7 @@
   </div>
   <div class="row">
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary" [disabled]="!recordsDiff">Save Changes</button>
+      <button type="button" class="btn btn-primary" [disabled]="!recordsDiffArrObj">Save Changes</button>
     </div>
     <div class="col-md-10">
       <ul class="pagination">

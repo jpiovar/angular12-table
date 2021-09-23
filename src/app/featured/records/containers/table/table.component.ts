@@ -42,7 +42,7 @@ export class TableComponent implements OnInit, OnDestroy {
   recordsPerPage: number = 5;
   paginationPages: number = 0;
   totalRecords: number = 0;
-  recordsDiff: boolean = false;
+  recordsDiffArrObj: any = null;
 
   constructor(
     private store: Store<AppState>,
@@ -103,7 +103,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
             if (res.data) {
               // debugger;
-              this.originalRecords = this.getSetPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
+              this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
 
               debugger;
@@ -128,11 +128,17 @@ export class TableComponent implements OnInit, OnDestroy {
     );
   }
 
-  getSetPropertyByValue(records: any, propertyName: string, propertyValue: any) {
+  getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
     let res = JSON.parse(JSON.stringify(records));
     for (let index = 0; index < res.length; index++) {
       res[index][propertyName] = propertyValue;
     }
+    return res;
+  }
+
+  getSetPropertyByValue(record: any, propertyName: string, propertyValue: any) {
+    let res = JSON.parse(JSON.stringify(record));
+    res[propertyName] = propertyValue;
     return res;
   }
 
@@ -267,16 +273,27 @@ export class TableComponent implements OnInit, OnDestroy {
     item.edit = false;
   }
 
-  onInputChange(evt: any) {
+  onInputChange(item: any, index: number) {
     debugger;
-    this.recordsDiff = this.recordsChanged();
+    const recordItemChanged = this.recordsItemChanged(this.records[index], this.originalRecords[index]);
+    if (recordItemChanged) {
+      if (this.recordsDiffArrObj === null) {
+        this.recordsDiffArrObj = {};
+      }
+      this.recordsDiffArrObj[this.records[index].id] = this.records[index];
+    } else {
+      delete this.recordsDiffArrObj[this.records[index].id];
+    }
+    if (JSON.stringify(this.recordsDiffArrObj) === '{}') {
+      this.recordsDiffArrObj = null;
+    }
   }
 
-  recordsChanged() {
+  recordsItemChanged(recordsItem, originalRecordsItem) {
     debugger;
-    const records = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', false);
-    const originalRecords = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.originalRecords)), 'edit', false);
-    if(JSON.stringify(records) != JSON.stringify(originalRecords)) {
+    const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
+    const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
+    if(JSON.stringify(record) != JSON.stringify(originalRecord)) {
       return true;
     }
     return false;
