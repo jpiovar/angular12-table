@@ -55,11 +55,11 @@
               <span *ngIf="!item.edit">{{item.firstname}}</span>
             </td>
             <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}">
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange($event)">
               <span *ngIf="!item.edit">{{item.surname}}</span>
             </td>
             <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}">
+              <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange($event)">
               <span *ngIf="!item.edit">{{item.age}}</span>
             </td>
             <td class="td-link">
