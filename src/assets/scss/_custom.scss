@@ -2,20 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 
-.dynamic-content {
-  .anchor {
-    display: none;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-  .title {
-    display: inline-block;
-    cursor: pointer;
-    &:hover {
-      > .anchor {
-        display: inline-block;
-      }
-    }
-  }
+.nonclick {
+  pointer-events: none;
+  touch-action: none;
 }
