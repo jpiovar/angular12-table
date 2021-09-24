@@ -63,13 +63,13 @@
               <span *ngIf="!item.edit">{{item.age}}</span>
             </td>
             <td>
-              <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
-              <span class="td-link" *ngIf="!item.edit" (click)="switchToEditMode(item)">
+              <button type="button" class="btn" *ngIf="!item.edit" (click)="switchToEditMode(item)">
                 <mat-icon aria-label="mode_edit_outline">mode_edit_outline</mat-icon>
-              </span>
-              <span class="td-link" *ngIf="item.edit" (click)="switchToReadMode(item)">
+              </button>
+              <button type="button" class="btn" *ngIf="item.edit" (click)="switchToReadMode(item)">
                 <mat-icon aria-label="edit_off">edit_off</mat-icon>
-              </span>
+              </button>
+              <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
             </td>
           </tr>
         </tbody>
