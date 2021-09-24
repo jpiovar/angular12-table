@@ -86,59 +86,76 @@ export class RecordsEffects {
 
   recordsSave$ = createEffect(() => this.actions$.pipe(
     ofType(RECORDS_SAVE),
-    switchMap(
+    map(
       (action: RecordsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
-
-        // if (actionType === 'update') {
-          return this.httpBase.putCommon(`${endPoint}`, records).pipe(
-            map(
-              (response: any) => {
-                debugger;
-                const item = JSON.parse(JSON.stringify(records));
-                const itemId = item?.id;
-                this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
-                return new RecordsSaveSuccess(records);
-              }
-            ),
-            catchError(error => {
-              debugger;
-              console.log(`${endPoint}`, error);
-              // const recordId = record.id;
-              // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
-              return of(new RecordsSaveFail(error));
-            })
-          );
-        // }
-        // else if (actionType === 'new') {
-        //   return this.httpBase.postCommon(`${endPoint}`, record).pipe(
-        //     map(
-        //       (response: any) => {
-        //         // debugger;
-        //         const recRow = JSON.parse(JSON.stringify(record));
-        //         if (response && (response?.eventId === recRow.eventId || response?.id === recRow.eventId)) {
-        //           const recordId = recRow?.event?.taxSubjectPerson.companyId || recRow?.event?.taxSubjectPerson.birthCode;
-        //           this.store.dispatch(new StartToastr({ text: `record ${recordId} added`, type: 'success', duration: 5000 }));
-        //           return new RecordSaveSuccess({ recordRow: recRow?.event?.taxSubjectPerson, actionType });
-        //         }
-        //       }
-        //     ),
-        //     catchError(error => {
-        //       // debugger;
-        //       console.log(`${endPoint}`, error);
-        //       const recordId = record?.event?.taxSubjectPerson.companyId || record?.event?.taxSubjectPerson.birthCode;
-        //       this.store.dispatch(new StartToastr({ text: `record ${recordId} did not add`, type: 'error', duration: 5000 }));
-        //       return of(new RecordSaveFail(error));
-        //     })
-        //   );
-        // }
-
+        const record1 = { id: 1, firstname: 'jopo1', lastname: 'popo', age: 10 };
+        const record2 = { id: 2, firstname: 'jopo1', lastname: 'popo', age: 10 };
+        const arrObs = [
+          this.httpBase.putCommon(`${endPoint}/1`, record1),
+          this.httpBase.putCommon(`${endPoint}/2`, record2)
+        ];
+        return {
+          endPoint, records, arrObs
+        };
       }
-    )
+    ),
+    mergeMap(
+      res => {
+        debugger;
+        return zip(...res.arrObs);
+      }
+    ),
+    map(
+      (res: any) => {
+        debugger;
+        const item = JSON.parse(JSON.stringify(res.records));
+        const itemId = item?.id;
+        this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
+        return new RecordsSaveSuccess(res.records);
+      }
+    ),
+    catchError(error => {
+      debugger;
+      // console.log(`${res.endPoint}`, error);
+      // const recordId = record.id;
+      // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
+      return of(new RecordsSaveFail(error));
+    })
   )
   );
+
+    // mergeMap(
+    //   (res: any) => {
+    //     debugger;
+
+
+    //     // if (actionType === 'update') {
+    //       return this.httpBase.putCommon(`${res.endPoint}/1`, res.records)
+    //       .pipe(
+    //         map(
+    //           (response: any) => {
+    //             debugger;
+    //             const item = JSON.parse(JSON.stringify(res.records));
+    //             const itemId = item?.id;
+    //             this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
+    //             return new RecordsSaveSuccess(res.records);
+    //           }
+    //         ),
+    //         catchError(error => {
+    //           debugger;
+    //           console.log(`${res.endPoint}`, error);
+    //           // const recordId = record.id;
+    //           // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
+    //           return of(new RecordsSaveFail(error));
+    //         })
+    //       );
+    //   }
+    // )
+  // )
+  // );
 
 
   // @Effect()

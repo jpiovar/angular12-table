@@ -8,7 +8,10 @@ import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { debounceTime } from 'rxjs/operators';
+import { catchError, debounceTime, map } from 'rxjs/operators';
+import { HttpBaseService } from 'src/app/core/services/http.base.service';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-table',
@@ -46,7 +49,9 @@ export class TableComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private httpBase: HttpBaseService,
+    private httpClient: HttpClient
   ) {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
@@ -293,7 +298,7 @@ export class TableComponent implements OnInit, OnDestroy {
     debugger;
     const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
     const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
-    if(JSON.stringify(record) != JSON.stringify(originalRecord)) {
+    if (JSON.stringify(record) != JSON.stringify(originalRecord)) {
       return true;
     }
     return false;
@@ -301,9 +306,44 @@ export class TableComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     debugger;
+    // let headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
+    // let httpOptions = {
+    //   headers, withCredentials: false
+    // };
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      this.store.dispatch(new RecordsSave({endPoint: url, records: this.records}));
+      // this.store.dispatch(new RecordsSave({endPoint: url, records: this.records}));
+      const record1 = { id: 'id1', firstname: 'jopo11', lastname: 'popo11', age: 10 };
+      // return this.httpClient.put<any>(url, record1, httpOptions)
+      // .pipe(
+      //   // retry(3),
+      //   catchError(
+      //     err => {
+
+      //       throw err;
+      //     }
+      //   )
+      // ).subscribe(
+      //   res => {
+      //     debugger;
+      //   }
+      // );
+      this.httpBase.putCommon(`${url}/id1`, record1)
+      // .pipe(
+      //   map((res: any) => {
+      //     debugger;
+      //     return '';
+      //   }),
+      //   catchError(error => {
+      //     debugger;
+      //     return '';
+      //   })
+      // )
+      .subscribe(
+        res => {
+          debugger;
+         }
+      );
     }
   }
 
