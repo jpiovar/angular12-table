@@ -15,7 +15,11 @@ import {
   META_LOAD,
   MetaLoad,
   MetaLoadSuccess,
-  MetaLoadFail
+  MetaLoadFail,
+  RECORDS_SAVE,
+  RecordsSave,
+  RecordsSaveSuccess,
+  RecordsSaveFail
 } from './records.actions';
 
 import { RecordsState } from './records.models';
@@ -79,6 +83,63 @@ export class RecordsEffects {
     )
   )
   );
+
+  recordsSave$ = createEffect(() => this.actions$.pipe(
+    ofType(RECORDS_SAVE),
+    switchMap(
+      (action: RecordsSave) => {
+        debugger;
+        const endPoint: any = action?.payload?.endPoint;
+        const records: any = action?.payload?.records;
+
+        // if (actionType === 'update') {
+          return this.httpBase.putCommon(`${endPoint}`, records).pipe(
+            map(
+              (response: any) => {
+                debugger;
+                const item = JSON.parse(JSON.stringify(records));
+                const itemId = item?.id;
+                this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
+                return new RecordsSaveSuccess(records);
+              }
+            ),
+            catchError(error => {
+              debugger;
+              console.log(`${endPoint}`, error);
+              // const recordId = record.id;
+              // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
+              return of(new RecordsSaveFail(error));
+            })
+          );
+        // }
+        // else if (actionType === 'new') {
+        //   return this.httpBase.postCommon(`${endPoint}`, record).pipe(
+        //     map(
+        //       (response: any) => {
+        //         // debugger;
+        //         const recRow = JSON.parse(JSON.stringify(record));
+        //         if (response && (response?.eventId === recRow.eventId || response?.id === recRow.eventId)) {
+        //           const recordId = recRow?.event?.taxSubjectPerson.companyId || recRow?.event?.taxSubjectPerson.birthCode;
+        //           this.store.dispatch(new StartToastr({ text: `record ${recordId} added`, type: 'success', duration: 5000 }));
+        //           return new RecordSaveSuccess({ recordRow: recRow?.event?.taxSubjectPerson, actionType });
+        //         }
+        //       }
+        //     ),
+        //     catchError(error => {
+        //       // debugger;
+        //       console.log(`${endPoint}`, error);
+        //       const recordId = record?.event?.taxSubjectPerson.companyId || record?.event?.taxSubjectPerson.birthCode;
+        //       this.store.dispatch(new StartToastr({ text: `record ${recordId} did not add`, type: 'error', duration: 5000 }));
+        //       return of(new RecordSaveFail(error));
+        //     })
+        //   );
+        // }
+
+      }
+    )
+  )
+  );
+
 
   // @Effect()
   // recordLoadDetails$ = this.actions$.pipe(

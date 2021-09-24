@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
-import { MetaLoad, RecordsLoad } from 'src/app/state/records/records.actions';
+import { MetaLoad, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -297,6 +297,14 @@ export class TableComponent implements OnInit, OnDestroy {
       return true;
     }
     return false;
+  }
+
+  saveChanges() {
+    debugger;
+    if (this.recordsDiffArrObj) {
+      const url = `${this.origin}${this.tableDataEndPoint}`;
+      this.store.dispatch(new RecordsSave({endPoint: url, records: this.records}));
+    }
   }
 
   globalSearch() {

@@ -36,6 +36,34 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
       };
     }
 
+    case RecordsActions.RECORDS_SAVE: {
+      debugger;
+      return {
+        ...state,
+        loading: true,
+        error: false
+      };
+    }
+
+    case RecordsActions.RECORDS_SAVE_SUCCESS: {
+      debugger;
+      const newState = JSON.parse(JSON.stringify(state?.data));
+      return {
+        ...state,
+        loading: false,
+        data: newState,
+        error: null
+      };
+    }
+
+    case RecordsActions.RECORDS_SAVE_FAIL: {
+      debugger;
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    }
 
     case RecordsActions.META_LOAD: {
       return {
