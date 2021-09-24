@@ -23,25 +23,25 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th id="firstname">
+            <th class="col-sm-3" id="firstname">
               <span class="th-link" (click)="sortByColumn('firstname')">Firstname
                 <mat-icon *ngIf="sortByCol?.firstname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.firstname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th id="surname">
+            <th class="col-sm-3" id="surname">
               <span class="th-link" (click)="sortByColumn('surname')">Surname
                 <mat-icon *ngIf="sortByCol?.surname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.surname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th id="age">
+            <th class="col-sm-3" id="age">
               <span class="th-link" (click)="sortByColumn('age')">Age
                 <mat-icon *ngIf="sortByCol?.age==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.age==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th id="action">
+            <th class="col-sm-3" id="action">
               <span>
                 Action
               </span>
