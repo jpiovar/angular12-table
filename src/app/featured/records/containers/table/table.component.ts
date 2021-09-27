@@ -323,8 +323,14 @@ export class TableComponent implements OnInit, OnDestroy {
     // };
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', false);
-      this.store.dispatch(new RecordsSave({endPoint: url, records, modified: this.recordsDiffArrObj}));
+      const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+      const modified = {};
+      for (const key in this.recordsDiffArrObj) {
+        modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+      }
+      this.store.dispatch(new RecordsSave({endPoint: url, records, modified}));
+
+      this.recordsDiffArrObj = null;
 
       // const record1 = { id: 'id1', firstname: 'jopo11', lastname: 'popo11', age: 10 };
       // const record2 = { id: 'id2', firstname: 'jopo22', lastname: 'popo22', age: 10 };
