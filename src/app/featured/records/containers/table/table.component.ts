@@ -288,14 +288,17 @@ export class TableComponent implements OnInit, OnDestroy {
 
   onInputChange(item: any, index: number) {
     debugger;
+    const itemId = this.records[index]?.id;
     const recordItemChanged = this.recordsItemChanged(this.records[index], this.originalRecords[index]);
     if (recordItemChanged) {
       if (this.recordsDiffArrObj === null) {
         this.recordsDiffArrObj = {};
       }
-      this.recordsDiffArrObj[this.records[index]?.id] = this.records[index];
+      const temp = JSON.parse(JSON.stringify((this.recordsDiffArrObj)));
+      temp[itemId] = this.records[index];
+      this.recordsDiffArrObj = {...this.recordsDiffArrObj, ...temp};
     } else {
-      delete this.recordsDiffArrObj[this.records[index].id];
+      delete this.recordsDiffArrObj[itemId];
     }
     if (JSON.stringify(this.recordsDiffArrObj) === '{}') {
       this.recordsDiffArrObj = null;
