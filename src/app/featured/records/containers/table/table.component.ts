@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, zip } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import { MetaLoad, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
@@ -285,7 +285,7 @@ export class TableComponent implements OnInit, OnDestroy {
       if (this.recordsDiffArrObj === null) {
         this.recordsDiffArrObj = {};
       }
-      this.recordsDiffArrObj[this.records[index].id] = this.records[index];
+      this.recordsDiffArrObj[this.records[index]?.id] = this.records[index];
     } else {
       delete this.recordsDiffArrObj[this.records[index].id];
     }
@@ -312,8 +312,10 @@ export class TableComponent implements OnInit, OnDestroy {
     // };
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      // this.store.dispatch(new RecordsSave({endPoint: url, records: this.records}));
-      const record1 = { id: 'id1', firstname: 'jopo11', lastname: 'popo11', age: 10 };
+      this.store.dispatch(new RecordsSave({endPoint: url, records: this.records, modified: this.recordsDiffArrObj}));
+
+      // const record1 = { id: 'id1', firstname: 'jopo11', lastname: 'popo11', age: 10 };
+      // const record2 = { id: 'id2', firstname: 'jopo22', lastname: 'popo22', age: 10 };
       // return this.httpClient.put<any>(url, record1, httpOptions)
       // .pipe(
       //   // retry(3),
@@ -328,7 +330,13 @@ export class TableComponent implements OnInit, OnDestroy {
       //     debugger;
       //   }
       // );
-      this.httpBase.putCommon(`${url}/id1`, record1)
+      // const arrObs = [
+      //   this.httpBase.putCommon(`${url}/id1`, record1),
+      //   this.httpBase.putCommon(`${url}/id2`, record2)
+      // ];
+      // this.httpBase.putCommon(`${url}/id1`, record1)
+      // this.httpBase.putCommon(`${url}/id2`, record2)
+      // zip(...arrObs)
       // .pipe(
       //   map((res: any) => {
       //     debugger;
@@ -339,11 +347,12 @@ export class TableComponent implements OnInit, OnDestroy {
       //     return '';
       //   })
       // )
-      .subscribe(
-        res => {
-          debugger;
-         }
-      );
+
+      // .subscribe(
+      //   res => {
+      //     debugger;
+      //    }
+      // );
     }
   }
 

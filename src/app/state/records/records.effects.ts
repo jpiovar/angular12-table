@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, flatMap, mergeMap, delay, withLatestFrom } from 'rxjs/operators';
-import { forkJoin, Observable, Observer, of, throwError, zip } from 'rxjs';
+import { forkJoin, Observable, Observer, of, throwError, zip, from } from 'rxjs';
 
 import {
   RECORDS_LOAD,
@@ -91,30 +91,48 @@ export class RecordsEffects {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
-        const record1 = { id: 1, firstname: 'jopo1', lastname: 'popo', age: 10 };
-        const record2 = { id: 2, firstname: 'jopo1', lastname: 'popo', age: 10 };
+        const modified: any = action?.payload?.modified;
+
+        const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
+        const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
         const arrObs = [
-          this.httpBase.putCommon(`${endPoint}/1`, record1),
-          this.httpBase.putCommon(`${endPoint}/2`, record2)
+          this.httpBase.putCommon(`${endPoint}/id1`, record1),
+          this.httpBase.putCommon(`${endPoint}/id2`, record2)
         ];
+
         return {
-          endPoint, records, arrObs
+          endPoint, records, arrObs, modified
         };
       }
     ),
     mergeMap(
-      res => {
-        debugger;
-        return zip(...res.arrObs);
+      (res: any) => {
+        return new Observable((observer: Observer<any>) => {
+          zip(...res.arrObs).subscribe(
+            (subres: any) => {
+              debugger;
+              return observer.next({
+                arrObsRes: subres,
+                endPoint: res.endPoint,
+                records: res.records,
+                modified: res.modified
+              });
+            },
+            error => throwError(error),
+            () => observer.complete()
+          );
+        })
       }
     ),
     map(
-      (res: any) => {
+      res => {
         debugger;
-        const item = JSON.parse(JSON.stringify(res.records));
-        const itemId = item?.id;
-        this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
-        return new RecordsSaveSuccess(res.records);
+        const records = JSON.parse(JSON.stringify(res.records));
+        // const itemId = item?.id;
+        for (const key in res?.modified) {
+          this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
+        }
+        return new RecordsSaveSuccess(records);
       }
     ),
     catchError(error => {
