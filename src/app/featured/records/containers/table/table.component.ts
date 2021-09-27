@@ -136,14 +136,22 @@ export class TableComponent implements OnInit, OnDestroy {
   getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
     let res = JSON.parse(JSON.stringify(records));
     for (let index = 0; index < res.length; index++) {
-      res[index][propertyName] = propertyValue;
+      if (propertyValue === 'remove') {
+        delete res[index][propertyName];
+      } else {
+        res[index][propertyName] = propertyValue;
+      }
     }
     return res;
   }
 
   getSetPropertyByValue(record: any, propertyName: string, propertyValue: any) {
     let res = JSON.parse(JSON.stringify(record));
-    res[propertyName] = propertyValue;
+    if (propertyValue === 'remove') {
+      delete res[propertyName];
+    } else {
+      res[propertyName] = propertyValue;
+    }
     return res;
   }
 
@@ -312,7 +320,8 @@ export class TableComponent implements OnInit, OnDestroy {
     // };
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      this.store.dispatch(new RecordsSave({endPoint: url, records: this.records, modified: this.recordsDiffArrObj}));
+      const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', false);
+      this.store.dispatch(new RecordsSave({endPoint: url, records, modified: this.recordsDiffArrObj}));
 
       // const record1 = { id: 'id1', firstname: 'jopo11', lastname: 'popo11', age: 10 };
       // const record2 = { id: 'id2', firstname: 'jopo22', lastname: 'popo22', age: 10 };

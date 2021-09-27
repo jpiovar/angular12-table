@@ -47,7 +47,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
 
     case RecordsActions.RECORDS_SAVE_SUCCESS: {
       debugger;
-      const newState = JSON.parse(JSON.stringify(state?.data));
+      const newState = JSON.parse(JSON.stringify(action.payload));
       return {
         ...state,
         loading: false,

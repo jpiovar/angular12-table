@@ -93,12 +93,16 @@ export class RecordsEffects {
         const records: any = action?.payload?.records;
         const modified: any = action?.payload?.modified;
 
-        const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
-        const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
-        const arrObs = [
-          this.httpBase.putCommon(`${endPoint}/id1`, record1),
-          this.httpBase.putCommon(`${endPoint}/id2`, record2)
-        ];
+        // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
+        // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
+        const arrObs = [];
+        for (const key in modified) {
+          arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
+        }
+        // [
+        //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
+        //   this.httpBase.putCommon(`${endPoint}/id2`, record2)
+        // ];
 
         return {
           endPoint, records, arrObs, modified
@@ -127,7 +131,7 @@ export class RecordsEffects {
     map(
       res => {
         debugger;
-        const records = JSON.parse(JSON.stringify(res.records));
+        const records = JSON.parse(JSON.stringify(res?.records));
         // const itemId = item?.id;
         for (const key in res?.modified) {
           this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
