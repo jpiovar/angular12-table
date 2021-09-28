@@ -65,6 +65,37 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
       };
     }
 
+
+    case RecordsActions.RECORDS_DELETE: {
+      debugger;
+      return {
+        ...state,
+        loading: true,
+        error: false
+      };
+    }
+
+    case RecordsActions.RECORDS_DELETE_SUCCESS: {
+      debugger;
+      const newState = JSON.parse(JSON.stringify(action.payload));
+      return {
+        ...state,
+        loading: false,
+        data: newState,
+        error: null
+      };
+    }
+
+    case RecordsActions.RECORDS_DELETE_FAIL: {
+      debugger;
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    }
+
+
     case RecordsActions.META_LOAD: {
       return {
         ...state,

@@ -9,6 +9,10 @@ export const RECORDS_SAVE = '[Records] Save data';
 export const RECORDS_SAVE_SUCCESS = '[Records] Save data success';
 export const RECORDS_SAVE_FAIL = '[Records] Save data fail';
 
+export const RECORDS_DELETE = '[Records] Delete data';
+export const RECORDS_DELETE_SUCCESS = '[Records] Delete data success';
+export const RECORDS_DELETE_FAIL = '[Records] Delete data fail';
+
 export const META_LOAD = '[Meta] Load meta';
 export const META_LOAD_SUCCESS = '[Meta] Load meta success';
 export const META_LOAD_FAIL = '[Meta] Load meta fail';
@@ -50,6 +54,27 @@ export class RecordsSaveSuccess implements Action {
 
 export class RecordsSaveFail implements Action {
   readonly type = RECORDS_SAVE_FAIL;
+  constructor(public payload: any) {
+    debugger;
+  }
+}
+
+export class RecordsDelete implements Action {
+  readonly type = RECORDS_DELETE;
+  constructor(public payload: { endPoint: string, records: any, deleted: any }) {
+    debugger;
+  }
+}
+
+export class RecordsDeleteSuccess implements Action {
+  readonly type = RECORDS_DELETE_SUCCESS;
+  constructor(public payload: RecordsState) {
+    debugger;
+  }
+}
+
+export class RecordsDeleteFail implements Action {
+  readonly type = RECORDS_DELETE_FAIL;
   constructor(public payload: any) {
     debugger;
   }
@@ -99,5 +124,6 @@ export class RecordSaveFail implements Action {
 
 export type Actions = RecordsLoad | RecordsLoadSuccess | RecordsLoadFail |
                       RecordsSave | RecordsSaveSuccess | RecordsSaveFail |
+                      RecordsDelete | RecordsDeleteSuccess | RecordsDeleteFail |
                       MetaLoad | MetaLoadSuccess | MetaLoadFail |
                       RecordSave | RecordSaveSuccess | RecordSaveFail;

@@ -19,7 +19,9 @@ import {
   RECORDS_SAVE,
   RecordsSave,
   RecordsSaveSuccess,
-  RecordsSaveFail
+  RecordsSaveFail,
+  RECORDS_DELETE,
+  RecordsDelete
 } from './records.actions';
 
 import { RecordsState } from './records.models';
@@ -106,6 +108,72 @@ export class RecordsEffects {
 
         return {
           endPoint, records, arrObs, modified
+        };
+      }
+    ),
+    mergeMap(
+      (res: any) => {
+        return new Observable((observer: Observer<any>) => {
+          zip(...res.arrObs).subscribe(
+            (subres: any) => {
+              debugger;
+              return observer.next({
+                arrObsRes: subres,
+                endPoint: res.endPoint,
+                records: res.records,
+                modified: res.modified
+              });
+            },
+            error => throwError(error),
+            () => observer.complete()
+          );
+        })
+      }
+    ),
+    map(
+      res => {
+        debugger;
+        const records = JSON.parse(JSON.stringify(res?.records));
+        // const itemId = item?.id;
+        for (const key in res?.modified) {
+          this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
+        }
+        return new RecordsSaveSuccess(records);
+      }
+    ),
+    catchError(error => {
+      debugger;
+      // console.log(`${res.endPoint}`, error);
+      // const recordId = record.id;
+      // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
+      return of(new RecordsSaveFail(error));
+    })
+  )
+  );
+
+
+  recordsDelete$ = createEffect(() => this.actions$.pipe(
+    ofType(RECORDS_DELETE),
+    map(
+      (action: RecordsDelete) => {
+        debugger;
+        const endPoint: any = action?.payload?.endPoint;
+        const records: any = action?.payload?.records;
+        const deleted: any = action?.payload?.deleted;
+
+        // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
+        // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
+        const arrObs = [];
+        for (const key in deleted) {
+          arrObs.push(this.httpBase.deleteCommon(`${endPoint}/${key}`));
+        }
+        // [
+        //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
+        //   this.httpBase.putCommon(`${endPoint}/id2`, record2)
+        // ];
+
+        return {
+          endPoint, records, arrObs, deleted
         };
       }
     ),

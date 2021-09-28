@@ -84,6 +84,25 @@ export class HttpBaseService {
       );
   }
 
+  deleteCommon(url: string, issueParams?: any, httpOptions?: any) {
+    let localHttpOptions = JSON.parse(JSON.stringify(this.httpOptions));
+    if (httpOptions) {
+      localHttpOptions = httpOptions;
+    }
+    this.issueParams = issueParams || null;
+    this.spaloggerEndPoint = this.issueParams && this.issueParams.links && this.issueParams.links[0].href;
+    return this.httpClient.delete<any>(url, localHttpOptions)
+      .pipe(
+        // retry(3),
+        catchError(
+          err => {
+            this.errorHandler.bind(this);
+            throw err;
+          }
+        )
+      );
+  }
+
 
   // Error handling
   errorHandler(error: any) {
