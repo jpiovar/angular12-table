@@ -286,6 +286,10 @@ export class TableComponent implements OnInit, OnDestroy {
     item.edit = false;
   }
 
+  removeItem(item: any) {
+
+  }
+
   onInputChange(item: any, index: number) {
     debugger;
     const itemId = this.records[index]?.id;
