@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
-import { MetaLoad, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
+import { MetaLoad, RecordsDelete, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -287,7 +287,13 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   removeItem(item: any) {
+    const url = `${this.origin}${this.tableDataEndPoint}`;
+    const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+    const deleted = {};
 
+    const key = item?.id;
+    deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
+    this.store.dispatch(new RecordsDelete({endPoint: url, records, deleted}));
   }
 
   onInputChange(item: any, index: number) {

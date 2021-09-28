@@ -21,7 +21,9 @@ import {
   RecordsSaveSuccess,
   RecordsSaveFail,
   RECORDS_DELETE,
-  RecordsDelete
+  RecordsDelete,
+  RecordsDeleteSuccess,
+  RecordsDeleteFail
 } from './records.actions';
 
 import { RecordsState } from './records.models';
@@ -187,7 +189,7 @@ export class RecordsEffects {
                 arrObsRes: subres,
                 endPoint: res.endPoint,
                 records: res.records,
-                modified: res.modified
+                deleted: res.deleted
               });
             },
             error => throwError(error),
@@ -200,11 +202,16 @@ export class RecordsEffects {
       res => {
         debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
-        // const itemId = item?.id;
-        for (const key in res?.modified) {
-          this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
+        const deleted = JSON.parse(JSON.stringify(res.deleted));
+        for (let i = 0; i < records.length; i++) {
+          if (Object.keys(deleted).indexOf(records[i].id) > -1) {
+            records.splice(i, 1);
+          }
         }
-        return new RecordsSaveSuccess(records);
+        for (const key in res?.deleted) {
+          this.store.dispatch(new StartToastr({ text: `record ${key} deleted`, type: 'success', duration: 5000 }));
+        }
+        return new RecordsDeleteSuccess(records);
       }
     ),
     catchError(error => {
@@ -212,7 +219,7 @@ export class RecordsEffects {
       // console.log(`${res.endPoint}`, error);
       // const recordId = record.id;
       // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
-      return of(new RecordsSaveFail(error));
+      return of(new RecordsDeleteFail(error));
     })
   )
   );
