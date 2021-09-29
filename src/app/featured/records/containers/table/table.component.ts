@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
-import { MetaLoad, RecordsDelete, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
+import { MetaLoad, MetaLocalSave, RecordsDelete, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -36,7 +36,7 @@ export class TableComponent implements OnInit, OnDestroy {
   dialogRef: MatDialogRef<any>;
   recordId: string = '';
   dialogAction: string = '';
-  tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | '' = '';
+  tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | 'remove' | '' = '';
   searchMode: 'init' | 'global' | '';
   globalFilter: string = '';
   isSearching: boolean = false;
@@ -103,6 +103,10 @@ export class TableComponent implements OnInit, OnDestroy {
                 this.totalRecords = 0;
                 this.totalRecords = res?.totalRecords;
                 this.setPagesRecords();
+              } else if (this.tableMode === 'remove') {
+                this.totalRecords--;
+                this.store.dispatch(new MetaLocalSave(this.totalRecords));
+                this.setPagesRecords();
               }
             }
 
@@ -111,7 +115,7 @@ export class TableComponent implements OnInit, OnDestroy {
               this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
 
-              debugger;
+
 
               // if (this.tableMode === 'init') {
               //   // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
@@ -294,6 +298,7 @@ export class TableComponent implements OnInit, OnDestroy {
     const key = item?.id;
     deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
     this.store.dispatch(new RecordsDelete({endPoint: url, records, deleted}));
+    this.tableMode = 'remove';
   }
 
   onInputChange(item: any, index: number) {
@@ -407,6 +412,7 @@ export class TableComponent implements OnInit, OnDestroy {
             if (this.searchMode === 'global') {
               const url = `${this.origin}${this.tableDataEndPoint}?q=${res}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
               this.store.dispatch(new RecordsLoad(url));
+
               // this.sortedOriginalRecords = this.getFilteredRecords(this.originalRecords, res);
               // this.sortBy = '';
               // this.activePage = 0;

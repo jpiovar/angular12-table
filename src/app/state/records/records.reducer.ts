@@ -122,6 +122,15 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
       };
     }
 
+    case RecordsActions.META_LOCAL_SAVE: {
+      debugger;
+      return {
+        ...state,
+        loading: false,
+        totalRecords: action.payload,
+        error: null
+      };
+    }
 
     case RecordsActions.RECORD_SAVE: {
       return {

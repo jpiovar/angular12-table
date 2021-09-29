@@ -17,6 +17,8 @@ export const META_LOAD = '[Meta] Load meta';
 export const META_LOAD_SUCCESS = '[Meta] Load meta success';
 export const META_LOAD_FAIL = '[Meta] Load meta fail';
 
+export const META_LOCAL_SAVE = '[Meta] Local meta save';
+
 export const RECORD_SAVE = '[Records] Save record';
 export const RECORD_SAVE_SUCCESS = '[Records] Save record success';
 export const RECORD_SAVE_FAIL = '[Records] Save record fail';
@@ -101,6 +103,13 @@ export class MetaLoadFail implements Action {
   }
 }
 
+export class MetaLocalSave implements Action {
+  readonly type = META_LOCAL_SAVE;
+  constructor(public payload: any) {
+    debugger;
+  }
+}
+
 export class RecordSave implements Action {
   readonly type = RECORD_SAVE;
   constructor(public payload: { endPoint: string, record: any, actionType?: string }) {
@@ -126,4 +135,5 @@ export type Actions = RecordsLoad | RecordsLoadSuccess | RecordsLoadFail |
                       RecordsSave | RecordsSaveSuccess | RecordsSaveFail |
                       RecordsDelete | RecordsDeleteSuccess | RecordsDeleteFail |
                       MetaLoad | MetaLoadSuccess | MetaLoadFail |
+                      MetaLocalSave|
                       RecordSave | RecordSaveSuccess | RecordSaveFail;
