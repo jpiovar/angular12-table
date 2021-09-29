@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 // import { Title } from '@angular/platform-browser';
 // import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -9,12 +9,15 @@ import { AppState } from './state';
 import { StartSpinner, StopSpinner } from './state/spinner/spinner.actions';
 
 import * as plantandgo from '@plantandgo/helpers';
+import { MsalService } from '@azure/msal-angular';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnDestroy, OnInit {
   title = 'angular11-12';
   openedSidenav: boolean = false;
   subscription: Subscription = new Subscription();
@@ -24,8 +27,10 @@ export class AppComponent implements OnDestroy {
   constructor(
     private store: Store<AppState>,
     private translate: TranslateService,
+    private msalService: MsalService,
+    private httpClient: HttpClient,
     // private titleService: Title,
-    // private router: Router,
+    private router: Router,
     // private httpBase: HttpBaseService,
   ) {
     console.log('current browser is Explorer ', plantandgo?.isExplorer());
@@ -36,6 +41,34 @@ export class AppComponent implements OnDestroy {
 
     this.translationSubscribe();
 
+  }
+
+  ngOnInit(): void {
+    debugger;
+    this.store.dispatch(new StartSpinner());
+    this.msalService.instance.handleRedirectPromise().then(res => {
+      debugger;
+      this.store.dispatch(new StopSpinner());
+      if (res?.account) {
+        this.msalService.instance.setActiveAccount(res.account);
+        this.router.navigate(['']);
+      }
+    });
+  }
+
+  isLoggedIn(): boolean {
+    return this.msalService.instance.getActiveAccount() != null;
+  }
+
+  login() {
+    this.msalService.loginRedirect();
+    // this.msalService.loginPopup().subscribe((response: AuthenticationResult) => {
+    //   this.msalService.instance.setActiveAccount(response.account);
+    // });
+  }
+
+  logout() {
+    this.msalService.logout();
   }
 
   translationSubscribe() {

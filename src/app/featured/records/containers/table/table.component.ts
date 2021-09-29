@@ -12,6 +12,7 @@ import { catchError, debounceTime, map } from 'rxjs/operators';
 import { HttpBaseService } from 'src/app/core/services/http.base.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions';
 
 @Component({
   selector: 'app-table',
@@ -79,6 +80,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   triggerTableLoad(): void {
     // debugger;
+    this.store.dispatch(new StartSpinner());
     const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
     this.store.dispatch(new RecordsLoad(url));
   }
@@ -95,6 +97,8 @@ export class TableComponent implements OnInit, OnDestroy {
         // .pipe(last())
         .subscribe((res: any) => {
           debugger;
+
+          this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
 
@@ -223,6 +227,7 @@ export class TableComponent implements OnInit, OnDestroy {
     }
     this.sortByCol[colname] = this.direction;
 
+    this.store.dispatch(new StartSpinner());
     const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
     this.store.dispatch(new RecordsLoad(url));
   }
@@ -291,6 +296,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   removeItem(item: any) {
+    this.store.dispatch(new StartSpinner());
     const url = `${this.origin}${this.tableDataEndPoint}`;
     const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
     const deleted = {};
@@ -331,6 +337,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   saveChanges() {
+    this.store.dispatch(new StartSpinner());
     debugger;
     // let headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
     // let httpOptions = {

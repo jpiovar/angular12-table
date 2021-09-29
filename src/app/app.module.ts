@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { MaterialModule } from './material.module';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,9 +35,32 @@ import { RecordsEffects } from './state/records/records.effects';
 import { AppState } from './state';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { InteractionType, IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
+import { MsalInterceptor, MsalInterceptorConfiguration, MsalModule, MsalService, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG } from '@azure/msal-angular';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication({
+    auth: {
+      clientId: environment.clientId,
+      authority: environment.tenantId,
+      redirectUri: 'http://localhost:4200'
+    }
+  });
+}
+
+export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+  const protectedResourceMap = new Map<string, Array<string>>();
+  // protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']); // Prod environment. Uncomment to use.
+  protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']);
+
+  return {
+    interactionType: InteractionType.Popup,
+    protectedResourceMap
+  };
 }
 
 @NgModule({
@@ -52,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     FormsModule,
     SharedModule,
+    MsalModule,
     TranslateModule.forRoot({
       defaultLanguage: 'sk',
       loader: {
@@ -81,7 +105,22 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgbModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory
+    },
+    MsalService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
+    {
+      provide: MSAL_INTERCEPTOR_CONFIG,
+      useFactory: MSALInterceptorConfigFactory
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
