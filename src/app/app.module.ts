@@ -29,6 +29,7 @@ import { CustomSerializer, MergedRouterStateSerializer } from './shared/utils/ro
 import { reducer as spinner } from './state/spinner/spinner.reducer';
 import { reducer as toastr } from './state/toastr/toastr.reducer';
 import { reducer as records } from './state/records/records.reducer';
+import { reducer as user } from './state/user/user.reducer';
 
 import { RecordsEffects } from './state/records/records.effects';
 
@@ -89,7 +90,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       router: routerReducer,
       spinner,
       toastr,
-      records
+      records,
+      user
     }),
     EffectsModule.forRoot([
       RecordsEffects

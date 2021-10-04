@@ -12,6 +12,8 @@ import * as plantandgo from '@plantandgo/helpers';
 import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { InteractionRequiredAuthError } from '@azure/msal-browser';
+import { UserStoreData } from './state/user/user.actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -43,6 +45,27 @@ export class AppComponent implements OnDestroy, OnInit {
 
   }
 
+  getAccessToken() {
+    debugger;
+    var request = {
+      scopes: ["Mail.Read"]
+    };
+
+    this.msalService.instance.acquireTokenSilent(request).then(tokenResponse => {
+      // Do something with the tokenResponse
+    }).catch(error => {
+      if (error instanceof InteractionRequiredAuthError) {
+        // fallback to interaction when silent call fails
+        return this.msalService.instance.acquireTokenRedirect(request)
+      }
+    });
+  }
+
+  storeAccessToken(res) {
+    debugger;
+    this.store.dispatch(new UserStoreData(res));
+  }
+
   ngOnInit(): void {
     debugger;
     this.store.dispatch(new StartSpinner());
@@ -50,6 +73,7 @@ export class AppComponent implements OnDestroy, OnInit {
       debugger;
       this.store.dispatch(new StopSpinner());
       if (res?.account) {
+        this.storeAccessToken(res);
         this.msalService.instance.setActiveAccount(res.account);
         this.router.navigate(['']);
       }
@@ -68,6 +92,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   logout() {
+    this.store.dispatch(new UserStoreData(null));
     this.msalService.logout();
   }
 
