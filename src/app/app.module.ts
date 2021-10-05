@@ -39,6 +39,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InteractionType, IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { MsalInterceptor, MsalInterceptorConfiguration, MsalModule, MsalService, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG } from '@azure/msal-angular';
 
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -49,6 +51,10 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       clientId: environment.clientId,
       authority: environment.tenantId,
       redirectUri: 'http://localhost:4200'
+    },
+    cache: {
+      cacheLocation: 'localStorage',
+      storeAuthStateInCookie: isIE,
     }
   });
 }

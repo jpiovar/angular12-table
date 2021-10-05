@@ -48,12 +48,15 @@ export class AppComponent implements OnDestroy, OnInit {
   getAccessToken() {
     debugger;
     var request = {
-      scopes: ["Mail.Read"]
+      scopes: ["user.read","mail.read"]
     };
 
     this.msalService.instance.acquireTokenSilent(request).then(tokenResponse => {
       // Do something with the tokenResponse
+      debugger;
+      this.storeAccessToken(tokenResponse);
     }).catch(error => {
+      debugger;
       if (error instanceof InteractionRequiredAuthError) {
         // fallback to interaction when silent call fails
         return this.msalService.instance.acquireTokenRedirect(request)
@@ -73,11 +76,17 @@ export class AppComponent implements OnDestroy, OnInit {
       debugger;
       this.store.dispatch(new StopSpinner());
       if (res?.account) {
-        this.storeAccessToken(res);
         this.msalService.instance.setActiveAccount(res.account);
         this.router.navigate(['']);
       }
+
+      if(this.isLoggedIn()) {
+        this.getAccessToken();
+      }
     });
+
+
+
   }
 
   isLoggedIn(): boolean {
