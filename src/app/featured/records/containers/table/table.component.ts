@@ -59,13 +59,18 @@ export class TableComponent implements OnInit, OnDestroy {
     this.metaDataEndPoint = environment.beMetaDataEndPoint;
     this.tableMode = 'init';
     this.searchMode = 'init';
-    this.triggerMetaLoad();
-    // this.triggerTableLoad();
-    this.metaAndTableDataSubscription();
-    this.processGlobalSearch();
   }
 
   ngOnInit(): void {
+    this.store.select('user').subscribe((res) => {
+      if (res?.accessToken) {
+        debugger;
+        this.triggerMetaLoad();
+        // this.triggerTableLoad();
+        this.metaAndTableDataSubscription();
+        this.processGlobalSearch();
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -303,7 +308,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
     const key = item?.id;
     deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
-    this.store.dispatch(new RecordsDelete({endPoint: url, records, deleted}));
+    this.store.dispatch(new RecordsDelete({ endPoint: url, records, deleted }));
     this.tableMode = 'remove';
   }
 
@@ -317,7 +322,7 @@ export class TableComponent implements OnInit, OnDestroy {
       }
       const temp = JSON.parse(JSON.stringify((this.recordsDiffArrObj)));
       temp[itemId] = this.records[index];
-      this.recordsDiffArrObj = {...this.recordsDiffArrObj, ...temp};
+      this.recordsDiffArrObj = { ...this.recordsDiffArrObj, ...temp };
     } else {
       delete this.recordsDiffArrObj[itemId];
     }
@@ -350,7 +355,7 @@ export class TableComponent implements OnInit, OnDestroy {
       for (const key in this.recordsDiffArrObj) {
         modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
       }
-      this.store.dispatch(new RecordsSave({endPoint: url, records, modified}));
+      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified }));
 
       this.recordsDiffArrObj = null;
 

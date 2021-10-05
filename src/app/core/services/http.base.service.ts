@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Params } from '@angular/router';
+import { AppState } from 'src/app/state';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,10 @@ export class HttpBaseService {
 
   issueParams: any = null;
 
-  constructor(private httpClient: HttpClient) {
+  accessToken: string = '';
+
+  constructor(private httpClient: HttpClient, private store: Store<AppState>) {
+
     this.headers = this.headers.set('Content-Type', 'application/json');
     this.headers = this.headers.set('Accept', 'application/json');
 
@@ -25,14 +30,27 @@ export class HttpBaseService {
       withCredentials: false
     };
 
+    this.store.select('user').subscribe((res: any) => {
+      debugger;
+      if (res?.accessToken) {
+        this.accessToken = res.accessToken;
+        this.headers = this.headers.set('Authorization', `Bearer ${res.accessToken}`);
+        this.httpOptions = {
+          headers: this.headers,
+          withCredentials: true
+        };
+      };
+    });
+
   }
 
 
   getCommon(url: string, params?: Params, issueParams?: any, httpOptions?: any): Observable<any> {
-    let localHttpOptions = JSON.parse(JSON.stringify(this.httpOptions));
+    let localHttpOptions = {...this.httpOptions};
     if (httpOptions) {
       localHttpOptions = httpOptions;
     }
+    debugger;
     localHttpOptions.params = params; // in case params did not set, then undefined
     this.issueParams = issueParams || null;
     this.spaloggerEndPoint = this.issueParams && this.issueParams.links && this.issueParams.links[0].href;
@@ -48,7 +66,7 @@ export class HttpBaseService {
   }
 
   postCommon(url: string, body: any | null, issueParams?: any, httpOptions?: any) {
-    let localHttpOptions = JSON.parse(JSON.stringify(this.httpOptions));
+    let localHttpOptions = {...this.httpOptions};
     if (httpOptions) {
       localHttpOptions = httpOptions;
     }
@@ -66,7 +84,7 @@ export class HttpBaseService {
   }
 
   putCommon(url: string, data: any | null, issueParams?: any, httpOptions?: any) {
-    let localHttpOptions = JSON.parse(JSON.stringify(this.httpOptions));
+    let localHttpOptions = {...this.httpOptions};
     if (httpOptions) {
       localHttpOptions = httpOptions;
     }
@@ -85,7 +103,7 @@ export class HttpBaseService {
   }
 
   deleteCommon(url: string, issueParams?: any, httpOptions?: any) {
-    let localHttpOptions = JSON.parse(JSON.stringify(this.httpOptions));
+    let localHttpOptions = {...this.httpOptions};
     if (httpOptions) {
       localHttpOptions = httpOptions;
     }
