@@ -59,18 +59,22 @@ export class TableComponent implements OnInit, OnDestroy {
     this.metaDataEndPoint = environment.beMetaDataEndPoint;
     this.tableMode = 'init';
     this.searchMode = 'init';
+    this.triggerMetaLoad();
+    // this.triggerTableLoad();
+    this.metaAndTableDataSubscription();
+    this.processGlobalSearch();
   }
 
   ngOnInit(): void {
-    this.store.select('user').subscribe((res) => {
-      if (res?.accessToken) {
-        debugger;
-        this.triggerMetaLoad();
-        // this.triggerTableLoad();
-        this.metaAndTableDataSubscription();
-        this.processGlobalSearch();
-      }
-    });
+    // this.store.select('user').subscribe((res) => {
+    //   if (res?.accessToken) {
+    // debugger;
+    // this.triggerMetaLoad();
+    // // this.triggerTableLoad();
+    // this.metaAndTableDataSubscription();
+    // this.processGlobalSearch();
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
