@@ -8,7 +8,7 @@ import { AppState } from './state';
 @Injectable({
   providedIn: 'root'
 })
-export class RecordsResolver implements Resolve<boolean> {
+export class RecordsResolver implements Resolve<boolean|any> {
   constructor(private store: Store<AppState>) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean|any> {
