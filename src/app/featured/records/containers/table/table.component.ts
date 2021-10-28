@@ -316,6 +316,10 @@ export class TableComponent implements OnInit, OnDestroy {
     this.tableMode = 'remove';
   }
 
+  historyLog(item: any) {
+    // dialog modal, get historyEndpoint/itemId
+  }
+
   onInputChange(item: any, index: number) {
     debugger;
     const itemId = this.records[index]?.id;
