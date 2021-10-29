@@ -86,6 +86,31 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
+    },
+    {
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
     }
   ];
 
@@ -361,7 +386,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   showHistoryLog(item: any) {
     // dialog modal, get historyEndpoint/itemId
-    this.openChangeLogDialog(this.recordId);
+    this.openChangeLogDialog(item.id);
   }
 
   onInputChange(item: any, index: number) {

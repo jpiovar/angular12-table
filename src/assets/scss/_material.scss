@@ -21,9 +21,9 @@ $material-design-icons-font-directory-path: '~material-design-icons-iconfont/dis
 
 .material-dialog {
   // font-family: $fonty-poppins;
-  .mat-dialog-container {
-    // padding: 0px;
-  }
+
+
+
   .mat-dialog-title {
     background: $color-primary;
     color: $color7;
@@ -90,5 +90,13 @@ $material-design-icons-font-directory-path: '~material-design-icons-iconfont/dis
 .mat-form-field{
   &.align{
     padding-left: 0px !important;
+  }
+}
+
+.mat-dialog-container {
+  overflow: hidden !important;
+
+  .mat-dialog-content {
+    overflow: auto;
   }
 }
