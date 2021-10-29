@@ -48,7 +48,7 @@ export class AppComponent implements OnDestroy, OnInit {
   getAccessToken() {
     debugger;
     var request = {
-      scopes: ["user.read","mail.read"]
+      scopes: ["user.read", "mail.read"]
     };
 
     this.msalService.instance.acquireTokenSilent(request).then(tokenResponse => {
@@ -77,11 +77,18 @@ export class AppComponent implements OnDestroy, OnInit {
       this.store.dispatch(new StopSpinner());
       if (res?.account) {
         this.msalService.instance.setActiveAccount(res.account);
-        this.router.navigate(['']);
+        // if (this.isLoggedIn()) {
+        //   this.router.navigate(['/records']);
+        // } else {
+        //   this.router.navigate(['/login']);
+        // }
       }
 
-      if(this.isLoggedIn()) {
+      if (this.isLoggedIn()) {
         this.getAccessToken();
+        this.router.navigate(['/records']);
+      } else {
+        this.router.navigate(['/login']);
       }
     });
 
@@ -93,17 +100,17 @@ export class AppComponent implements OnDestroy, OnInit {
     return this.msalService.instance.getActiveAccount() != null;
   }
 
-  login() {
-    this.msalService.loginRedirect();
-    // this.msalService.loginPopup().subscribe((response: AuthenticationResult) => {
-    //   this.msalService.instance.setActiveAccount(response.account);
-    // });
-  }
+  // login() {
+  //   this.msalService.loginRedirect();
+  //   // this.msalService.loginPopup().subscribe((response: AuthenticationResult) => {
+  //   //   this.msalService.instance.setActiveAccount(response.account);
+  //   // });
+  // }
 
-  logout() {
-    this.store.dispatch(new UserStoreData(null));
-    this.msalService.logout();
-  }
+  // logout() {
+  //   this.store.dispatch(new UserStoreData(null));
+  //   this.msalService.logout();
+  // }
 
   translationSubscribe() {
     // currently just for example of usage

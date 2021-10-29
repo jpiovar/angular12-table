@@ -6,8 +6,8 @@
 <a routerLink="records" *ngIf="isLoggedIn()">Restricted page, records</a>
 
 <br/>
-<button class="btn btn-primary" (click)="login()" *ngIf="!isLoggedIn()">Login</button>
-<button class="btn btn-primary" (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
+<!-- <button class="btn btn-primary" (click)="login()" *ngIf="!isLoggedIn()">Login</button> -->
+<!-- <button class="btn btn-primary" (click)="logout()" *ngIf="isLoggedIn()">Logout</button> -->
 <div *ngIf="isLoggedIn()">
   you are loggedIn
 </div>

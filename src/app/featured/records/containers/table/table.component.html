@@ -1,103 +1,117 @@
-<div class="container" id="table-records">
-  <div class="row">
-    <div class="col-md-12">
-      <div id="global-search">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
-          </div>
-          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" (keyup)="globalSearch()"
-            placeholder="Search" aria-label="Search" aria-describedby="search-addon">
-          <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
-        </div>
-        <div class="filter-item">
-          <button mat-raised-button color="accent" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
-            Reset filter
-          </button>
-        </div>
+<div>
+  <div class="container" id="subheader">
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-primary" (click)="logout()">Logout</button>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th class="col-sm-3" id="firstname">
-              <span class="th-link" (click)="sortByColumn('firstname')">Firstname
-                <mat-icon *ngIf="sortByCol?.firstname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.firstname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
-              </span>
-            </th>
-            <th class="col-sm-3" id="surname">
-              <span class="th-link" (click)="sortByColumn('surname')">Surname
-                <mat-icon *ngIf="sortByCol?.surname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.surname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
-              </span>
-            </th>
-            <th class="col-sm-3" id="age">
-              <span class="th-link" (click)="sortByColumn('age')">Age
-                <mat-icon *ngIf="sortByCol?.age==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.age==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
-              </span>
-            </th>
-            <th class="col-sm-3" id="action">
-              <span>
-                Action
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of records; let i = index">
-            <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange(item, i)">
-              <span *ngIf="!item.edit">{{item.firstname}}</span>
-            </td>
-            <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange(item, i)">
-              <span *ngIf="!item.edit">{{item.surname}}</span>
-            </td>
-            <td>
-              <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange(item, i)">
-              <span *ngIf="!item.edit">{{item.age}}</span>
-            </td>
-            <td>
-              <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
-                <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
-              </span>
-              <span *ngIf="item.edit" (click)="switchToReadMode(item)">
-                <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
-              </span>
-              <span (click)="removeItem(item)">
-                <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
-              </span>
-              <span (click)="historyLog(item)">
-                <mat-icon aria-label="history" class="td-link ml-2">history</mat-icon>
-              </span>
-              <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="container" id="table-records">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="global-search">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
+            </div>
+            <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch"
+              (keyup)="globalSearch()" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+            <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
+          </div>
+          <div class="filter-item">
+            <button mat-raised-button color="accent" type="button" ngbTooltip="Reset filter"
+              (click)="clearAllFilters()">
+              Reset filter
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-2">
-      <button type="button" class="btn btn-primary" [disabled]="!recordsDiffArrObj" (click)="saveChanges()">Save Changes</button>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="col-sm-3" id="firstname">
+                <span class="th-link" (click)="sortByColumn('firstname')">Firstname
+                  <mat-icon *ngIf="sortByCol?.firstname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.firstname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-3" id="surname">
+                <span class="th-link" (click)="sortByColumn('surname')">Surname
+                  <mat-icon *ngIf="sortByCol?.surname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.surname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-3" id="age">
+                <span class="th-link" (click)="sortByColumn('age')">Age
+                  <mat-icon *ngIf="sortByCol?.age==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.age==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-3" id="action">
+                <span>
+                  Action
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of records; let i = index">
+              <td>
+                <input *ngIf="item.edit" type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange(item, i)">
+                <span *ngIf="!item.edit">{{item.firstname}}</span>
+              </td>
+              <td>
+                <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange(item, i)">
+                <span *ngIf="!item.edit">{{item.surname}}</span>
+              </td>
+              <td>
+                <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange(item, i)">
+                <span *ngIf="!item.edit">{{item.age}}</span>
+              </td>
+              <td>
+                <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
+                  <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
+                </span>
+                <span *ngIf="item.edit" (click)="switchToReadMode(item)">
+                  <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
+                </span>
+                <span (click)="removeItem(item)">
+                  <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
+                </span>
+                <span (click)="historyLog(item)">
+                  <mat-icon aria-label="history" class="td-link ml-2">history</mat-icon>
+                </span>
+                <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="col-md-10">
-      <ul class="pagination">
-        <li class="page-item">
-          <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
-        </li>
-        <li *ngFor="let itemP of pages; let i = index" class="page-item" [ngClass]="{'active': activePage === i}">
-          <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
-        </li>
-        <li class="page-item">
-          <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="nextPage()">Next</span>
-        </li>
-      </ul>
+    <div class="row">
+      <div class="col-md-2">
+        <button type="button" class="btn btn-primary" [disabled]="!recordsDiffArrObj" (click)="saveChanges()">Save
+          Changes</button>
+      </div>
+      <div class="col-md-10">
+        <ul class="pagination">
+          <li class="page-item">
+            <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
+          </li>
+          <li *ngFor="let itemP of pages; let i = index" class="page-item" [ngClass]="{'active': activePage === i}">
+            <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="nextPage()">Next</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

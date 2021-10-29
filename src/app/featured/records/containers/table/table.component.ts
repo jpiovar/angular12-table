@@ -13,6 +13,8 @@ import { HttpBaseService } from 'src/app/core/services/http.base.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions';
+import { UserStoreData } from 'src/app/state/user/user.actions';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-table',
@@ -51,6 +53,7 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     public dialog: MatDialog,
+    private msalService: MsalService,
     private httpBase: HttpBaseService,
     private httpClient: HttpClient
   ) {
@@ -465,5 +468,10 @@ export class TableComponent implements OnInit, OnDestroy {
     return records.filter(item => item.firstname.indexOf(propertyValue) > -1 || item.surname.indexOf(propertyValue) > -1 || item.age.indexOf(propertyValue) > -1);
   }
 
+
+  logout() {
+    this.store.dispatch(new UserStoreData(null));
+    this.msalService.logout();
+  }
 
 }

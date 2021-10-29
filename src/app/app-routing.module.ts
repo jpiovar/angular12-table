@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './featured/records/containers/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './featured/home/containers/page-not-found/page-not-found.component';
 import { MsalGuard } from './msal.guard';
 import { RecordsResolver } from './records.resolver';
 
@@ -9,7 +9,17 @@ const routes: Routes = [
   {
     path: 'page-not-found',
     component: PageNotFoundComponent,
-    data: { page: 'page-not-found', label: 'Stranka nenajdena'}
+    data: { page: 'page-not-found', label: 'Stranka nenajdena' }
+  },
+  // {
+  //   path: 'home',
+  //   loadChildren: () => import('./featured/home/home.module').then(m => m.HomeModule),
+  //   // canActivate: [MsalGuard]
+  // },
+  {
+    path: 'login',
+    loadChildren: () => import('./featured/home/home.module').then(m => m.HomeModule),
+    // canActivate: [MsalGuard]
   },
   {
     path: 'records',
@@ -20,19 +30,24 @@ const routes: Routes = [
     canActivate: [MsalGuard]
   },
   // { path: '', pathMatch: 'full', redirectTo: 'records'},
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   loadChildren: () => import('./featured/records/records.module').then(m => m.RecordsModule),
+  //   resolve: {
+  //     user: RecordsResolver
+  //   },
+  //   canActivate: [MsalGuard]
+  // },
   {
     path: '',
-    pathMatch: 'full',
-    loadChildren: () => import('./featured/records/records.module').then(m => m.RecordsModule),
-    resolve: {
-      user: RecordsResolver
-    },
-    canActivate: [MsalGuard]
+    loadChildren: () => import('./featured/home/home.module').then(m => m.HomeModule),
+    // canActivate: [MsalGuard]
   },
   {
     path: '**',
     component: PageNotFoundComponent,
-    data: { page: 'page-not-found', label: 'Stranka nenajdena'}
+    data: { page: 'page-not-found', label: 'Stranka nenajdena' }
   }
 ];
 
