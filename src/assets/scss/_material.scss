@@ -93,10 +93,26 @@ $material-design-icons-font-directory-path: '~material-design-icons-iconfont/dis
   }
 }
 
-.mat-dialog-container {
-  overflow: hidden !important;
+.change-log-dialog-class {
 
-  .mat-dialog-content {
-    overflow: auto;
+  .content-wrapper {
+    // max-height: 250px;
+    // height: 250px;
   }
+
+// .mat-dialog-container {
+//   overflow: hidden !important;
+//   position: relative !important;
+
+//   .mat-dialog-title {
+//     position: relative !important;
+//   }
+//   .mat-dialog-content {
+//     overflow: auto;
+//     position: relative !important
+//   }
+//   .mat-dialog-actions {
+//     position: relative !important
+//   }
+// }
 }

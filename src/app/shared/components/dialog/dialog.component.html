@@ -4,7 +4,11 @@
 
 <h1 mat-dialog-title>
   <ng-container *ngIf="content; else mockTitle">
+    <div class="row align-top">
+      <div class="col-md-12">
     {{content?.title}}
+      </div>
+      </div>
   </ng-container>
   <ng-template #mockTitle>
     Mocked title
@@ -19,6 +23,9 @@
       *ngIf="content?.details && (!content.mode || content.mode!=='edit'); then thenContentBlock else elseContentBlock">
     </span>
     <ng-template #thenContentBlock>
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-12">
       <!-- <p class="text-right">
         <button type="button" class="btn btn-primary m-1" (click)="content.mode='edit'">Edit mode</button>
       </p> -->
@@ -28,15 +35,18 @@
       Age: {{content?.details?.age}}<br />
       Details: {{content?.details?.details}}
       </p> -->
-      <p>
+      <!-- <p>
         Change log details:
-      </p>
+      </p> -->
       <div>
         <p *ngFor="let item of content.details; let i = index">
           <spam>userId: {{item.details.userId}}</spam> |
           <span>name {{item.details.name}}</span> |
           <span>{{item.details.dateTime}}</span>
         </p>
+      </div>
+      </div>
+      </div>
       </div>
     </ng-template>
     <ng-template #elseContentBlock>
@@ -64,10 +74,14 @@
 
 </mat-dialog-content>
 
-<mat-dialog-actions style="justify-content: flex-end;">
-  <!-- <mat-dialog-actions align="end"> -->
+<!-- <mat-dialog-actions style="justify-content: flex-end;"> -->
+  <mat-dialog-actions align="end">
   <!-- <button type="button" class="btn btn-primary m-1" (click)="submit()">Submit</button> -->
+  <div class="row">
+    <div class="col-md-12">
   <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
+  </div>
+  </div>
 </mat-dialog-actions>
 
 

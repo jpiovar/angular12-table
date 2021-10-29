@@ -111,6 +111,126 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },{
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
     }
   ];
 
@@ -324,7 +444,7 @@ export class TableComponent implements OnInit, OnDestroy {
       panelClass: 'change-log-dialog-class',
       id: `change-log-dialog-id-${id}`,
       width: '800px',
-      height: '300px',
+      height: 'auto',
       data: {
         title: 'Change log dialog',
         details: this.mockDataDialog
