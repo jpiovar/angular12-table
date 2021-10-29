@@ -50,6 +50,46 @@ export class TableComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 
+  mockDataDialog: any[] = [
+    {
+      "id": "id1",
+      "recordId": "id1",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },
+    {
+      "id": "id2",
+      "recordId": "id2",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    },
+    {
+      "id": "id3",
+      "recordId": "id2",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:49:00"
+      }
+    },
+    {
+      "id": "id4",
+      "recordId": "id3",
+      "details": {
+        "userId": "id1",
+        "name": "jozko",
+        "dateTime": "2011-10-10T14:48:00"
+      }
+    }
+  ];
+
+
   constructor(
     private store: Store<AppState>,
     public dialog: MatDialog,
@@ -140,7 +180,7 @@ export class TableComponent implements OnInit, OnDestroy {
               // } else if (this.tableMode === 'load' && this.recordId) {
               //   // debugger;
               //   this.setTargetSortedRecord(this.recordId);
-              //   this.openViewEditDialog(this.recordId);
+              //   this.openChangeLogDialog(this.recordId);
               // } else if (this.tableMode === 'save' && this.recordId) {
               //   this.setTargetSortedRecord(this.recordId);
               // }
@@ -251,24 +291,24 @@ export class TableComponent implements OnInit, OnDestroy {
   //   this.triggerTableRecordLoad(this.origin, this.tableRecordEndPoint, item.id);
   // }
 
-  openViewEditDialog(id: string) {
-    // debugger;
+  openChangeLogDialog(id: string) {
+    debugger;
     this.dialogAction = '';
-    const recordDetail = getItemBasedId(this.records, id);
+    // const recordDetail = getItemBasedId(this.records, id);
     this.dialogRef = this.dialog.open(DialogComponent, {
-      panelClass: 'view-edit-dialog-class',
-      id: `view-edit-dialog-id-${id}`,
-      // width: '800px',
-      // height: '300px',
+      panelClass: 'change-log-dialog-class',
+      id: `change-log-dialog-id-${id}`,
+      width: '800px',
+      height: '300px',
       data: {
-        title: 'Details dialog View/Edit',
-        details: {
-          firstname: recordDetail?.data?.firstname,
-          surname: recordDetail?.data?.surname,
-          age: recordDetail?.data?.age,
-          details: recordDetail?.data?.details,
-          id: recordDetail?.data?.id
-        },
+        title: 'Change log dialog',
+        details: this.mockDataDialog
+          // firstname: recordDetail?.data?.firstname,
+          // surname: recordDetail?.data?.surname,
+          // age: recordDetail?.data?.age,
+          // details: recordDetail?.data?.details,
+          // id: recordDetail?.data?.id
+        ,
         mode: 'view'
       }
     });
@@ -319,8 +359,9 @@ export class TableComponent implements OnInit, OnDestroy {
     this.tableMode = 'remove';
   }
 
-  historyLog(item: any) {
+  showHistoryLog(item: any) {
     // dialog modal, get historyEndpoint/itemId
+    this.openChangeLogDialog(this.recordId);
   }
 
   onInputChange(item: any, index: number) {

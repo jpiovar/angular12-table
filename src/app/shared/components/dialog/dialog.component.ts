@@ -30,7 +30,10 @@ export class DialogComponent implements OnInit {
   initializeContent() {
     // debugger;
     this.content = this.data;
-    this.modifiedContent = JSON.parse(JSON.stringify(this.content));
+
+    console.log(this.content);
+
+    // this.modifiedContent = JSON.parse(JSON.stringify(this.content));
 
     // this.dialogRef?.afterClosed()?.subscribe(result => {
     //   // debugger;
@@ -38,30 +41,30 @@ export class DialogComponent implements OnInit {
     // });
   }
 
-  submit() {
-  //   // debugger;
-  //   const endPoint = `${this.origin}${this.tableRecordEndPoint}`;
-  //   const record = this.content.details;
-  //   const actionType = 'update';
-  //   console.log('confirmed');
-  //   this.dialogRef.close('submitBtn');
-  //   this.store.dispatch(new RecordSave({ endPoint, record, actionType }));
-  }
+  // submit() {
+  // //   // debugger;
+  // //   const endPoint = `${this.origin}${this.tableRecordEndPoint}`;
+  // //   const record = this.content.details;
+  // //   const actionType = 'update';
+  // //   console.log('confirmed');
+  // //   this.dialogRef.close('submitBtn');
+  // //   this.store.dispatch(new RecordSave({ endPoint, record, actionType }));
+  // }
 
   close() {
     console.log('closed');
     this.dialogRef.close('closeBtn');
   }
 
-  confirmChanges() {
-    // debugger;
-    this.content = JSON.parse(JSON.stringify(this.modifiedContent));
-  }
+  // confirmChanges() {
+  //   // debugger;
+  //   this.content = JSON.parse(JSON.stringify(this.modifiedContent));
+  // }
 
-  cancelChanges() {
-    // debugger;
-    this.modifiedContent = JSON.parse(JSON.stringify(this.content));
-  }
+  // cancelChanges() {
+  //   // debugger;
+  //   this.modifiedContent = JSON.parse(JSON.stringify(this.content));
+  // }
 
 
 }
