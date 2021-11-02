@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
-import { MetaLoad, MetaLocalSave, RecordsDelete, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
+import { ChangeLogLoad, MetaLoad, MetaLocalSave, RecordsDelete, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -25,6 +25,7 @@ export class TableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tableDataEndPoint: string;
   metaDataEndPoint: string;
+  tableChangeLogs: string;
   // tableRecordEndPoint: string;
   origin: string;
   originalRecords: any[];
@@ -39,7 +40,7 @@ export class TableComponent implements OnInit, OnDestroy {
   dialogRef: MatDialogRef<any>;
   recordId: string = '';
   dialogAction: string = '';
-  tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | 'remove' | '' = '';
+  tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | 'remove' | 'log' | '' = '';
   searchMode: 'init' | 'global' | '';
   globalFilter: string = '';
   isSearching: boolean = false;
@@ -245,6 +246,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
     this.metaDataEndPoint = environment.beMetaDataEndPoint;
+    this.tableChangeLogs = environment.beTableChangeLogs;
     this.tableMode = 'init';
     this.searchMode = 'init';
     this.triggerMetaLoad();
@@ -317,6 +319,10 @@ export class TableComponent implements OnInit, OnDestroy {
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
 
 
+              if (this.tableMode === 'log') {
+                const index = getIndexBasedId(res.data, this.recordId);
+                this.openChangeLogDialog(this.recordId, res.data[index].changeLog);
+              }
 
               // if (this.tableMode === 'init') {
               //   // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
@@ -436,9 +442,10 @@ export class TableComponent implements OnInit, OnDestroy {
   //   this.triggerTableRecordLoad(this.origin, this.tableRecordEndPoint, item.id);
   // }
 
-  openChangeLogDialog(id: string) {
+  openChangeLogDialog(id: string, dataDetails) {
     debugger;
     this.dialogAction = '';
+    this.tableMode = '';
     // const recordDetail = getItemBasedId(this.records, id);
     this.dialogRef = this.dialog.open(DialogComponent, {
       panelClass: 'change-log-dialog-class',
@@ -447,7 +454,8 @@ export class TableComponent implements OnInit, OnDestroy {
       height: 'auto',
       data: {
         title: 'Change log dialog',
-        details: this.mockDataDialog
+        details: dataDetails
+        // details: this.mockDataDialog
           // firstname: recordDetail?.data?.firstname,
           // surname: recordDetail?.data?.surname,
           // age: recordDetail?.data?.age,
@@ -505,8 +513,15 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   showHistoryLog(item: any) {
+    debugger;
     // dialog modal, get historyEndpoint/itemId
-    this.openChangeLogDialog(item.id);
+    this.store.dispatch(new StartSpinner());
+    const url = `${this.origin}${this.tableChangeLogs}?recordId=${item.id}`;
+    this.recordId = item.id;
+    this.tableMode = 'log';
+    this.store.dispatch(new ChangeLogLoad({url, recordId: this.recordId}));
+
+    // this.openChangeLogDialog(item.id);
   }
 
   onInputChange(item: any, index: number) {

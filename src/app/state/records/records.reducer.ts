@@ -96,6 +96,39 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
 
+    case RecordsActions.CHANGE_LOG_LOAD: {
+      return {
+        ...state,
+        loading: true,
+        error: false
+      };
+    }
+
+    case RecordsActions.CHANGE_LOG_LOAD_SUCCESS: {
+      debugger;
+      const itemId = action.payload.recordId;
+      const changeLog = action.payload.changeLog;
+      const newState = JSON.parse(JSON.stringify(state?.data));
+      const index = getIndexBasedId(newState, itemId);
+      newState[index]['changeLog'] = changeLog;
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: newState
+      };
+    }
+
+    case RecordsActions.CHANGE_LOG_LOAD_FAIL: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    }
+
+
+
     case RecordsActions.META_LOAD: {
       return {
         ...state,

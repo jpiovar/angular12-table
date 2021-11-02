@@ -19,6 +19,10 @@ export const META_LOAD_FAIL = '[Meta] Load meta fail';
 
 export const META_LOCAL_SAVE = '[Meta] Local meta save';
 
+export const CHANGE_LOG_LOAD = '[ChangeLog] Load';
+export const CHANGE_LOG_LOAD_SUCCESS = '[ChangeLog] Load success';
+export const CHANGE_LOG_LOAD_FAIL = '[ChangeLog] Load fail';
+
 export const RECORD_SAVE = '[Records] Save record';
 export const RECORD_SAVE_SUCCESS = '[Records] Save record success';
 export const RECORD_SAVE_FAIL = '[Records] Save record fail';
@@ -82,6 +86,28 @@ export class RecordsDeleteFail implements Action {
   }
 }
 
+export class ChangeLogLoad implements Action {
+  readonly type = CHANGE_LOG_LOAD;
+  constructor(public payload: { url: string; recordId: string }) {
+    debugger;
+  }
+}
+
+export class ChangeLogLoadSuccess implements Action {
+  readonly type = CHANGE_LOG_LOAD_SUCCESS;
+  constructor(public payload: any) {
+    debugger;
+  }
+}
+
+export class ChangeLogLoadFail implements Action {
+  readonly type = CHANGE_LOG_LOAD_FAIL;
+  constructor(public payload: any) {
+    debugger;
+  }
+}
+
+
 export class MetaLoad implements Action {
   readonly type = META_LOAD;
   constructor(public payload: any) {
@@ -136,4 +162,5 @@ export type Actions = RecordsLoad | RecordsLoadSuccess | RecordsLoadFail |
                       RecordsDelete | RecordsDeleteSuccess | RecordsDeleteFail |
                       MetaLoad | MetaLoadSuccess | MetaLoadFail |
                       MetaLocalSave|
+                      ChangeLogLoad | ChangeLogLoadSuccess | ChangeLogLoadFail |
                       RecordSave | RecordSaveSuccess | RecordSaveFail;

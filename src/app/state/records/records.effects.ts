@@ -23,7 +23,11 @@ import {
   RECORDS_DELETE,
   RecordsDelete,
   RecordsDeleteSuccess,
-  RecordsDeleteFail
+  RecordsDeleteFail,
+  CHANGE_LOG_LOAD,
+  ChangeLogLoad,
+  ChangeLogLoadSuccess,
+  ChangeLogLoadFail
 } from './records.actions';
 
 import { RecordsState } from './records.models';
@@ -46,6 +50,30 @@ export class RecordsEffects {
     this.origin = environment.beOrigin;
   }
   origin: string;
+
+
+  changeLogLoad$ = createEffect(() => this.actions$.pipe(
+    ofType(CHANGE_LOG_LOAD),
+    switchMap(
+      (action: ChangeLogLoad) => {
+        debugger;
+        const urlChangeLog: any = action.payload.url;
+        const recordId = action.payload.recordId;
+        return this.httpBase.getCommon(`${urlChangeLog}`).pipe(
+          map((res: any) => {
+            debugger;
+            return new ChangeLogLoadSuccess({recordId, changeLog: res})
+          }),
+          catchError(error => {
+            debugger;
+            return of(new ChangeLogLoadFail(error));
+          })
+        );
+      }
+    )
+  )
+  );
+
 
   metaLoad$ = createEffect(() => this.actions$.pipe(
     ofType(META_LOAD),
