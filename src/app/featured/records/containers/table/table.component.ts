@@ -96,7 +96,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -104,7 +104,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -112,7 +112,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -120,7 +120,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -128,7 +128,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -136,7 +136,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -144,7 +144,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -152,7 +152,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -160,7 +160,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -168,7 +168,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -176,7 +176,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -184,7 +184,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -192,7 +192,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -200,7 +200,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -208,7 +208,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -216,7 +216,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -224,7 +224,7 @@ export class TableComponent implements OnInit, OnDestroy {
         "name": "jozko",
         "dateTime": "2011-10-10T14:48:00"
       }
-    },{
+    }, {
       "id": "id4",
       "recordId": "id3",
       "details": {
@@ -315,9 +315,10 @@ export class TableComponent implements OnInit, OnDestroy {
 
             if (res.data) {
               // debugger;
-              this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
-              this.records = JSON.parse(JSON.stringify(this.originalRecords));
-
+              if (this.tableMode !== 'log') {
+                this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
+                this.records = JSON.parse(JSON.stringify(this.originalRecords));
+              }
 
               if (this.tableMode === 'log') {
                 const index = getIndexBasedId(res.data, this.recordId);
@@ -513,12 +514,12 @@ export class TableComponent implements OnInit, OnDestroy {
     const url = `${this.origin}${this.tableChangeLogs}?recordId=${item.id}`;
     this.recordId = item.id;
     this.tableMode = 'log';
-    this.store.dispatch(new ChangeLogLoad({url, recordId: this.recordId}));
+    this.store.dispatch(new ChangeLogLoad({ url, recordId: this.recordId }));
 
     // this.openChangeLogDialog(item.id);
   }
 
-  onInputChange(item: any, index: number) {
+  onInputChange(colname: string, item: any, index: number) {
     debugger;
     const itemId = this.records[index]?.id;
     const recordItemChanged = this.recordsItemChanged(this.records[index], this.originalRecords[index]);
@@ -535,6 +536,17 @@ export class TableComponent implements OnInit, OnDestroy {
     if (JSON.stringify(this.recordsDiffArrObj) === '{}') {
       this.recordsDiffArrObj = null;
     }
+
+    if (!item[colname]) {
+      item[colname + 'ErrorRequired'] = true;
+      this.recordsDiffArrObj['error'] = true;
+    } else {
+      delete item[colname + 'ErrorRequired'];
+      if (this.recordsDiffArrObj?.error) {
+        delete this.recordsDiffArrObj['error'];
+      }
+    }
+
   }
 
   recordsItemChanged(recordsItem, originalRecordsItem) {

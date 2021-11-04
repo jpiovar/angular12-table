@@ -1,3 +1,5 @@
+@import "~src/assets/scss/colors";
+
 #table-records {
   #global-search {
 
@@ -31,6 +33,20 @@
     float: right;
     .page-link {
       cursor: pointer;
+    }
+  }
+
+  .record-edit {
+    input, label {
+      display:block;
+    }
+    &.required {
+      input {
+        border: 1px solid $color9;
+      }
+      label {
+        color: $color9;
+      }
     }
   }
 }

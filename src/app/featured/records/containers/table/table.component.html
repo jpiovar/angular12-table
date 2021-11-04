@@ -62,31 +62,40 @@
           <tbody>
             <tr *ngFor="let item of records; let i = index">
               <td>
-                <input *ngIf="item.edit" type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange(item, i)">
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.firstnameErrorRequired}">
+                  <input type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('firstname', item, i)">
+                  <label *ngIf="item?.firstnameErrorRequired">Required</label>
+                </span>
                 <span *ngIf="!item.edit">{{item.firstname}}</span>
               </td>
               <td>
-                <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange(item, i)">
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.surnameErrorRequired}">
+                  <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('surname', item, i)">
+                  <label *ngIf="item?.surnameErrorRequired">Required</label>
+                </span>
                 <span *ngIf="!item.edit">{{item.surname}}</span>
               </td>
               <td>
-                <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange(item, i)">
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.ageErrorRequired}" >
+                  <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('age', item, i)">
+                  <label *ngIf="item?.ageErrorRequired">Required</label>
+                </span>
                 <span *ngIf="!item.edit">{{item.age}}</span>
               </td>
               <td>
                 <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
                   <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
                 </span>
-                <span *ngIf="item.edit" (click)="switchToReadMode(item)">
+                <span *ngIf="item.edit" (click)="switchToReadMode(item)" [ngClass]="{'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)}">
                   <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
                 </span>
                 <span (click)="removeItem(item)">
                   <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
                 </span>
-                <span (click)="showHistoryLog(item)">
+                <span (click)="showHistoryLog(item)" [ngClass]="{'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)}">
                   <mat-icon aria-label="history" class="td-link ml-2">history</mat-icon>
                 </span>
                 <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
@@ -98,7 +107,8 @@
     </div>
     <div class="row">
       <div class="col-md-2">
-        <button type="button" class="btn btn-primary" [disabled]="!recordsDiffArrObj" (click)="saveChanges()">Save
+        <button type="button" class="btn btn-primary" [disabled]="!recordsDiffArrObj || recordsDiffArrObj?.error"
+          (click)="saveChanges()">Save
           Changes</button>
       </div>
       <div class="col-md-10">
