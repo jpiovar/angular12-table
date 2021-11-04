@@ -20,7 +20,7 @@
   <ng-container *ngIf="content; else mockText">
     <span [innerHTML]="content?.text | safeHtml"></span>
     <span
-      *ngIf="content?.details && (!content.mode || content.mode!=='edit'); then thenContentBlock else elseContentBlock">
+      *ngIf="content?.changeLog && (!content.mode || content.mode!=='edit'); then thenContentBlock else elseContentBlock">
     </span>
     <ng-template #thenContentBlock>
       <div class="content-wrapper">
@@ -39,10 +39,10 @@
         Change log details:
       </p> -->
       <div>
-        <p *ngFor="let item of content.details; let i = index">
-          <spam>userId: {{item.details.userId}}</spam> |
-          <span>name {{item.details.name}}</span> |
-          <span>{{item.details.dateTime}}</span>
+        <p *ngFor="let item of content.changeLog; let i = index">
+          <spam>userId: {{item.userId}}</spam> |
+          <span>name {{item.name}}</span> |
+          <span>{{item.dateTime}}</span>
         </p>
       </div>
       </div>

@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "mock": "json-server --port 3000 --watch ./src/assets/mock/server.js --routes ./src/assets/mock/routes.json",
+    "db": "json-server --no-cors --port 3000 --watch ./src/assets/mock/db.json",
     "postinstall": "ngcc",
     "stylelint": "stylelint **/*.scss",
     "project:init": "npm cache clean --force && npm cache verify && npm i -g @angular/cli && npm i -g @angular/compiler && npm i -g @angular/compiler-cli && npm i -g typescript && npm install",

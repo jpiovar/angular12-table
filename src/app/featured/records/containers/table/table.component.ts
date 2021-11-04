@@ -442,7 +442,7 @@ export class TableComponent implements OnInit, OnDestroy {
   //   this.triggerTableRecordLoad(this.origin, this.tableRecordEndPoint, item.id);
   // }
 
-  openChangeLogDialog(id: string, dataDetails) {
+  openChangeLogDialog(id: string, changeLog) {
     debugger;
     this.dialogAction = '';
     this.tableMode = '';
@@ -454,7 +454,7 @@ export class TableComponent implements OnInit, OnDestroy {
       height: 'auto',
       data: {
         title: 'Change log dialog',
-        details: dataDetails
+        changeLog
         // details: this.mockDataDialog
           // firstname: recordDetail?.data?.firstname,
           // surname: recordDetail?.data?.surname,
