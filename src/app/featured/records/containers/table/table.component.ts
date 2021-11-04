@@ -454,14 +454,8 @@ export class TableComponent implements OnInit, OnDestroy {
       height: 'auto',
       data: {
         title: 'Change log dialog',
-        changeLog
-        // details: this.mockDataDialog
-          // firstname: recordDetail?.data?.firstname,
-          // surname: recordDetail?.data?.surname,
-          // age: recordDetail?.data?.age,
-          // details: recordDetail?.data?.details,
-          // id: recordDetail?.data?.id
-        ,
+        changeLog,
+        type: 'changeLog',
         mode: 'view'
       }
     });
