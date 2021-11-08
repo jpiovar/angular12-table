@@ -15,6 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions';
 import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
+import { LogsLoad } from 'src/app/state/logs/logs.actions';
 
 @Component({
   selector: 'app-table',
@@ -314,16 +315,16 @@ export class TableComponent implements OnInit, OnDestroy {
             }
 
             if (res.data) {
-              // debugger;
+              debugger;
               if (this.tableMode !== 'log') {
                 this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
                 this.records = JSON.parse(JSON.stringify(this.originalRecords));
               }
 
-              if (this.tableMode === 'log') {
-                const index = getIndexBasedId(res.data, this.recordId);
-                this.openChangeLogDialog(this.recordId, res.data[index].changeLog);
-              }
+              // if (this.tableMode === 'log') {
+              //   const index = getIndexBasedId(res.data, this.recordId);
+              //   this.openChangeLogDialog(this.recordId, res.data[index].changeLog);
+              // }
 
               // if (this.tableMode === 'init') {
               //   // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
@@ -336,6 +337,32 @@ export class TableComponent implements OnInit, OnDestroy {
               // } else if (this.tableMode === 'save' && this.recordId) {
               //   this.setTargetSortedRecord(this.recordId);
               // }
+            }
+
+          }
+
+
+        })
+    );
+
+    this.subscription.add(
+      this.store.select('logs')
+        // .pipe(last())
+        .subscribe((res: any) => {
+          debugger;
+
+          this.store.dispatch(new StopSpinner());
+
+          if (res && !res.loading) {
+
+            if (res.data) {
+              debugger;
+
+              if (this.tableMode === 'log') {
+                this.openChangeLogDialog(this.recordId, res.data[this.recordId]);
+              }
+
+
             }
 
           }
@@ -514,7 +541,7 @@ export class TableComponent implements OnInit, OnDestroy {
     const url = `${this.origin}${this.tableChangeLogs}?recordId=${item.id}`;
     this.recordId = item.id;
     this.tableMode = 'log';
-    this.store.dispatch(new ChangeLogLoad({ url, recordId: this.recordId }));
+    this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
 
     // this.openChangeLogDialog(item.id);
   }

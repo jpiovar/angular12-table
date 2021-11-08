@@ -30,8 +30,10 @@ import { reducer as spinner } from './state/spinner/spinner.reducer';
 import { reducer as toastr } from './state/toastr/toastr.reducer';
 import { reducer as records } from './state/records/records.reducer';
 import { reducer as user } from './state/user/user.reducer';
+import { reducer as logs } from './state/logs/logs.reducer';
 
 import { RecordsEffects } from './state/records/records.effects';
+import { LogsEffects } from './state/logs/logs.effects';
 
 import { AppState } from './state';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -97,10 +99,12 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       spinner,
       toastr,
       records,
-      user
+      user,
+      logs
     }),
     EffectsModule.forRoot([
-      RecordsEffects
+      RecordsEffects,
+      LogsEffects
     ]),
     StoreDevtoolsModule.instrument({
       name: 'NgRx tracker state', logOnly: environment.production
