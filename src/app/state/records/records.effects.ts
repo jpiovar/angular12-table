@@ -38,9 +38,12 @@ import { Store } from '@ngrx/store';
 import { AppState } from '..';
 import { StartToastr } from '../toastr/toastr.actions';
 import { getItemBasedId } from 'src/app/shared/utils/helper';
+import { LogsSave } from '../logs/logs.actions';
 
 @Injectable()
 export class RecordsEffects {
+  origin: string;
+  tableLogs: string;
 
   constructor(
     private actions$: Actions<any>,
@@ -48,8 +51,8 @@ export class RecordsEffects {
     private store: Store<AppState>
   ) {
     this.origin = environment.beOrigin;
+    this.tableLogs = environment.beTableChangeLogs;
   }
-  origin: string;
 
 
   changeLogLoad$ = createEffect(() => this.actions$.pipe(
@@ -162,12 +165,14 @@ export class RecordsEffects {
     ),
     map(
       res => {
+        const url: string = `${this.origin}${this.tableLogs}`;
         debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
         // const itemId = item?.id;
         for (const key in res?.modified) {
           this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
         }
+        this.store.dispatch(new LogsSave({ endPoint: url, logs: res?.modified }));
         return new RecordsSaveSuccess(records);
       }
     ),

@@ -3,7 +3,7 @@ import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, flatMap, mergeMap, delay, withLatestFrom } from 'rxjs/operators';
 import { forkJoin, Observable, Observer, of, throwError, zip, from } from 'rxjs';
 
-import { LogsLoad, LogsLoadFail, LogsLoadSuccess, LOGS_LOAD } from './logs.actions';
+import { LogsLoad, LogsLoadFail, LogsLoadSuccess, LogsSave, LogsSaveFail, LogsSaveSuccess, LOGS_LOAD, LOGS_SAVE } from './logs.actions';
 
 import { LogsState } from './logs.models';
 import { HttpBaseService } from '../../core/services/http.base.service';
@@ -38,7 +38,7 @@ export class LogsEffects {
         return this.httpBase.getCommon(`${urlLogs}`).pipe(
           map((res: any) => {
             debugger;
-            return new LogsLoadSuccess({recordId, logs: res})
+            return new LogsLoadSuccess({ recordId, logs: res })
           }),
           catchError(error => {
             debugger;
@@ -47,6 +47,88 @@ export class LogsEffects {
         );
       }
     )
+  )
+  );
+
+
+
+  logsSave$ = createEffect(() => this.actions$.pipe(
+    ofType(LOGS_SAVE),
+    mergeMap(
+      (action: LogsSave) => {
+        debugger;
+        const endPoint: any = action?.payload?.endPoint;
+        const logs: any = action?.payload?.logs;
+        // const modified: any = action?.payload?.modified;
+
+        const arrObs = [];
+        // for (const key in logs) {
+        const httpBody = {
+          // id: "id2",
+          recordId: "id2",
+          userId: "id1",
+          name: "jozko",
+          dateTime: "2011-10-16"
+        }
+        // arrObs.push(this.httpBase.postCommon(`${endPoint}`, httpBody));
+        // }
+
+        // return {
+        //   endPoint, logs, arrObs
+        // };
+
+
+        return this.httpBase.postCommon(`${endPoint}`, httpBody).pipe(
+          map(
+            (response: any) => {
+              return new LogsSaveSuccess(response);
+            }
+          ),
+          catchError(error => {
+            // debugger;
+            return of(new LogsSaveFail(error));
+          })
+        );
+
+
+      }
+    )
+    // mergeMap(
+    //   (res: any) => {
+    //     return new Observable((observer: Observer<any>) => {
+    //       zip(...res.arrObs).subscribe(
+    //         (subres: any) => {
+    //           debugger;
+    //           return observer.next({
+    //             arrObsRes: subres,
+    //             endPoint: res.endPoint,
+    //             records: res.records,
+    //             modified: res.modified
+    //           });
+    //         },
+    //         error => throwError(error),
+    //         () => observer.complete()
+    //       );
+    //     })
+    //   }
+    // ),
+
+
+    // map(
+    //   res => {
+    //     debugger;
+    //     const logs = JSON.parse(JSON.stringify(res));
+
+    //     // for (const key in res?.modified) {
+    //     //   this.store.dispatch(new StartToastr({ text: `log ${key} updated`, type: 'success', duration: 5000 }));
+    //     // }
+    //     return new LogsSaveSuccess(res);
+    //   }
+    // ),
+    // catchError(error => {
+    //   debugger;
+    //   return of(new LogsSaveFail(error));
+    // })
   )
   );
 
