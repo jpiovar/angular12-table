@@ -24,15 +24,15 @@
     }
   }
   .th-link {
-    cursor: pointer;
+    cursor: pointer !important;
   }
   .td-link {
-    cursor: pointer;
+    cursor: pointer !important;
   }
   .pagination {
     float: right;
     .page-link {
-      cursor: pointer;
+      cursor: pointer !important;
     }
   }
 

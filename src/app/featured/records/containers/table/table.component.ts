@@ -28,16 +28,17 @@ import { LogsLoad } from 'src/app/state/logs/logs.actions';
 export class TableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tableDataEndPoint: string;
-  metaDataEndPoint: string;
   tableChangeLogs: string;
-  // tableRecordEndPoint: string;
   origin: string;
   originalRecords: any[];
-  sortedOriginalRecords: any[];
   records: any[];
+
   pages: any[] = [];
-  itemsPerPage: number = 5;
   activePage: number = 0;
+  recordsPerPage: number = 5;
+  totalRecords: number = 0;
+  recordsDiffArrObj: any = null;
+
   sortBy: string = 'firstname';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
@@ -49,196 +50,7 @@ export class TableComponent implements OnInit, OnDestroy {
   globalFilter: string = '';
   isSearching: boolean = false;
   searchTextChanged: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
-  recordsPerPage: number = 5;
-  paginationPages: number = 0;
-  totalRecords: number = 0;
-  recordsDiffArrObj: any = null;
-
-  mockDataDialog: any[] = [
-    {
-      "id": "id1",
-      "recordId": "id1",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    },
-    {
-      "id": "id2",
-      "recordId": "id2",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    },
-    {
-      "id": "id3",
-      "recordId": "id2",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:49:00"
-      }
-    },
-    {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    },
-    {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }, {
-      "id": "id4",
-      "recordId": "id3",
-      "details": {
-        "userId": "id1",
-        "name": "jozko",
-        "dateTime": "2011-10-10T14:48:00"
-      }
-    }
-  ];
-
+  searchText: string = '';
 
   constructor(
     private store: Store<AppState>,
@@ -249,56 +61,32 @@ export class TableComponent implements OnInit, OnDestroy {
   ) {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
-    this.metaDataEndPoint = environment.beMetaDataEndPoint;
     this.tableChangeLogs = environment.beTableChangeLogs;
     this.tableMode = 'init';
     this.searchMode = 'init';
 
-    // this.triggerMetaLoad();
-
-    // this.triggerTableLoad();
     this.metaAndTableDataSubscription();
     this.processGlobalSearch();
   }
 
   ngOnInit(): void {
-    // this.store.select('user').subscribe((res) => {
-    //   if (res?.accessToken) {
-    // debugger;
-    // this.triggerMetaLoad();
-    // if (this.tableMode === 'init') {
     this.triggerTableLoad();
-    // this.tableMode = '';
-    // }
-    // this.metaAndTableDataSubscription();
-    // this.processGlobalSearch();
-    //   }
-    // });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  // triggerMetaLoad(): void {
-  //   debugger;
-  //   const url = `${this.origin}${this.metaDataEndPoint}`;
-  //   this.store.dispatch(new MetaLoad(url));
-  // }
-
   triggerTableLoad(): void {
     debugger;
     this.tableMode = 'load';
     this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    if (this.searchText) {
+      url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    }
     this.store.dispatch(new RecordsLoad(url));
   }
-
-  // triggerTableRecordLoad(origin: string, dataEndPoint: string, id: string): void {
-  //   // debugger;
-  //   const url = `${origin}${dataEndPoint}/${id}`;
-  //   this.store.dispatch(new RecordLoadDetail({ id, detail: url, storeMode: true }));
-  // }
 
   metaAndTableDataSubscription() {
     this.subscription.add(
@@ -316,41 +104,11 @@ export class TableComponent implements OnInit, OnDestroy {
               this.setPagesRecords();
             }
 
-
-            // if (res.totalRecords > -1) {
-            // if (this.tableMode === 'init') {
-            //   // this.totalRecords = 0;
-            //   // this.totalRecords = res?.totalRecords;
-            //   this.setPagesRecords();
-            // } else if (this.tableMode === 'remove') {
-            //   // this.totalRecords--;
-            //   // this.store.dispatch(new MetaLocalSave(this.totalRecords));
-            //   this.setPagesRecords();
-            // }
-            // }
-
             if (res.data) {
               debugger;
               // if (this.tableMode !== 'log') {
               this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
-              // }
-
-              // if (this.tableMode === 'log') {
-              //   const index = getIndexBasedId(res.data, this.recordId);
-              //   this.openChangeLogDialog(this.recordId, res.data[index].changeLog);
-              // }
-
-              // if (this.tableMode === 'init') {
-              //   // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
-              //   // this.sortByColumn(this.sortBy);
-              //   // this.setPagesRecords();
-              // } else if (this.tableMode === 'load' && this.recordId) {
-              //   // debugger;
-              //   this.setTargetSortedRecord(this.recordId);
-              //   this.openChangeLogDialog(this.recordId);
-              // } else if (this.tableMode === 'save' && this.recordId) {
-              //   this.setTargetSortedRecord(this.recordId);
               // }
             }
 
@@ -409,36 +167,18 @@ export class TableComponent implements OnInit, OnDestroy {
     return res;
   }
 
-  // setTargetSortedRecord(recordId: string) {
-  //   // debugger;
-  //   const indexR = getIndexBasedId(this.records, recordId);
-  //   const indexSor = getIndexBasedId(this.sortedOriginalRecords, recordId);
-  //   const indexOr = getIndexBasedId(this.originalRecords, recordId);
-  //   this.records[indexR] = JSON.parse(JSON.stringify(this.originalRecords[indexOr]));
-  //   this.sortedOriginalRecords[indexSor] = JSON.parse(JSON.stringify(this.originalRecords[indexOr]));
-  // }
 
-  // setTargetRecord(recordId: string) {
-  //   // debugger;
-  //   const indexR = getIndexBasedId(this.records, recordId);
-  //   const indexSor = getIndexBasedId(this.sortedOriginalRecords, recordId);
-  //   this.records[indexR] = JSON.parse(JSON.stringify(this.sortedOriginalRecords[indexSor]));
-  // }
 
   setPagesRecords() {
     // debugger;
     this.tableMode = '';
     this.pages = new Array(Math.ceil(this.totalRecords / this.recordsPerPage));
-    // this.triggerTableLoad();
-    // this.pages = new Array(Math.ceil(this.sortedOriginalRecords.length / this.itemsPerPage));
-    // this.records = this.sortedOriginalRecords.slice(this.activePage * this.itemsPerPage, this.activePage * this.itemsPerPage + this.itemsPerPage);
   }
 
   jumpToPage(page: number): void {
     // debugger;
     this.activePage = page;
     this.triggerTableLoad();
-    // this.setPagesRecords();
   }
 
   previousPage() {
@@ -446,7 +186,6 @@ export class TableComponent implements OnInit, OnDestroy {
     if (this.activePage >= 1) {
       this.activePage--;
       this.triggerTableLoad();
-      // this.setPagesRecords();
     }
   }
 
@@ -455,7 +194,6 @@ export class TableComponent implements OnInit, OnDestroy {
     if (this.activePage < this.pages.length - 1) {
       this.activePage++;
       this.triggerTableLoad();
-      // this.setPagesRecords();
     }
   }
 
@@ -477,16 +215,12 @@ export class TableComponent implements OnInit, OnDestroy {
     this.sortByCol[colname] = this.direction;
 
     this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    if (this.searchText) {
+      url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    }
     this.store.dispatch(new RecordsLoad(url));
   }
-
-  // triggerOpenViewEditDialog(item: any) {
-  //   // debugger;
-  //   this.recordId = item.id;
-  //   this.tableMode = 'load';
-  //   this.triggerTableRecordLoad(this.origin, this.tableRecordEndPoint, item.id);
-  // }
 
   openChangeLogDialog(id: string, changeLog) {
     debugger;
@@ -510,7 +244,6 @@ export class TableComponent implements OnInit, OnDestroy {
       // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
-      // this.recordId = '';
       if (this.dialogAction === 'submitBtn') {
         this.tableMode = 'save';
       }
@@ -521,7 +254,6 @@ export class TableComponent implements OnInit, OnDestroy {
       // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
-      // this.recordId = '';
       if (this.dialogAction === 'submitBtn') {
         this.tableMode = 'save';
       }
@@ -560,8 +292,6 @@ export class TableComponent implements OnInit, OnDestroy {
     this.recordId = item.id;
     this.tableMode = 'log';
     this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
-
-    // this.openChangeLogDialog(item.id);
   }
 
   onInputChange(colname: string, item: any, index: number) {
@@ -607,10 +337,6 @@ export class TableComponent implements OnInit, OnDestroy {
   saveChanges() {
     this.store.dispatch(new StartSpinner());
     debugger;
-    // let headers = new HttpHeaders({'Content-Type': 'application/json', 'Accept': 'application/json'});
-    // let httpOptions = {
-    //   headers, withCredentials: false
-    // };
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
       const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
@@ -619,48 +345,7 @@ export class TableComponent implements OnInit, OnDestroy {
         modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
       }
       this.store.dispatch(new RecordsSave({ endPoint: url, records, modified }));
-
       this.recordsDiffArrObj = null;
-
-      // const record1 = { id: 'id1', firstname: 'jopo11', lastname: 'popo11', age: 10 };
-      // const record2 = { id: 'id2', firstname: 'jopo22', lastname: 'popo22', age: 10 };
-      // return this.httpClient.put<any>(url, record1, httpOptions)
-      // .pipe(
-      //   // retry(3),
-      //   catchError(
-      //     err => {
-
-      //       throw err;
-      //     }
-      //   )
-      // ).subscribe(
-      //   res => {
-      //     debugger;
-      //   }
-      // );
-      // const arrObs = [
-      //   this.httpBase.putCommon(`${url}/id1`, record1),
-      //   this.httpBase.putCommon(`${url}/id2`, record2)
-      // ];
-      // this.httpBase.putCommon(`${url}/id1`, record1)
-      // this.httpBase.putCommon(`${url}/id2`, record2)
-      // zip(...arrObs)
-      // .pipe(
-      //   map((res: any) => {
-      //     debugger;
-      //     return '';
-      //   }),
-      //   catchError(error => {
-      //     debugger;
-      //     return '';
-      //   })
-      // )
-
-      // .subscribe(
-      //   res => {
-      //     debugger;
-      //    }
-      // );
     }
   }
 
@@ -672,6 +357,7 @@ export class TableComponent implements OnInit, OnDestroy {
   clearAllFilters() {
     // debugger;
     this.globalFilter = '';
+    this.searchText = '';
     this.globalSearch();
   }
 
@@ -684,28 +370,19 @@ export class TableComponent implements OnInit, OnDestroy {
           this.isSearching = false;
           const res = response.trim();
           if (res) {
+            this.searchText = res;
+            this.sortBy = 'firstname';
+            this.direction = 'asc';
             if (this.searchMode === 'global') {
-              const url = `${this.origin}${this.tableDataEndPoint}?q=${res}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+              const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
               this.store.dispatch(new RecordsLoad(url));
-
-              // this.sortedOriginalRecords = this.getFilteredRecords(this.originalRecords, res);
-              // this.sortBy = '';
-              // this.activePage = 0;
-              // this.sortByColumn(this.sortBy);
-              // this.setPagesRecords();
             }
-            // const url = `${this.origin}${this.tableDataEndPoint}`;
-            // this.store.dispatch(new RecordsLoad(url));
           } else {
+            this.direction = 'asc';
             if (this.searchMode === 'global') {
-              const url = `${this.origin}${this.tableDataEndPoint}?_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+              const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
               this.store.dispatch(new RecordsLoad(url));
-              // this.activePage = 0;
-              // this.sortedOriginalRecords = JSON.parse(JSON.stringify(this.originalRecords));
-              // this.setPagesRecords();
             }
-            // const url = `${this.origin}${this.tableDataEndPoint}`;
-            // this.store.dispatch(new RecordsLoad(url));
           }
           this.searchMode = 'global';
         },
