@@ -31,7 +31,7 @@ export class HttpBaseService {
     };
 
     this.store.select('user').subscribe((res: any) => {
-      debugger;
+      // debugger;
       if (res?.accessToken) {
         this.accessToken = res.accessToken;
         this.headers = this.headers.set('Authorization', `Bearer ${res.accessToken}`);
@@ -50,7 +50,7 @@ export class HttpBaseService {
     if (httpOptions) {
       localHttpOptions = httpOptions;
     }
-    debugger;
+    // debugger;
     localHttpOptions.params = params; // in case params did not set, then undefined
     this.issueParams = issueParams || null;
     this.spaloggerEndPoint = this.issueParams && this.issueParams.links && this.issueParams.links[0].href;

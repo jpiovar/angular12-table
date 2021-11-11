@@ -8,14 +8,14 @@ import {
   RecordsLoad,
   RecordsLoadSuccess,
   RecordsLoadFail,
-  RECORD_SAVE,
-  RecordSave,
-  RecordSaveSuccess,
-  RecordSaveFail,
-  META_LOAD,
-  MetaLoad,
-  MetaLoadSuccess,
-  MetaLoadFail,
+  // RECORD_SAVE,
+  // RecordSave,
+  // RecordSaveSuccess,
+  // RecordSaveFail,
+  // META_LOAD,
+  // MetaLoad,
+  // MetaLoadSuccess,
+  // MetaLoadFail,
   RECORDS_SAVE,
   RecordsSave,
   RecordsSaveSuccess,
@@ -24,10 +24,10 @@ import {
   RecordsDelete,
   RecordsDeleteSuccess,
   RecordsDeleteFail,
-  CHANGE_LOG_LOAD,
-  ChangeLogLoad,
-  ChangeLogLoadSuccess,
-  ChangeLogLoadFail
+  // CHANGE_LOG_LOAD,
+  // ChangeLogLoad,
+  // ChangeLogLoadSuccess,
+  // ChangeLogLoadFail
 } from './records.actions';
 
 import { RecordsState } from './records.models';
@@ -55,49 +55,49 @@ export class RecordsEffects {
   }
 
 
-  changeLogLoad$ = createEffect(() => this.actions$.pipe(
-    ofType(CHANGE_LOG_LOAD),
-    switchMap(
-      (action: ChangeLogLoad) => {
-        debugger;
-        const urlChangeLog: any = action.payload.url;
-        const recordId = action.payload.recordId;
-        return this.httpBase.getCommon(`${urlChangeLog}`).pipe(
-          map((res: any) => {
-            debugger;
-            return new ChangeLogLoadSuccess({recordId, changeLog: res})
-          }),
-          catchError(error => {
-            debugger;
-            return of(new ChangeLogLoadFail(error));
-          })
-        );
-      }
-    )
-  )
-  );
+  // changeLogLoad$ = createEffect(() => this.actions$.pipe(
+  //   ofType(CHANGE_LOG_LOAD),
+  //   switchMap(
+  //     (action: ChangeLogLoad) => {
+  //       debugger;
+  //       const urlChangeLog: any = action.payload.url;
+  //       const recordId = action.payload.recordId;
+  //       return this.httpBase.getCommon(`${urlChangeLog}`).pipe(
+  //         map((res: any) => {
+  //           debugger;
+  //           return new ChangeLogLoadSuccess({recordId, changeLog: res})
+  //         }),
+  //         catchError(error => {
+  //           debugger;
+  //           return of(new ChangeLogLoadFail(error));
+  //         })
+  //       );
+  //     }
+  //   )
+  // )
+  // );
 
 
-  metaLoad$ = createEffect(() => this.actions$.pipe(
-    ofType(META_LOAD),
-    switchMap(
-      (action: MetaLoad) => {
-        // debugger;
-        const urlRecords: any = action.payload;
-        return this.httpBase.getCommon(`${urlRecords}`).pipe(
-          map((res: any) => {
-            // debugger;
-            return new MetaLoadSuccess(res?.total)
-          }),
-          catchError(error => {
-            // debugger;
-            return of(new MetaLoadFail(error));
-          })
-        );
-      }
-    )
-  )
-  );
+  // metaLoad$ = createEffect(() => this.actions$.pipe(
+  //   ofType(META_LOAD),
+  //   switchMap(
+  //     (action: MetaLoad) => {
+  //       // debugger;
+  //       const urlRecords: any = action.payload;
+  //       return this.httpBase.getCommon(`${urlRecords}`).pipe(
+  //         map((res: any) => {
+  //           // debugger;
+  //           return new MetaLoadSuccess(res?.total)
+  //         }),
+  //         catchError(error => {
+  //           // debugger;
+  //           return of(new MetaLoadFail(error));
+  //         })
+  //       );
+  //     }
+  //   )
+  // )
+  // );
 
   // @Effect()
   // recordsLoad$ = this.actions$.pipe(
@@ -108,7 +108,17 @@ export class RecordsEffects {
         // debugger;
         const urlRecords: any = action.payload;
         return this.httpBase.getCommon(`${urlRecords}`).pipe(
-          map((res: any) => new RecordsLoadSuccess(res)),
+          map((res: any) => {
+            debugger;
+            let resExt = res;
+            if (!res?.data && !res?.totalRecords) {
+              resExt = {
+                data: res,
+                totalRecords: 12
+              }
+            }
+            return new RecordsLoadSuccess(resExt)
+          }),
           catchError(error => {
             // debugger;
             return of(new RecordsLoadFail(error));
@@ -257,33 +267,33 @@ export class RecordsEffects {
   )
   );
 
-    // mergeMap(
-    //   (res: any) => {
-    //     debugger;
+  // mergeMap(
+  //   (res: any) => {
+  //     debugger;
 
 
-    //     // if (actionType === 'update') {
-    //       return this.httpBase.putCommon(`${res.endPoint}/1`, res.records)
-    //       .pipe(
-    //         map(
-    //           (response: any) => {
-    //             debugger;
-    //             const item = JSON.parse(JSON.stringify(res.records));
-    //             const itemId = item?.id;
-    //             this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
-    //             return new RecordsSaveSuccess(res.records);
-    //           }
-    //         ),
-    //         catchError(error => {
-    //           debugger;
-    //           console.log(`${res.endPoint}`, error);
-    //           // const recordId = record.id;
-    //           // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
-    //           return of(new RecordsSaveFail(error));
-    //         })
-    //       );
-    //   }
-    // )
+  //     // if (actionType === 'update') {
+  //       return this.httpBase.putCommon(`${res.endPoint}/1`, res.records)
+  //       .pipe(
+  //         map(
+  //           (response: any) => {
+  //             debugger;
+  //             const item = JSON.parse(JSON.stringify(res.records));
+  //             const itemId = item?.id;
+  //             this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
+  //             return new RecordsSaveSuccess(res.records);
+  //           }
+  //         ),
+  //         catchError(error => {
+  //           debugger;
+  //           console.log(`${res.endPoint}`, error);
+  //           // const recordId = record.id;
+  //           // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
+  //           return of(new RecordsSaveFail(error));
+  //         })
+  //       );
+  //   }
+  // )
   // )
   // );
 
@@ -353,62 +363,62 @@ export class RecordsEffects {
 
   // @Effect()
   // recordSave$ = this.actions$.pipe(
-  recordSave$ = createEffect(() => this.actions$.pipe(
-    ofType(RECORD_SAVE),
-    switchMap(
-      (action: RecordSave) => {
-        // debugger;
-        const endPoint: any = action?.payload?.endPoint;
-        const record: any = action?.payload?.record;
-        const actionType = action?.payload?.actionType;
+  // recordSave$ = createEffect(() => this.actions$.pipe(
+  //   ofType(RECORD_SAVE),
+  //   switchMap(
+  //     (action: RecordSave) => {
+  //       // debugger;
+  //       const endPoint: any = action?.payload?.endPoint;
+  //       const record: any = action?.payload?.record;
+  //       const actionType = action?.payload?.actionType;
 
-        if (actionType === 'update') {
-          return this.httpBase.putCommon(`${endPoint}/${record.id}`, record).pipe(
-            map(
-              (response: any) => {
-                // debugger;
-                const item = JSON.parse(JSON.stringify(record));
-                const itemId = item?.id;
-                this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
-                return new RecordSaveSuccess({ recordRow: item, actionType });
-              }
-            ),
-            catchError(error => {
-              // debugger;
-              console.log(`${endPoint}`, error);
-              const recordId = record.id;
-              this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
-              return of(new RecordSaveFail(error));
-            })
-          );
-        }
-        else if (actionType === 'new') {
-          return this.httpBase.postCommon(`${endPoint}`, record).pipe(
-            map(
-              (response: any) => {
-                // debugger;
-                const recRow = JSON.parse(JSON.stringify(record));
-                if (response && (response?.eventId === recRow.eventId || response?.id === recRow.eventId)) {
-                  const recordId = recRow?.event?.taxSubjectPerson.companyId || recRow?.event?.taxSubjectPerson.birthCode;
-                  this.store.dispatch(new StartToastr({ text: `record ${recordId} added`, type: 'success', duration: 5000 }));
-                  return new RecordSaveSuccess({ recordRow: recRow?.event?.taxSubjectPerson, actionType });
-                }
-              }
-            ),
-            catchError(error => {
-              // debugger;
-              console.log(`${endPoint}`, error);
-              const recordId = record?.event?.taxSubjectPerson.companyId || record?.event?.taxSubjectPerson.birthCode;
-              this.store.dispatch(new StartToastr({ text: `record ${recordId} did not add`, type: 'error', duration: 5000 }));
-              return of(new RecordSaveFail(error));
-            })
-          );
-        }
+  //       if (actionType === 'update') {
+  //         return this.httpBase.putCommon(`${endPoint}/${record.id}`, record).pipe(
+  //           map(
+  //             (response: any) => {
+  //               // debugger;
+  //               const item = JSON.parse(JSON.stringify(record));
+  //               const itemId = item?.id;
+  //               this.store.dispatch(new StartToastr({ text: `record ${itemId} updated`, type: 'success', duration: 5000 }));
+  //               return new RecordSaveSuccess({ recordRow: item, actionType });
+  //             }
+  //           ),
+  //           catchError(error => {
+  //             // debugger;
+  //             console.log(`${endPoint}`, error);
+  //             const recordId = record.id;
+  //             this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
+  //             return of(new RecordSaveFail(error));
+  //           })
+  //         );
+  //       }
+  //       else if (actionType === 'new') {
+  //         return this.httpBase.postCommon(`${endPoint}`, record).pipe(
+  //           map(
+  //             (response: any) => {
+  //               // debugger;
+  //               const recRow = JSON.parse(JSON.stringify(record));
+  //               if (response && (response?.eventId === recRow.eventId || response?.id === recRow.eventId)) {
+  //                 const recordId = recRow?.event?.taxSubjectPerson.companyId || recRow?.event?.taxSubjectPerson.birthCode;
+  //                 this.store.dispatch(new StartToastr({ text: `record ${recordId} added`, type: 'success', duration: 5000 }));
+  //                 return new RecordSaveSuccess({ recordRow: recRow?.event?.taxSubjectPerson, actionType });
+  //               }
+  //             }
+  //           ),
+  //           catchError(error => {
+  //             // debugger;
+  //             console.log(`${endPoint}`, error);
+  //             const recordId = record?.event?.taxSubjectPerson.companyId || record?.event?.taxSubjectPerson.birthCode;
+  //             this.store.dispatch(new StartToastr({ text: `record ${recordId} did not add`, type: 'error', duration: 5000 }));
+  //             return of(new RecordSaveFail(error));
+  //           })
+  //         );
+  //       }
 
-      }
-    )
-  )
-  );
+  //     }
+  //   )
+  // )
+  // );
 
   randomProcessState(item: any): string {
     const index = Number(item?.fileNumber[item?.fileNumber.length - 1]) || 0;

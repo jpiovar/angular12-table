@@ -2,37 +2,30 @@
   {
     "id": "id1",
     "recordId": "id1",
-  
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-12"
-    
+    "dateTime": "2011-10-12T11:01:00"
   },
   {
     "id": "id2",
     "recordId": "id2",
-  
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-11"
-    
+    "dateTime": "2011-10-11T11:01:00"
   },
   {
     "id": "id3",
     "recordId": "id2",
-    
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-10"
-  
+    "dateTime": "2011-10-10T11:01:00"
   },
   {
     "id": "id4",
     "recordId": "id3",
-    
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-09"
-    
+    "dateTime": "2011-10-09T11:01:00"
+
   }
 ]

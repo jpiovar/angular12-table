@@ -13,19 +13,16 @@ export const RECORDS_DELETE = '[Records] Delete data';
 export const RECORDS_DELETE_SUCCESS = '[Records] Delete data success';
 export const RECORDS_DELETE_FAIL = '[Records] Delete data fail';
 
-export const META_LOAD = '[Meta] Load meta';
-export const META_LOAD_SUCCESS = '[Meta] Load meta success';
-export const META_LOAD_FAIL = '[Meta] Load meta fail';
+// export const META_LOAD = '[Meta] Load meta';
+// export const META_LOAD_SUCCESS = '[Meta] Load meta success';
+// export const META_LOAD_FAIL = '[Meta] Load meta fail';
 
-export const META_LOCAL_SAVE = '[Meta] Local meta save';
+// export const META_LOCAL_SAVE = '[Meta] Local meta save';
 
-export const CHANGE_LOG_LOAD = '[ChangeLog] Load';
-export const CHANGE_LOG_LOAD_SUCCESS = '[ChangeLog] Load success';
-export const CHANGE_LOG_LOAD_FAIL = '[ChangeLog] Load fail';
 
-export const RECORD_SAVE = '[Records] Save record';
-export const RECORD_SAVE_SUCCESS = '[Records] Save record success';
-export const RECORD_SAVE_FAIL = '[Records] Save record fail';
+// export const RECORD_SAVE = '[Records] Save record';
+// export const RECORD_SAVE_SUCCESS = '[Records] Save record success';
+// export const RECORD_SAVE_FAIL = '[Records] Save record fail';
 
 export class RecordsLoad implements Action {
   readonly type = RECORDS_LOAD;
@@ -36,7 +33,9 @@ export class RecordsLoad implements Action {
 
 export class RecordsLoadSuccess implements Action {
   readonly type = RECORDS_LOAD_SUCCESS;
-  constructor(public payload: RecordsState) {}
+  constructor(public payload: RecordsState) {
+    debugger;
+  }
 }
 
 export class RecordsLoadFail implements Action {
@@ -86,81 +85,81 @@ export class RecordsDeleteFail implements Action {
   }
 }
 
-export class ChangeLogLoad implements Action {
-  readonly type = CHANGE_LOG_LOAD;
-  constructor(public payload: { url: string; recordId: string }) {
-    debugger;
-  }
-}
+// export class ChangeLogLoad implements Action {
+//   readonly type = CHANGE_LOG_LOAD;
+//   constructor(public payload: { url: string; recordId: string }) {
+//     debugger;
+//   }
+// }
 
-export class ChangeLogLoadSuccess implements Action {
-  readonly type = CHANGE_LOG_LOAD_SUCCESS;
-  constructor(public payload: any) {
-    debugger;
-  }
-}
+// export class ChangeLogLoadSuccess implements Action {
+//   readonly type = CHANGE_LOG_LOAD_SUCCESS;
+//   constructor(public payload: any) {
+//     debugger;
+//   }
+// }
 
-export class ChangeLogLoadFail implements Action {
-  readonly type = CHANGE_LOG_LOAD_FAIL;
-  constructor(public payload: any) {
-    debugger;
-  }
-}
+// export class ChangeLogLoadFail implements Action {
+//   readonly type = CHANGE_LOG_LOAD_FAIL;
+//   constructor(public payload: any) {
+//     debugger;
+//   }
+// }
 
 
-export class MetaLoad implements Action {
-  readonly type = META_LOAD;
-  constructor(public payload: any) {
-    // debugger;
-  }
-}
+// export class MetaLoad implements Action {
+//   readonly type = META_LOAD;
+//   constructor(public payload: any) {
+//     // debugger;
+//   }
+// }
 
-export class MetaLoadSuccess implements Action {
-  readonly type = META_LOAD_SUCCESS;
-  constructor(public payload: any) {
-    // debugger;
-  }
-}
+// export class MetaLoadSuccess implements Action {
+//   readonly type = META_LOAD_SUCCESS;
+//   constructor(public payload: any) {
+//     // debugger;
+//   }
+// }
 
-export class MetaLoadFail implements Action {
-  readonly type = META_LOAD_FAIL;
-  constructor(public payload: any) {
-    // debugger;
-  }
-}
+// export class MetaLoadFail implements Action {
+//   readonly type = META_LOAD_FAIL;
+//   constructor(public payload: any) {
+//     // debugger;
+//   }
+// }
 
-export class MetaLocalSave implements Action {
-  readonly type = META_LOCAL_SAVE;
-  constructor(public payload: any) {
-    debugger;
-  }
-}
+// export class MetaLocalSave implements Action {
+//   readonly type = META_LOCAL_SAVE;
+//   constructor(public payload: any) {
+//     debugger;
+//   }
+// }
 
-export class RecordSave implements Action {
-  readonly type = RECORD_SAVE;
-  constructor(public payload: { endPoint: string, record: any, actionType?: string }) {
-    // debugger;
-  }
-}
+// export class RecordSave implements Action {
+//   readonly type = RECORD_SAVE;
+//   constructor(public payload: { endPoint: string, record: any, actionType?: string }) {
+//     // debugger;
+//   }
+// }
 
-export class RecordSaveSuccess implements Action {
-  readonly type = RECORD_SAVE_SUCCESS;
-  constructor(public payload: { recordRow: any, actionType?: string }) {
-    // debugger;
-  }
-}
+// export class RecordSaveSuccess implements Action {
+//   readonly type = RECORD_SAVE_SUCCESS;
+//   constructor(public payload: { recordRow: any, actionType?: string }) {
+//     // debugger;
+//   }
+// }
 
-export class RecordSaveFail implements Action {
-  readonly type = RECORD_SAVE_FAIL;
-  constructor(public payload: any) {
-    // debugger;
-  }
-}
+// export class RecordSaveFail implements Action {
+//   readonly type = RECORD_SAVE_FAIL;
+//   constructor(public payload: any) {
+//     // debugger;
+//   }
+// }
 
 export type Actions = RecordsLoad | RecordsLoadSuccess | RecordsLoadFail |
                       RecordsSave | RecordsSaveSuccess | RecordsSaveFail |
-                      RecordsDelete | RecordsDeleteSuccess | RecordsDeleteFail |
-                      MetaLoad | MetaLoadSuccess | MetaLoadFail |
-                      MetaLocalSave|
-                      ChangeLogLoad | ChangeLogLoadSuccess | ChangeLogLoadFail |
-                      RecordSave | RecordSaveSuccess | RecordSaveFail;
+                      RecordsDelete | RecordsDeleteSuccess | RecordsDeleteFail;
+                      // MetaLoad | MetaLoadSuccess | MetaLoadFail |
+                      // MetaLocalSave|
+                      // ChangeLogLoad | ChangeLogLoadSuccess | ChangeLogLoadFail |
+                      // RecordSave | RecordSaveSuccess | RecordSaveFail;

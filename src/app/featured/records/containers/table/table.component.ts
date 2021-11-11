@@ -3,7 +3,10 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
-import { ChangeLogLoad, MetaLoad, MetaLocalSave, RecordsDelete, RecordsLoad, RecordsSave } from 'src/app/state/records/records.actions';
+import {
+  // ChangeLogLoad, MetaLoad, MetaLocalSave,
+  RecordsDelete, RecordsLoad, RecordsSave
+} from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -250,7 +253,9 @@ export class TableComponent implements OnInit, OnDestroy {
     this.tableChangeLogs = environment.beTableChangeLogs;
     this.tableMode = 'init';
     this.searchMode = 'init';
-    this.triggerMetaLoad();
+
+    // this.triggerMetaLoad();
+
     // this.triggerTableLoad();
     this.metaAndTableDataSubscription();
     this.processGlobalSearch();
@@ -261,7 +266,10 @@ export class TableComponent implements OnInit, OnDestroy {
     //   if (res?.accessToken) {
     // debugger;
     // this.triggerMetaLoad();
-    // // this.triggerTableLoad();
+    // if (this.tableMode === 'init') {
+    this.triggerTableLoad();
+    // this.tableMode = '';
+    // }
     // this.metaAndTableDataSubscription();
     // this.processGlobalSearch();
     //   }
@@ -272,14 +280,15 @@ export class TableComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  triggerMetaLoad(): void {
-    debugger;
-    const url = `${this.origin}${this.metaDataEndPoint}`;
-    this.store.dispatch(new MetaLoad(url));
-  }
+  // triggerMetaLoad(): void {
+  //   debugger;
+  //   const url = `${this.origin}${this.metaDataEndPoint}`;
+  //   this.store.dispatch(new MetaLoad(url));
+  // }
 
   triggerTableLoad(): void {
-    // debugger;
+    debugger;
+    this.tableMode = 'load';
     this.store.dispatch(new StartSpinner());
     const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
     this.store.dispatch(new RecordsLoad(url));
@@ -301,25 +310,31 @@ export class TableComponent implements OnInit, OnDestroy {
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
-
-            if (res.totalRecords > -1) {
-              if (this.tableMode === 'init') {
-                this.totalRecords = 0;
-                this.totalRecords = res?.totalRecords;
-                this.setPagesRecords();
-              } else if (this.tableMode === 'remove') {
-                this.totalRecords--;
-                this.store.dispatch(new MetaLocalSave(this.totalRecords));
-                this.setPagesRecords();
-              }
+            debugger;
+            if (res?.totalRecords > -1) {
+              this.totalRecords = res?.totalRecords;
+              this.setPagesRecords();
             }
+
+
+            // if (res.totalRecords > -1) {
+            // if (this.tableMode === 'init') {
+            //   // this.totalRecords = 0;
+            //   // this.totalRecords = res?.totalRecords;
+            //   this.setPagesRecords();
+            // } else if (this.tableMode === 'remove') {
+            //   // this.totalRecords--;
+            //   // this.store.dispatch(new MetaLocalSave(this.totalRecords));
+            //   this.setPagesRecords();
+            // }
+            // }
 
             if (res.data) {
               debugger;
-              if (this.tableMode !== 'log') {
-                this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
-                this.records = JSON.parse(JSON.stringify(this.originalRecords));
-              }
+              // if (this.tableMode !== 'log') {
+              this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
+              this.records = JSON.parse(JSON.stringify(this.originalRecords));
+              // }
 
               // if (this.tableMode === 'log') {
               //   const index = getIndexBasedId(res.data, this.recordId);
@@ -414,7 +429,7 @@ export class TableComponent implements OnInit, OnDestroy {
     // debugger;
     this.tableMode = '';
     this.pages = new Array(Math.ceil(this.totalRecords / this.recordsPerPage));
-    this.triggerTableLoad();
+    // this.triggerTableLoad();
     // this.pages = new Array(Math.ceil(this.sortedOriginalRecords.length / this.itemsPerPage));
     // this.records = this.sortedOriginalRecords.slice(this.activePage * this.itemsPerPage, this.activePage * this.itemsPerPage + this.itemsPerPage);
   }
@@ -422,14 +437,16 @@ export class TableComponent implements OnInit, OnDestroy {
   jumpToPage(page: number): void {
     // debugger;
     this.activePage = page;
-    this.setPagesRecords();
+    this.triggerTableLoad();
+    // this.setPagesRecords();
   }
 
   previousPage() {
     // debugger;
     if (this.activePage >= 1) {
       this.activePage--;
-      this.setPagesRecords();
+      this.triggerTableLoad();
+      // this.setPagesRecords();
     }
   }
 
@@ -437,7 +454,8 @@ export class TableComponent implements OnInit, OnDestroy {
     // debugger;
     if (this.activePage < this.pages.length - 1) {
       this.activePage++;
-      this.setPagesRecords();
+      this.triggerTableLoad();
+      // this.setPagesRecords();
     }
   }
 

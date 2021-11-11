@@ -16,11 +16,11 @@ export class RecordsResolver implements Resolve<boolean|any> {
     return this.store.pipe(
       select('user'),
       tap(state => {
-        debugger;
+        // debugger;
       }),
       filter(state => state && state.accessToken !== null),
       map(state => {
-        debugger;
+        // debugger;
         return state;
       }),
       first()
