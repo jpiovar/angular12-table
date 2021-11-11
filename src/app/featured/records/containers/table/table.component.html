@@ -89,7 +89,9 @@
                 <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
                   <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
                 </span>
-                <span *ngIf="item.edit" (click)="switchToReadMode(item)" [ngClass]="{'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)}">
+                <span *ngIf="item.edit" (click)="switchToReadMode(item)" [ngClass]="{
+                  'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)
+                }">
                   <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
                 </span>
                 <span (click)="removeItem(item)">
@@ -113,13 +115,13 @@
       </div>
       <div class="col-md-10">
         <ul class="pagination">
-          <li class="page-item">
+          <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
             <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
           </li>
-          <li *ngFor="let itemP of pages; let i = index" class="page-item" [ngClass]="{'active': activePage === i}">
+          <li *ngFor="let itemP of pages; let i = index" class="page-item" [ngClass]="{'active': activePage === i, 'not-allowed': recordsDiffArrObj}">
             <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
           </li>
-          <li class="page-item">
+          <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
             <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="nextPage()">Next</span>
           </li>
         </ul>
