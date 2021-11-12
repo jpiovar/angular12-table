@@ -98,86 +98,86 @@
           <tbody>
             <tr *ngFor="let item of records; let i = index">
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
                   <input type="text" readonly [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('op_ico', item, i)" class="form-control">
                   <label *ngIf="item?.op_icoErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.op_ico}}</span>
+                <span *ngIf="item.read">{{item.op_ico}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
                   <input type="text" readonly [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('obchodne_meno', item, i)" class="form-control">
                   <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.obchodne_meno}}</span>
+                <span *ngIf="item.read">{{item.obchodne_meno}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}" >
                   <input type="text" readonly [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control">
                   <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.vypocitany_rating}}</span>
+                <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}" >
                   <input type="text" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('manualny_rating', item, i)" class="form-control">
                   <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.manualny_rating}}</span>
+                <span *ngIf="item.read">{{item.manualny_rating}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}" >
                   <input type="text" [(ngModel)]="item.od" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('od', item, i)" class="form-control">
                   <label *ngIf="item?.odErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.od}}</span>
+                <span *ngIf="item.read">{{item.od}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}" >
                   <input type="text" [(ngModel)]="item.do" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('do', item, i)" class="form-control">
                   <label *ngIf="item?.doErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.do}}</span>
+                <span *ngIf="item.read">{{item.do}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}" >
                   <input type="text" [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('poznamka', item, i)" class="form-control">
                   <label *ngIf="item?.poznamkaErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.poznamka}}</span>
+                <span *ngIf="item.read">{{item.poznamka}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.datum_zmenyErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datum_zmenyErrorRequired}" >
                   <input type="text" [(ngModel)]="item.datum_zmeny" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('datum_zmeny', item, i)" class="form-control">
                   <label *ngIf="item?.datum_zmenyErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.datum_zmeny}}</span>
+                <span *ngIf="item.read">{{item.datum_zmeny}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.autor_zmenyErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.autor_zmenyErrorRequired}" >
                   <input type="text" [(ngModel)]="item.autor_zmeny" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('autor_zmeny', item, i)" class="form-control">
                   <label *ngIf="item?.autor_zmenyErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.autor_zmeny}}</span>
+                <span *ngIf="item.read">{{item.autor_zmeny}}</span>
               </td>
               <td>
-                <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
+                <!-- <span *ngIf="item.read" (click)="switchToEditMode(item)">
                   <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
                 </span>
-                <span *ngIf="item.edit" (click)="switchToReadMode(item)" [ngClass]="{
+                <span *ngIf="!item.read" (click)="switchToReadMode(item)" [ngClass]="{
                   'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)
                 }">
                   <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
-                </span>
+                </span> -->
                 <span (click)="removeItem(item)">
                   <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
                 </span>

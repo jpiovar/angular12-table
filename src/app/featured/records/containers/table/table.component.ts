@@ -263,13 +263,13 @@ export class TableComponent implements OnInit, OnDestroy {
   switchToEditMode(item: any) {
     this.recordId = item.id;
     this.tableMode = 'edit';
-    item.edit = true;
+    item.read = false;
   }
 
   switchToReadMode(item: any) {
     this.recordId = item.id;
     this.tableMode = 'read';
-    item.edit = false;
+    item.read = true;
   }
 
   removeItem(item: any) {
