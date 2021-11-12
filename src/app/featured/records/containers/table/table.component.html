@@ -34,22 +34,58 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th class="col-sm-3" id="firstname">
-                <span class="th-link" (click)="sortByColumn('firstname')">Firstname
-                  <mat-icon *ngIf="sortByCol?.firstname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                  <mat-icon *ngIf="sortByCol?.firstname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              <th class="col-sm-1" id="firstname">
+                <span class="th-link" (click)="sortByColumn('op_ico')">OP/ico
+                  <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-3" id="surname">
-                <span class="th-link" (click)="sortByColumn('surname')">Surname
-                  <mat-icon *ngIf="sortByCol?.surname==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                  <mat-icon *ngIf="sortByCol?.surname==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              <th class="col-sm-2" id="obchodne_meno">
+                <span class="th-link" (click)="sortByColumn('obchodne_meno')">obchodne<br>meno
+                  <mat-icon *ngIf="sortByCol?.obchodne_meno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.obchodne_meno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-3" id="age">
-                <span class="th-link" (click)="sortByColumn('age')">Age
-                  <mat-icon *ngIf="sortByCol?.age==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                  <mat-icon *ngIf="sortByCol?.age==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              <th class="col-sm-1" id="vypocitany_rating">
+                <span class="th-link" (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
+                  <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-1" id="manualny_rating">
+                <span class="th-link" (click)="sortByColumn('manualny_rating')">manualny<br>rating
+                  <mat-icon *ngIf="sortByCol?.manualny_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-1" id="od">
+                <span class="th-link" (click)="sortByColumn('od')">od
+                  <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-1" id="do">
+                <span class="th-link" (click)="sortByColumn('do')">do
+                  <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-2" id="poznamka">
+                <span class="th-link" (click)="sortByColumn('poznamka')">poznamka
+                  <mat-icon *ngIf="sortByCol?.poznamka==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.poznamka==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-1" id="datum_zmeny">
+                <span class="th-link" (click)="sortByColumn('datum_zmeny')">datum<br>zmeny
+                  <mat-icon *ngIf="sortByCol?.datum_zmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.datum_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                </span>
+              </th>
+              <th class="col-sm-2" id="autor_zmeny">
+                <span class="th-link" (click)="sortByColumn('autor_zmeny')">autor<br>zmeny
+                  <mat-icon *ngIf="sortByCol?.autor_zmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.autor_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
               <th class="col-sm-3" id="action">
@@ -62,28 +98,76 @@
           <tbody>
             <tr *ngFor="let item of records; let i = index">
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.firstnameErrorRequired}">
-                  <input type="text" [(ngModel)]="item.firstname" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onInputChange('firstname', item, i)">
-                  <label *ngIf="item?.firstnameErrorRequired">Required</label>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
+                  <input type="text" readonly [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('op_ico', item, i)" class="form-control">
+                  <label *ngIf="item?.op_icoErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.firstname}}</span>
+                <span *ngIf="!item.edit">{{item.op_ico}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.surnameErrorRequired}">
-                  <input *ngIf="item.edit" type="text" [(ngModel)]="item.surname" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onInputChange('surname', item, i)">
-                  <label *ngIf="item?.surnameErrorRequired">Required</label>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
+                  <input type="text" readonly [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('obchodne_meno', item, i)" class="form-control">
+                  <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.surname}}</span>
+                <span *ngIf="!item.edit">{{item.obchodne_meno}}</span>
               </td>
               <td>
-                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.ageErrorRequired}" >
-                  <input *ngIf="item.edit" type="text" [(ngModel)]="item.age" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onInputChange('age', item, i)">
-                  <label *ngIf="item?.ageErrorRequired">Required</label>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}" >
+                  <input type="text" readonly [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control">
+                  <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
                 </span>
-                <span *ngIf="!item.edit">{{item.age}}</span>
+                <span *ngIf="!item.edit">{{item.vypocitany_rating}}</span>
+              </td>
+              <td>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}" >
+                  <input type="text" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('manualny_rating', item, i)" class="form-control">
+                  <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
+                </span>
+                <span *ngIf="!item.edit">{{item.manualny_rating}}</span>
+              </td>
+              <td>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}" >
+                  <input type="text" [(ngModel)]="item.od" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('od', item, i)" class="form-control">
+                  <label *ngIf="item?.odErrorRequired">Required</label>
+                </span>
+                <span *ngIf="!item.edit">{{item.od}}</span>
+              </td>
+              <td>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}" >
+                  <input type="text" [(ngModel)]="item.do" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('do', item, i)" class="form-control">
+                  <label *ngIf="item?.doErrorRequired">Required</label>
+                </span>
+                <span *ngIf="!item.edit">{{item.do}}</span>
+              </td>
+              <td>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}" >
+                  <input type="text" [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('poznamka', item, i)" class="form-control">
+                  <label *ngIf="item?.poznamkaErrorRequired">Required</label>
+                </span>
+                <span *ngIf="!item.edit">{{item.poznamka}}</span>
+              </td>
+              <td>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.datum_zmenyErrorRequired}" >
+                  <input type="text" [(ngModel)]="item.datum_zmeny" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('datum_zmeny', item, i)" class="form-control">
+                  <label *ngIf="item?.datum_zmenyErrorRequired">Required</label>
+                </span>
+                <span *ngIf="!item.edit">{{item.datum_zmeny}}</span>
+              </td>
+              <td>
+                <span *ngIf="item.edit" class="record-edit" [ngClass]="{'required': item?.autor_zmenyErrorRequired}" >
+                  <input type="text" [(ngModel)]="item.autor_zmeny" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('autor_zmeny', item, i)" class="form-control">
+                  <label *ngIf="item?.autor_zmenyErrorRequired">Required</label>
+                </span>
+                <span *ngIf="!item.edit">{{item.autor_zmeny}}</span>
               </td>
               <td>
                 <span *ngIf="!item.edit" (click)="switchToEditMode(item)">
@@ -100,7 +184,6 @@
                 <span (click)="showHistoryLog(item)" [ngClass]="{'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)}">
                   <mat-icon aria-label="history" class="td-link ml-2">history</mat-icon>
                 </span>
-                <!-- <span (click)="triggerOpenViewEditDialog(item)"> -->
               </td>
             </tr>
           </tbody>

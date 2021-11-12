@@ -1,4 +1,6 @@
-[
+{
+  "totalRecords": 12,
+  "data": [
   {
     "id": "id1",
     "resource_id": "id1",
@@ -168,3 +170,4 @@
     "autor_zmeny": "john conor"
   }
 ]
+}

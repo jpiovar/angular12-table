@@ -39,6 +39,7 @@
   .record-edit {
     input, label {
       display:block;
+      // max-width: 80px;
     }
     &.required {
       input {

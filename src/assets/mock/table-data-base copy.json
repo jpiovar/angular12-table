@@ -1,0 +1,77 @@
+{
+  "totalRecords": 12,
+  "data": [
+  {
+    "id": "id1",
+    "op_ico": "jankofirstname1",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id2",
+    "op_ico": "jankofirstname2",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id3",
+    "op_ico": "jankofirstname3",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id4",
+    "op_ico": "jankofirstname4",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id5",
+    "op_ico": "jankofirstname5",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id6",
+    "op_ico": "jankofirstname6",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id7",
+    "op_ico": "jankofirstname7",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id8",
+    "op_ico": "jankofirstname8",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id9",
+    "op_ico": "jankofirstname9",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id10",
+    "op_ico": "jankofirstname10",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id11",
+    "op_ico": "jankofirstname11",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  },
+  {
+    "id": "id12",
+    "op_ico": "jankofirstname12",
+    "obchodne_meno": "jankosurname",
+    "vypocitany_rating": "18"
+  }
+]
+}
