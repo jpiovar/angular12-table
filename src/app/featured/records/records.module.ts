@@ -7,7 +7,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MomentDateFormatter } from 'src/app/core/services/moment.date.formatter';
 
 
 @NgModule({
@@ -21,6 +22,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MaterialModule,
     RecordsRoutingModule,
     FormsModule
-  ]
+  ],
+  providers: [
+    {provide: NgbDateParserFormatter, useValue: new MomentDateFormatter()}
+   ]
 })
 export class RecordsModule { }
