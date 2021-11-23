@@ -7,12 +7,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
     TableComponent
   ],
   imports: [
+    NgbModule,
     CommonModule,
     SharedModule,
     MaterialModule,

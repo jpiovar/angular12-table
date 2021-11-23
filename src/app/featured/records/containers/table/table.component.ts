@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
-import { compareValues, getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
+import { compareValues, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
   // ChangeLogLoad, MetaLoad, MetaLocalSave,
@@ -19,12 +19,16 @@ import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions
 import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
+
 export class TableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tableDataEndPoint: string;
@@ -39,7 +43,7 @@ export class TableComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 
-  sortBy: string = 'firstname';
+  sortBy: string = 'op_ico';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
   dialogRef: MatDialogRef<any>;
@@ -51,6 +55,14 @@ export class TableComponent implements OnInit, OnDestroy {
   isSearching: boolean = false;
   searchTextChanged: BehaviorSubject<string> = new BehaviorSubject<string>('');
   searchText: string = '';
+
+  date: any = new Date();
+  // model1: NgbDateStruct = { day: this.date.getUTCDate(), month: this.date.getUTCMonth()+1, year: this.date.getUTCFullYear()};
+  model1: NgbDateStruct = isoStringtoNgbDateStruct('2020-01-10T00:00:00');
+
+  changeDate(event) {
+    console.log(event);
+  }
 
   constructor(
     private store: Store<AppState>,
@@ -107,7 +119,7 @@ export class TableComponent implements OnInit, OnDestroy {
             if (res.data) {
               debugger;
               // if (this.tableMode !== 'log') {
-              this.originalRecords = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false);
+              this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['od', 'do']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }
@@ -143,6 +155,17 @@ export class TableComponent implements OnInit, OnDestroy {
 
         })
     );
+  }
+
+  setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
+    const arr: any[] = JSON.parse(JSON.stringify(arrObj));
+    for (let j = 0; j < props.length; j++) {
+      const currentProp = props[j];
+      for (let i = 0; i < arr.length; i++) {
+        arr[i][currentProp] = isoStringtoNgbDateStruct(arr[i][currentProp]);
+      }
+    }
+    return arr;
   }
 
   getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
@@ -339,14 +362,31 @@ export class TableComponent implements OnInit, OnDestroy {
     debugger;
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-      const modified = {};
+      let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+      let modified = {};
       for (const key in this.recordsDiffArrObj) {
         modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
       }
+      debugger;
+      records = this.setDatePickersToIsoString(records, ['od', 'do']);
+      modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
       this.store.dispatch(new RecordsSave({ endPoint: url, records, modified }));
       this.recordsDiffArrObj = null;
     }
+  }
+
+  setDatePickersToIsoString(arrObj: any, props: string[]) {
+    const arr: any[] = JSON.parse(JSON.stringify(arrObj));
+    for (let j = 0; j < props.length; j++) {
+      const currentProp = props[j];
+      // for (let i = 0; i < arr.length; i++) {
+      //   arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
+      // }
+      for (const i in arr) { // accepts array and object
+        arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
+      }
+    }
+    return arr;
   }
 
   globalSearch() {
@@ -371,7 +411,7 @@ export class TableComponent implements OnInit, OnDestroy {
           const res = response.trim();
           if (res) {
             this.searchText = res;
-            this.sortBy = 'firstname';
+            this.sortBy = 'op_ico';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
@@ -393,14 +433,16 @@ export class TableComponent implements OnInit, OnDestroy {
       ));
   }
 
-  getFilteredRecords(records: any[], propertyValue: string) {
-    return records.filter(item => item.firstname.indexOf(propertyValue) > -1 || item.surname.indexOf(propertyValue) > -1 || item.age.indexOf(propertyValue) > -1);
-  }
+  // getFilteredRecords(records: any[], propertyValue: string) {
+  //   return records.filter(item => item.firstname.indexOf(propertyValue) > -1 || item.surname.indexOf(propertyValue) > -1 || item.age.indexOf(propertyValue) > -1);
+  // }
 
 
   logout() {
     this.store.dispatch(new UserStoreData(null));
     this.msalService.logout();
   }
+
+
 
 }

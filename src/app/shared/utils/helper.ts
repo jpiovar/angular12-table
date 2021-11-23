@@ -1,3 +1,7 @@
+import { NgbDate, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
+import moment from "moment";
+import { CoreModule } from "src/app/core/core.module";
+
 export function isExplorer() {
   return window.navigator.userAgent.indexOf('MSIE ') > -1 || !!window.navigator.userAgent.match(/Trident.*rv\:11\./);
 }
@@ -32,5 +36,19 @@ export function compareValues(key: any, order = 'asc') {
       (order === 'desc') ? (comparison * -1) : comparison
     );
   };
+}
+
+export function isoStringtoNgbDateStruct(val: string): NgbDateStruct {
+  // const date = new Date(val);
+  const ddate = moment(val, 'YYYY-MM-DD[T]HH:mm:ss');
+  return {
+    // day: date.getDay(), month: date.getMonth() + 1, year: date.getFullYear()
+    day: ddate.date(), month: ddate.month() + 1, year: ddate.year()
+  }
+}
+
+export function ngbDateStructToIsoString(val: NgbDateStruct): string {
+  // return new Date(val.year, val.month-1, val.day).toISOString();
+  return moment([val.year, val.month-1, val.day]).format("YYYY-MM-DD[T]HH:mm:ss");
 }
 

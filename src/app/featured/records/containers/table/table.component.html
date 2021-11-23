@@ -11,6 +11,18 @@
   <div class="container" id="table-records">
     <div class="row">
       <div class="col-md-12">
+
+
+
+        <!-- <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model1" ngbDatepicker
+            #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="changeDate($event)" />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div> -->
+
+
         <div id="global-search">
           <div class="input-group">
             <div class="input-group-prepend">
@@ -34,7 +46,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th class="col-sm-1" id="firstname">
+              <th class="col-sm-1" id="op_ico">
                 <span class="th-link" (click)="sortByColumn('op_ico')">OP/ico
                   <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
@@ -49,22 +61,24 @@
               <th class="col-sm-1" id="vypocitany_rating">
                 <span class="th-link" (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
                   <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                  <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down
+                  </mat-icon>
                 </span>
               </th>
               <th class="col-sm-1" id="manualny_rating">
                 <span class="th-link" (click)="sortByColumn('manualny_rating')">manualny<br>rating
                   <mat-icon *ngIf="sortByCol?.manualny_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                  <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                  <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down
+                  </mat-icon>
                 </span>
               </th>
-              <th class="col-sm-1" id="od">
+              <th class="col-sm-2" id="od">
                 <span class="th-link" (click)="sortByColumn('od')">od
                   <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-1" id="do">
+              <th class="col-sm-2" id="do">
                 <span class="th-link" (click)="sortByColumn('do')">do
                   <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
@@ -76,7 +90,7 @@
                   <mat-icon *ngIf="sortByCol?.poznamka==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-1" id="datum_zmeny">
+              <!-- <th class="col-sm-1" id="datum_zmeny">
                 <span class="th-link" (click)="sortByColumn('datum_zmeny')">datum<br>zmeny
                   <mat-icon *ngIf="sortByCol?.datum_zmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.datum_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
@@ -87,8 +101,8 @@
                   <mat-icon *ngIf="sortByCol?.autor_zmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.autor_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
-              </th>
-              <th class="col-sm-3" id="action">
+              </th> -->
+              <th class="col-sm-1" id="action">
                 <span>
                   Action
                 </span>
@@ -114,7 +128,8 @@
                 <span *ngIf="item.read">{{item.obchodne_meno}}</span>
               </td>
               <td>
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit"
+                  [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
                   <input type="text" readonly [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control">
                   <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
@@ -122,38 +137,71 @@
                 <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
               </td>
               <td>
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit"
+                  [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
                   <input type="text" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('manualny_rating', item, i)" class="form-control">
                   <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
                 </span>
                 <span *ngIf="item.read">{{item.manualny_rating}}</span>
               </td>
+
               <td>
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}" >
-                  <input type="text" [(ngModel)]="item.od" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onInputChange('od', item, i)" class="form-control">
+
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="item.od" ngbDatepicker
+                      #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                      </button>
+                    </div>
+                  </div>
                   <label *ngIf="item?.odErrorRequired">Required</label>
                 </span>
+
+                <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+                  <div class="input-group">
+                    <input type="text" [(ngModel)]="item.od" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="onInputChange('od', item, i)" class="form-control">
+
+                  </div>
+                  <label *ngIf="item?.odErrorRequired">Required</label>
+                </span> -->
                 <span *ngIf="item.read">{{item.od}}</span>
               </td>
               <td>
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}" >
+
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="item.do" ngbDatepicker
+                      #d="ngbDatepicker" #c2="ngModel" (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <label *ngIf="item?.doErrorRequired">Required</label>
+                </span>
+
+                <!-- <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                   <input type="text" [(ngModel)]="item.do" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('do', item, i)" class="form-control">
                   <label *ngIf="item?.doErrorRequired">Required</label>
-                </span>
+                </span> -->
                 <span *ngIf="item.read">{{item.do}}</span>
               </td>
               <td>
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}" >
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
                   <input type="text" [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('poznamka', item, i)" class="form-control">
                   <label *ngIf="item?.poznamkaErrorRequired">Required</label>
                 </span>
                 <span *ngIf="item.read">{{item.poznamka}}</span>
               </td>
-              <td>
+              <!-- <td>
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datum_zmenyErrorRequired}" >
                   <input type="text" [(ngModel)]="item.datum_zmeny" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('datum_zmeny', item, i)" class="form-control">
@@ -168,7 +216,7 @@
                   <label *ngIf="item?.autor_zmenyErrorRequired">Required</label>
                 </span>
                 <span *ngIf="item.read">{{item.autor_zmeny}}</span>
-              </td>
+              </td> -->
               <td>
                 <!-- <span *ngIf="item.read" (click)="switchToEditMode(item)">
                   <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
@@ -181,7 +229,8 @@
                 <span (click)="removeItem(item)">
                   <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
                 </span>
-                <span (click)="showHistoryLog(item)" [ngClass]="{'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)}">
+                <span (click)="showHistoryLog(item)"
+                  [ngClass]="{'nonclick':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)}">
                   <mat-icon aria-label="history" class="td-link ml-2">history</mat-icon>
                 </span>
               </td>
@@ -201,7 +250,8 @@
           <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
             <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
           </li>
-          <li *ngFor="let itemP of pages; let i = index" class="page-item" [ngClass]="{'active': activePage === i, 'not-allowed': recordsDiffArrObj}">
+          <li *ngFor="let itemP of pages; let i = index" class="page-item"
+            [ngClass]="{'active': activePage === i, 'not-allowed': recordsDiffArrObj}">
             <span class="page-link" [ngClass]="{'nonclick': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
           </li>
           <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
