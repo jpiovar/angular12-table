@@ -26,9 +26,9 @@ export class NgbDatepickerI18nTitleDirective {
     previousMonth.setAttribute('aria-label', 'Predošlý mesiac');
 
     // @ts-ignore
-    const previousMonth = this.datepicker._cRef.location.nativeElement.querySelector('button[title="Next month"]');
-    previousMonth.setAttribute('title', 'Nasledujúci mesiac');
-    previousMonth.setAttribute('aria-label', 'Nasledujúci mesiac');
+    const nextMonth = this.datepicker._cRef.location.nativeElement.querySelector('button[title="Next month"]');
+    nextMonth.setAttribute('title', 'Nasledujúci mesiac');
+    nextMonth.setAttribute('aria-label', 'Nasledujúci mesiac');
 
     // @ts-ignore
     const selectMonth = this.datepicker._cRef.location.nativeElement.querySelector('select[title="Select month"]');
