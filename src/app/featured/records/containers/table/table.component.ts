@@ -90,7 +90,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   triggerTableLoad(): void {
-    debugger;
+    // debugger;
     this.tableMode = 'load';
     this.store.dispatch(new StartSpinner());
     let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
@@ -105,21 +105,22 @@ export class TableComponent implements OnInit, OnDestroy {
       this.store.select('records')
         // .pipe(last())
         .subscribe((res: any) => {
-          debugger;
+          // debugger;
 
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
-            debugger;
+            // debugger;
             if (res?.totalRecords > -1) {
               this.totalRecords = res?.totalRecords;
               this.setPagesRecords();
             }
 
             if (res.data) {
-              debugger;
+              // debugger;
               // if (this.tableMode !== 'log') {
-              this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['od', 'do']);
+              // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['od', 'do']);
+              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }
@@ -134,14 +135,14 @@ export class TableComponent implements OnInit, OnDestroy {
       this.store.select('logs')
         // .pipe(last())
         .subscribe((res: any) => {
-          debugger;
+          // debugger;
 
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
 
             if (res.data) {
-              debugger;
+              // debugger;
 
               if (this.tableMode === 'log') {
                 this.openChangeLogDialog(this.recordId, res.data[this.recordId]);
@@ -193,7 +194,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
 
   setPagesRecords() {
-    // debugger;
+    // // debugger;
     this.tableMode = '';
     this.pages = new Array(Math.ceil(this.totalRecords / this.recordsPerPage));
   }
@@ -283,17 +284,17 @@ export class TableComponent implements OnInit, OnDestroy {
     });
   }
 
-  switchToEditMode(item: any) {
-    this.recordId = item.id;
-    this.tableMode = 'edit';
-    item.read = false;
-  }
+  // switchToEditMode(item: any) {
+  //   this.recordId = item.id;
+  //   this.tableMode = 'edit';
+  //   item.read = false;
+  // }
 
-  switchToReadMode(item: any) {
-    this.recordId = item.id;
-    this.tableMode = 'read';
-    item.read = true;
-  }
+  // switchToReadMode(item: any) {
+  //   this.recordId = item.id;
+  //   this.tableMode = 'read';
+  //   item.read = true;
+  // }
 
   removeItem(item: any) {
     this.store.dispatch(new StartSpinner());
@@ -337,29 +338,44 @@ export class TableComponent implements OnInit, OnDestroy {
 
     if (!item[colname]) {
       item[colname + 'ErrorRequired'] = true;
-      this.recordsDiffArrObj['error'] = true;
+      // this.recordsDiffArrObj['error'] = true;
     } else {
       delete item[colname + 'ErrorRequired'];
-      if (this.recordsDiffArrObj?.error) {
-        delete this.recordsDiffArrObj['error'];
-      }
+      // if (this.recordsDiffArrObj?.error) {
+      //   delete this.recordsDiffArrObj['error'];
+      // }
     }
 
   }
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
     debugger;
-    const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
-    const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
+    // const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
+    // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
+    const record = JSON.parse(JSON.stringify(recordsItem));
+    const originalRecord = JSON.parse(JSON.stringify(originalRecordsItem));
     if (JSON.stringify(record) != JSON.stringify(originalRecord)) {
       return true;
     }
     return false;
   }
 
+  getRecordsDiffArrObjError(obj: any): boolean {
+    debugger;
+    let res = false;
+    for (const i in obj) {
+      const keys = Object.keys(obj[i]);
+      if (keys.join(',').indexOf('ErrorRequired') > -1) {
+        res = true;
+        break;
+      }
+    }
+    return res;
+  }
+
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    debugger;
+    // debugger;
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
@@ -367,7 +383,7 @@ export class TableComponent implements OnInit, OnDestroy {
       for (const key in this.recordsDiffArrObj) {
         modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
       }
-      debugger;
+      // debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
       modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
       this.store.dispatch(new RecordsSave({ endPoint: url, records, modified }));
@@ -395,18 +411,18 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   clearAllFilters() {
-    // debugger;
+    // // debugger;
     this.globalFilter = '';
     this.searchText = '';
     this.globalSearch();
   }
 
   processGlobalSearch() {
-    debugger;
+    // debugger;
     this.subscription.add(
       this.searchTextChanged.pipe(debounceTime(1000)).subscribe(
         response => {
-          debugger;
+          // debugger;
           this.isSearching = false;
           const res = response.trim();
           if (res) {
