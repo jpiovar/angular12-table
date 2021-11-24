@@ -3,19 +3,21 @@ import moment from "moment";
 
 export class MomentDateFormatter extends NgbDateParserFormatter {
 
-    readonly DT_FORMAT = 'DD.MM.YYYY';
+  readonly DT_FORMAT = 'DD.MM.YYYY';
 
-    parse(value: string): NgbDateStruct {
-        if (value) {
-            value = value.trim();
-            let mdt = moment(value, this.DT_FORMAT)
-        }
-        return null;
+  parse(value: string): NgbDateStruct {
+    // debugger;
+    if (value) {
+      const mdt = moment(value.trim(), this.DT_FORMAT)
+      return { day: mdt.date(), month: mdt.month() + 1, year: mdt.year() };
     }
-    format(date: NgbDateStruct): string {
-        if (!date) return '';
-        let mdt = moment([date.year, date.month - 1, date.day]);
-        if (!mdt.isValid()) return '';
-        return mdt.format(this.DT_FORMAT);
-    }
+    return null;
+  }
+  format(date: NgbDateStruct): string {
+    // debugger;
+    if (!date) return '';
+    let mdt = moment([date.year, date.month - 1, date.day]);
+    if (!mdt.isValid()) return '';
+    return mdt.format(this.DT_FORMAT);
+  }
 }

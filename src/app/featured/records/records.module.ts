@@ -7,9 +7,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 
-import { NgbDateParserFormatter, NgbDatepickerI18n, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MomentDateFormatter } from 'src/app/core/services/moment.date.formatter';
-import { CustomDatepickerI18n, I18n } from 'src/app/core/services/i18n.fr';
+import { CustomDatepickerI18n, I18n } from 'src/app/core/services/i18n.sk';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import { CustomDatepickerI18n, I18n } from 'src/app/core/services/i18n.fr';
   ],
   providers: [
     I18n,
-    {provide: NgbDateParserFormatter, useValue: new MomentDateFormatter()},
+    {provide: NgbDateParserFormatter, useValue: new MomentDateFormatter},
     {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}
    ]
 })
