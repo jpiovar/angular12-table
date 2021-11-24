@@ -150,7 +150,7 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                   <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="item.od" ngbDatepicker
+                    <input appNgbDatepickerI18nTitle class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker
                       #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -175,7 +175,7 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                   <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="item.do" ngbDatepicker
+                    <input appNgbDatepickerI18nTitle class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker
                       #d="ngbDatepicker" #c2="ngModel" (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
