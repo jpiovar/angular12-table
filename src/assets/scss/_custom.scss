@@ -2,19 +2,22 @@ html {
   scroll-behavior: smooth;
 }
 
-.nonclick {
+.non-click {
   pointer-events: none;
   touch-action: none;
+  // * {
+  //   pointer-events: none;
+  //   touch-action: none;
+  // }
 }
 
 .not-allowed {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
   * {
-    pointer-events: none;
-    touch-action: none;
+    cursor: not-allowed !important;
   }
   mat-icon {
-    cursor: not-allowed;
+    cursor: not-allowed !important;
   }
 }
 
