@@ -19,7 +19,7 @@ import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions
 import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -60,6 +60,9 @@ export class TableComponent implements OnInit, OnDestroy {
   // model1: NgbDateStruct = { day: this.date.getUTCDate(), month: this.date.getUTCMonth()+1, year: this.date.getUTCFullYear()};
   model1: NgbDateStruct = isoStringtoNgbDateStruct('2020-01-10T00:00:00');
 
+  minDate = {year: 2017, month: 1, day: 1};
+  maxDate = {year: 2027, month: 12, day: 1};
+
   changeDate(event) {
     console.log(event);
   }
@@ -69,7 +72,9 @@ export class TableComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private msalService: MsalService,
     private httpBase: HttpBaseService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    public formatter: NgbDateParserFormatter,
+    private calendar: NgbCalendar
   ) {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
@@ -346,7 +351,21 @@ export class TableComponent implements OnInit, OnDestroy {
       // }
     }
 
+    if (colname === 'od' || colname === 'do') {
+      const isoDateOd = ngbDateStructToIsoString(item['od']);
+      const isoDateDo = ngbDateStructToIsoString(item['do']);
+
+      if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
+        item['ErrorInterval'] = true;
+      } else {
+        delete item['ErrorInterval'];
+      }
+    }
+
+
+
   }
+
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
     debugger;
@@ -365,7 +384,7 @@ export class TableComponent implements OnInit, OnDestroy {
     let res = false;
     for (const i in obj) {
       const keys = Object.keys(obj[i]);
-      if (keys.join(',').indexOf('ErrorRequired') > -1) {
+      if (keys.join(',').indexOf('Error') > -1) {
         res = true;
         break;
       }

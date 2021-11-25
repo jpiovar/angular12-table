@@ -150,7 +150,7 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                   <div class="input-group">
-                    <input appNgbDatepickerI18nTitle class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker
+                    <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker
                       #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -158,7 +158,8 @@
                       </button>
                     </div>
                   </div>
-                  <label *ngIf="item?.odErrorRequired">Required</label>
+                  <small *ngIf="item?.odErrorRequired">Required </small>
+                  <small *ngIf="item?.ErrorInterval">Od > Do !</small>
                 </span>
 
                 <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.odErrorRequired}">
@@ -175,7 +176,7 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                   <div class="input-group">
-                    <input appNgbDatepickerI18nTitle class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker
+                    <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate"  class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker
                       #d="ngbDatepicker" #c2="ngModel" (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -183,7 +184,19 @@
                       </button>
                     </div>
                   </div>
-                  <label *ngIf="item?.doErrorRequired">Required</label>
+                  <small *ngIf="item?.doErrorRequired">Required</small>
+                  <small *ngIf="item?.ErrorInterval">Do < Od !</small>
+                  <!-- <div *ngIf="item.do.dirty && item.do.invalid">
+                    <small class="form-text text-danger" *ngIf="item.do.errors.required">
+                        Your birth date is required.
+                    </small>
+                    <small class="form-text text-danger" *ngIf="item.do.errors.ngbDate?.invalid">
+                        Your birth date must be a valid date (Ex: yyyy-mm-dd).
+                    </small>
+                    <small class="form-text text-danger" *ngIf="item.do.errors.ngbDate?.requiredBefore || item.do.errors.ngbDate?.requiredAfter">
+                        Your age must be between 18 and 100.
+                    </small>
+                </div> -->
                 </span>
 
                 <!-- <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
