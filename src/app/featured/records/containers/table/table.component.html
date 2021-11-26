@@ -139,7 +139,8 @@
               <td>
                 <span *ngIf="!item.read" class="record-edit"
                   [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
-                  <input type="text" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
+                  <input [readonly]="item?.status === 'inactive'"
+                    type="text" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('manualny_rating', item, i)" class="form-control">
                   <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
                 </span>
@@ -150,7 +151,8 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                   <div class="input-group">
-                    <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker
+                    <input [readonly]="item?.status === 'inactive'"
+                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker
                       #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -176,7 +178,8 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                   <div class="input-group">
-                    <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate"  class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker
+                    <input [readonly]="item?.status === 'inactive'"
+                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate"  class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker
                       #d="ngbDatepicker" #c2="ngModel" (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
@@ -208,7 +211,8 @@
               </td>
               <td>
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
-                  <input type="text" [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
+                  <input [readonly]="item?.status === 'inactive'"
+                    type="text" [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('poznamka', item, i)" class="form-control">
                   <label *ngIf="item?.poznamkaErrorRequired">Required</label>
                 </span>
