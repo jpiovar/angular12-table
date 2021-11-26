@@ -70,7 +70,6 @@ export class TableComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     public dialog: MatDialog,
-    private msalService: MsalService,
     private httpBase: HttpBaseService,
     private httpClient: HttpClient,
     public formatter: NgbDateParserFormatter,
@@ -473,10 +472,7 @@ export class TableComponent implements OnInit, OnDestroy {
   // }
 
 
-  logout() {
-    this.store.dispatch(new UserStoreData(null));
-    this.msalService.logout();
-  }
+
 
 
 

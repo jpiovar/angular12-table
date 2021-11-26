@@ -11,12 +11,14 @@ import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n, NgbModule } 
 import { MomentDateFormatter } from 'src/app/core/services/moment.date.formatter';
 import { CustomDatepickerI18n, I18n } from 'src/app/core/services/i18n.sk';
 import { NgbDatepickerI18nTitleDirective } from 'src/app/core/directives/datepicker.title.directive';
+import { LogoutBtnComponent } from './components/logout-btn/logout-btn.component';
 
 
 @NgModule({
   declarations: [
     TableComponent,
-    NgbDatepickerI18nTitleDirective
+    NgbDatepickerI18nTitleDirective,
+    LogoutBtnComponent
   ],
   imports: [
     NgbModule,
