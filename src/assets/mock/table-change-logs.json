@@ -4,28 +4,41 @@
     "recordId": "id1",
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-12T11:01:00"
+    "dateTime": "2011-10-12T11:01:00",
+    "actionType": "edit",
+    "modifiedColumn": "poznamka",
+    "detail": {
+      "previousContent": "poznamka1",
+      "updatedContent": "poznaka11"
+    }
   },
   {
     "id": "id2",
     "recordId": "id2",
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-11T11:01:00"
+    "dateTime": "2011-10-11T11:01:00",
+    "actionType": "edit",
+    "modifiedColumn": "od",
+    "detail": {
+      "previousContent": "2020-10-01T00:00:11",
+      "updatedContent": "2020-12-01T00:00:11"
+    }
   },
   {
     "id": "id3",
     "recordId": "id2",
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-10T11:01:00"
+    "dateTime": "2011-10-10T11:01:00",
+    "actionType": "delete"
   },
   {
     "id": "id4",
     "recordId": "id3",
     "userId": "id1",
     "name": "jozko",
-    "dateTime": "2011-10-09T11:01:00"
-
+    "dateTime": "2011-10-09T11:01:00",
+    "actionType": "create"
   }
 ]
