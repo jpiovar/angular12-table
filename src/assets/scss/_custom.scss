@@ -1,3 +1,5 @@
+@import "~src/assets/scss/colors";
+
 html {
   scroll-behavior: smooth;
 }
@@ -21,11 +23,6 @@ html {
   }
 }
 
-
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #fdfeff;
-}
-
-.btn-outline-secondary {
-  max-height: 38px;
+.inactive {
+  background-color: $color2;
 }

@@ -110,7 +110,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of records; let i = index">
+            <tr *ngFor="let item of records; let i = index" [ngClass]="{'non-click': item?.status === 'inactive' ,'inactive': item?.status === 'inactive'}">
               <td>
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
                   <input type="text" readonly [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
