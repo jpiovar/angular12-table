@@ -14,6 +14,8 @@ import { NgbDatepickerI18nTitleDirective } from 'src/app/core/directives/datepic
 import { LogoutBtnComponent } from './components/logout-btn/logout-btn.component';
 import { TableExtendedComponent } from './components/table-extended/table-extended.component';
 import { TableBaseComponent } from './components/table-base/table-base.component';
+import { InsertNewBtnComponent } from './components/insert-new-btn/insert-new-btn.component';
+import { StatusToggleBtnComponent } from './components/status-toggle-btn/status-toggle-btn.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { TableBaseComponent } from './components/table-base/table-base.component
     NgbDatepickerI18nTitleDirective,
     LogoutBtnComponent,
     TableExtendedComponent,
-    TableBaseComponent
+    TableBaseComponent,
+    InsertNewBtnComponent,
+    StatusToggleBtnComponent
   ],
   imports: [
     NgbModule,
