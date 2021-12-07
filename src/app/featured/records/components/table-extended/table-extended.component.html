@@ -1,0 +1,268 @@
+<div class="container" id="table-records">
+  <div class="row">
+    <div class="col-md-12">
+
+
+      <!-- <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model1" ngbDatepicker
+          #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="changeDate($event)" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div> -->
+
+
+      <div id="global-search">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
+          </div>
+          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch"
+            (keyup)="globalSearch()" placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+          <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
+        </div>
+        <div class="filter-item">
+          <button mat-raised-button color="accent" type="button" ngbTooltip="Reset filter"
+            (click)="clearAllFilters()">
+            Reset filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="col-sm-1" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op_ico')">OP/ico
+                <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('obchodne_meno')">obchodne<br>meno
+                <mat-icon *ngIf="sortByCol?.obchodne_meno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.obchodne_meno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-1" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
+                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down
+                </mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-1" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('manualny_rating')">manualny<br>rating
+                <mat-icon *ngIf="sortByCol?.manualny_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down
+                </mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-2" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('od')">od
+                <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-2" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('do')">do
+                <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-2" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('poznamka')">poznamka
+                <mat-icon *ngIf="sortByCol?.poznamka==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.poznamka==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <!-- <th class="col-sm-1" id="datum_zmeny">
+              <span class="th-link" (click)="sortByColumn('datum_zmeny')">datum<br>zmeny
+                <mat-icon *ngIf="sortByCol?.datum_zmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datum_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-2" id="autor_zmeny">
+              <span class="th-link" (click)="sortByColumn('autor_zmeny')">autor<br>zmeny
+                <mat-icon *ngIf="sortByCol?.autor_zmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.autor_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th> -->
+            <th class="col-sm-1" id="action">
+              <span>
+                Action
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of records; let i = index" [ngClass]="{'non-click': item?.status === 'inactive' ,'inactive': item?.status === 'inactive'}">
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
+                <input type="text" readonly [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('op_ico', item, i)" class="form-control">
+                <label *ngIf="item?.op_icoErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.op_ico}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
+                <input type="text" readonly [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('obchodne_meno', item, i)" class="form-control">
+                <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.obchodne_meno}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit"
+                [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
+                <input type="text" readonly [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control">
+                <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit"
+                [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
+                <input [readonly]="item?.status === 'inactive'"
+                  type="text" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('manualny_rating', item, i)" class="form-control">
+                <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.manualny_rating}}</span>
+            </td>
+
+            <td>
+
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+                <div class="input-group">
+                  <input [readonly]="item?.status === 'inactive'"
+                    appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker
+                    #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <small *ngIf="item?.odErrorRequired">Required </small>
+                <small *ngIf="item?.ErrorInterval">Od > Do !</small>
+              </span>
+
+              <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+                <div class="input-group">
+                  <input type="text" [(ngModel)]="item.od" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('od', item, i)" class="form-control">
+
+                </div>
+                <label *ngIf="item?.odErrorRequired">Required</label>
+              </span> -->
+              <span *ngIf="item.read">{{item.od}}</span>
+            </td>
+            <td>
+
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
+                <div class="input-group">
+                  <input [readonly]="item?.status === 'inactive'"
+                    appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate"  class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker
+                    #d="ngbDatepicker" #c2="ngModel" (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <small *ngIf="item?.doErrorRequired">Required</small>
+                <small *ngIf="item?.ErrorInterval">Do < Od !</small>
+                <!-- <div *ngIf="item.do.dirty && item.do.invalid">
+                  <small class="form-text text-danger" *ngIf="item.do.errors.required">
+                      Your birth date is required.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="item.do.errors.ngbDate?.invalid">
+                      Your birth date must be a valid date (Ex: yyyy-mm-dd).
+                  </small>
+                  <small class="form-text text-danger" *ngIf="item.do.errors.ngbDate?.requiredBefore || item.do.errors.ngbDate?.requiredAfter">
+                      Your age must be between 18 and 100.
+                  </small>
+              </div> -->
+              </span>
+
+              <!-- <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
+                <input type="text" [(ngModel)]="item.do" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('do', item, i)" class="form-control">
+                <label *ngIf="item?.doErrorRequired">Required</label>
+              </span> -->
+              <span *ngIf="item.read">{{item.do}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
+                <input [readonly]="item?.status === 'inactive'"
+                  type="text" [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('poznamka', item, i)" class="form-control">
+                <label *ngIf="item?.poznamkaErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.poznamka}}</span>
+            </td>
+            <!-- <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datum_zmenyErrorRequired}" >
+                <input type="text" [(ngModel)]="item.datum_zmeny" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('datum_zmeny', item, i)" class="form-control">
+                <label *ngIf="item?.datum_zmenyErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.datum_zmeny}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.autor_zmenyErrorRequired}" >
+                <input type="text" [(ngModel)]="item.autor_zmeny" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('autor_zmeny', item, i)" class="form-control">
+                <label *ngIf="item?.autor_zmenyErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.autor_zmeny}}</span>
+            </td> -->
+            <td>
+              <!-- <span *ngIf="item.read" (click)="switchToEditMode(item)">
+                <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
+              </span>
+              <span *ngIf="!item.read" (click)="switchToReadMode(item)" [ngClass]="{
+                'non-click':(item?.firstnameErrorRequired || item?.surnameErrorRequired || item?.ageErrorRequired)
+              }">
+                <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
+              </span> -->
+              <span (click)="removeItem(item)">
+                <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
+              </span>
+              <span [ngClass]="{'not-allowed':recordsDiffArrObj}">
+                <mat-icon [ngClass]="{'non-click': recordsDiffArrObj}" aria-label="history" class="td-link ml-2" (click)="showHistoryLog(item)">history</mat-icon>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <button type="button" class="btn btn-primary" [disabled]="!recordsDiffArrObj || getRecordsDiffArrObjError(recordsDiffArrObj)"
+        (click)="saveChanges()">Save
+        Changes</button>
+    </div>
+    <div class="col-md-10">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
+        </li>
+        <li *ngFor="let itemP of pages; let i = index" class="page-item"
+          [ngClass]="{'active': activePage === i, 'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
+        </li>
+        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="nextPage()">Next</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
