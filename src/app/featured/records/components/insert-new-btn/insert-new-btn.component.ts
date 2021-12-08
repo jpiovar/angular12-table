@@ -12,4 +12,8 @@ export class InsertNewBtnComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openInsertDialog() {
+
+  }
+
 }
