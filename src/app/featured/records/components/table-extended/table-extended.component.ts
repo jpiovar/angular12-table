@@ -103,6 +103,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     } else {
       this.toggleBtnState = 'active';
     }
+    const url = `${this.origin}${this.tableDataEndPoint}?status_like=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    this.store.dispatch(new RecordsLoad(url));
   }
 
   triggerTableLoad(): void {
