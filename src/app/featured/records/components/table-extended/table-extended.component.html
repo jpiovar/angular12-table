@@ -11,6 +11,11 @@
         </div>
       </div> -->
 
+      <p>
+        <app-insert-new-btn></app-insert-new-btn>
+        <app-status-toggle-btn [toggleBtnState]="toggleBtnState" (click)="activeInactiveToggle($event)"></app-status-toggle-btn>
+      </p>
+
 
       <div id="global-search">
         <div class="input-group">

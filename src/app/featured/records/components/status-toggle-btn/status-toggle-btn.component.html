@@ -1,1 +1,7 @@
-<p>status-toggle-btn works!</p>
+<label class="switch">
+  <input type="checkbox" [checked]="toggleBtnState === 'active'">
+  <span class="slider">
+    <span class="active" *ngIf="toggleBtnState === 'active'">Active</span>
+    <span class="inactive" *ngIf="toggleBtnState === 'inactive'">Inactive</span>
+  </span>
+</label>

@@ -63,6 +63,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   minDate = {year: 2017, month: 1, day: 1};
   maxDate = {year: 2027, month: 12, day: 1};
 
+  toggleBtnState: 'active'|'inactive' = 'active';
+
   changeDate(event) {
     console.log(event);
   }
@@ -91,6 +93,16 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  activeInactiveToggle(event) {
+    debugger;
+    event.preventDefault();
+    if (this.toggleBtnState === 'active') {
+      this.toggleBtnState = 'inactive';
+    } else {
+      this.toggleBtnState = 'active';
+    }
   }
 
   triggerTableLoad(): void {
