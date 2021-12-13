@@ -95,6 +95,22 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  createAndExecuteUrl() {
+    debugger;
+    const origin = `${this.origin}`;
+    const endPoint = `${this.tableDataEndPoint}`;
+    // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
+    const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    const q = this.searchText ? `&q=${this.searchText}` : '';
+    const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
+    const order = this.direction ? `&_order=${this.direction}` : '';
+    const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
+    const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
+
+    const url = `${origin}${endPoint}?${statusLike}${q}${sort}${order}${page}${limit}`;
+    this.store.dispatch(new RecordsLoad(url));
+  }
+
   activeInactiveToggle(event) {
     debugger;
     event.preventDefault();
@@ -103,19 +119,21 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     } else {
       this.toggleBtnState = 'active';
     }
-    const url = `${this.origin}${this.tableDataEndPoint}?status_like=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    this.store.dispatch(new RecordsLoad(url));
+    // const url = `${this.origin}${this.tableDataEndPoint}?status_like=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    // this.store.dispatch(new RecordsLoad(url));
+    this.createAndExecuteUrl();
   }
 
   triggerTableLoad(): void {
     // debugger;
     this.tableMode = 'load';
     this.store.dispatch(new StartSpinner());
-    let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    if (this.searchText) {
-      url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    }
-    this.store.dispatch(new RecordsLoad(url));
+    // let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    // if (this.searchText) {
+    //   url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    // }
+    // this.store.dispatch(new RecordsLoad(url));
+    this.createAndExecuteUrl();
   }
 
   metaAndTableDataSubscription() {
@@ -257,11 +275,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.sortByCol[colname] = this.direction;
 
     this.store.dispatch(new StartSpinner());
-    let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    if (this.searchText) {
-      url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    }
-    this.store.dispatch(new RecordsLoad(url));
+    // let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    // if (this.searchText) {
+    //   url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    // }
+    // this.store.dispatch(new RecordsLoad(url));
+    this.createAndExecuteUrl();
   }
 
   openChangeLogDialog(id: string, changeLog) {
@@ -462,14 +481,18 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             this.sortBy = 'op_ico';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
-              const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-              this.store.dispatch(new RecordsLoad(url));
+              // const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+              // this.store.dispatch(new RecordsLoad(url));
+              this.createAndExecuteUrl();
             }
           } else {
+            this.searchText = '';
+            this.sortBy = 'op_ico';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
-              const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-              this.store.dispatch(new RecordsLoad(url));
+              // const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+              // this.store.dispatch(new RecordsLoad(url));
+              this.createAndExecuteUrl();
             }
           }
           this.searchMode = 'global';
