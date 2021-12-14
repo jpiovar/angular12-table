@@ -120,7 +120,7 @@
             [ngClass]="{'non-click': item?.status === 'inactive' ,'inactive': item?.status === 'inactive'}">
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
-                <input type="text" readonly [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
+                <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('op_ico', item, i)" class="form-control">
                 <label *ngIf="item?.op_icoErrorRequired">Required</label>
               </span>
@@ -128,7 +128,7 @@
             </td>
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
-                <input type="text" readonly [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                <input type="text" disabled [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('obchodne_meno', item, i)" class="form-control">
                 <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
               </span>
@@ -137,17 +137,27 @@
             <td>
               <span *ngIf="!item.read" class="record-edit"
                 [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
-                <input type="text" readonly [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control">
+                <!-- <input type="text" disabled [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control"> -->
+                <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('vypocitany_rating', item, i)" [disabled]="item?.status === 'inactive'">
+                  <option value="" disabled>Vyberte vypocitany rating</option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
                 <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
               </span>
               <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
             </td>
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
-                <input [readonly]="item?.status === 'inactive'" type="text" [(ngModel)]="item.manualny_rating"
+                <!-- <input [disabled]="item?.status === 'inactive'" type="text" [(ngModel)]="item.manualny_rating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item, i)"
-                  class="form-control">
+                  class="form-control"> -->
+                <select class="form-control custom-select" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('manualny_rating', item, i)" [disabled]="item?.status === 'inactive'">
+                  <option value="" disabled>Vyberte manualny rating</option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
                 <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
               </span>
               <span *ngIf="item.read">{{item.manualny_rating}}</span>
@@ -157,7 +167,7 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                 <div class="input-group">
-                  <input [readonly]="item?.status === 'inactive'" appNgbDatepickerI18nTitle [minDate]="minDate"
+                  <input [disabled]="item?.status === 'inactive'" appNgbDatepickerI18nTitle [minDate]="minDate"
                     [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od"
                     ngbDatepicker #d="ngbDatepicker" #c1="ngModel"
                     (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
@@ -185,7 +195,7 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                 <div class="input-group">
-                  <input [readonly]="item?.status === 'inactive'" appNgbDatepickerI18nTitle [minDate]="minDate"
+                  <input [disabled]="item?.status === 'inactive'" appNgbDatepickerI18nTitle [minDate]="minDate"
                     [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do"
                     ngbDatepicker #d="ngbDatepicker" #c2="ngModel"
                     (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
@@ -219,7 +229,7 @@
             </td>
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
-                <input [readonly]="item?.status === 'inactive'" type="text" [(ngModel)]="item.poznamka"
+                <input [disabled]="item?.status === 'inactive'" type="text" [(ngModel)]="item.poznamka"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('poznamka', item, i)"
                   class="form-control">
                 <label *ngIf="item?.poznamkaErrorRequired">Required</label>

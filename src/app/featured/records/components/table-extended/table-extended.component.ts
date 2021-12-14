@@ -65,6 +65,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   toggleBtnState: 'active'|'inactive' = 'active';
 
+  ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
+
   changeDate(event) {
     console.log(event);
   }
@@ -507,8 +509,6 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // getFilteredRecords(records: any[], propertyValue: string) {
   //   return records.filter(item => item.firstname.indexOf(propertyValue) > -1 || item.surname.indexOf(propertyValue) > -1 || item.age.indexOf(propertyValue) > -1);
   // }
-
-
 
 
 
