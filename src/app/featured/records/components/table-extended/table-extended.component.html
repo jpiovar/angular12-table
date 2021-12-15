@@ -141,7 +141,7 @@
                   (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control"> -->
                 <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('vypocitany_rating', item)"
-                  [disabled]="item?.status === 'inactive'">
+                  disabled>
                   <option value="" disabled>Vyberte vypocitany rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
