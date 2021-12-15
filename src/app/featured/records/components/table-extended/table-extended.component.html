@@ -117,7 +117,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of records; let i = index"
-            [ngClass]="{'non-click': item?.status === 'inactive' ,'inactive': item?.status === 'inactive'}">
+            [ngClass]="{'inactive': item?.status === 'inactive'}"><!-- 'non-click': item?.status === 'inactive' , -->
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
@@ -139,8 +139,9 @@
                 [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
                 <!-- <input type="text" disabled [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control"> -->
-                <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('vypocitany_rating', item, i)" [disabled]="item?.status === 'inactive'">
+                <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('vypocitany_rating', item, i)"
+                  [disabled]="item?.status === 'inactive'">
                   <option value="" disabled>Vyberte vypocitany rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
@@ -153,8 +154,9 @@
                 <!-- <input [disabled]="item?.status === 'inactive'" type="text" [(ngModel)]="item.manualny_rating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item, i)"
                   class="form-control"> -->
-                <select class="form-control custom-select" [(ngModel)]="item.manualny_rating" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('manualny_rating', item, i)" [disabled]="item?.status === 'inactive'">
+                <select class="form-control custom-select" [(ngModel)]="item.manualny_rating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item, i)"
+                  [disabled]="item?.status === 'inactive'">
                   <option value="" disabled>Vyberte manualny rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
@@ -172,7 +174,7 @@
                     ngbDatepicker #d="ngbDatepicker" #c1="ngModel"
                     (ngModelChange)="onInputChange('od', item, i); changeDate($event)" />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button [ngClass]="{'non-click': item?.status === 'inactive'}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -200,7 +202,7 @@
                     ngbDatepicker #d="ngbDatepicker" #c2="ngModel"
                     (ngModelChange)="onInputChange('do', item, i); changeDate($event)" />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button [ngClass]="{'non-click': item?.status === 'inactive'}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -261,11 +263,11 @@
               }">
                 <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
               </span> -->
-              <span (click)="removeItem(item)">
+              <span (click)="removeItem(item)" [ngClass]="{'non-click': item?.status === 'inactive'}">
                 <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
               </span>
-              <span [ngClass]="{'not-allowed':recordsDiffArrObj}">
-                <mat-icon [ngClass]="{'non-click': recordsDiffArrObj}" aria-label="history" class="td-link ml-2"
+              <span>
+                <mat-icon [ngClass]="{'active-click': true}" aria-label="history" class="td-link ml-2"
                   (click)="showHistoryLog(item)">history</mat-icon>
               </span>
             </td>
