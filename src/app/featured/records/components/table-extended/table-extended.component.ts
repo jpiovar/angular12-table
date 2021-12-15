@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
+
+import * as _ from 'lodash';
+
 import { compareValues, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
@@ -60,10 +63,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // model1: NgbDateStruct = { day: this.date.getUTCDate(), month: this.date.getUTCMonth()+1, year: this.date.getUTCFullYear()};
   model1: NgbDateStruct = isoStringtoNgbDateStruct('2020-01-10T00:00:00');
 
-  minDate = {year: 2017, month: 1, day: 1};
-  maxDate = {year: 2027, month: 12, day: 1};
+  minDate = { year: 2017, month: 1, day: 1 };
+  maxDate = { year: 2027, month: 12, day: 1 };
 
-  toggleBtnState: 'active'|'inactive' = 'active';
+  toggleBtnState: 'active' | 'inactive' = 'active';
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
@@ -335,16 +338,20 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   //   item.read = true;
   // }
 
-  removeItem(item: any) {
-    this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableDataEndPoint}`;
-    const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-    const deleted = {};
+  // removeItem(item: any) {
+  //   this.store.dispatch(new StartSpinner());
+  //   const url = `${this.origin}${this.tableDataEndPoint}`;
+  //   const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+  //   const deleted = {};
 
-    const key = item?.id;
-    deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
-    this.store.dispatch(new RecordsDelete({ endPoint: url, records, deleted }));
-    this.tableMode = 'remove';
+  //   const key = item?.id;
+  //   deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
+  //   this.store.dispatch(new RecordsDelete({ endPoint: url, records, deleted }));
+  //   this.tableMode = 'remove';
+  // }
+
+  removeItem(item: any) {
+
   }
 
   showHistoryLog(item: any) {
@@ -357,9 +364,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
   }
 
-  onInputChange(colname: string, item: any, index: number) {
+  onInputChange(colname: string, item: any) {
     debugger;
-    const itemId = this.records[index]?.id;
+    // const itemId = this.records[index]?.id;
+    const itemId = item?.id;
+    const index = getIndexBasedId(this.records, itemId);
     const recordItemChanged = this.recordsItemChanged(this.records[index], this.originalRecords[index]);
     if (recordItemChanged) {
       if (this.recordsDiffArrObj === null) {
@@ -407,10 +416,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
     const record = JSON.parse(JSON.stringify(recordsItem));
     const originalRecord = JSON.parse(JSON.stringify(originalRecordsItem));
-    if (JSON.stringify(record) != JSON.stringify(originalRecord)) {
-      return true;
+    // if (JSON.stringify(record) != JSON.stringify(originalRecord)) {
+    if (_.isEqual(record, originalRecord)) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   getRecordsDiffArrObjError(obj: any): boolean {
