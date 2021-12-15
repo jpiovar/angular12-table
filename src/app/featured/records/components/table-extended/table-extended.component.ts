@@ -351,7 +351,16 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // }
 
   removeItem(item: any) {
+    debugger;
+    item['progressStatus'] = 'removed';
+  }
 
+  undoChange(item: any) {
+    debugger;
+    delete item['progressStatus'];
+    const itemId = item?.id;
+    const index = getIndexBasedId(this.records, itemId);
+    this.records[index] = JSON.parse(JSON.stringify(this.originalRecords[index]));
   }
 
   showHistoryLog(item: any) {

@@ -45,7 +45,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-hover">
+      <table class="table">
         <thead>
           <tr>
             <th class="col-sm-1" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
@@ -117,7 +117,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of records; let i = index"
-            [ngClass]="{'inactive': item?.status === 'inactive'}"><!-- 'non-click': item?.status === 'inactive' , -->
+            [ngClass]="{'inactive': item?.status === 'inactive', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
+            <!-- 'non-click': item?.status === 'inactive' , -->
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
@@ -156,7 +157,7 @@
                   class="form-control"> -->
                 <select class="form-control custom-select" [(ngModel)]="item.manualny_rating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item)"
-                  [disabled]="item?.status === 'inactive'">
+                  [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'">
                   <option value="" disabled>Vyberte manualny rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
@@ -169,12 +170,12 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                 <div class="input-group">
-                  <input [disabled]="item?.status === 'inactive'" appNgbDatepickerI18nTitle [minDate]="minDate"
+                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" appNgbDatepickerI18nTitle [minDate]="minDate"
                     [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od"
                     ngbDatepicker #d="ngbDatepicker" #c1="ngModel"
                     (ngModelChange)="onInputChange('od', item); changeDate($event)" />
                   <div class="input-group-append">
-                    <button [ngClass]="{'non-click': item?.status === 'inactive'}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -197,12 +198,12 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                 <div class="input-group">
-                  <input [disabled]="item?.status === 'inactive'" appNgbDatepickerI18nTitle [minDate]="minDate"
+                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" appNgbDatepickerI18nTitle [minDate]="minDate"
                     [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do"
                     ngbDatepicker #d="ngbDatepicker" #c2="ngModel"
                     (ngModelChange)="onInputChange('do', item); changeDate($event)" />
                   <div class="input-group-append">
-                    <button [ngClass]="{'non-click': item?.status === 'inactive'}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -231,7 +232,7 @@
             </td>
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
-                <input [disabled]="item?.status === 'inactive'" type="text" [(ngModel)]="item.poznamka"
+                <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" type="text" [(ngModel)]="item.poznamka"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('poznamka', item)"
                   class="form-control">
                 <label *ngIf="item?.poznamkaErrorRequired">Required</label>
@@ -263,12 +264,16 @@
               }">
                 <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
               </span> -->
-              <span (click)="removeItem(item)" [ngClass]="{'non-click': item?.status === 'inactive'}">
+              <span (click)="removeItem(item)" [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}">
                 <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="history" class="td-link ml-2"
                   (click)="showHistoryLog(item)">history</mat-icon>
+              </span>
+              <span>
+                <mat-icon [ngClass]="{'active-click': true}" aria-label="undo" class="td-link ml-2"
+                  (click)="undoChange(item)">undo</mat-icon>
               </span>
             </td>
           </tr>
