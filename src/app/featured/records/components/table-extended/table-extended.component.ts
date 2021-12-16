@@ -37,6 +37,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   tableDataEndPoint: string;
   tableChangeLogs: string;
   origin: string;
+  currentUrl: string = '';
   originalRecords: any[];
   records: any[];
 
@@ -113,6 +114,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
     const url = `${origin}${endPoint}?${statusLike}${q}${sort}${order}${page}${limit}`;
+    this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
   }
 
@@ -450,18 +452,24 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    // debugger;
+    debugger;
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+      records = this.getSetArrPropertyByValue(records, 'progressStatus', 'remove');
       let modified = {};
       for (const key in this.recordsDiffArrObj) {
         modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+        modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
+        modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
+        const itemId = key;
+        const index = getIndexBasedId(records, itemId);
+        records[index]['status'] = 'inactive';
       }
       // debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
       modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
-      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified }));
+      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;
     }
   }

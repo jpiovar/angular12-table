@@ -264,7 +264,7 @@
               }">
                 <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
               </span> -->
-              <span (click)="removeItem(item); onInputChange(undefined, item)" [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}">
+              <span (click)="removeItem(item); onInputChange('', item)" [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}">
                 <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
               </span>
               <span>
@@ -273,7 +273,7 @@
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="undo" class="td-link ml-2"
-                  (click)="undoChange(item); onInputChange(undefined, item)">undo</mat-icon>
+                  (click)="undoChange(item); onInputChange('', item)">undo</mat-icon>
               </span>
             </td>
           </tr>

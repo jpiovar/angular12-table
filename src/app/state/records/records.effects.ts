@@ -44,6 +44,8 @@ import { LogsSave } from '../logs/logs.actions';
 export class RecordsEffects {
   origin: string;
   tableLogs: string;
+  tableDataEndPoint: string;
+
 
   constructor(
     private actions$: Actions<any>,
@@ -52,6 +54,7 @@ export class RecordsEffects {
   ) {
     this.origin = environment.beOrigin;
     this.tableLogs = environment.beTableChangeLogs;
+    this.tableDataEndPoint = environment.beTableDataEndPoint;
   }
 
 
@@ -137,6 +140,7 @@ export class RecordsEffects {
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
         const modified: any = action?.payload?.modified;
+        const currentUrl: string = action?.payload?.currentUrl;
 
         // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
         // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
@@ -150,7 +154,7 @@ export class RecordsEffects {
         // ];
 
         return {
-          endPoint, records, arrObs, modified
+          endPoint, records, arrObs, modified, currentUrl
         };
       }
     ),
@@ -164,7 +168,8 @@ export class RecordsEffects {
                 arrObsRes: subres,
                 endPoint: res.endPoint,
                 records: res.records,
-                modified: res.modified
+                modified: res.modified,
+                currentUrl: res.currentUrl
               });
             },
             error => throwError(error),
@@ -183,6 +188,11 @@ export class RecordsEffects {
           this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
         }
         this.store.dispatch(new LogsSave({ endPoint: url, logs: res?.modified }));
+
+        debugger;
+        const urlLoadRecords = res?.currentUrl;
+        this.store.dispatch(new RecordsLoad(urlLoadRecords));
+
         return new RecordsSaveSuccess(records);
       }
     ),

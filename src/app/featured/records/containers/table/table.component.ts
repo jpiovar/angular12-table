@@ -404,7 +404,7 @@ export class TableComponent implements OnInit, OnDestroy {
       // debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
       modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
-      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified }));
+      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: '' }));
       this.recordsDiffArrObj = null;
     }
   }
