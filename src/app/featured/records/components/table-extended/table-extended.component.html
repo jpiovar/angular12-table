@@ -273,7 +273,7 @@
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="undo" class="td-link ml-2"
-                  (click)="undoChange(item)">undo</mat-icon>
+                  (click)="undoChange(item); onInputChange(undefined, item)">undo</mat-icon>
               </span>
             </td>
           </tr>

@@ -393,27 +393,30 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.recordsDiffArrObj = null;
     }
 
-    if (!item[colname]) {
-      item[colname + 'ErrorRequired'] = true;
-      // this.recordsDiffArrObj['error'] = true;
-    } else {
-      delete item[colname + 'ErrorRequired'];
-      // if (this.recordsDiffArrObj?.error) {
-      //   delete this.recordsDiffArrObj['error'];
-      // }
-    }
+    if (colname) {
 
-    if (colname === 'od' || colname === 'do') {
-      const isoDateOd = ngbDateStructToIsoString(item['od']);
-      const isoDateDo = ngbDateStructToIsoString(item['do']);
-
-      if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
-        item['ErrorInterval'] = true;
+      if (!item[colname]) {
+        item[colname + 'ErrorRequired'] = true;
+        // this.recordsDiffArrObj['error'] = true;
       } else {
-        delete item['ErrorInterval'];
+        delete item[colname + 'ErrorRequired'];
+        // if (this.recordsDiffArrObj?.error) {
+        //   delete this.recordsDiffArrObj['error'];
+        // }
       }
-    }
 
+      if (colname === 'od' || colname === 'do') {
+        const isoDateOd = ngbDateStructToIsoString(item['od']);
+        const isoDateDo = ngbDateStructToIsoString(item['do']);
+
+        if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
+          item['ErrorInterval'] = true;
+        } else {
+          delete item['ErrorInterval'];
+        }
+      }
+
+    }
 
 
   }
