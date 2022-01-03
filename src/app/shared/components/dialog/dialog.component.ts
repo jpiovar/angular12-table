@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state';
 // import { RecordSave } from 'src/app/state/records/records.actions';
@@ -14,6 +15,9 @@ export class DialogComponent implements OnInit {
   content: any;
   modifiedContent: any;
   origin: string;
+  selectedIndex: number = 0;
+
+  @ViewChild('stepper') stepper: MatStepper;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -66,5 +70,31 @@ export class DialogComponent implements OnInit {
   //   this.modifiedContent = JSON.parse(JSON.stringify(this.content));
   // }
 
+
+  setIndex(event) {
+    debugger;
+    this.selectedIndex = event.selectedIndex;
+ }
+
+ triggerClick(event) {
+   debugger;
+    console.log(`Selected tab index: ${this.selectedIndex}`);
+ }
+
+ goBack(stepper: MatStepper){
+   debugger;
+  stepper.previous();
+}
+
+goForward(stepper: MatStepper){
+  debugger;
+  stepper.next();
+}
+
+
+move(index: number) {
+  debugger;
+  this.stepper.selectedIndex = index;
+}
 
 }
