@@ -380,6 +380,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // const itemId = this.records[index]?.id;
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
+    if (colname) {
+      delete item['progressStatus'];
+    }
     const recordItemChanged = this.recordsItemChanged(this.records[index], this.originalRecords[index]);
     if (recordItemChanged) {
       if (this.recordsDiffArrObj === null) {
@@ -388,6 +391,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       const temp = JSON.parse(JSON.stringify((this.recordsDiffArrObj)));
       temp[itemId] = this.records[index];
       this.recordsDiffArrObj = { ...this.recordsDiffArrObj, ...temp };
+      if (colname) {
+        item['progressStatus'] = 'changed';
+      }
     } else {
       delete this.recordsDiffArrObj[itemId];
     }
@@ -460,11 +466,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       let modified = {};
       for (const key in this.recordsDiffArrObj) {
         modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+        if (modified[key]['progressStatus'] === 'removed') {
+          modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
+          const index = getIndexBasedId(records, key); // itemId === key;
+          records[index]['status'] = 'inactive';
+        }
         modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
-        modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
-        const itemId = key;
-        const index = getIndexBasedId(records, itemId);
-        records[index]['status'] = 'inactive';
       }
       // debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
