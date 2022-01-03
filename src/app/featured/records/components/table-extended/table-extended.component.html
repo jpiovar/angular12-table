@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-6 text-right">
           <span class="mr-2">
-            <app-insert-new-btn></app-insert-new-btn>
+            <app-insert-new-btn (click)="insertNewRecord()"></app-insert-new-btn>
           </span>
           <span>
             <app-status-toggle-btn [toggleBtnState]="toggleBtnState" (click)="activeInactiveToggle($event)">

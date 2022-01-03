@@ -50,7 +50,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   sortBy: string = 'op_ico';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
-  dialogRef: MatDialogRef<any>;
+  dialogRefChangeModal: MatDialogRef<any>;
+  dialogRefNewRecordModal: MatDialogRef<any>;
   recordId: string = '';
   dialogAction: string = '';
   tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | 'remove' | 'log' | '' = '';
@@ -295,7 +296,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.dialogAction = '';
     this.tableMode = '';
     // const recordDetail = getItemBasedId(this.records, id);
-    this.dialogRef = this.dialog.open(DialogComponent, {
+    this.dialogRefChangeModal = this.dialog.open(DialogComponent, {
       panelClass: 'change-log-dialog-class',
       id: `change-log-dialog-id-${id}`,
       width: '800px',
@@ -308,7 +309,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.dialogRef.beforeClosed().subscribe(result => {
+    this.dialogRefChangeModal.beforeClosed().subscribe(result => {
       // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
@@ -318,7 +319,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     });
 
-    this.dialogRef.afterClosed().subscribe(result => {
+    this.dialogRefChangeModal.afterClosed().subscribe(result => {
       // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
@@ -548,6 +549,31 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // }
 
 
+  insertNewRecord() {
+    debugger;
+    const id = new Date();
+    this.dialogRefNewRecordModal = this.dialog.open(DialogComponent, {
+      panelClass: 'new-record-dialog-class',
+      id: `new-record-dialog-id-${id}`,
+      width: '800px',
+      height: 'auto',
+      data: {
+        title: 'New record dialog',
+        type: 'newRecord',
+        mode: 'view'
+      }
+    });
+
+    this.dialogRefNewRecordModal.beforeClosed().subscribe(result => {
+      // debugger;
+      console.log(`Dialog result: ${result}`);
+    });
+
+    this.dialogRefNewRecordModal.afterClosed().subscribe(result => {
+      // debugger;
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
 
 }

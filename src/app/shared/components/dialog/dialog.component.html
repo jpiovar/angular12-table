@@ -1,4 +1,4 @@
-<ng-container *ngIf="content.type === 'changeLog'; else mock">
+<ng-container *ngIf="content.type === 'changeLog'; else newRecord">
   <h1 mat-dialog-title>
     <div class="row align-top">
       <div class="col-md-12">
@@ -47,6 +47,12 @@
 
 
 </ng-container>
+
+<ng-template #newRecord>
+  <ng-container *ngIf="content.type === 'newRecord'; else mock">
+    New record
+  </ng-container>
+</ng-template>
 
 <ng-template #mock>
   Mocked
