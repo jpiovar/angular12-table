@@ -5,12 +5,14 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
+import { DialogStepperComponent } from './components/dialog-stepper/dialog-stepper.component';
 
 @NgModule({
   declarations: [
     HamburgerButtonComponent,
     SafeHtmlPipe,
-    DialogComponent
+    DialogComponent,
+    DialogStepperComponent
   ],
   imports: [
     CommonModule,

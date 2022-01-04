@@ -15,9 +15,6 @@ export class DialogComponent implements OnInit {
   content: any;
   modifiedContent: any;
   origin: string;
-  selectedIndex: number = 0;
-
-  @ViewChild('stepper') stepper: MatStepper;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -71,30 +68,5 @@ export class DialogComponent implements OnInit {
   // }
 
 
-  setIndex(event) {
-    debugger;
-    this.selectedIndex = event.selectedIndex;
- }
-
- triggerClick(event) {
-   debugger;
-    console.log(`Selected tab index: ${this.selectedIndex}`);
- }
-
- goBack(stepper: MatStepper){
-   debugger;
-  stepper.previous();
-}
-
-goForward(stepper: MatStepper){
-  debugger;
-  stepper.next();
-}
-
-
-move(index: number) {
-  debugger;
-  this.stepper.selectedIndex = index;
-}
 
 }

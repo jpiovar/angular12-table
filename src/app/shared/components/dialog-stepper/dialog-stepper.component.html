@@ -1,0 +1,73 @@
+<ng-container *ngIf="content.type === 'newRecord'; else mock">
+
+  <!-- <app-table-base></app-table-base> -->
+
+  <!-- <mat-horizontal-stepper (selectionChange)="setIndex($event)" #stepper>
+
+      <mat-step label="Step 1">
+        <div class="container">
+          <h2>Basic Table</h2>
+          <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span (click)="move(1)">John</span></td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+              </tr>
+              <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-step>
+
+      <mat-step label="Step 2">
+        Step 2 content
+        <span (click)="goBack(stepper)">go back</span>
+      </mat-step>
+
+      <mat-step label="Step 3">
+        <span (click)="move(0)">You are now done.</span>
+      </mat-step>
+
+    </mat-horizontal-stepper> -->
+
+  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)">
+    <mat-step label="Step 1">
+      Step 1
+    </mat-step>
+    <mat-step label="Step 2">
+      Step 2
+    </mat-step>
+    <mat-step label="Step 3">
+      Step 3
+    </mat-step>
+  </mat-horizontal-stepper>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="6px">
+    <button mat-raised-button color="accent" (click)="move(0)">1st</button>
+    <button mat-raised-button color="accent" (click)="move(1)">2nd</button>
+    <button mat-raised-button color="accent" (click)="move(2)">3rd</button>
+  </div>
+
+</ng-container>
+
+
+<ng-template #mock>
+  Mocked
+</ng-template>

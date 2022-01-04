@@ -23,6 +23,7 @@ import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { DialogStepperComponent } from 'src/app/shared/components/dialog-stepper/dialog-stepper.component';
 
 
 
@@ -552,7 +553,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   insertNewRecord() {
     debugger;
     const id = new Date();
-    this.dialogRefNewRecordModal = this.dialog.open(DialogComponent, {
+    this.dialogRefNewRecordModal = this.dialog.open(DialogStepperComponent, {
       panelClass: 'new-record-dialog-class',
       id: `new-record-dialog-id-${id}`,
       width: '800px',
