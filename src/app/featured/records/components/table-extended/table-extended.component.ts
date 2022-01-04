@@ -12,7 +12,7 @@ import {
 } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
-import { DialogComponent } from 'src/app/shared/module/dialog/components/dialog/dialog.component';
+import { DialogComponent } from 'src/app/shared/modules/dialog/components/dialog/dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { catchError, debounceTime, map } from 'rxjs/operators';
 import { HttpBaseService } from 'src/app/core/services/http.base.service';
@@ -23,7 +23,7 @@ import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DialogStepperComponent } from 'src/app/shared/module/dialog/components/dialog-stepper/dialog-stepper.component';
+import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
 
 
 

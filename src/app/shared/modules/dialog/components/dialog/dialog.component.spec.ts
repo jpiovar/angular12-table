@@ -6,7 +6,8 @@ import { StoreModule } from '@ngrx/store';
 import { Overlay } from '@angular/cdk/overlay';
 
 import { DialogComponent } from './dialog.component';
-import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
+import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
+// import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;

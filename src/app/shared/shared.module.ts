@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
-import { DialogModule } from './module/dialog/dialog.module';
-import { ButtonModule } from './module/button/button.module';
+import { DialogModule } from './modules/dialog/dialog.module';
+import { ButtonModule } from './modules/button/button.module';
 
 @NgModule({
   declarations: [
