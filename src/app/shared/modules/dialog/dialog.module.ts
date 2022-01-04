@@ -4,6 +4,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogStepperComponent } from './components/dialog-stepper/dialog-stepper.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
+import { TableModule } from '../table/table.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MaterialModule } from 'src/app/material.module';
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    TableModule
   ],
   exports: [
     DialogComponent,
