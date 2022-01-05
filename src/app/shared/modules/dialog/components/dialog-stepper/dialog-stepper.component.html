@@ -48,16 +48,16 @@
 
     </mat-horizontal-stepper> -->
 
-  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)">
-    <mat-step label="Step 1">
-      Step 1
+  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)" class="{{ 'last-edited-step-' + stepper.selectedIndex }}">
+    <mat-step label="Select template record">
+      Select template record
       <app-table-base></app-table-base>
     </mat-step>
-    <mat-step label="Step 2">
-      Step 2
+    <mat-step label="Complete record">
+      Complete record
     </mat-step>
-    <mat-step label="Step 3">
-      Step 3
+    <mat-step label="Submit record">
+      Submit record
     </mat-step>
   </mat-horizontal-stepper>
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="6px">
