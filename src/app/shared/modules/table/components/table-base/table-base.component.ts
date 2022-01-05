@@ -1,20 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-table-base',
-//   templateUrl: './table-base.component.html',
-//   styleUrls: ['./table-base.component.scss']
-// })
-// export class TableBaseComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
@@ -29,18 +12,14 @@ import {
 } from 'src/app/state/records/records.actions';
 import { environment } from 'src/environments/environment';
 import { compare } from 'natural-orderby';
-import { DialogComponent } from 'src/app/shared/modules/dialog/components/dialog/dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { catchError, debounceTime, map } from 'rxjs/operators';
-import { HttpBaseService } from 'src/app/core/services/http.base.service';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions';
-import { UserStoreData } from 'src/app/state/user/user.actions';
-import { MsalService } from '@azure/msal-angular';
-import { LogsLoad } from 'src/app/state/logs/logs.actions';
+
+
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
+import { RecordsBaseLoad } from 'src/app/state/records-base/records-base.actions';
 
 
 
@@ -52,8 +31,7 @@ import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components
 
 export class TableBaseComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  tableDataEndPoint: string;
-  tableChangeLogs: string;
+  tableDataBaseEndPoint: string;
   origin: string;
   currentUrl: string = '';
   originalRecords: any[];
@@ -68,8 +46,6 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   sortBy: string = 'op_ico';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
-  dialogRefChangeModal: MatDialogRef<any>;
-  dialogRefNewRecordModal: MatDialogRef<any>;
   recordId: string = '';
   dialogAction: string = '';
   tableMode: 'init' | 'load' | 'save' | 'edit' | 'read' | 'remove' | 'log' | '' = '';
@@ -80,31 +56,17 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   searchText: string = '';
 
   date: any = new Date();
-  // model1: NgbDateStruct = { day: this.date.getUTCDate(), month: this.date.getUTCMonth()+1, year: this.date.getUTCFullYear()};
-  model1: NgbDateStruct = isoStringtoNgbDateStruct('2020-01-10T00:00:00');
-
-  minDate = { year: 2017, month: 1, day: 1 };
-  maxDate = { year: 2027, month: 12, day: 1 };
-
-  toggleBtnState: 'active' | 'inactive' = 'active';
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
-  changeDate(event) {
-    console.log(event);
-  }
 
   constructor(
     private store: Store<AppState>,
     public dialog: MatDialog,
-    private httpBase: HttpBaseService,
-    private httpClient: HttpClient,
-    public formatter: NgbDateParserFormatter,
-    private calendar: NgbCalendar
+    public formatter: NgbDateParserFormatter
   ) {
     this.origin = environment.beOrigin;
-    this.tableDataEndPoint = environment.beTableDataEndPoint;
-    this.tableChangeLogs = environment.beTableChangeLogs;
+    this.tableDataBaseEndPoint = environment.beTableDataBaseEndPoint;
     this.tableMode = 'init';
     this.searchMode = 'init';
 
@@ -113,6 +75,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    debugger;
     this.triggerTableLoad();
   }
 
@@ -123,48 +86,30 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   createAndExecuteUrl() {
     debugger;
     const origin = `${this.origin}`;
-    const endPoint = `${this.tableDataEndPoint}`;
-    // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    const endPoint = `${this.tableDataBaseEndPoint}`;
     const q = this.searchText ? `&q=${this.searchText}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     const order = this.direction ? `&_order=${this.direction}` : '';
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${q}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${q}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
-    this.store.dispatch(new RecordsLoad(url));
+    this.store.dispatch(new RecordsBaseLoad(url));
   }
 
-  activeInactiveToggle(event) {
-    debugger;
-    event.preventDefault();
-    if (this.toggleBtnState === 'active') {
-      this.toggleBtnState = 'inactive';
-    } else {
-      this.toggleBtnState = 'active';
-    }
-    // const url = `${this.origin}${this.tableDataEndPoint}?status_like=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    // this.store.dispatch(new RecordsLoad(url));
-    this.createAndExecuteUrl();
-  }
+
 
   triggerTableLoad(): void {
     // debugger;
     this.tableMode = 'load';
     this.store.dispatch(new StartSpinner());
-    // let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    // if (this.searchText) {
-    //   url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    // }
-    // this.store.dispatch(new RecordsLoad(url));
     this.createAndExecuteUrl();
   }
 
   metaAndTableDataSubscription() {
     this.subscription.add(
-      this.store.select('records')
+      this.store.select('recordsBase')
         // .pipe(last())
         .subscribe((res: any) => {
           // debugger;
@@ -180,8 +125,6 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
             if (res.data) {
               // debugger;
-              // if (this.tableMode !== 'log') {
-              // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['od', 'do']);
               this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
@@ -193,31 +136,6 @@ export class TableBaseComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.subscription.add(
-      this.store.select('logs')
-        // .pipe(last())
-        .subscribe((res: any) => {
-          // debugger;
-
-          this.store.dispatch(new StopSpinner());
-
-          if (res && !res.loading) {
-
-            if (res.data) {
-              // debugger;
-
-              if (this.tableMode === 'log') {
-                this.openChangeLogDialog(this.recordId, res.data[this.recordId]);
-              }
-
-
-            }
-
-          }
-
-
-        })
-    );
   }
 
   setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
@@ -301,98 +219,15 @@ export class TableBaseComponent implements OnInit, OnDestroy {
     this.sortByCol[colname] = this.direction;
 
     this.store.dispatch(new StartSpinner());
-    // let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    // if (this.searchText) {
-    //   url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-    // }
-    // this.store.dispatch(new RecordsLoad(url));
+
     this.createAndExecuteUrl();
   }
 
-  openChangeLogDialog(id: string, changeLog) {
-    debugger;
-    this.dialogAction = '';
-    this.tableMode = '';
-    // const recordDetail = getItemBasedId(this.records, id);
-    this.dialogRefChangeModal = this.dialog.open(DialogComponent, {
-      panelClass: 'change-log-dialog-class',
-      id: `change-log-dialog-id-${id}`,
-      width: '800px',
-      height: 'auto',
-      data: {
-        title: 'Change log dialog',
-        changeLog,
-        type: 'changeLog',
-        mode: 'view'
-      }
-    });
 
-    this.dialogRefChangeModal.beforeClosed().subscribe(result => {
-      // debugger;
-      console.log(`Dialog result: ${result}`);
-      this.dialogAction = result;
-      if (this.dialogAction === 'submitBtn') {
-        this.tableMode = 'save';
-      }
 
-    });
 
-    this.dialogRefChangeModal.afterClosed().subscribe(result => {
-      // debugger;
-      console.log(`Dialog result: ${result}`);
-      this.dialogAction = result;
-      if (this.dialogAction === 'submitBtn') {
-        this.tableMode = 'save';
-      }
-    });
-  }
 
-  // switchToEditMode(item: any) {
-  //   this.recordId = item.id;
-  //   this.tableMode = 'edit';
-  //   item.read = false;
-  // }
 
-  // switchToReadMode(item: any) {
-  //   this.recordId = item.id;
-  //   this.tableMode = 'read';
-  //   item.read = true;
-  // }
-
-  // removeItem(item: any) {
-  //   this.store.dispatch(new StartSpinner());
-  //   const url = `${this.origin}${this.tableDataEndPoint}`;
-  //   const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-  //   const deleted = {};
-
-  //   const key = item?.id;
-  //   deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
-  //   this.store.dispatch(new RecordsDelete({ endPoint: url, records, deleted }));
-  //   this.tableMode = 'remove';
-  // }
-
-  removeItem(item: any) {
-    debugger;
-    item['progressStatus'] = 'removed';
-  }
-
-  undoChange(item: any) {
-    debugger;
-    delete item['progressStatus'];
-    const itemId = item?.id;
-    const index = getIndexBasedId(this.records, itemId);
-    this.records[index] = JSON.parse(JSON.stringify(this.originalRecords[index]));
-  }
-
-  showHistoryLog(item: any) {
-    debugger;
-    // dialog modal, get historyEndpoint/itemId
-    this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableChangeLogs}?recordId=${item.id}`;
-    this.recordId = item.id;
-    this.tableMode = 'log';
-    this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
-  }
 
   onInputChange(colname: string, item: any) {
     debugger;
@@ -475,30 +310,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
     return res;
   }
 
-  saveChanges() {
-    this.store.dispatch(new StartSpinner());
-    debugger;
-    if (this.recordsDiffArrObj) {
-      const url = `${this.origin}${this.tableDataEndPoint}`;
-      let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-      records = this.getSetArrPropertyByValue(records, 'progressStatus', 'remove');
-      let modified = {};
-      for (const key in this.recordsDiffArrObj) {
-        modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
-        if (modified[key]['progressStatus'] === 'removed') {
-          modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
-          const index = getIndexBasedId(records, key); // itemId === key;
-          records[index]['status'] = 'inactive';
-        }
-        modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
-      }
-      // debugger;
-      records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
-      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
-      this.recordsDiffArrObj = null;
-    }
-  }
+
 
   setDatePickersToIsoString(arrObj: any, props: string[]) {
     const arr: any[] = JSON.parse(JSON.stringify(arrObj));
@@ -539,8 +351,6 @@ export class TableBaseComponent implements OnInit, OnDestroy {
             this.sortBy = 'op_ico';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
-              // const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-              // this.store.dispatch(new RecordsLoad(url));
               this.createAndExecuteUrl();
             }
           } else {
@@ -548,8 +358,6 @@ export class TableBaseComponent implements OnInit, OnDestroy {
             this.sortBy = 'op_ico';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
-              // const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
-              // this.store.dispatch(new RecordsLoad(url));
               this.createAndExecuteUrl();
             }
           }
@@ -561,37 +369,5 @@ export class TableBaseComponent implements OnInit, OnDestroy {
         }
       ));
   }
-
-  // getFilteredRecords(records: any[], propertyValue: string) {
-  //   return records.filter(item => item.firstname.indexOf(propertyValue) > -1 || item.surname.indexOf(propertyValue) > -1 || item.age.indexOf(propertyValue) > -1);
-  // }
-
-
-  insertNewRecord() {
-    debugger;
-    const id = new Date();
-    this.dialogRefNewRecordModal = this.dialog.open(DialogStepperComponent, {
-      panelClass: 'new-record-dialog-class',
-      id: `new-record-dialog-id-${id}`,
-      width: '800px',
-      height: 'auto',
-      data: {
-        title: 'New record dialog',
-        type: 'newRecord',
-        mode: 'view'
-      }
-    });
-
-    this.dialogRefNewRecordModal.beforeClosed().subscribe(result => {
-      // debugger;
-      console.log(`Dialog result: ${result}`);
-    });
-
-    this.dialogRefNewRecordModal.afterClosed().subscribe(result => {
-      // debugger;
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
 
 }
