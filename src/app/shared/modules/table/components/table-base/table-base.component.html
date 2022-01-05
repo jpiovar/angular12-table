@@ -48,7 +48,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of records; let i = index"
+          <tr (dblclick)="doubleClick($event)" (click)="singleClick($event)"
+            *ngFor="let item of records; let i = index"
+            class="tr-link"
             [ngClass]="{'inactive': item?.status === 'inactive', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
             <!-- 'non-click': item?.status === 'inactive' , -->
             <td>

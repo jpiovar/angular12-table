@@ -370,4 +370,12 @@ export class TableBaseComponent implements OnInit, OnDestroy {
       ));
   }
 
+  doubleClick(event: Event): void {
+    console.log('double click');
+  }
+
+  singleClick(event: Event): void {
+    console.log('single click');
+  }
+
 }
