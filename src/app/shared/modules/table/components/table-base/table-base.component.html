@@ -1,1 +1,110 @@
-<p>table-base works!</p>
+<div class="container" id="table-records">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div id="global-search">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
+          </div>
+          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" (keyup)="globalSearch()"
+            placeholder="Search" aria-label="Search" aria-describedby="search-addon">
+          <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
+        </div>
+        <div class="filter-item">
+          <button class="btn btn-success" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
+            Reset filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-sm-1" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op_ico')">OP/ico
+                <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
+                (click)="sortByColumn('obchodne_meno')">obchodne<br>meno
+                <mat-icon *ngIf="sortByCol?.obchodne_meno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.obchodne_meno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+            </th>
+            <th class="col-sm-1" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
+                (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
+                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down
+                </mat-icon>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of records; let i = index"
+            [ngClass]="{'inactive': item?.status === 'inactive', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
+            <!-- 'non-click': item?.status === 'inactive' , -->
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
+                <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('op_ico', item)" class="form-control">
+                <label *ngIf="item?.op_icoErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.op_ico}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
+                <input type="text" disabled [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('obchodne_meno', item)" class="form-control">
+                <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.obchodne_meno}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit"
+                [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
+                <!-- <input type="text" disabled [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('vypocitany_rating', item, i)" class="form-control"> -->
+                <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('vypocitany_rating', item)"
+                  disabled>
+                  <option value="" disabled>Vyberte vypocitany rating</option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
+                <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
+        </li>
+        <li *ngFor="let itemP of pages; let i = index" class="page-item"
+          [ngClass]="{'active': activePage === i, 'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
+        </li>
+        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="nextPage()">Next</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
