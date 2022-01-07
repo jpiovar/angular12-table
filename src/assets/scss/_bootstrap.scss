@@ -7,8 +7,27 @@ $theme-colors: (
 );
 @import '~bootstrap/scss/bootstrap';
 
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: $color6;
+.table-hover {
+  tbody {
+    tr {
+      &:hover {
+        .table-hover {
+          tbody {
+            tr {
+              &:hover {
+                th {
+                  background-color: $color6;
+                }
+              }
+            }
+          }
+        }
+        td {
+          background-color: $color6;
+        }
+      }
+    }
+  }
 }
 
 .btn-outline-secondary {
