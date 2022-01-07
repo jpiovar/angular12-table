@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 
@@ -30,6 +30,8 @@ import { RecordsBaseLoad } from 'src/app/state/records-base/records-base.actions
 })
 
 export class TableBaseComponent implements OnInit, OnDestroy {
+  @Output() newItemEvent = new EventEmitter<any>();
+
   subscription: Subscription = new Subscription();
   tableDataBaseEndPoint: string;
   origin: string;
@@ -370,12 +372,17 @@ export class TableBaseComponent implements OnInit, OnDestroy {
       ));
   }
 
-  doubleClick(event: Event): void {
+  doubleClick(itemRecord: any): void {
     console.log('double click');
+    this.sendDataToParent(itemRecord);
   }
 
   singleClick(event: Event): void {
     console.log('single click');
+  }
+
+  sendDataToParent(itemRecord: any) {
+    this.newItemEvent.emit(itemRecord);
   }
 
 }

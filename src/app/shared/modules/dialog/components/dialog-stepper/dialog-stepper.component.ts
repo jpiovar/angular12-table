@@ -10,6 +10,7 @@ import { MatStepper } from '@angular/material/stepper';
 export class DialogStepperComponent implements OnInit {
   content: any = {};
   selectedIndex: number = 0;
+  itemRecordNew: any = null;
 
   @ViewChild('stepper') stepper: MatStepper;
 
@@ -60,6 +61,17 @@ export class DialogStepperComponent implements OnInit {
   move(index: number) {
     debugger;
     this.stepper.selectedIndex = index;
+  }
+
+  addItem(newItem: any) {
+    debugger;
+    this.addItemAndStepNext(newItem)
+  }
+
+  addItemAndStepNext(itemRecord: any) {
+    debugger;
+    this.itemRecordNew = itemRecord;
+    this.stepper.next();
   }
 
 }
