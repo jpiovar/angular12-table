@@ -51,11 +51,11 @@
   <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)" class="{{ 'last-edited-step-' + stepper.selectedIndex }}">
     <mat-step label="Select template record">
       Select template record
-      <app-table-base (newItemEvent)="addItem($event)"></app-table-base>
+      <app-table-base (newItemsEvent)="addItems($event)"></app-table-base>
     </mat-step>
     <mat-step label="Complete record">
       Complete record
-      <app-table-base-extended [itemRecordNew]="itemRecordNew"></app-table-base-extended>
+      <app-table-base-extended [newRecords]="recordsNew"></app-table-base-extended>
     </mat-step>
     <mat-step label="Submit record">
       Submit record

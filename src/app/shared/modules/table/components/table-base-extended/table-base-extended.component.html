@@ -1,3 +1,140 @@
-<p>
+<!-- <p>
     {{itemRecordNew?.op_ico}} | {{itemRecordNew?.obchodne_meno}} | {{itemRecordNew?.vypocitany_rating}}
-</p>
+</p> -->
+
+<div class="container" id="table-records">
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-sm-1" id="op_ico">
+              <span>OP/ico</span>
+            </th>
+            <th class="col-sm-2" id="obchodne_meno">
+              <span>obchodne<br>meno</span>
+            </th>
+            <th class="col-sm-1" id="vypocitany_rating">
+              <span class="th-link">vypocitany<br>rating</span>
+            </th>
+            <th class="col-sm-1" id="manualny_rating">
+              <span>manualny<br>rating</span>
+            </th>
+            <th class="col-sm-2" id="od">
+              <span>od</span>
+            </th>
+            <th class="col-sm-2" id="do">
+              <span>do</span>
+            </th>
+            <th class="col-sm-2" id="poznamka">
+              <span>poznamka</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of records; let i = index"
+            [ngClass]="{'inactive': item?.status === 'inactive', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
+
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
+                <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('op_ico', item)" class="form-control">
+                <label *ngIf="item?.op_icoErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.op_ico}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
+                <input type="text" disabled [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('obchodne_meno', item)" class="form-control">
+                <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.obchodne_meno}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit"
+                [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
+                <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('vypocitany_rating', item)"
+                  disabled>
+                  <option value="" disabled>Vyberte vypocitany rating</option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
+                <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
+
+                <select class="form-control custom-select" [(ngModel)]="item.manualny_rating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item)"
+                  [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'">
+                  <option value="" disabled>Vyberte manualny rating</option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
+                <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.manualny_rating}}</span>
+            </td>
+
+            <td>
+
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+                <div class="input-group">
+                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" appNgbDatepickerI18nTitle [minDate]="minDate"
+                    [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od"
+                    ngbDatepicker #d="ngbDatepicker" #c1="ngModel"
+                    (ngModelChange)="onInputChange('od', item); changeDate($event)" />
+                  <div class="input-group-append">
+                    <button [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <small *ngIf="item?.odErrorRequired">Required </small>
+                <small *ngIf="item?.ErrorInterval">Od > Do !</small>
+              </span>
+
+
+              <span *ngIf="item.read">{{item.od}}</span>
+            </td>
+            <td>
+
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
+                <div class="input-group">
+                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" appNgbDatepickerI18nTitle [minDate]="minDate"
+                    [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do"
+                    ngbDatepicker #d="ngbDatepicker" #c2="ngModel"
+                    (ngModelChange)="onInputChange('do', item); changeDate($event)" />
+                  <div class="input-group-append">
+                    <button [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <small *ngIf="item?.doErrorRequired">Required</small>
+                <small *ngIf="item?.ErrorInterval">Do < Od !</small>
+
+              </span>
+
+              <span *ngIf="item.read">{{item.do}}</span>
+            </td>
+            <td>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
+                <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" type="text" [(ngModel)]="item.poznamka"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('poznamka', item)"
+                  class="form-control">
+                <label *ngIf="item?.poznamkaErrorRequired">Required</label>
+              </span>
+              <span *ngIf="item.read">{{item.poznamka}}</span>
+            </td>
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

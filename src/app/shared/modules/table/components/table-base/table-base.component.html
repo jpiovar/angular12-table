@@ -24,20 +24,20 @@
       <table class="table table-hover table-link">
         <thead>
           <tr>
-            <th class="col-sm-1" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+            <th class="col-sm-4" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op_ico')">OP/ico
                 <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th class="col-sm-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-4" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                 (click)="sortByColumn('obchodne_meno')">obchodne<br>meno
                 <mat-icon *ngIf="sortByCol?.obchodne_meno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.obchodne_meno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th class="col-sm-1" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-4" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                 (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
                 <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>

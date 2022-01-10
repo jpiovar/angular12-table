@@ -30,7 +30,7 @@ import { RecordsBaseLoad } from 'src/app/state/records-base/records-base.actions
 })
 
 export class TableBaseComponent implements OnInit, OnDestroy {
-  @Output() newItemEvent = new EventEmitter<any>();
+  @Output() newItemsEvent = new EventEmitter<any>();
 
   subscription: Subscription = new Subscription();
   tableDataBaseEndPoint: string;
@@ -127,7 +127,8 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
             if (res.data) {
               // debugger;
-              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
+              // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
+              this.originalRecords = JSON.parse(JSON.stringify(res.data));
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }
@@ -140,16 +141,16 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
   }
 
-  setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
-    const arr: any[] = JSON.parse(JSON.stringify(arrObj));
-    for (let j = 0; j < props.length; j++) {
-      const currentProp = props[j];
-      for (let i = 0; i < arr.length; i++) {
-        arr[i][currentProp] = isoStringtoNgbDateStruct(arr[i][currentProp]);
-      }
-    }
-    return arr;
-  }
+  // setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
+  //   const arr: any[] = JSON.parse(JSON.stringify(arrObj));
+  //   for (let j = 0; j < props.length; j++) {
+  //     const currentProp = props[j];
+  //     for (let i = 0; i < arr.length; i++) {
+  //       arr[i][currentProp] = isoStringtoNgbDateStruct(arr[i][currentProp]);
+  //     }
+  //   }
+  //   return arr;
+  // }
 
   getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
     let res = JSON.parse(JSON.stringify(records));
@@ -269,16 +270,16 @@ export class TableBaseComponent implements OnInit, OnDestroy {
         // }
       }
 
-      if (colname === 'od' || colname === 'do') {
-        const isoDateOd = ngbDateStructToIsoString(item['od']);
-        const isoDateDo = ngbDateStructToIsoString(item['do']);
+      // if (colname === 'od' || colname === 'do') {
+      //   const isoDateOd = ngbDateStructToIsoString(item['od']);
+      //   const isoDateDo = ngbDateStructToIsoString(item['do']);
 
-        if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
-          item['ErrorInterval'] = true;
-        } else {
-          delete item['ErrorInterval'];
-        }
-      }
+      //   if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
+      //     item['ErrorInterval'] = true;
+      //   } else {
+      //     delete item['ErrorInterval'];
+      //   }
+      // }
 
     }
 
@@ -314,19 +315,19 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
 
 
-  setDatePickersToIsoString(arrObj: any, props: string[]) {
-    const arr: any[] = JSON.parse(JSON.stringify(arrObj));
-    for (let j = 0; j < props.length; j++) {
-      const currentProp = props[j];
-      // for (let i = 0; i < arr.length; i++) {
-      //   arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
-      // }
-      for (const i in arr) { // accepts array and object
-        arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
-      }
-    }
-    return arr;
-  }
+  // setDatePickersToIsoString(arrObj: any, props: string[]) {
+  //   const arr: any[] = JSON.parse(JSON.stringify(arrObj));
+  //   for (let j = 0; j < props.length; j++) {
+  //     const currentProp = props[j];
+  //     // for (let i = 0; i < arr.length; i++) {
+  //     //   arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
+  //     // }
+  //     for (const i in arr) { // accepts array and object
+  //       arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
+  //     }
+  //   }
+  //   return arr;
+  // }
 
   globalSearch() {
     this.isSearching = true;
@@ -374,15 +375,16 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
   doubleClick(itemRecord: any): void {
     console.log('double click');
-    this.sendDataToParent(itemRecord);
+    this.sendDataToParent([itemRecord]);
   }
 
   singleClick(event: Event): void {
     console.log('single click');
   }
 
-  sendDataToParent(itemRecord: any) {
-    this.newItemEvent.emit(itemRecord);
+  sendDataToParent(records: any) {
+    debugger;
+    this.newItemsEvent.emit(records);
   }
 
 }
