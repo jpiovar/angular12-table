@@ -131,17 +131,23 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     // debugger;
     this.tableMode = 'load';
     // this.store.dispatch(new StartSpinner());
-    this.originalRecords = JSON.parse(JSON.stringify(this.newRecords));
+    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(this.newRecords)), ['od', 'do']);
     this.records = JSON.parse(JSON.stringify(this.originalRecords));
     // this.createAndExecuteUrl();
   }
 
   setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
-    const arr: any[] = JSON.parse(JSON.stringify(arrObj));
+    const arr = JSON.parse(JSON.stringify(arrObj));
     for (let j = 0; j < props.length; j++) {
       const currentProp = props[j];
-      for (let i = 0; i < arr.length; i++) {
-        arr[i][currentProp] = isoStringtoNgbDateStruct(arr[i][currentProp]);
+      for (let i = 0; i < arr?.length; i++) {
+        if (arr[i][currentProp]) {
+          arr[i][currentProp] = isoStringtoNgbDateStruct(arr[i][currentProp]);
+        } else {
+          const d = new Date(); // today date
+          const dtext = d.toISOString();
+          arr[i][currentProp] = isoStringtoNgbDateStruct(dtext);
+        }
       }
     }
     return arr;
