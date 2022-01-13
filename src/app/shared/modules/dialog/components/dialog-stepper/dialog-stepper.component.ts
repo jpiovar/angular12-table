@@ -38,38 +38,38 @@ export class DialogStepperComponent implements OnInit {
   }
 
   setIndex(event) {
-    debugger;
+    // debugger;
     this.selectedIndex = event.selectedIndex;
   }
 
   triggerClick(event) {
-    debugger;
+    // debugger;
     console.log(`Selected tab index: ${this.selectedIndex}`);
   }
 
   goBack(stepper: MatStepper) {
-    debugger;
+    // debugger;
     stepper.previous();
   }
 
   goForward(stepper: MatStepper) {
-    debugger;
+    // debugger;
     stepper.next();
   }
 
 
   move(index: number) {
-    debugger;
+    // debugger;
     this.stepper.selectedIndex = index;
   }
 
   addItems(newItems: any) {
-    debugger;
-    this.addItemsAndStepNext(newItems)
+    // debugger;
+    this.addItemsAndStepNext(newItems);
   }
 
   addItemsAndStepNext(items: any) {
-    debugger;
+    // debugger;
     this.recordsNew = items;
     this.stepper.next();
   }

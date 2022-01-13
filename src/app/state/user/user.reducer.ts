@@ -6,7 +6,7 @@ export const initialState: UserState | any = null;
 export function reducer(state = initialState, action: UserActions.Actions): UserState {
   switch (action.type) {
     case UserActions.USER_STORE_DATA: {
-      debugger;
+      // debugger;
       const newState = action.payload;
       return {
         ...state, ...newState

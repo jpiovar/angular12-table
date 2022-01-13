@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
     case RecordsActions.RECORDS_SAVE: {
-      debugger;
+      // debugger;
       return {
         ...state,
         loading: true,
@@ -47,7 +47,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
     case RecordsActions.RECORDS_SAVE_SUCCESS: {
-      debugger;
+      // debugger;
       const newState = JSON.parse(JSON.stringify(action.payload));
       return {
         ...state,
@@ -58,7 +58,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
     case RecordsActions.RECORDS_SAVE_FAIL: {
-      debugger;
+      // debugger;
       return {
         ...state,
         loading: false,
@@ -68,7 +68,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
 
 
     case RecordsActions.RECORDS_DELETE: {
-      debugger;
+      // debugger;
       return {
         ...state,
         loading: true,
@@ -77,7 +77,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
     case RecordsActions.RECORDS_DELETE_SUCCESS: {
-      debugger;
+      // debugger;
       const newState = JSON.parse(JSON.stringify(action.payload));
       return {
         ...state,
@@ -88,7 +88,7 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
     }
 
     case RecordsActions.RECORDS_DELETE_FAIL: {
-      debugger;
+      // debugger;
       return {
         ...state,
         loading: false,

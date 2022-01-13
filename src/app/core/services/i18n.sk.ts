@@ -2,7 +2,7 @@ import {Component, Injectable} from '@angular/core';
 import {NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
-  'sk': {
+  sk: {
     weekdays: ['Po', 'Ut', 'Str', 'Št', 'Pia', 'So', 'Ne'],
     months: ['Jan', 'Feb', 'Mar', 'Apr', 'Máj', 'Jún', 'Júl', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
     weekLabel: 'týždeň'

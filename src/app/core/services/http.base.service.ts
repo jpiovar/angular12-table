@@ -39,7 +39,7 @@ export class HttpBaseService {
           headers: this.headers,
           withCredentials: true
         };
-      };
+      }
     });
 
   }

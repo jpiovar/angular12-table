@@ -112,15 +112,15 @@ export class RecordsEffects {
         const urlRecords: any = action.payload;
         return this.httpBase.getCommon(`${urlRecords}`).pipe(
           map((res: any) => {
-            debugger;
+            // debugger;
             let resExt = res;
             if (!res?.data && !res?.totalRecords) {
               resExt = {
                 data: res,
                 totalRecords: 12
-              }
+              };
             }
-            return new RecordsLoadSuccess(resExt)
+            return new RecordsLoadSuccess(resExt);
           }),
           catchError(error => {
             // debugger;
@@ -136,7 +136,7 @@ export class RecordsEffects {
     ofType(RECORDS_SAVE),
     map(
       (action: RecordsSave) => {
-        debugger;
+        // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
         const modified: any = action?.payload?.modified;
@@ -146,7 +146,9 @@ export class RecordsEffects {
         // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
         const arrObs = [];
         for (const key in modified) {
-          arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
+          if (modified.hasOwnProperty(key)) {
+            arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
+          }
         }
         // [
         //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
@@ -163,7 +165,7 @@ export class RecordsEffects {
         return new Observable((observer: Observer<any>) => {
           zip(...res.arrObs).subscribe(
             (subres: any) => {
-              debugger;
+              // debugger;
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
@@ -175,21 +177,23 @@ export class RecordsEffects {
             error => throwError(error),
             () => observer.complete()
           );
-        })
+        });
       }
     ),
     map(
       res => {
-        const url: string = `${this.origin}${this.tableLogs}`;
-        debugger;
+        const url = `${this.origin}${this.tableLogs}`;
+        // debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
         // const itemId = item?.id;
         for (const key in res?.modified) {
-          this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
+          if (res?.modified.hasOwnProperty(key)) {
+            this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
+          }
         }
         this.store.dispatch(new LogsSave({ endPoint: url, logs: res?.modified }));
 
-        debugger;
+        // debugger;
         const urlLoadRecords = res?.currentUrl;
         this.store.dispatch(new RecordsLoad(urlLoadRecords));
 
@@ -197,7 +201,7 @@ export class RecordsEffects {
       }
     ),
     catchError(error => {
-      debugger;
+      // debugger;
       // console.log(`${res.endPoint}`, error);
       // const recordId = record.id;
       // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
@@ -211,7 +215,7 @@ export class RecordsEffects {
     ofType(RECORDS_DELETE),
     map(
       (action: RecordsDelete) => {
-        debugger;
+        // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
         const deleted: any = action?.payload?.deleted;
@@ -220,7 +224,9 @@ export class RecordsEffects {
         // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
         const arrObs = [];
         for (const key in deleted) {
-          arrObs.push(this.httpBase.deleteCommon(`${endPoint}/${key}`));
+          if (deleted.hasOwnProperty(key)) {
+            arrObs.push(this.httpBase.deleteCommon(`${endPoint}/${key}`));
+          }
         }
         // [
         //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
@@ -237,7 +243,7 @@ export class RecordsEffects {
         return new Observable((observer: Observer<any>) => {
           zip(...res.arrObs).subscribe(
             (subres: any) => {
-              debugger;
+              // debugger;
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
@@ -248,12 +254,12 @@ export class RecordsEffects {
             error => throwError(error),
             () => observer.complete()
           );
-        })
+        });
       }
     ),
     map(
       res => {
-        debugger;
+        // debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
         const deleted = JSON.parse(JSON.stringify(res.deleted));
         for (let i = 0; i < records.length; i++) {
@@ -262,13 +268,15 @@ export class RecordsEffects {
           }
         }
         for (const key in res?.deleted) {
-          this.store.dispatch(new StartToastr({ text: `record ${key} deleted`, type: 'success', duration: 5000 }));
+          if (res?.deleted.hasOwnProperty(key)) {
+            this.store.dispatch(new StartToastr({ text: `record ${key} deleted`, type: 'success', duration: 5000 }));
+          }
         }
         return new RecordsDeleteSuccess(records);
       }
     ),
     catchError(error => {
-      debugger;
+      // debugger;
       // console.log(`${res.endPoint}`, error);
       // const recordId = record.id;
       // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));

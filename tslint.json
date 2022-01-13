@@ -46,7 +46,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      200
+      250
     ],
     "member-access": false,
     "member-ordering": [
@@ -60,6 +60,7 @@
         ]
       }
     ],
+    "new-parens": false,
     "no-angle-bracket-type-assertion": false,
     "no-consecutive-blank-lines": false,
     "no-console": [
@@ -78,6 +79,7 @@
     ],
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
+    "no-shadowed-variable": false,
     "no-switch-case-fall-through": false,
     "no-var-requires": false,
     "object-literal-key-quotes": [
@@ -138,7 +140,9 @@
       "options": [
         "ban-keywords",
         "check-format",
-        "allow-pascal-case"
+        "allow-pascal-case",
+        "allow-trailing-underscore",
+        "allow-leading-underscore"
       ]
     },
     "whitespace": {

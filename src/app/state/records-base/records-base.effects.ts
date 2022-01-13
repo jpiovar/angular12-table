@@ -48,15 +48,15 @@ export class RecordsBaseEffects {
         const urlRecordsBase: any = action.payload;
         return this.httpBase.getCommon(`${urlRecordsBase}`).pipe(
           map((res: any) => {
-            debugger;
+            // debugger;
             let resExt = res;
             if (!res?.data && !res?.totalRecords) {
               resExt = {
                 data: res,
                 totalRecords: 12
-              }
+              };
             }
-            return new RecordsBaseLoadSuccess(resExt)
+            return new RecordsBaseLoadSuccess(resExt);
           }),
           catchError(error => {
             // debugger;

@@ -1,5 +1,5 @@
-import { Directive } from "@angular/core";
-import { NgbInputDatepicker } from "@ng-bootstrap/ng-bootstrap";
+import { Directive } from '@angular/core';
+import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 @Directive({
   selector: '[appNgbDatepickerI18nTitle]',

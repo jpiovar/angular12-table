@@ -15,7 +15,7 @@ export class RecordsBaseLoad implements Action {
 export class RecordsBaseLoadSuccess implements Action {
   readonly type = RECORDS_BASE_LOAD_SUCCESS;
   constructor(public payload: RecordsBaseState) {
-    debugger;
+    // debugger;
   }
 }
 

@@ -12,5 +12,5 @@ export interface AppState {
   readonly records: RecordsState;
   readonly user: UserState;
   readonly logs: LogsState;
-  readonly recordsBase: RecordsBaseState
+  readonly recordsBase: RecordsBaseState;
 }

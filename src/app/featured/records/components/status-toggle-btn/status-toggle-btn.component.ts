@@ -15,8 +15,8 @@ export class StatusToggleBtnComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    debugger;
-    this.toggleBtnState;
+    // debugger;
+    // this.toggleBtnState;
   }
 
 }

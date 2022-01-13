@@ -14,9 +14,9 @@ describe('DialogComponent', () => {
   let fixture: ComponentFixture<DialogComponent>;
 
 
-    const mockDialogRef = {
-      close: jasmine.createSpy('close')
-    };
+  const mockDialogRef = {
+    close: jasmine.createSpy('close')
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -29,16 +29,16 @@ describe('DialogComponent', () => {
       providers: [MatDialog, Overlay, SafeHtmlPipe,
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }],
-      declarations: [ DialogComponent, SafeHtmlPipe ]
+      declarations: [DialogComponent, SafeHtmlPipe]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogComponent ]
+      declarations: [DialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

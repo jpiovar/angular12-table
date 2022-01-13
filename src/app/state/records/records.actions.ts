@@ -34,7 +34,7 @@ export class RecordsLoad implements Action {
 export class RecordsLoadSuccess implements Action {
   readonly type = RECORDS_LOAD_SUCCESS;
   constructor(public payload: RecordsState) {
-    debugger;
+    // // debugger;
   }
 }
 
@@ -46,42 +46,42 @@ export class RecordsLoadFail implements Action {
 export class RecordsSave implements Action {
   readonly type = RECORDS_SAVE;
   constructor(public payload: { endPoint: string, records: any, modified: any, currentUrl: string }) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsSaveSuccess implements Action {
   readonly type = RECORDS_SAVE_SUCCESS;
   constructor(public payload: RecordsState) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsSaveFail implements Action {
   readonly type = RECORDS_SAVE_FAIL;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsDelete implements Action {
   readonly type = RECORDS_DELETE;
   constructor(public payload: { endPoint: string, records: any, deleted: any }) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsDeleteSuccess implements Action {
   readonly type = RECORDS_DELETE_SUCCESS;
   constructor(public payload: RecordsState) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsDeleteFail implements Action {
   readonly type = RECORDS_DELETE_FAIL;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 

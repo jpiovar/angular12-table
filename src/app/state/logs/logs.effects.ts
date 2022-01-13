@@ -31,17 +31,17 @@ export class LogsEffects {
     ofType(LOGS_LOAD),
     switchMap(
       (action: LogsLoad) => {
-        debugger;
+        // debugger;
         const urlLogs: any = action.payload.url;
         const recordId = action.payload.recordId;
         const item = null;
         return this.httpBase.getCommon(`${urlLogs}`).pipe(
           map((res: any) => {
-            debugger;
-            return new LogsLoadSuccess({ recordId, logs: res })
+            // debugger;
+            return new LogsLoadSuccess({ recordId, logs: res });
           }),
           catchError(error => {
-            debugger;
+            // debugger;
             return of(new LogsLoadFail(error));
           })
         );
@@ -56,7 +56,7 @@ export class LogsEffects {
     ofType(LOGS_SAVE),
     mergeMap(
       (action: LogsSave) => {
-        debugger;
+        // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const logs: any = action?.payload?.logs;
         // const modified: any = action?.payload?.modified;
@@ -65,11 +65,11 @@ export class LogsEffects {
         // for (const key in logs) {
         const httpBody = {
           // id: "id2",
-          recordId: "id2",
-          userId: "id1",
-          name: "jozko",
-          dateTime: "2011-10-16"
-        }
+          recordId: 'id2',
+          userId: 'id1',
+          name: 'jozko',
+          dateTime: '2011-10-16'
+        };
         // arrObs.push(this.httpBase.postCommon(`${endPoint}`, httpBody));
         // }
 

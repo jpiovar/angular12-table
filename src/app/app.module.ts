@@ -53,7 +53,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
       clientId: environment.clientId,
-      authority: environment.cloudUrl+'/'+environment.tenantId,
+      authority: environment.cloudUrl + '/' + environment.tenantId,
       redirectUri: environment.redirectUrl
     },
     cache: {

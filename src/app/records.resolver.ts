@@ -17,6 +17,7 @@ export class RecordsResolver implements Resolve<boolean|any> {
       select('user'),
       tap(state => {
         // debugger;
+        console.log('state', state);
       }),
       filter(state => state && state.accessToken !== null),
       map(state => {

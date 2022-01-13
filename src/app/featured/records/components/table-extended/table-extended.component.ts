@@ -104,7 +104,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   createAndExecuteUrl() {
-    debugger;
+    // debugger;
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
     // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
@@ -121,7 +121,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   activeInactiveToggle(event) {
-    debugger;
+    // debugger;
     event.preventDefault();
     if (this.toggleBtnState === 'active') {
       this.toggleBtnState = 'inactive';
@@ -215,7 +215,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
-    let res = JSON.parse(JSON.stringify(records));
+    const res = JSON.parse(JSON.stringify(records));
     for (let index = 0; index < res.length; index++) {
       if (propertyValue === 'remove') {
         delete res[index][propertyName];
@@ -227,7 +227,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   getSetPropertyByValue(record: any, propertyName: string, propertyValue: any) {
-    let res = JSON.parse(JSON.stringify(record));
+    const res = JSON.parse(JSON.stringify(record));
     if (propertyValue === 'remove') {
       delete res[propertyName];
     } else {
@@ -293,7 +293,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   openChangeLogDialog(id: string, changeLog) {
-    debugger;
+    // debugger;
     this.dialogAction = '';
     this.tableMode = '';
     // const recordDetail = getItemBasedId(this.records, id);
@@ -355,12 +355,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // }
 
   removeItem(item: any) {
-    debugger;
+    // debugger;
     item['progressStatus'] = 'removed';
   }
 
   undoChange(item: any) {
-    debugger;
+    // debugger;
     delete item['progressStatus'];
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
@@ -368,7 +368,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   showHistoryLog(item: any) {
-    debugger;
+    // debugger;
     // dialog modal, get historyEndpoint/itemId
     this.store.dispatch(new StartSpinner());
     const url = `${this.origin}${this.tableChangeLogs}?recordId=${item.id}`;
@@ -378,7 +378,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   onInputChange(colname: string, item: any) {
-    debugger;
+    // debugger;
     // const itemId = this.records[index]?.id;
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
@@ -433,7 +433,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
-    debugger;
+    // debugger;
     // const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
     // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
     const record = JSON.parse(JSON.stringify(recordsItem));
@@ -446,13 +446,15 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   getRecordsDiffArrObjError(obj: any): boolean {
-    debugger;
+    // debugger;
     let res = false;
     for (const i in obj) {
-      const keys = Object.keys(obj[i]);
-      if (keys.join(',').indexOf('Error') > -1) {
-        res = true;
-        break;
+      if (obj.hasOwnProperty(i)) {
+        const keys = Object.keys(obj[i]);
+        if (keys.join(',').indexOf('Error') > -1) {
+          res = true;
+          break;
+        }
       }
     }
     return res;
@@ -460,20 +462,22 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    debugger;
+    // debugger;
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
       records = this.getSetArrPropertyByValue(records, 'progressStatus', 'remove');
       let modified = {};
       for (const key in this.recordsDiffArrObj) {
-        modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
-        if (modified[key]['progressStatus'] === 'removed') {
-          modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
-          const index = getIndexBasedId(records, key); // itemId === key;
-          records[index]['status'] = 'inactive';
+        if (this.recordsDiffArrObj.hasOwnProperty(key)) {
+          modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+          if (modified[key]['progressStatus'] === 'removed') {
+            modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
+            const index = getIndexBasedId(records, key); // itemId === key;
+            records[index]['status'] = 'inactive';
+          }
+          modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
         }
-        modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
       }
       // debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
@@ -491,7 +495,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       //   arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
       // }
       for (const i in arr) { // accepts array and object
-        arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
+        if (arr.hasOwnProperty(i)) {
+          arr[i][currentProp] = ngbDateStructToIsoString(arr[i][currentProp]);
+        }
       }
     }
     return arr;
@@ -503,7 +509,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   clearAllFilters() {
-    // // debugger;
+    // debugger;
     this.globalFilter = '';
     this.searchText = '';
     this.globalSearch();
@@ -551,7 +557,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
   insertNewRecord() {
-    debugger;
+    // debugger;
     const id = new Date();
     this.dialogRefNewRecordModal = this.dialog.open(DialogStepperComponent, {
       panelClass: 'new-record-dialog-class',
