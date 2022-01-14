@@ -2,6 +2,7 @@ import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@an
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { element } from 'protractor';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-stepper',
@@ -9,6 +10,8 @@ import { element } from 'protractor';
   styleUrls: ['./dialog-stepper.component.scss']
 })
 export class DialogStepperComponent implements OnInit {
+  triggerSubmit: Subject<any> = new Subject<any>();
+
   content: any = {};
   selectedIndex: number = 0;
   recordsNew: any = null;
@@ -95,6 +98,15 @@ export class DialogStepperComponent implements OnInit {
     // debugger;
     this.recordsNew = items;
     this.stepper.next();
+  }
+
+  submitRecord() {
+    debugger;
+    this.emitEventToChild();
+  }
+
+  emitEventToChild() {
+    this.triggerSubmit.next('');
   }
 
 }

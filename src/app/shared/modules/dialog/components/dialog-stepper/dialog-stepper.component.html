@@ -65,18 +65,35 @@
         </div>
       </div>
 
-      <app-table-base-extended [newRecords]="recordsNew"></app-table-base-extended>
+      <app-table-base-extended [newRecords]="recordsNew" [submitCall]="triggerSubmit"></app-table-base-extended>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <button class="btn btn-success" type="button" (click)="move(0)">
             Previous step
           </button>
         </div>
+        <div class="col-md-6 text-right">
+          <button class="btn btn-success" type="button" (click)="submitRecord()">
+            Submit record
+          </button>
+        </div>
       </div>
     </mat-step>
-    <mat-step label="Submit record">
-      Submit record
+    <mat-step label="Status record">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Status record</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button class="btn btn-success" type="button" (click)="move(0)">
+            Close dialog
+          </button>
+        </div>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>
   <!-- <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="6px">

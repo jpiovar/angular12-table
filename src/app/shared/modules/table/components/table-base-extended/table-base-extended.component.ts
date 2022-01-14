@@ -20,7 +20,7 @@
 
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Subscription, zip } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, zip } from 'rxjs';
 
 import * as _ from 'lodash';
 
@@ -54,6 +54,10 @@ import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components
 })
 
 export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy {
+  subscription: Subscription = new Subscription();
+
+  @Input() submitCall: Subject<any>;
+
   @Input() newRecords: any[] = [];
 
   tableDataEndPoint: string;
@@ -96,6 +100,16 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   ngOnInit(): void {
     // this.triggerTableLoad();
+    // this.eventsSubscription = this.events.subscribe(() => {
+    //   console.log('submitt new record');
+    // });
+
+    this.subscription.add(
+      this.submitCall.subscribe(res => {
+        debugger;
+        console.log('submitCall executed', res);
+      })
+    );
   }
 
   ngOnChanges(): void {
@@ -105,7 +119,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   ngOnDestroy(): void {
-
+    this.subscription.unsubscribe();
   }
 
   // createAndExecuteUrl() {
@@ -301,6 +315,11 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       }
     }
     return arr;
+  }
+
+
+  submitNewRecord(): void {
+    console.log('submit new record');
   }
 
 }
