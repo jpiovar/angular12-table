@@ -108,6 +108,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       this.submitCall.subscribe(res => {
         debugger;
         console.log('submitCall executed', res);
+        this.triggerCheckChangesAndSave();
       })
     );
   }
@@ -139,13 +140,25 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   //   this.store.dispatch(new RecordsLoad(url));
   // }
 
+  initializeStructure(records: any[]) {
+    const d = new Date(); // today date
+    const dtext = d.toISOString();
+    for (let i = 0; i < records?.length; i++) {
+      records[i]['manualny_rating'] = '';
+      records[i]['od'] = dtext;
+      records[i]['do'] = dtext;
+      records[i]['poznamka'] = '';
+    }
+  }
 
 
   triggerTableLoad(): void {
-    // debugger;
+    debugger;
+    let newRecords = JSON.parse(JSON.stringify(this.newRecords));
     this.tableMode = 'load';
     // this.store.dispatch(new StartSpinner());
-    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(this.newRecords)), ['od', 'do']);
+    this.initializeStructure(newRecords);
+    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(newRecords)), ['od', 'do']);
     this.records = JSON.parse(JSON.stringify(this.originalRecords));
     // this.createAndExecuteUrl();
   }
@@ -157,11 +170,12 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       for (let i = 0; i < arr?.length; i++) {
         if (arr[i][currentProp]) {
           arr[i][currentProp] = isoStringtoNgbDateStruct(arr[i][currentProp]);
-        } else {
-          const d = new Date(); // today date
-          const dtext = d.toISOString();
-          arr[i][currentProp] = isoStringtoNgbDateStruct(dtext);
         }
+        // else {
+        //   const d = new Date(); // today date
+        //   const dtext = d.toISOString();
+        //   arr[i][currentProp] = isoStringtoNgbDateStruct(dtext);
+        // }
       }
     }
     return arr;
@@ -190,17 +204,26 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
 
+  triggerCheckChangesAndSave() {
+    debugger;
+    for(let i=0; i<this.records.length; i++) {
+      this.onInputChange('manualny_rating', this.records[i]);
+      this.onInputChange('od', this.records[i]);
+      this.onInputChange('do', this.records[i]);
+      this.onInputChange('poznamka', this.records[i]);
+    }
 
+
+    this.saveChanges();
+  }
 
 
   onInputChange(colname: string, item: any) {
-    // debugger;
+    debugger;
     // const itemId = this.records[index]?.id;
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
-    if (colname) {
-      delete item['progressStatus'];
-    }
+
     const recordItemChanged = this.recordsItemChanged(this.records[index], this.originalRecords[index]);
     if (recordItemChanged) {
       if (this.recordsDiffArrObj === null) {
@@ -209,11 +232,9 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       const temp = JSON.parse(JSON.stringify((this.recordsDiffArrObj)));
       temp[itemId] = this.records[index];
       this.recordsDiffArrObj = { ...this.recordsDiffArrObj, ...temp };
-      if (colname) {
-        item['progressStatus'] = 'changed';
-      }
+
     } else {
-      delete this.recordsDiffArrObj[itemId];
+      this.recordsDiffArrObj && delete this.recordsDiffArrObj[itemId];
     }
     if (JSON.stringify(this.recordsDiffArrObj) === '{}') {
       this.recordsDiffArrObj = null;
@@ -223,12 +244,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
       if (!item[colname]) {
         item[colname + 'ErrorRequired'] = true;
-        // this.recordsDiffArrObj['error'] = true;
       } else {
         delete item[colname + 'ErrorRequired'];
-        // if (this.recordsDiffArrObj?.error) {
-        //   delete this.recordsDiffArrObj['error'];
-        // }
       }
 
       if (colname === 'od' || colname === 'do') {
@@ -278,29 +295,25 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    // debugger;
+    debugger;
     if (this.recordsDiffArrObj) {
-      const url = `${this.origin}${this.tableDataEndPoint}`;
-      let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-      records = this.getSetArrPropertyByValue(records, 'progressStatus', 'remove');
-      let modified = {};
-      for (const key in this.recordsDiffArrObj) {
-        if (this.recordsDiffArrObj.hasOwnProperty(key)) {
-          modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
-          if (modified[key]['progressStatus'] === 'removed') {
-            modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
-            const index = getIndexBasedId(records, key); // itemId === key;
-            records[index]['status'] = 'inactive';
-          }
-          modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
-        }
-      }
-      // debugger;
-      records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
-      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
-      this.recordsDiffArrObj = null;
+      // const url = `${this.origin}${this.tableDataEndPoint}`;
+      // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+
+      // let modified = {};
+      // for (const key in this.recordsDiffArrObj) {
+      //   if (this.recordsDiffArrObj.hasOwnProperty(key)) {
+      //     modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+
+      //   }
+      // }
+      // // debugger;
+      // records = this.setDatePickersToIsoString(records, ['od', 'do']);
+      // modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
+      // this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
+      // this.recordsDiffArrObj = null;
     }
+    this.store.dispatch(new StopSpinner());
   }
 
   setDatePickersToIsoString(arrObj: any, props: string[]) {
@@ -317,9 +330,5 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     return arr;
   }
 
-
-  submitNewRecord(): void {
-    console.log('submit new record');
-  }
 
 }

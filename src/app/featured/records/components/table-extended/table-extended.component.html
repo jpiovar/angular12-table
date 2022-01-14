@@ -15,28 +15,28 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6 text-right">
-          <span class="mr-2">
-            <app-insert-new-btn (click)="insertNewRecord()"></app-insert-new-btn>
+          <span class="mr-2" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+            <app-insert-new-btn (click)="insertNewRecord()" [ngClass]="{'non-click': recordsDiffArrObj}"></app-insert-new-btn>
           </span>
-          <span> Records
-            <app-status-toggle-btn [toggleBtnState]="toggleBtnState" (click)="activeInactiveToggle($event)">
+          <span [ngClass]="{'not-allowed': recordsDiffArrObj}"> Records
+            <app-status-toggle-btn [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState" (click)="activeInactiveToggle($event)">
             </app-status-toggle-btn>
           </span>
         </div>
       </div>
 
 
-      <div id="global-search">
+      <div id="global-search" [ngClass]="{'not-allowed': recordsDiffArrObj}">
         <div class="input-group">
           <div class="input-group-prepend">
             <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
           </div>
-          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" (keyup)="globalSearch()"
+          <input [ngClass]="{'non-click': recordsDiffArrObj}" [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" (keyup)="globalSearch()"
             placeholder="Search" aria-label="Search" aria-describedby="search-addon">
           <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
         </div>
         <div class="filter-item">
-          <button class="btn btn-success" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
+          <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-success" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
             Reset filter
           </button>
         </div>

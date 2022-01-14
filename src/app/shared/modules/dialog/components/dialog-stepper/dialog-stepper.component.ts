@@ -1,7 +1,6 @@
 import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
-import { element } from 'protractor';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -24,7 +23,9 @@ export class DialogStepperComponent implements OnInit {
     private renderer: Renderer2,
     public dialogStepperRef: MatDialogRef<DialogStepperComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {
+    dialogStepperRef.disableClose = true;
+  }
 
   ngOnInit(): void {
     this.initializeContent();
@@ -109,4 +110,8 @@ export class DialogStepperComponent implements OnInit {
     this.triggerSubmit.next('');
   }
 
+  close() {
+    console.log('closed');
+    this.dialogStepperRef.close('closeBtn');
+  }
 }

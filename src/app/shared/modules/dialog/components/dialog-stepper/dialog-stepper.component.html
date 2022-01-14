@@ -57,6 +57,17 @@
         </div>
       </div>
       <app-table-base (newItemsEvent)="addItems($event)"></app-table-base>
+
+
+      <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6 text-right">
+          <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
+
+        </div>
+      </div>
     </mat-step>
     <mat-step label="Complete record">
       <div class="row">
@@ -74,6 +85,7 @@
           </button>
         </div>
         <div class="col-md-6 text-right">
+          <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
           <button class="btn btn-success" type="button" (click)="submitRecord()">
             Submit record
           </button>

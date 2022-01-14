@@ -21,6 +21,7 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private store: Store<AppState>
   ) {
+    dialogRef.disableClose = true;
     this.origin = environment.beOrigin;
   }
 
@@ -36,10 +37,10 @@ export class DialogComponent implements OnInit {
 
     // this.modifiedContent = JSON.parse(JSON.stringify(this.content));
 
-    // this.dialogRef?.afterClosed()?.subscribe(result => {
-    //   // debugger;
-    //   console.log(`Dialog result: ${result}`);
-    // });
+    this.dialogRef?.afterClosed()?.subscribe(result => {
+      // debugger;
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   // submit() {
