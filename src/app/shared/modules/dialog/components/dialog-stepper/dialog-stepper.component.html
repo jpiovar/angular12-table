@@ -48,24 +48,42 @@
 
     </mat-horizontal-stepper> -->
 
-  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)" class="{{ 'last-edited-step-' + stepper.selectedIndex }}">
+  <mat-horizontal-stepper #stepper (selectionChange)="setIndex($event)"
+    class="{{ 'last-edited-step-' + stepper.selectedIndex }}">
     <mat-step label="Select template record">
-      Select template record
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Select template record</h4>
+        </div>
+      </div>
       <app-table-base (newItemsEvent)="addItems($event)"></app-table-base>
     </mat-step>
     <mat-step label="Complete record">
-      Complete record
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Complete record</h4>
+        </div>
+      </div>
+
       <app-table-base-extended [newRecords]="recordsNew"></app-table-base-extended>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-success" type="button" (click)="move(0)">
+            Previous step
+          </button>
+        </div>
+      </div>
     </mat-step>
     <mat-step label="Submit record">
       Submit record
     </mat-step>
   </mat-horizontal-stepper>
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="6px">
+  <!-- <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="6px">
     <button mat-raised-button color="accent" (click)="move(0)">1st</button>
     <button mat-raised-button color="accent" (click)="move(1)">2nd</button>
     <button mat-raised-button color="accent" (click)="move(2)">3rd</button>
-  </div>
+  </div> -->
 
 </ng-container>
 

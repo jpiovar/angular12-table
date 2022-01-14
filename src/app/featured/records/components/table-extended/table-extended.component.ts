@@ -302,6 +302,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       id: `change-log-dialog-id-${id}`,
       width: '800px',
       height: 'auto',
+      // minHeight: '500px',
       data: {
         title: 'Change log dialog',
         changeLog,
@@ -564,6 +565,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       id: `new-record-dialog-id-${id}`,
       width: '800px',
       height: 'auto',
+      // minHeight: '500px',
       data: {
         title: 'New record dialog',
         type: 'newRecord',
