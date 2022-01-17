@@ -103,6 +103,10 @@
         </div>
       </div>
 
+      <div class="mat-dialog-content">
+        <app-table-completed [completedRecords]="submittedRecords"></app-table-completed>
+      </div>
+
       <div class="row">
         <div class="col-md-12 text-right">
           <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>

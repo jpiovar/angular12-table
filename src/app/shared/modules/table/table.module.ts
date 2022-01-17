@@ -5,13 +5,15 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { TableBaseExtendedComponent } from './components/table-base-extended/table-base-extended.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TableCompletedComponent } from './components/table-completed/table-completed.component';
 
 
 
 @NgModule({
   declarations: [
     TableBaseComponent,
-    TableBaseExtendedComponent
+    TableBaseExtendedComponent,
+    TableCompletedComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     TableBaseComponent,
-    TableBaseExtendedComponent
+    TableBaseExtendedComponent,
+    TableCompletedComponent
   ]
 })
 export class TableModule { }
