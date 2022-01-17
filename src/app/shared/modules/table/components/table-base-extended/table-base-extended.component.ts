@@ -18,7 +18,7 @@
 // }
 
 
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, Subject, Subscription, zip } from 'rxjs';
 
@@ -27,6 +27,7 @@ import * as _ from 'lodash';
 import { compareValues, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
+  RecordsAddNew,
   // ChangeLogLoad, MetaLoad, MetaLocalSave,
   RecordsDelete, RecordsLoad, RecordsSave
 } from 'src/app/state/records/records.actions';
@@ -59,6 +60,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   @Input() submitCall: Subject<any>;
 
   @Input() newRecords: any[] = [];
+
+  @Output() submitRecordsEvent = new EventEmitter<any>();
 
   tableDataEndPoint: string;
   origin: string;
@@ -182,9 +185,12 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
+    debugger;
     const res = JSON.parse(JSON.stringify(records));
     for (let index = 0; index < res.length; index++) {
-      if (propertyValue === 'remove') {
+      if (propertyValue && propertyValue.indexOf('property_') > -1 && res[index].hasOwnProperty(propertyValue.replace('property_',''))) {
+        res[index][propertyName] = res[index][propertyValue.replace('property_','')];
+      } else if (propertyValue === 'remove') {
         delete res[index][propertyName];
       } else {
         res[index][propertyName] = propertyValue;
@@ -314,6 +320,20 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       // modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
       // this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
       // this.recordsDiffArrObj = null;
+
+      const d = new Date(); // today date
+      const dtext = d.toISOString();
+      const url = `${this.origin}${this.tableDataEndPoint}`;
+      let records =JSON.parse(JSON.stringify(this.records));
+      records = this.setDatePickersToIsoString(records, ['od', 'do']);
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'resource_id', 'property_id');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'active');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datum_zmeny', dtext);
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autor_zmeny', 'janko');
+      this.store.dispatch(new RecordsAddNew({ endPoint: url, records }));
+
+      this.sendDataToParent(records);
     }
     this.store.dispatch(new StopSpinner());
   }
@@ -332,5 +352,9 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     return arr;
   }
 
+  sendDataToParent(records: any) {
+    debugger;
+    this.submitRecordsEvent.emit(records);
+  }
 
 }

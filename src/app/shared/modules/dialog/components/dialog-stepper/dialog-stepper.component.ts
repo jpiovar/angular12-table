@@ -13,8 +13,10 @@ export class DialogStepperComponent implements OnInit {
 
   content: any = {};
   selectedIndex: number = 0;
-  recordsNew: any = null;
+  recordsNew: any[] = [];
   currentDialogSize: any = { step0: {}, step1: {} };
+
+  submittedRecords: any[] = [];
 
   @ViewChild('stepper') stepper: MatStepper;
 
@@ -114,4 +116,19 @@ export class DialogStepperComponent implements OnInit {
     console.log('closed');
     this.dialogStepperRef.close('closeBtn');
   }
+
+  submitRecordsEventParent(submittedItems) {
+    debugger;
+    this.submitItemsAndStepNext(submittedItems);
+  }
+
+  submitItemsAndStepNext(submittedItems: any) {
+    // debugger;
+    if (submittedItems && submittedItems?.length > 0) {
+      this.submittedRecords = submittedItems;
+      this.stepper.next();
+    }
+  }
+
+
 }

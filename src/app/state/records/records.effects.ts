@@ -24,6 +24,10 @@ import {
   RecordsDelete,
   RecordsDeleteSuccess,
   RecordsDeleteFail,
+  RECORDS_ADD_NEW,
+  RecordsAddNew,
+  RecordsAddNewSuccess,
+  RecordsAddNewFail,
   // CHANGE_LOG_LOAD,
   // ChangeLogLoad,
   // ChangeLogLoadSuccess,
@@ -282,6 +286,35 @@ export class RecordsEffects {
       // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
       return of(new RecordsDeleteFail(error));
     })
+  )
+  );
+
+  recordsAddNew$ = createEffect(() => this.actions$.pipe(
+    ofType(RECORDS_ADD_NEW),
+    switchMap(
+      (action: RecordsAddNew) => {
+        debugger;
+        const endPoint: any = action?.payload?.endPoint;
+        const records: any = action?.payload?.records;
+
+          return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(
+            map(
+              (response: any) => {
+                debugger;
+                if (response) {
+                  return new RecordsAddNewSuccess();
+                }
+              }
+            ),
+            catchError(error => {
+              debugger;
+              console.log(`${endPoint}`, error);
+              return of(new RecordsAddNewFail(error));
+            })
+          );
+
+      }
+    )
   )
   );
 

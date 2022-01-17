@@ -80,7 +80,7 @@
       </div>
 
       <div class="mat-dialog-content">
-        <app-table-base-extended [newRecords]="recordsNew" [submitCall]="triggerSubmit"></app-table-base-extended>
+        <app-table-base-extended [newRecords]="recordsNew" [submitCall]="triggerSubmit" (submitRecordsEvent)="submitRecordsEventParent($event)"></app-table-base-extended>
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -105,9 +105,7 @@
 
       <div class="row">
         <div class="col-md-12 text-right">
-          <button class="btn btn-success" type="button" (click)="move(0)">
-            Close dialog
-          </button>
+          <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
         </div>
       </div>
     </mat-step>

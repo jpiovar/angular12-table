@@ -96,6 +96,33 @@ export function reducer(state = initialState, action: RecordsActions.Actions): R
       };
     }
 
+    case RecordsActions.RECORDS_ADD_NEW: {
+      debugger;
+      return {
+        ...state,
+        loading: true,
+        error: false
+      };
+    }
+
+    case RecordsActions.RECORDS_ADD_NEW_SUCCESS: {
+      debugger;
+      return {
+        ...state,
+        loading: false,
+        error: null
+      };
+    }
+
+    case RecordsActions.RECORDS_ADD_NEW_FAIL: {
+      debugger;
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    }
+
 
     // case RecordsActions.CHANGE_LOG_LOAD: {
     //   return {
