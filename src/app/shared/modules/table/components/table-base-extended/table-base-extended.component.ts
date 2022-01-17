@@ -213,8 +213,10 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       this.onInputChange('poznamka', this.records[i]);
     }
 
+    if (!this.getRecordsDiffArrObjError(this.recordsDiffArrObj)) {
+      this.saveChanges();
+    }
 
-    this.saveChanges();
   }
 
 
