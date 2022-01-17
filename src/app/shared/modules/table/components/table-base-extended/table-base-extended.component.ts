@@ -69,6 +69,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   originalRecords: any[];
   records: any[];
 
+  user: any;
+
 
   recordsDiffArrObj: any = null;
 
@@ -112,6 +114,16 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
         debugger;
         console.log('submitCall executed', res);
         this.triggerCheckChangesAndSave();
+      })
+    );
+
+    this.subscription.add(
+      this.store.select('user').subscribe((res: any) => {
+        debugger;
+        if (res) {
+          debugger;
+          this.user = res;
+        }
       })
     );
   }
@@ -330,7 +342,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'active');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datum_zmeny', dtext);
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autor_zmeny', 'janko');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autor_zmeny', this.user?.account?.name);
       this.store.dispatch(new RecordsAddNew({ endPoint: url, records }));
 
       this.sendDataToParent(records);
