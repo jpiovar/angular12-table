@@ -52,16 +52,45 @@
     class="{{ 'last-edited-step-' + stepper.selectedIndex }}">
     <mat-step label="Select template record">
 
-      <div class="row">
+      <div class="dialog-wrapper">
+        <header>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Select template record</h4>
+            </div>
+          </div>
+        </header>
+        <main>
+          <app-table-base (newItemsEvent)="addItems($event)"></app-table-base>
+        </main>
+        <footer>
+          <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6 text-right">
+              <button type="button" class="btn btn-secondary m-1" (click)="close()">Close</button>
+
+            </div>
+          </div>
+        </footer>
+      </div>
+
+
+      <!-- <div class="mat-dialog-title"> -->
+      <!-- <div class="row">
         <div class="col-md-12">
           <h4>Select template record</h4>
         </div>
-      </div>
-      <div class="mat-dialog-content">
+      </div> -->
+      <!-- </div> -->
+      <!-- <div class="mat-dialog-content">
         <app-table-base (newItemsEvent)="addItems($event)"></app-table-base>
-      </div>
+      </div> -->
 
-      <div class="row">
+      <!-- <div class="mat-dialog-actions"> -->
+
+      <!-- <div class="row">
         <div class="col-md-6">
 
         </div>
@@ -69,48 +98,66 @@
           <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
 
         </div>
-      </div>
+      </div> -->
+      <!-- </div> -->
 
     </mat-step>
     <mat-step label="Complete record">
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Complete record</h4>
-        </div>
-      </div>
+      <div class="dialog-wrapper">
+        <header>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Complete record</h4>
+            </div>
+          </div>
+        </header>
 
-      <div class="mat-dialog-content">
-        <app-table-base-extended [newRecords]="recordsNew" [submitCall]="triggerSubmit" (submitRecordsEvent)="submitRecordsEventParent($event)"></app-table-base-extended>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <button class="btn btn-success" type="button" (click)="move(0)">
-            Previous step
-          </button>
-        </div>
-        <div class="col-md-6 text-right">
-          <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
-          <button class="btn btn-success" type="button" (click)="submitRecord()">
-            Submit record
-          </button>
-        </div>
+        <!-- <div class="mat-dialog-content"> -->
+        <main>
+          <app-table-base-extended [newRecords]="recordsNew" [submitCall]="triggerSubmit"
+            (submitRecordsEvent)="submitRecordsEventParent($event)"></app-table-base-extended>
+        </main>
+        <!-- </div> -->
+        <footer>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-success" type="button" (click)="move(0)">
+                Previous step
+              </button>
+            </div>
+            <div class="col-md-6 text-right">
+              <button type="button" class="btn btn-secondary m-1" (click)="close()">Close</button>
+              <button class="btn btn-success" type="button" (click)="submitRecord()">
+                Submit record
+              </button>
+            </div>
+          </div>
+        </footer>
       </div>
     </mat-step>
     <mat-step label="Status record">
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Status record</h4>
-        </div>
-      </div>
+      <div class="dialog-wrapper">
+        <header>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Status record</h4>
+            </div>
+          </div>
+        </header>
 
-      <div class="mat-dialog-content">
-        <app-table-completed [completedRecords]="submittedRecords"></app-table-completed>
-      </div>
+        <!-- <div class="mat-dialog-content"> -->
+        <main>
+          <app-table-completed [completedRecords]="submittedRecords"></app-table-completed>
+        </main>
+        <!-- </div> -->
 
-      <div class="row">
-        <div class="col-md-12 text-right">
-          <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
-        </div>
+        <footer>
+          <div class="row">
+            <div class="col-md-12 text-right">
+              <button type="button" class="btn btn-secondary m-1" (click)="close()">Close</button>
+            </div>
+          </div>
+        </footer>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
