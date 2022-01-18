@@ -1,83 +1,140 @@
 <ng-container *ngIf="content.type === 'changeLog'">
-  <h1 mat-dialog-title>
-    <div class="row align-top">
-      <div class="col-md-12">
-        {{content?.title}}
-      </div>
-    </div>
-  </h1>
-
-  <mat-dialog-content class="mat-typography">
-
-    <div *ngIf="content?.mode==='view'; then thenViewBlock else elseBlock"></div>
-
-    <ng-template #thenViewBlock>
-      <div class="content-wrapper">
-        <div class="row">
+  <div class="dialog-wrapper">
+    <header>
+      <!-- <h1 mat-dialog-title>
+        <div class="row align-top">
           <div class="col-md-12">
+            {{content?.title}}
+          </div>
+        </div>
+      </h1> -->
+      <div class="row">
+        <div class="col-md-12">
+          <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4>{{content?.title}}</h4>
+        </div>
+      </div>
+    </header>
 
-            <div>
-              <p *ngFor="let item of content?.changeLog; let i = index">
-                <spam>userId: {{item.userId}}</spam> |
-                <span>name {{item.name}}</span> |
-                <span>{{item.dateTime}}</span>
-              </p>
+    <!-- <mat-dialog-content class="mat-typography"> -->
+
+    <main>
+      <div *ngIf="content?.mode==='view'; then thenViewBlock else elseBlock"></div>
+
+      <ng-template #thenViewBlock>
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12">
+
+              <div>
+                <p *ngFor="let item of content?.changeLog; let i = index">
+                  <spam>userId: {{item.userId}}</spam> |
+                  <span>name {{item.name}}</span> |
+                  <span>{{item.dateTime}}</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </ng-template>
+
+      <ng-template #elseBlock>
+        <div>
+          else block
+        </div>
+      </ng-template>
+
+
+    </main>
+    <!-- </mat-dialog-content> -->
+
+
+
+
+    <!-- <mat-dialog-actions align="end"> -->
+    <footer>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button type="button" class="btn btn-secondary m-1" (click)="close()">Close</button>
+        </div>
       </div>
-    </ng-template>
+    </footer>
+    <!-- </mat-dialog-actions> -->
 
-    <ng-template #elseBlock>
-      <div>
-        else block
-      </div>
-    </ng-template>
-
-
-  </mat-dialog-content>
-
-  <mat-dialog-actions align="end">
-    <div class="row">
-      <div class="col-md-12">
-        <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
-      </div>
-    </div>
-  </mat-dialog-actions>
-
+  </div>
 
 </ng-container>
 
 <ng-container *ngIf="content.type === 'logout'">
 
-  <h1 mat-dialog-title>
-    <div class="row align-top">
-      <div class="col-md-12">
-        {{content?.title}}
-      </div>
-    </div>
-  </h1>
+  <div class="dialog-wrapper">
+    <!-- <h1 mat-dialog-title> -->
 
-  <mat-dialog-content class="mat-typography">
-    Some date are still unsaved, please complete work.
-  </mat-dialog-content>
-
-  <mat-dialog-actions align="end">
-    <div class="row">
-      <div class="col-md-12">
-        <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
+    <header>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4>{{content?.title}}</h4>
+        </div>
       </div>
-    </div>
-  </mat-dialog-actions>
+    </header>
+    <!-- </h1> -->
+
+    <!-- <mat-dialog-content class="mat-typography"> -->
+    <main>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          Some date are still unsaved, please complete work.
+        </div>
+      </div>
+    </main>
+    <!-- </mat-dialog-content> -->
+
+    <!-- <mat-dialog-actions align="end"> -->
+    <footer>
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button type="button" class="btn btn-secondary m-1" (click)="close()">Close</button>
+        </div>
+      </div>
+    </footer>
+    <!-- </mat-dialog-actions> -->
+
+  </div>
 </ng-container>
 
 
 <ng-container *ngIf="!content.type">
-  Mocked
+  <div class="dialog-wrapper">
+    <header>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4>Mocked</h4>
+        </div>
+      </div>
+    </header>
 
-  <div class="row">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
-    </div>
+    <main>
+      <div class="row">
+        <div class="col-md-12">
+          Mocked
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="button" class="btn btn-secondary m-1" (click)="close()">Close</button>
+        </div>
+      </div>
+    </footer>
   </div>
 </ng-container>
