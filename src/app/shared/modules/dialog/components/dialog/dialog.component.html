@@ -1,4 +1,4 @@
-<ng-container *ngIf="content.type === 'changeLog'; else mock">
+<ng-container *ngIf="content.type === 'changeLog'">
   <h1 mat-dialog-title>
     <div class="row align-top">
       <div class="col-md-12">
@@ -48,6 +48,36 @@
 
 </ng-container>
 
-<ng-template #mock>
+<ng-container *ngIf="content.type === 'logout'">
+
+  <h1 mat-dialog-title>
+    <div class="row align-top">
+      <div class="col-md-12">
+        {{content?.title}}
+      </div>
+    </div>
+  </h1>
+
+  <mat-dialog-content class="mat-typography">
+    Some date are still unsaved, please complete work.
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
+      </div>
+    </div>
+  </mat-dialog-actions>
+</ng-container>
+
+
+<ng-container *ngIf="!content.type">
   Mocked
-</ng-template>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-default m-1" (click)="close()">Close</button>
+    </div>
+  </div>
+</ng-container>
