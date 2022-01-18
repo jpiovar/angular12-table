@@ -4,6 +4,7 @@ import { RecordsState } from './records/records.models';
 import { UserState } from './user/user.models';
 import { LogsState } from './logs/logs.models';
 import { RecordsBaseState } from './records-base/records-base.models';
+import { TablesState } from './tables/tables.models';
 
 export interface AppState {
   readonly router: any;
@@ -13,4 +14,5 @@ export interface AppState {
   readonly user: UserState;
   readonly logs: LogsState;
   readonly recordsBase: RecordsBaseState;
+  readonly tables: TablesState;
 }

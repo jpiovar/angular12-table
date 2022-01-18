@@ -24,6 +24,7 @@ import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
+import { TablesStatus } from 'src/app/state/tables/tables.actions';
 
 
 
@@ -429,6 +430,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     }
 
+    if (this.recordsDiffArrObj) {
+      this.store.dispatch(new TablesStatus({tableExtended:'inprogress'}));
+    }
+    else {
+      this.store.dispatch(new TablesStatus({tableExtended:'ready'}));
+    }
 
   }
 
@@ -485,7 +492,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
       this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;
+
+      this.store.dispatch(new TablesStatus({tableExtended:'ready'}));
     }
+
+
   }
 
   setDatePickersToIsoString(arrObj: any, props: string[]) {
