@@ -14,7 +14,7 @@ export class DialogStepperComponent implements OnInit {
   content: any = {};
   selectedIndex: number = 0;
   recordsNew: any[] = [];
-  currentDialogSize: any = { step0: {}, step1: {} };
+  currentDialogSize: any = { step0: {}, step1: {}, step2: {} };
 
   submittedRecords: any[] = [];
 
@@ -58,6 +58,7 @@ export class DialogStepperComponent implements OnInit {
       this.currentDialogSize.step0.width = element.offsetWidth;
       this.currentDialogSize.step0.height = element.offsetHeight;
       this.currentDialogSize.step1.width = 1.5 * this.currentDialogSize.step0.width;
+      this.currentDialogSize.step2.width = 0.7 * this.currentDialogSize.step0.width;
     })
   }
 
@@ -68,6 +69,8 @@ export class DialogStepperComponent implements OnInit {
       this.dialogStepperRef.updateSize(`${this.currentDialogSize.step0.width}px`);
     } else if (event?.selectedIndex === 1) {
       this.dialogStepperRef.updateSize(`${this.currentDialogSize.step1.width}px`);
+    } else if (event?.selectedIndex === 2) {
+      this.dialogStepperRef.updateSize(`${this.currentDialogSize.step2.width}px`);
     }
   }
 
