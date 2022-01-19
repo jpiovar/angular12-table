@@ -74,6 +74,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
+  searchFilter: any = {
+    op_ico: '', obchodne_meno: '', vypocitany_rating: '', manualny_rating: '', od: '', do: '', poznamka: ''
+  };
+
+
   changeDate(event) {
     console.log(event);
   }
@@ -593,6 +598,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       // debugger;
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  triggerPartialFilters() {
+
   }
 
 

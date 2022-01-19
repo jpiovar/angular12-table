@@ -16,17 +16,20 @@
         </div>
         <div class="col-md-6 text-right">
           <span class="mr-2" [ngClass]="{'not-allowed': recordsDiffArrObj}">
-            <app-insert-new-btn (click)="insertNewRecord()" [ngClass]="{'non-click': recordsDiffArrObj}"></app-insert-new-btn>
+            <app-insert-new-btn (click)="insertNewRecord()" [ngClass]="{'non-click': recordsDiffArrObj}">
+            </app-insert-new-btn>
           </span>
           <span [ngClass]="{'not-allowed': recordsDiffArrObj}"> Records
-            <app-status-toggle-btn [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState" (click)="activeInactiveToggle($event)">
+            <app-status-toggle-btn [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState"
+              (click)="activeInactiveToggle($event)">
             </app-status-toggle-btn>
           </span>
         </div>
       </div>
 
+      <br />
 
-      <div id="global-search" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+      <!-- <div id="global-search" [ngClass]="{'not-allowed': recordsDiffArrObj}">
         <div class="input-group">
           <div class="input-group-prepend">
             <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
@@ -40,7 +43,7 @@
             Reset filter
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="row">
@@ -53,12 +56,22 @@
                 <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
+              <br />
+              <span>
+                <input type="text" [(ngModel)]="searchFilter.op_ico" [ngModelOptions]="{standalone: true}"
+                  class="form-control">
+              </span>
             </th>
             <th class="col-sm-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                 (click)="sortByColumn('obchodne_meno')">obchodne<br>meno
                 <mat-icon *ngIf="sortByCol?.obchodne_meno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.obchodne_meno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+              <br />
+              <span>
+                <input type="text" [(ngModel)]="searchFilter.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                  class="form-control">
               </span>
             </th>
             <th class="col-sm-1" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
@@ -68,6 +81,17 @@
                 <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down
                 </mat-icon>
               </span>
+              <br />
+              <span>
+                <!-- <input type="text" [(ngModel)]="searchFilter.vypocitany_rating"
+                  [ngModelOptions]="{standalone: true}"
+                  class="form-control"> -->
+                <select class="form-control custom-select" [(ngModel)]="searchFilter.vypocitany_rating"
+                  [ngModelOptions]="{standalone: true}">
+                  <option value=""></option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
+              </span>
             </th>
             <th class="col-sm-1" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
@@ -76,11 +100,39 @@
                 <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down
                 </mat-icon>
               </span>
+              <br />
+              <span>
+                <!-- <input type="text" [(ngModel)]="searchFilter.manualnyRating"
+                  [ngModelOptions]="{standalone: true}"
+                  class="form-control"> -->
+                <select class="form-control custom-select" [(ngModel)]="searchFilter.manualny_rating"
+                  [ngModelOptions]="{standalone: true}">
+                  <option value=""></option>
+                  <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
+                </select>
+              </span>
             </th>
             <th class="col-sm-2" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('od')">od
                 <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+              <br />
+              <span class="partial-search">
+                <!-- <input type="text" [(ngModel)]="searchFilter.od" [ngModelOptions]="{standalone: true}"
+                  class="form-control"> -->
+                  <div class="input-group">
+                    <input
+                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.od" ngbDatepicker #d1="ngbDatepicker"
+                      #c1="ngModel"/>
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                        <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                      </button>
+                    </div>
+                  </div>
               </span>
             </th>
             <th class="col-sm-2" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
@@ -88,12 +140,34 @@
                 <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
+              <br />
+              <span class='partial-search'>
+                <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
+                  class="form-control"> -->
+                  <div class="input-group">
+                    <input
+                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.do" ngbDatepicker #d2="ngbDatepicker"
+                      #c1="ngModel"/>
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                        <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+              </span>
             </th>
             <th class="col-sm-2" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                 (click)="sortByColumn('poznamka')">poznamka
                 <mat-icon *ngIf="sortByCol?.poznamka==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.poznamka==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+              <br />
+              <span>
+                <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
+                  class="form-control">
               </span>
             </th>
             <!-- <th class="col-sm-1" id="datum_zmeny">
@@ -111,6 +185,13 @@
             <th class="col-sm-1" id="action">
               <span>
                 Action
+              </span>
+              <br />
+              <span>
+                <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-success" type="button"
+                  ngbTooltip="Reset filter" (click)="triggerPartialFilters()">
+                  Search
+                </button>
               </span>
             </th>
           </tr>
@@ -170,12 +251,14 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                 <div class="input-group">
-                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" appNgbDatepickerI18nTitle [minDate]="minDate"
-                    [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od"
-                    ngbDatepicker #d="ngbDatepicker" #c1="ngModel"
-                    (ngModelChange)="onInputChange('od', item); changeDate($event)" />
+                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'"
+                    appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker #d="ngbDatepicker"
+                    #c1="ngModel" (ngModelChange)="onInputChange('od', item); changeDate($event)" />
                   <div class="input-group-append">
-                    <button [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button
+                      [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}"
+                      class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -198,12 +281,14 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                 <div class="input-group">
-                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" appNgbDatepickerI18nTitle [minDate]="minDate"
-                    [maxDate]="maxDate" class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do"
-                    ngbDatepicker #d="ngbDatepicker" #c2="ngModel"
-                    (ngModelChange)="onInputChange('do', item); changeDate($event)" />
+                  <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'"
+                    appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker #d="ngbDatepicker"
+                    #c2="ngModel" (ngModelChange)="onInputChange('do', item); changeDate($event)" />
                   <div class="input-group-append">
-                    <button [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}" class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <button
+                      [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}"
+                      class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -232,9 +317,9 @@
             </td>
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
-                <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" type="text" [(ngModel)]="item.poznamka"
-                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('poznamka', item)"
-                  class="form-control">
+                <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" type="text"
+                  [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('poznamka', item)" class="form-control">
                 <label *ngIf="item?.poznamkaErrorRequired">Required</label>
               </span>
               <span *ngIf="item.read">{{item.poznamka}}</span>
@@ -264,7 +349,8 @@
               }">
                 <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
               </span> -->
-              <span (click)="removeItem(item); onInputChange('', item)" [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}">
+              <span (click)="removeItem(item); onInputChange('', item)"
+                [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}">
                 <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
               </span>
               <span>
