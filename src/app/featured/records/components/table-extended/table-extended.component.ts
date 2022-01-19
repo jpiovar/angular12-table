@@ -612,7 +612,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     if (input === 'all') {
        this.searchFilter  = JSON.parse(JSON.stringify(this.initialSearchFilter));
     } else {
-      this.searchFilter[input] = '';
+      if (this.searchFilter.hasOwnProperty(input)) {
+        this.searchFilter[input] = '';
+      }
     }
   }
 
