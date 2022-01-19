@@ -52,37 +52,30 @@
         <thead>
           <tr>
             <th class="col-sm-1 pl-2 pr-2" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              <span class='partial-search'>
+                <input type="text" [(ngModel)]="searchFilter.op_ico" [ngModelOptions]="{standalone: true}"
+                  class="form-control">
+              </span>
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op_ico')">OP/ico
                 <mat-icon *ngIf="sortByCol?.op_ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.op_ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
-              <br />
-              <span>
-                <input type="text" [(ngModel)]="searchFilter.op_ico" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
-              </span>
+
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class='partial-search'>
+                <input type="text" [(ngModel)]="searchFilter.obchodne_meno" [ngModelOptions]="{standalone: true}"
+                  class="form-control">
+              </span>
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                 (click)="sortByColumn('obchodne_meno')">obchodne<br>meno
                 <mat-icon *ngIf="sortByCol?.obchodne_meno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.obchodne_meno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
-              <br />
-              <span>
-                <input type="text" [(ngModel)]="searchFilter.obchodne_meno" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
-              </span>
+
             </th>
-            <th class="col-sm-1 pl-2 pr-2" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
-                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down
-                </mat-icon>
-              </span>
-              <br />
-              <span>
+            <th class="col-sm-1 pl-0 pr-0" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class='partial-search'>
                 <!-- <input type="text" [(ngModel)]="searchFilter.vypocitany_rating"
                   [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -92,16 +85,16 @@
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
               </span>
-            </th>
-            <th class="col-sm-1 pl-2 pr-2" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                (click)="sortByColumn('manualny_rating')">manualny<br>rating
-                <mat-icon *ngIf="sortByCol?.manualny_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down
+                (click)="sortByColumn('vypocitany_rating')">vypocitany<br>rating
+                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.vypocitany_rating==='desc'" aria-label="down icon">arrow_drop_down
                 </mat-icon>
               </span>
-              <br />
-              <span>
+
+            </th>
+            <th class="col-sm-1 pl-0 pr-0" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class='partial-search'>
                 <!-- <input type="text" [(ngModel)]="searchFilter.manualnyRating"
                   [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -111,13 +104,15 @@
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
               </span>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
+                (click)="sortByColumn('manualny_rating')">manualny<br>rating
+                <mat-icon *ngIf="sortByCol?.manualny_rating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.manualny_rating==='desc'" aria-label="down icon">arrow_drop_down
+                </mat-icon>
+              </span>
+
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('od')">od
-                <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
-              </span>
-              <br />
               <span class="partial-search">
                 <!-- <input type="text" [(ngModel)]="searchFilter.od" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -135,13 +130,13 @@
                   </div>
                 </div>
               </span>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('od')">od
+                <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('do')">do
-                <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
-              </span>
-              <br />
               <span class='partial-search'>
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -159,18 +154,24 @@
                   </div>
                 </div>
               </span>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('do')">do
+                <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+
+
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <span class='partial-search'>
+                <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
+                  class="form-control">
+              </span>
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                 (click)="sortByColumn('poznamka')">poznamka
                 <mat-icon *ngIf="sortByCol?.poznamka==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.poznamka==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
-              <br />
-              <span>
-                <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
-              </span>
+
             </th>
             <!-- <th class="col-sm-1" id="datum_zmeny">
               <span class="th-link" (click)="sortByColumn('datum_zmeny')">datum<br>zmeny
@@ -185,11 +186,7 @@
               </span>
             </th> -->
             <th class="col-sm-1 pl-0 pr-0" id="action">
-              <span>
-                Action
-              </span>
-              <br />
-              <span>
+              <span class='partial-search'>
                 <button class="btn btn-outline-secondary pl-1 pr-1" (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
                   <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                 </button>
@@ -198,6 +195,10 @@
                   Search
                 </button>
               </span>
+              <span>
+                Action
+              </span>
+
             </th>
           </tr>
         </thead>
@@ -221,7 +222,7 @@
               </span>
               <span *ngIf="item.read">{{item.obchodne_meno}}</span>
             </td>
-            <td class="pl-2 pr-2">
+            <td class="pl-0 pr-0">
               <span *ngIf="!item.read" class="record-edit"
                 [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
                 <!-- <input type="text" disabled [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
@@ -236,7 +237,7 @@
               </span>
               <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
             </td>
-            <td class="pl-2 pr-2">
+            <td class="pl-0 pr-0">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
                 <!-- <input [disabled]="item?.status === 'inactive'" type="text" [(ngModel)]="item.manualny_rating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item, i)"

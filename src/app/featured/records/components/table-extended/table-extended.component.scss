@@ -73,6 +73,15 @@
       padding-left: 0;
       padding-right: 0;
     }
+
+    + span {
+      // background-color: red;
+      float: left;
+      height: 50px;
+      display: flex;
+      align-items:  center; //flex-end;
+      justify-content: center; //flex-end;
+    }
   }
 }
 
