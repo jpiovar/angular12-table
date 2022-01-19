@@ -112,18 +112,50 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   createAndExecuteUrl() {
-    // debugger;
+    debugger;
+    // const origin = `${this.origin}`;
+    // const endPoint = `${this.tableDataEndPoint}`;
+    // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
+    // const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    // const q = this.searchText ? `&q=${this.searchText}` : '';
+    // const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
+    // const order = this.direction ? `&_order=${this.direction}` : '';
+    // const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
+    // const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
+
+    // const url = `${origin}${endPoint}?${statusLike}${q}${sort}${order}${page}${limit}`;
+    // this.currentUrl = url;
+    // this.store.dispatch(new RecordsLoad(url));
+
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
+    let s_od = '';
+    let s_do = '';
+
+    const s_op_ico = this.searchFilter?.op_ico?.trim() ? `&op_ico_like=${this.searchFilter?.op_ico?.trim()}` : '';
+    const s_obchodne_meno = this.searchFilter?.obchodne_meno?.trim() ? `&obchodne_meno_like=${this.searchFilter?.obchodne_meno?.trim()}` : '';
+    const s_vypocitany_rating = this.searchFilter?.vypocitany_rating.trim() ? `&vypocitany_rating_like=${this.searchFilter?.vypocitany_rating?.trim()}` : '';
+    const s_manualny_rating = this.searchFilter?.manualny_rating.trim() ? `&manualny_rating_like=${this.searchFilter?.manualny_rating?.trim()}` : '';
+
+    if (this.searchFilter?.od) {
+      s_od = ngbDateStructToIsoString(this.searchFilter?.od);
+    }
+    if (this.searchFilter?.do) {
+      s_do = ngbDateStructToIsoString(this.searchFilter?.do);
+    }
+
+    const s_poznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
+
+
     // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
     const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
-    const q = this.searchText ? `&q=${this.searchText}` : '';
+    // const q = this.searchText ? `&q=${this.searchText}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     const order = this.direction ? `&_order=${this.direction}` : '';
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${q}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${s_op_ico}${s_obchodne_meno}${s_vypocitany_rating}${s_manualny_rating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
   }
@@ -604,7 +636,52 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   triggerPartialFilters() {
     debugger;
+    // const origin = `${this.origin}`;
+    // const endPoint = `${this.tableDataEndPoint}`;
+    // let s_op_ico = '';
+    // let s_obchodne_meno = '';
+    // let s_vypocitany_rating = '';
+    // let s_manualny_rating = '';
+    // let s_od = '';
+    // let s_do = '';
+    // let s_poznamka = '';
 
+    // if (this.searchFilter?.op_ico) {
+    //   s_op_ico = this.searchFilter?.op_ico?.trim();
+    // }
+    // if (this.searchFilter?.obchodne_meno) {
+    //   s_obchodne_meno = this.searchFilter?.obchodne_meno?.trim();
+    // }
+    // if (this.searchFilter?.vypocitany_rating) {
+    //   s_vypocitany_rating = this.searchFilter?.vypocitany_rating;
+    // }
+    // if (this.searchFilter?.manualny_rating) {
+    //   s_manualny_rating = this.searchFilter?.manualny_rating;
+    // }
+    // if (this.searchFilter?.od) {
+    //   s_od = ngbDateStructToIsoString(this.searchFilter?.od);
+    // }
+    // if (this.searchFilter?.do) {
+    //   s_do = ngbDateStructToIsoString(this.searchFilter?.do);
+    // }
+    // if (this.searchFilter?.poznamka) {
+    //   s_poznamka = this.searchFilter?.poznamka?.trim();
+    // }
+
+
+    // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
+    // const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    // // const q = this.searchText ? `&q=${this.searchText}` : '';
+    // const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
+    // const order = this.direction ? `&_order=${this.direction}` : '';
+    // const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
+    // const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
+
+    // const url = `${origin}${endPoint}?${statusLike}${s_op_ico}${s_obchodne_meno}${s_vypocitany_rating}${s_manualny_rating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
+    // this.currentUrl = url;
+    // this.store.dispatch(new RecordsLoad(url));
+
+    this.createAndExecuteUrl();
   }
 
   clearInput(input: string) {
