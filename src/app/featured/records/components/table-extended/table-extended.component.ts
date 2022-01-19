@@ -601,7 +601,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   triggerPartialFilters() {
+    debugger;
 
+  }
+
+  clearInput(input: string) {
+    debugger;
+    this.searchFilter[input] = '';
   }
 
 
