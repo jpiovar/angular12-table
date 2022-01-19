@@ -74,9 +74,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
-  searchFilter: any = {
+  initialSearchFilter: any = {
     op_ico: '', obchodne_meno: '', vypocitany_rating: '', manualny_rating: '', od: '', do: '', poznamka: ''
   };
+
+  searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
 
 
   changeDate(event) {
@@ -607,7 +609,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   clearInput(input: string) {
     debugger;
-    this.searchFilter[input] = '';
+    if (input === 'all') {
+       this.searchFilter  = JSON.parse(JSON.stringify(this.initialSearchFilter));
+    } else {
+      this.searchFilter[input] = '';
+    }
   }
 
 
