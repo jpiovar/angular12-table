@@ -20,7 +20,7 @@
             </app-insert-new-btn>
           </span>
           <span [ngClass]="{'not-allowed': recordsDiffArrObj}"> Records
-            <app-status-toggle-btn [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState"
+            <app-status-toggle-btn ngbTooltip="Click to switch active/inactive records" [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState"
               (click)="activeInactiveToggle($event)">
             </app-status-toggle-btn>
           </span>
@@ -190,11 +190,11 @@
               </span>
               <br />
               <span>
-                <button class="btn btn-outline-secondary pl-1 pr-1" (click)="clearInput('all')" type="button">
+                <button class="btn btn-outline-secondary pl-1 pr-1" (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
                   <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                 </button>
                 <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-success pl-1 pr-1" type="button"
-                  ngbTooltip="Reset filter" (click)="triggerPartialFilters()">
+                  ngbTooltip="Search filter" (click)="triggerPartialFilters()">
                   Search
                 </button>
               </span>
@@ -356,15 +356,15 @@
               </span> -->
               <span (click)="removeItem(item); onInputChange('', item)"
                 [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'removed')}">
-                <mat-icon aria-label="delete_forever" class="td-link ml-2">delete_forever</mat-icon>
+                <mat-icon aria-label="delete_forever" class="td-link ml-2" ngbTooltip="Remove record">delete_forever</mat-icon>
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="history" class="td-link ml-2"
-                  (click)="showHistoryLog(item)">history</mat-icon>
+                  (click)="showHistoryLog(item)" ngbTooltip="Show change log of record">history</mat-icon>
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="undo" class="td-link ml-2"
-                  (click)="undoChange(item); onInputChange('', item)">undo</mat-icon>
+                  (click)="undoChange(item); onInputChange('', item)" ngbTooltip="Undo changes of record">undo</mat-icon>
               </span>
             </td>
           </tr>
