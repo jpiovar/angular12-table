@@ -52,7 +52,7 @@
         <thead>
           <tr>
             <th class="col-sm-1 pl-2 pr-2" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
-              <span class='partial-search'>
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.op_ico" [ngModelOptions]="{standalone: true}"
                   class="form-control">
               </span>
@@ -63,7 +63,7 @@
 
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class='partial-search'>
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.obchodne_meno" [ngModelOptions]="{standalone: true}"
                   class="form-control">
               </span>
@@ -75,7 +75,7 @@
 
             </th>
             <th class="col-sm-1 pl-0 pr-0" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class='partial-search'>
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.vypocitany_rating"
                   [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -94,7 +94,7 @@
 
             </th>
             <th class="col-sm-1 pl-0 pr-0" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class='partial-search'>
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.manualnyRating"
                   [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -113,7 +113,7 @@
 
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class="partial-search">
+              <span class="partial-search" [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.od" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <div class="input-group">
@@ -137,7 +137,7 @@
 
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class='partial-search'>
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <div class="input-group">
@@ -162,7 +162,7 @@
 
             </th>
             <th class="col-sm-2 pl-2 pr-2" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
-              <span class='partial-search'>
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
                   class="form-control">
               </span>
@@ -185,9 +185,9 @@
                 <mat-icon *ngIf="sortByCol?.autor_zmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th> -->
-            <th class="col-sm-1 pl-0 pr-0" id="action">
+            <th class="col-sm-1 pl-0 pr-0" id="action" [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class='partial-search'>
-                <button class="btn btn-outline-secondary pl-1 pr-1" (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
+                <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-outline-secondary pl-1 pr-1" (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
                   <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                 </button>
                 <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-success pl-1 pr-1" type="button"
