@@ -338,7 +338,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records =JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'resource_id', 'property_id');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'active');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datum_zmeny', dtext);

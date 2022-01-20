@@ -526,7 +526,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
         }
       }
-      // debugger;
+      debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
       modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
       this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));

@@ -140,7 +140,7 @@ export class RecordsEffects {
     ofType(RECORDS_SAVE),
     map(
       (action: RecordsSave) => {
-        // debugger;
+        debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
         const modified: any = action?.payload?.modified;
@@ -169,7 +169,7 @@ export class RecordsEffects {
         return new Observable((observer: Observer<any>) => {
           zip(...res.arrObs).subscribe(
             (subres: any) => {
-              // debugger;
+              debugger;
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
@@ -187,7 +187,7 @@ export class RecordsEffects {
     map(
       res => {
         const url = `${this.origin}${this.tableLogs}`;
-        // debugger;
+        debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
         // const itemId = item?.id;
         for (const key in res?.modified) {
@@ -195,9 +195,10 @@ export class RecordsEffects {
             this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
           }
         }
-        this.store.dispatch(new LogsSave({ endPoint: url, logs: res?.modified }));
+        debugger;
+        this.store.dispatch(new LogsSave({ endPoint: url, records: res?.records, modified: res?.modified }));
 
-        // debugger;
+        debugger;
         const urlLoadRecords = res?.currentUrl;
         this.store.dispatch(new RecordsLoad(urlLoadRecords));
 

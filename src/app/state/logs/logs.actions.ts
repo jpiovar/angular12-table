@@ -31,15 +31,15 @@ export class LogsLoadFail implements Action {
 
 export class LogsSave implements Action {
   readonly type = LOGS_SAVE;
-  constructor(public payload: { endPoint: string, logs: any }) {
-    // debugger;
+  constructor(public payload: { endPoint: string, records: any, modified: any }) {
+    debugger;
   }
 }
 
 export class LogsSaveSuccess implements Action {
   readonly type = LOGS_SAVE_SUCCESS;
   constructor(public payload: LogsState) {
-    // debugger;
+    debugger;
   }
 }
 

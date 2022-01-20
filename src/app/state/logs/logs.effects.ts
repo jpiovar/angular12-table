@@ -56,10 +56,10 @@ export class LogsEffects {
     ofType(LOGS_SAVE),
     mergeMap(
       (action: LogsSave) => {
-        // debugger;
+        debugger;
         const endPoint: any = action?.payload?.endPoint;
-        const logs: any = action?.payload?.logs;
-        // const modified: any = action?.payload?.modified;
+        const records: any = action?.payload?.records;
+        const modified: any = action?.payload?.modified;
 
         const arrObs = [];
         // for (const key in logs) {
@@ -81,11 +81,12 @@ export class LogsEffects {
         return this.httpBase.postCommon(`${endPoint}`, httpBody).pipe(
           map(
             (response: any) => {
+              debugger;
               return new LogsSaveSuccess(response);
             }
           ),
           catchError(error => {
-            // debugger;
+            debugger;
             return of(new LogsSaveFail(error));
           })
         );
