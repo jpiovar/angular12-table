@@ -49,7 +49,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 
-  sortBy: string = 'op_ico';
+  sortBy: string = 'opIco';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
   dialogRefChangeModal: MatDialogRef<any>;
@@ -75,7 +75,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
   initialSearchFilter: any = {
-    op_ico: '', obchodne_meno: '', vypocitany_rating: '', manualny_rating: '', od: '', do: '', poznamka: ''
+    opIco: '', obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', od: '', do: '', poznamka: ''
   };
 
   searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
@@ -114,7 +114,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   createAndExecuteUrl(isFilter?: boolean) {
     debugger;
     if (isFilter) {
-      this.sortBy = 'op_ico';
+      this.sortBy = 'opIco';
       this.direction = 'asc';
       this.activePage = 0;
     }
@@ -137,10 +137,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     let s_od = '';
     let s_do = '';
 
-    const s_op_ico = this.searchFilter?.op_ico?.trim() ? `&op_ico_like=${this.searchFilter?.op_ico?.trim()}` : '';
-    const s_obchodne_meno = this.searchFilter?.obchodne_meno?.trim() ? `&obchodne_meno_like=${this.searchFilter?.obchodne_meno?.trim()}` : '';
-    const s_vypocitany_rating = this.searchFilter?.vypocitany_rating.trim() ? `&vypocitany_rating_like=${this.searchFilter?.vypocitany_rating?.trim()}` : '';
-    const s_manualny_rating = this.searchFilter?.manualny_rating.trim() ? `&manualny_rating_like=${this.searchFilter?.manualny_rating?.trim()}` : '';
+    const s_opIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
+    const s_obchodneMeno = this.searchFilter?.obchodneMeno?.trim() ? `&obchodneMeno_like=${this.searchFilter?.obchodneMeno?.trim()}` : '';
+    const s_vypocitanyRating = this.searchFilter?.vypocitanyRating.trim() ? `&vypocitanyRating_like=${this.searchFilter?.vypocitanyRating?.trim()}` : '';
+    const s_manualnyRating = this.searchFilter?.manualnyRating.trim() ? `&manualnyRating_like=${this.searchFilter?.manualnyRating?.trim()}` : '';
 
     if (this.searchFilter?.od) {
       let t_od = ngbDateStructToIsoString(this.searchFilter?.od);
@@ -162,7 +162,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${s_op_ico}${s_obchodne_meno}${s_vypocitany_rating}${s_manualny_rating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${s_opIco}${s_obchodneMeno}${s_vypocitanyRating}${s_manualnyRating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
   }
@@ -583,7 +583,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           const res = response.trim();
           if (res) {
             this.searchText = res;
-            this.sortBy = 'op_ico';
+            this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               // const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
@@ -592,7 +592,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             }
           } else {
             this.searchText = '';
-            this.sortBy = 'op_ico';
+            this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               // const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
@@ -645,25 +645,25 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     debugger;
     // const origin = `${this.origin}`;
     // const endPoint = `${this.tableDataEndPoint}`;
-    // let s_op_ico = '';
-    // let s_obchodne_meno = '';
-    // let s_vypocitany_rating = '';
-    // let s_manualny_rating = '';
+    // let s_opIco = '';
+    // let s_obchodneMeno = '';
+    // let s_vypocitanyRating = '';
+    // let s_manualnyRating = '';
     // let s_od = '';
     // let s_do = '';
     // let s_poznamka = '';
 
-    // if (this.searchFilter?.op_ico) {
-    //   s_op_ico = this.searchFilter?.op_ico?.trim();
+    // if (this.searchFilter?.opIco) {
+    //   s_opIco = this.searchFilter?.opIco?.trim();
     // }
-    // if (this.searchFilter?.obchodne_meno) {
-    //   s_obchodne_meno = this.searchFilter?.obchodne_meno?.trim();
+    // if (this.searchFilter?.obchodneMeno) {
+    //   s_obchodneMeno = this.searchFilter?.obchodneMeno?.trim();
     // }
-    // if (this.searchFilter?.vypocitany_rating) {
-    //   s_vypocitany_rating = this.searchFilter?.vypocitany_rating;
+    // if (this.searchFilter?.vypocitanyRating) {
+    //   s_vypocitanyRating = this.searchFilter?.vypocitanyRating;
     // }
-    // if (this.searchFilter?.manualny_rating) {
-    //   s_manualny_rating = this.searchFilter?.manualny_rating;
+    // if (this.searchFilter?.manualnyRating) {
+    //   s_manualnyRating = this.searchFilter?.manualnyRating;
     // }
     // if (this.searchFilter?.od) {
     //   s_od = ngbDateStructToIsoString(this.searchFilter?.od);
@@ -684,7 +684,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     // const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    // const url = `${origin}${endPoint}?${statusLike}${s_op_ico}${s_obchodne_meno}${s_vypocitany_rating}${s_manualny_rating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
+    // const url = `${origin}${endPoint}?${statusLike}${s_opIco}${s_obchodneMeno}${s_vypocitanyRating}${s_manualnyRating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
     // this.currentUrl = url;
     // this.store.dispatch(new RecordsLoad(url));
 

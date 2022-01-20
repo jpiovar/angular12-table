@@ -1,5 +1,5 @@
 <!-- <p>
-    {{itemRecordNew?.op_ico}} | {{itemRecordNew?.obchodne_meno}} | {{itemRecordNew?.vypocitany_rating}}
+    {{itemRecordNew?.opIco}} | {{itemRecordNew?.obchodneMeno}} | {{itemRecordNew?.vypocitanyRating}}
 </p> -->
 
 <div class="container" id="table-records">
@@ -17,16 +17,16 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="col-sm-1" id="op_ico">
+            <th class="col-sm-1" id="opIco">
               <span>OP/ico</span>
             </th>
-            <th class="col-sm-2" id="obchodne_meno">
+            <th class="col-sm-2" id="obchodneMeno">
               <span>obchodne<br>meno</span>
             </th>
-            <th class="col-sm-1" id="vypocitany_rating">
+            <th class="col-sm-1" id="vypocitanyRating">
               <span class="th-link">vypocitany<br>rating</span>
             </th>
-            <th class="col-sm-1" id="manualny_rating">
+            <th class="col-sm-1" id="manualnyRating">
               <span>manualny<br>rating</span>
             </th>
             <th class="col-sm-2" id="od">
@@ -45,46 +45,46 @@
             [ngClass]="{'inactive': item?.status === 'inactive', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
 
             <td>
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
-                <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('op_ico', item)" class="form-control">
-                <label *ngIf="item?.op_icoErrorRequired">Required</label>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opIcoErrorRequired}">
+                <input type="text" disabled [(ngModel)]="item.opIco" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('opIco', item)" class="form-control">
+                <label *ngIf="item?.opIcoErrorRequired">Required</label>
               </span>
-              <span *ngIf="item.read">{{item.op_ico}}</span>
+              <span *ngIf="item.read">{{item.opIco}}</span>
             </td>
             <td>
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
-                <input type="text" disabled [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('obchodne_meno', item)" class="form-control">
-                <label *ngIf="item?.obchodne_menoErrorRequired">Required</label>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodneMenoErrorRequired}">
+                <input type="text" disabled [(ngModel)]="item.obchodneMeno" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('obchodneMeno', item)" class="form-control">
+                <label *ngIf="item?.obchodneMenoErrorRequired">Required</label>
               </span>
-              <span *ngIf="item.read">{{item.obchodne_meno}}</span>
+              <span *ngIf="item.read">{{item.obchodneMeno}}</span>
             </td>
             <td>
               <span *ngIf="!item.read" class="record-edit"
-                [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
-                <select class="form-control custom-select" [(ngModel)]="item.vypocitany_rating"
-                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('vypocitany_rating', item)"
+                [ngClass]="{'required': item?.vypocitanyRatingErrorRequired}">
+                <select class="form-control custom-select" [(ngModel)]="item.vypocitanyRating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('vypocitanyRating', item)"
                   disabled>
                   <option value="" disabled>Vyberte vypocitany rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
-                <label *ngIf="item?.vypocitany_ratingErrorRequired">Required</label>
+                <label *ngIf="item?.vypocitanyRatingErrorRequired">Required</label>
               </span>
-              <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
+              <span *ngIf="item.read">{{item.vypocitanyRating}}</span>
             </td>
             <td>
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualnyRatingErrorRequired}">
 
-                <select class="form-control custom-select" [(ngModel)]="item.manualny_rating"
-                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item)"
+                <select class="form-control custom-select" [(ngModel)]="item.manualnyRating"
+                  [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualnyRating', item)"
                   [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'">
                   <option value="" disabled>Vyberte manualny rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
-                <label *ngIf="item?.manualny_ratingErrorRequired">Required</label>
+                <label *ngIf="item?.manualnyRatingErrorRequired">Required</label>
               </span>
-              <span *ngIf="item.read">{{item.manualny_rating}}</span>
+              <span *ngIf="item.read">{{item.manualnyRating}}</span>
             </td>
 
             <td>

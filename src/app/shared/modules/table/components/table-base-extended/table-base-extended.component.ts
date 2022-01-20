@@ -159,7 +159,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     const d = new Date(); // today date
     const dtext = d.toISOString();
     for (let i = 0; i < records?.length; i++) {
-      records[i]['manualny_rating'] = '';
+      records[i]['manualnyRating'] = '';
       records[i]['od'] = dtext;
       records[i]['do'] = dtext;
       records[i]['poznamka'] = '';
@@ -225,7 +225,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   triggerCheckChangesAndSave() {
     debugger;
     for(let i=0; i<this.records.length; i++) {
-      this.onInputChange('manualny_rating', this.records[i]);
+      this.onInputChange('manualnyRating', this.records[i]);
       this.onInputChange('od', this.records[i]);
       this.onInputChange('do', this.records[i]);
       this.onInputChange('poznamka', this.records[i]);
@@ -341,8 +341,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'active');
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datum_zmeny', dtext);
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autor_zmeny', this.user?.account?.name);
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datumZmeny', dtext);
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autorZmeny', this.user?.account?.name);
       this.store.dispatch(new RecordsAddNew({ endPoint: url, records }));
 
       this.sendDataToParent(records);

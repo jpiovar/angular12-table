@@ -45,7 +45,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 
-  sortBy: string = 'op_ico';
+  sortBy: string = 'opIco';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
   recordId: string = '';
@@ -353,14 +353,14 @@ export class TableBaseComponent implements OnInit, OnDestroy {
           const res = response.trim();
           if (res) {
             this.searchText = res;
-            this.sortBy = 'op_ico';
+            this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               this.createAndExecuteUrl();
             }
           } else {
             this.searchText = '';
-            this.sortBy = 'op_ico';
+            this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               this.createAndExecuteUrl();
