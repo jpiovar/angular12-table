@@ -148,7 +148,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     }
     if (this.searchFilter?.do) {
       let t_do = ngbDateStructToIsoString(this.searchFilter?.do);
-      s_do = t_do && `&od_lte=${t_do}`;
+      s_do = t_do && `&do_lte=${t_do}`;
     }
 
     const s_poznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
