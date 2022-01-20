@@ -111,8 +111,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  createAndExecuteUrl() {
+  createAndExecuteUrl(isFilter?: boolean) {
     debugger;
+    if (isFilter) {
+      this.sortBy = 'op_ico';
+      this.direction = 'asc';
+      this.activePage = 0;
+    }
     // const origin = `${this.origin}`;
     // const endPoint = `${this.tableDataEndPoint}`;
     // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
@@ -472,10 +477,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     }
 
     if (this.recordsDiffArrObj) {
-      this.store.dispatch(new TablesStatus({tableExtended:'inprogress'}));
+      this.store.dispatch(new TablesStatus({ tableExtended: 'inprogress' }));
     }
     else {
-      this.store.dispatch(new TablesStatus({tableExtended:'ready'}));
+      this.store.dispatch(new TablesStatus({ tableExtended: 'ready' }));
     }
 
   }
@@ -534,7 +539,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;
 
-      this.store.dispatch(new TablesStatus({tableExtended:'ready'}));
+      this.store.dispatch(new TablesStatus({ tableExtended: 'ready' }));
     }
 
 
@@ -683,13 +688,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // this.currentUrl = url;
     // this.store.dispatch(new RecordsLoad(url));
 
-    this.createAndExecuteUrl();
+    this.createAndExecuteUrl(true);
   }
 
   clearInput(input: string) {
     debugger;
     if (input === 'all') {
-       this.searchFilter  = JSON.parse(JSON.stringify(this.initialSearchFilter));
+      this.searchFilter = JSON.parse(JSON.stringify(this.initialSearchFilter));
     } else {
       if (this.searchFilter.hasOwnProperty(input)) {
         this.searchFilter[input] = '';
