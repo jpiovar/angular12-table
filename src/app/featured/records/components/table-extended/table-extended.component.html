@@ -51,7 +51,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="col-sm-1 pl-2 pr-2" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+            <th class="col-sm-1 pl-1 pr-1" id="op_ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.op_ico" [ngModelOptions]="{standalone: true}"
                   class="form-control">
@@ -62,7 +62,7 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-2 pr-2" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" id="obchodne_meno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.obchodne_meno" [ngModelOptions]="{standalone: true}"
                   class="form-control">
@@ -74,7 +74,7 @@
               </span>
 
             </th>
-            <th class="col-sm-1 pl-0 pr-0" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-1 pl-1 pr-1" id="vypocitany_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.vypocitany_rating"
                   [ngModelOptions]="{standalone: true}"
@@ -93,7 +93,7 @@
               </span>
 
             </th>
-            <th class="col-sm-1 pl-0 pr-0" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-1 pl-1 pr-1" id="manualny_rating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.manualnyRating"
                   [ngModelOptions]="{standalone: true}"
@@ -112,7 +112,7 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-2 pr-2" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="partial-search" [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.od" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -136,7 +136,7 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-2 pr-2" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -161,7 +161,7 @@
 
 
             </th>
-            <th class="col-sm-2 pl-2 pr-2" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
                   class="form-control">
@@ -206,7 +206,7 @@
           <tr *ngFor="let item of records; let i = index"
             [ngClass]="{'inactive': item?.status === 'inactive', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
             <!-- 'non-click': item?.status === 'inactive' , -->
-            <td class="pl-2 pr-2">
+            <td class="pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.op_icoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.op_ico" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('op_ico', item)" class="form-control">
@@ -214,7 +214,7 @@
               </span>
               <span *ngIf="item.read">{{item.op_ico}}</span>
             </td>
-            <td class="pl-2 pr-2">
+            <td class="pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodne_menoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.obchodne_meno" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('obchodne_meno', item)" class="form-control">
@@ -222,7 +222,7 @@
               </span>
               <span *ngIf="item.read">{{item.obchodne_meno}}</span>
             </td>
-            <td class="pl-0 pr-0">
+            <td class="pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit"
                 [ngClass]="{'required': item?.vypocitany_ratingErrorRequired}">
                 <!-- <input type="text" disabled [(ngModel)]="item.vypocitany_rating" [ngModelOptions]="{standalone: true}"
@@ -237,7 +237,7 @@
               </span>
               <span *ngIf="item.read">{{item.vypocitany_rating}}</span>
             </td>
-            <td class="pl-0 pr-0">
+            <td class="pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualny_ratingErrorRequired}">
                 <!-- <input [disabled]="item?.status === 'inactive'" type="text" [(ngModel)]="item.manualny_rating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualny_rating', item, i)"
@@ -253,7 +253,7 @@
               <span *ngIf="item.read">{{item.manualny_rating}}</span>
             </td>
 
-            <td class="pl-2 pr-2">
+            <td class="pl-1 pr-1">
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
                 <div class="input-group">
@@ -283,7 +283,7 @@
               </span> -->
               <span *ngIf="item.read">{{item.od}}</span>
             </td>
-            <td class="pl-2 pr-2">
+            <td class="pl-1 pr-1">
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
                 <div class="input-group">
@@ -321,7 +321,7 @@
               </span> -->
               <span *ngIf="item.read">{{item.do}}</span>
             </td>
-            <td class="pl-2 pr-2">
+            <td class="pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
                 <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'removed'" type="text"
                   [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
@@ -346,7 +346,7 @@
               </span>
               <span *ngIf="item.read">{{item.autor_zmeny}}</span>
             </td> -->
-            <td class="pl-2 pr-2">
+            <td class="pl-1 pr-1">
               <!-- <span *ngIf="item.read" (click)="switchToEditMode(item)">
                 <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
               </span>
