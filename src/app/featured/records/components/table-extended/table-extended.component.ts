@@ -138,10 +138,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const s_manualny_rating = this.searchFilter?.manualny_rating.trim() ? `&manualny_rating_like=${this.searchFilter?.manualny_rating?.trim()}` : '';
 
     if (this.searchFilter?.od) {
-      s_od = ngbDateStructToIsoString(this.searchFilter?.od);
+      let t_od = ngbDateStructToIsoString(this.searchFilter?.od);
+      s_od = t_od && `&od_gte=${t_od}`;
     }
     if (this.searchFilter?.do) {
-      s_do = ngbDateStructToIsoString(this.searchFilter?.do);
+      let t_do = ngbDateStructToIsoString(this.searchFilter?.do);
+      s_do = t_do && `&od_lte=${t_do}`;
     }
 
     const s_poznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
