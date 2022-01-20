@@ -9,6 +9,8 @@ export const environment = {
   beVersionEndPoint: 'version',
   beTableDataEndPoint: 'table-data',
   beMetaDataEndPoint: 'meta-data',
+  beTableChangeLogs: 'table-change-logs',
+  beTableDataBaseEndPoint: 'table-data-base',
   redirectUrl: 'http://localhost:4200',
   cloudUrl: 'https://login.microsoftonline.com',
   clientId: '', // set your own
