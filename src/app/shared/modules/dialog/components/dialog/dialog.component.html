@@ -29,10 +29,21 @@
             <div class="col-md-12">
 
               <div>
-                <p *ngFor="let item of content?.changeLog; let i = index">
+                <p *ngFor="let item of content?.changeLog; let i = index" class="border">
                   <spam>userId: {{item.userId}}</spam> |
-                  <span>name {{item.name}}</span> |
-                  <span>{{item.dateTime}}</span>
+                  <span>referenceId: {{item.recordIdExtended}}</span> |
+                  <span>name: {{item.name}}</span> |
+                  <span>dateTime: {{item.dateTime}}</span> |
+                  <span>actionType: {{item.actionType}}</span>
+                  <span *ngIf="item.actionType==='edit'"><br/>modifiedColumns:
+                  <br/>
+                  <span *ngFor="let mi of item.modifiedColumns; let j = index">
+                    <span>columnName: {{mi.columnName}}</span> |
+                    <span>previousContent: {{mi.previousContent}}</span> |
+                    <span>updatedContent: {{mi.updatedContent}}</span>
+                    <br/>
+                  </span>
+                  </span>
                 </p>
               </div>
             </div>
