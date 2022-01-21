@@ -13,14 +13,14 @@ export const LOGS_SAVE_FAIL = '[Logs] Save data fail';
 export class LogsLoad implements Action {
   readonly type = LOGS_LOAD;
   constructor(public payload: any) {
-    // debugger;
+    debugger;
   }
 }
 
 export class LogsLoadSuccess implements Action {
   readonly type = LOGS_LOAD_SUCCESS;
   constructor(public payload: any) {
-    // debugger;
+    debugger;
   }
 }
 

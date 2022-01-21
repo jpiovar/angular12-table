@@ -31,13 +31,13 @@ export class LogsEffects {
     ofType(LOGS_LOAD),
     switchMap(
       (action: LogsLoad) => {
-        // debugger;
+        debugger;
         const urlLogs: any = action.payload.url;
         const recordId = action.payload.recordId;
         const item = null;
         return this.httpBase.getCommon(`${urlLogs}`).pipe(
           map((res: any) => {
-            // debugger;
+            debugger;
             return new LogsLoadSuccess({ recordId, logs: res });
           }),
           catchError(error => {

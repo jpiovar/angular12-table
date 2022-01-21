@@ -155,7 +155,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
     // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    const statusLike = this.toggleBtnState === 'active' ? `status=active` : `status=inactive`;
     // const q = this.searchText ? `&q=${this.searchText}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     const order = this.direction ? `&_order=${this.direction}` : '';
@@ -416,10 +416,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   showHistoryLog(item: any) {
-    // debugger;
+    debugger;
     // dialog modal, get historyEndpoint/itemId
     this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableChangeLogs}?recordId=${item.id}`;
+    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}`;
     this.recordId = item.id;
     this.tableMode = 'log';
     this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
