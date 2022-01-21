@@ -13,7 +13,6 @@ import { CustomDatepickerI18n, I18n } from 'src/app/core/services/i18n.sk';
 import { NgbDatepickerI18nTitleDirective } from 'src/app/core/directives/datepicker.title.directive';
 import { LogoutBtnComponent } from './components/logout-btn/logout-btn.component';
 import { TableExtendedComponent } from './components/table-extended/table-extended.component';
-import { TableBaseComponent } from './components/table-base/table-base.component';
 import { InsertNewBtnComponent } from './components/insert-new-btn/insert-new-btn.component';
 import { StatusToggleBtnComponent } from './components/status-toggle-btn/status-toggle-btn.component';
 import { DialogModule } from 'src/app/shared/modules/dialog/dialog.module';
@@ -25,7 +24,6 @@ import { DialogModule } from 'src/app/shared/modules/dialog/dialog.module';
     NgbDatepickerI18nTitleDirective,
     LogoutBtnComponent,
     TableExtendedComponent,
-    TableBaseComponent,
     InsertNewBtnComponent,
     StatusToggleBtnComponent
   ],
