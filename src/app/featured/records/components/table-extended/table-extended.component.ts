@@ -80,6 +80,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
 
+  exportActive: boolean = false;
+
 
   changeDate(event) {
     console.log(event);
@@ -542,7 +544,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.store.dispatch(new TablesStatus({ tableExtended: 'ready' }));
     }
 
-
+    this.exportActive = true;
   }
 
   setDatePickersToIsoString(arrObj: any, props: string[]) {
@@ -702,5 +704,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     }
   }
 
+  exportToDwh() {
+    debugger;
+    // code logic to trigger export
+    this.exportActive = false;
+  }
 
 }
