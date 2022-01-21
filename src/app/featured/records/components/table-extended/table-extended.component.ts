@@ -25,6 +25,7 @@ import { LogsLoad } from 'src/app/state/logs/logs.actions';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
 import { TablesStatus } from 'src/app/state/tables/tables.actions';
+import { ExportStatus } from 'src/app/state/export/export.actions';
 
 
 
@@ -250,6 +251,23 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
         })
     );
+
+
+    this.subscription.add(
+      this.store.select('exportState')
+        // .pipe(last())
+        .subscribe((res: any) => {
+          debugger;
+
+          this.store.dispatch(new StopSpinner());
+
+          if (res?.status) {
+            this.exportActive = res?.status === 'active' ? true : false;
+          }
+
+        })
+    );
+
   }
 
   setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
@@ -544,7 +562,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.store.dispatch(new TablesStatus({ tableExtended: 'ready' }));
     }
 
-    this.exportActive = true;
+    // this.exportActive = true;
   }
 
   setDatePickersToIsoString(arrObj: any, props: string[]) {
@@ -707,7 +725,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   exportToDwh() {
     debugger;
     // code logic to trigger export
-    this.exportActive = false;
+    this.store.dispatch(new ExportStatus({ status: 'inactive'}));
   }
 
 }

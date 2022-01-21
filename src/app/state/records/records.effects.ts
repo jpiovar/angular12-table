@@ -43,6 +43,7 @@ import { AppState } from '..';
 import { StartToastr } from '../toastr/toastr.actions';
 import { getItemBasedId } from 'src/app/shared/utils/helper';
 import { LogsSave } from '../logs/logs.actions';
+import { ExportStatus } from '../export/export.actions';
 
 @Injectable()
 export class RecordsEffects {
@@ -198,6 +199,7 @@ export class RecordsEffects {
         debugger;
         this.store.dispatch(new LogsSave({ endPoint: url, records: res?.records, modified: res?.modified }));
 
+        this.store.dispatch(new ExportStatus({ status: 'active'}));
         debugger;
         const urlLoadRecords = res?.currentUrl;
         this.store.dispatch(new RecordsLoad(urlLoadRecords));

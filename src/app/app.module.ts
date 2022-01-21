@@ -33,6 +33,7 @@ import { reducer as user } from './state/user/user.reducer';
 import { reducer as logs } from './state/logs/logs.reducer';
 import { reducer as recordsBase } from './state/records-base/records-base.reducer';
 import { reducer as tables } from './state/tables/tables.reducer';
+import { reducer as exportState } from './state/export/export.reducer';
 
 import { RecordsEffects } from './state/records/records.effects';
 import { LogsEffects } from './state/logs/logs.effects';
@@ -105,7 +106,8 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       user,
       logs,
       recordsBase,
-      tables
+      tables,
+      exportState
     }),
     EffectsModule.forRoot([
       RecordsEffects,
