@@ -367,7 +367,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.dialogRefChangeModal = this.dialog.open(DialogComponent, {
       panelClass: 'change-log-dialog-class',
       id: `change-log-dialog-id-${id}`,
-      width: '800px',
+      width: '1000px',
       height: 'auto',
       // minHeight: '500px',
       data: {

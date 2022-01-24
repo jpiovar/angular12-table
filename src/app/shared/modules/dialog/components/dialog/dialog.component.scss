@@ -17,6 +17,14 @@
   header, main, footer {
     flex-shrink: 0;
   }
+
+  .table-wrapper {
+    max-height: 50vh;
+    width: 100%;
+    // height: 100vw;
+    overflow: auto;
+    display:inline-block;
+  }
 }
 
 
