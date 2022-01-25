@@ -87,7 +87,13 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
+
+
   opIco: string = '';
+  totalRecordsBE: number = 0;
+  originalRecordsBE: any[];
+  recordsBE: any[];
+
 
   changeDate(event) {
     console.log(event);
@@ -128,6 +134,35 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
           this.user = res;
         }
       })
+    );
+
+    this.subscription.add(
+      this.store.select('recordsBaseExtended')
+        // .pipe(last())
+        .subscribe((res: any) => {
+          // debugger;
+
+          this.store.dispatch(new StopSpinner());
+
+          if (res && !res.loading) {
+            // debugger;
+            if (res?.totalRecords > -1) {
+              this.totalRecordsBE = res?.totalRecords;
+
+            }
+
+            if (res.data) {
+              // debugger;
+              // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
+              this.originalRecordsBE = JSON.parse(JSON.stringify(res.data));
+              this.recordsBE = JSON.parse(JSON.stringify(this.originalRecordsBE));
+              // }
+            }
+
+          }
+
+
+        })
     );
   }
 
