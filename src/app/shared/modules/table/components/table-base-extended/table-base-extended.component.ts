@@ -156,12 +156,17 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   // }
 
   initializeStructure(records: any[]) {
-    const d = new Date(); // today date
-    const dtext = d.toISOString();
+    // debugger;
+    const d1 = new Date(); // today date
+    const dtext1 = d1.toISOString();
+    const d2 = new Date();
+    d2.setFullYear(new Date().getFullYear() + 1);
+    const dtext2 = d2.toISOString();
+
     for (let i = 0; i < records?.length; i++) {
       records[i]['manualnyRating'] = '';
-      records[i]['od'] = dtext;
-      records[i]['do'] = dtext;
+      records[i]['od'] = dtext1;
+      records[i]['do'] = dtext2;
       records[i]['poznamka'] = '';
     }
   }
