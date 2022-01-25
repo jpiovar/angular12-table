@@ -14,7 +14,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div>
+      <div class="new-records">
         <table class="table">
           <thead>
             <tr>
@@ -151,8 +151,11 @@
         </table>
       </div>
 
+      <div *ngIf="recordsBE?.length === 0" class="text-center">
+        Current OP/ico is unique.
+      </div>
 
-      <div class="table-wrapper">
+      <div class="table-wrapper" *ngIf="recordsBE?.length > 0">
         <table class="table table-hover table-condensed">
           <thead class="invisible">
             <tr>
@@ -191,11 +194,6 @@
             </tr>
           </tbody>
         </table>
-
-
-
-
-
 
       </div>
 
