@@ -34,10 +34,12 @@ import { reducer as logs } from './state/logs/logs.reducer';
 import { reducer as recordsBase } from './state/records-base/records-base.reducer';
 import { reducer as tables } from './state/tables/tables.reducer';
 import { reducer as exportState } from './state/export/export.reducer';
+import { reducer as recordsBaseExtended } from './state/records-base-extended/records-base-extended.reducer';
 
 import { RecordsEffects } from './state/records/records.effects';
 import { LogsEffects } from './state/logs/logs.effects';
 import { RecordsBaseEffects } from './state/records-base/records-base.effects';
+import { RecordsBaseExtendedEffects } from './state/records-base-extended/records-base-extended.effects';
 
 import { AppState } from './state';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -107,12 +109,14 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       logs,
       recordsBase,
       tables,
-      exportState
+      exportState,
+      recordsBaseExtended
     }),
     EffectsModule.forRoot([
       RecordsEffects,
       LogsEffects,
-      RecordsBaseEffects
+      RecordsBaseEffects,
+      RecordsBaseExtendedEffects
     ]),
     StoreDevtoolsModule.instrument({
       name: 'NgRx tracker state', logOnly: environment.production

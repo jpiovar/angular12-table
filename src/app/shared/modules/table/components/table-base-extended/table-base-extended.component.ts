@@ -45,6 +45,7 @@ import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
+import { RecordsBaseExtendedLoad } from 'src/app/state/records-base-extended/records-base-extended.actions';
 
 
 
@@ -85,6 +86,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   maxDate = { year: 2027, month: 12, day: 1 };
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
+
+  opIco: string = '';
 
   changeDate(event) {
     console.log(event);
@@ -132,6 +135,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     // debugger;
     // this.newRecords;
     this.triggerTableLoad();
+    this.triggerTableBaseExtendedLoad();
   }
 
   ngOnDestroy(): void {
@@ -181,6 +185,16 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(newRecords)), ['od', 'do']);
     this.records = JSON.parse(JSON.stringify(this.originalRecords));
     // this.createAndExecuteUrl();
+  }
+
+  triggerTableBaseExtendedLoad() {
+    debugger;
+    this.opIco = this?.newRecords[0]?.opIco;
+    const origin = `${this.origin}`;
+    const endPoint = `${this.tableDataEndPoint}`;
+    const opIco = this.opIco?.trim() ? `opIco=${this.opIco?.trim()}` : '';
+    const url = `${origin}${endPoint}?${opIco}`;
+    this.store.dispatch(new RecordsBaseExtendedLoad(url));
   }
 
   setDatePickersToNgbStruct(arrObj: any[], props: string[]) {
