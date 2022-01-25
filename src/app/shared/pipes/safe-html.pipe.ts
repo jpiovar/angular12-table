@@ -7,10 +7,10 @@ import DOMPurify from 'dompurify';
 })
 export class SafeHtmlPipe implements PipeTransform {
 
-  constructor(protected sanitizer: DomSanitizer) {}
+  constructor(protected sanitizer: DomSanitizer) { }
 
- public transform(value: any, type: string): SafeHtml {
-     const sanitizedContent = DOMPurify.sanitize(value);
-     return this.sanitizer.bypassSecurityTrustHtml(sanitizedContent);
+  public transform(value: any, type: string): SafeHtml {
+    const sanitizedContent = DOMPurify.sanitize(value);
+    return this.sanitizer.bypassSecurityTrustHtml(sanitizedContent);
   }
 }

@@ -185,8 +185,8 @@
               <td>{{item.obchodneMeno}}</td>
               <td> {{item.vypocitanyRating}}</td>
               <td>{{item.manualnyRating}}</td>
-              <td>{{item.od}}</td>
-              <td>{{item.do}}</td>
+              <td>{{item.od | date:"dd.MM.yyyy" }}</td>
+              <td>{{item.do | date:"dd.MM.yyyy" }}</td>
               <td>{{item.poznamka}}</td>
             </tr>
           </tbody>
