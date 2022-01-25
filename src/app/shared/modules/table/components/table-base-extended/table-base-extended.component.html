@@ -154,7 +154,7 @@
 
       <div class="table-wrapper">
         <table class="table table-hover table-condensed">
-          <thead>
+          <thead class="invisible">
             <tr>
               <th class="col-sm-1" id="opIco">
                 <span>OP/ico</span>
@@ -182,7 +182,7 @@
           <tbody>
             <tr *ngFor="let item of recordsBE; let i = index">
               <td>{{item.opIco}}</td>
-              <td>{{item.obchodneMeno}</td>
+              <td>{{item.obchodneMeno}}</td>
               <td> {{item.vypocitanyRating}}</td>
               <td>{{item.manualnyRating}}</td>
               <td>{{item.od}}</td>
