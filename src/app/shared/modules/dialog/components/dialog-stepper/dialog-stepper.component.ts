@@ -68,7 +68,8 @@ export class DialogStepperComponent implements OnInit {
     if (event?.selectedIndex === 0) {
       this.dialogStepperRef.updateSize(`${this.currentDialogSize.step0.width}px`);
     } else if (event?.selectedIndex === 1) {
-      this.dialogStepperRef.updateSize(`${this.currentDialogSize.step1.width}px`);
+      this.dialogStepperRef.updateSize(`100vw`);
+      // this.dialogStepperRef.updateSize(`${this.currentDialogSize.step1.width}px`);
     } else if (event?.selectedIndex === 2) {
       this.dialogStepperRef.updateSize(`${this.currentDialogSize.step2.width}px`);
     }
