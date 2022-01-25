@@ -269,8 +269,9 @@
                     </button>
                   </div>
                 </div>
-                <small *ngIf="item?.odErrorRequired">Required </small>
-                <small *ngIf="item?.ErrorInterval">Od > Do !</small>
+                <small *ngIf="item?.odErrorRequired">Required<br/></small>
+                <small *ngIf="item?.ErrorInterval">Od > Do !<br/></small>
+                <small *ngIf="item?.ErrorMin">{{item.datumVytvoreniaPoslednejSnimky | date:"dd.MM.yyyy" }} >= Od !<br/></small>
               </span>
 
               <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.odErrorRequired}">
@@ -299,8 +300,8 @@
                     </button>
                   </div>
                 </div>
-                <small *ngIf="item?.doErrorRequired">Required</small>
-                <small *ngIf="item?.ErrorInterval">Do < Od !</small>
+                <small *ngIf="item?.doErrorRequired">Required<br/></small>
+                <small *ngIf="item?.ErrorInterval">Do < Od !<br/></small>
                     <!-- <div *ngIf="item.do.dirty && item.do.invalid">
                   <small class="form-text text-danger" *ngIf="item.do.errors.required">
                       Your birth date is required.

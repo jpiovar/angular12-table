@@ -492,6 +492,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
         } else {
           delete item['ErrorInterval'];
         }
+
+        if (isoDateOd && item?.datumVytvoreniaPoslednejSnimky >= isoDateOd) {
+          item['ErrorMin'] = true;
+        } else {
+          delete item['ErrorMin'];
+        }
+
       }
 
     }
