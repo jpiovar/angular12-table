@@ -33,6 +33,10 @@ export class DialogComponent implements OnInit {
     // debugger;
     this.content = this.data;
 
+    if (this.content?.type === 'changeLog') {
+      this.dialogRef.updateSize(`100vw`);
+    }
+
     console.log(this.content);
 
     // this.modifiedContent = JSON.parse(JSON.stringify(this.content));

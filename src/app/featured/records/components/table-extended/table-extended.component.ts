@@ -439,7 +439,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     debugger;
     // dialog modal, get historyEndpoint/itemId
     this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}`;
+    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}&_sort=datumZmeny&_order=asc`;
     this.recordId = item.id;
     this.tableMode = 'log';
     this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));

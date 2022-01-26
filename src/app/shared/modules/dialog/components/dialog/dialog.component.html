@@ -26,92 +26,37 @@
       <ng-template #thenViewBlock>
         <div class="content-wrapper">
 
-
-
-
-
           <div class="row">
             <div class="col-md-12">
               <div class="table-wrapper">
                 <table class="table table-hover table-condensed">
                   <thead>
                     <tr>
-                      <th>userId</th>
-                      <th>referenceId</th>
-                      <th>name</th>
-                      <th>dateTime</th>
-                      <th>actionType</th>
+                      <th>OP/ico</th>
+                      <th>obchodne meno</th>
+                      <th>vypocitany rating</th>
+                      <th>manualny rating</th>
+                      <th>od</th>
+                      <th>do</th>
+                      <th>poznamka</th>
+                      <th>datum zmeny</th>
+                      <th>autor zmeny</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let item of content?.changeLog; let i = index">
-                      <td>{{item.userId}}</td>
-                      <td>{{item.recordIdExtended}}</td>
-                      <td> {{item.name}}</td>
-                      <td>{{item.dateTime}}</td>
-                      <td>{{item.actionType}}
-                        <br />
-                        <table *ngIf="item.actionType==='edit'" class="table table-condensed">
-                          <thead>
-                            <th>columnName</th>
-                            <th>previousContent</th>
-                            <th>updatedContent</th>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let mi of item.modifiedColumns; let j = index">
-                              <td>{{mi.columnName}}</td>
-                              <td>{{mi.previousContent}}</td>
-                              <td>{{mi.updatedContent}}</td>
-                            </tr>
-
-                            <!-- <div *ngIf="item.actionType==='edit'">
-
-                          <div *ngFor="let mi of item.modifiedColumns; let j = index">
-                            <span>columnName: {{mi.columnName}}</span> |
-                            <span>previousContent: {{mi.previousContent}}</span> |
-                            <span>updatedContent: {{mi.updatedContent}}</span>
-                            <br/>
-                          </div>
-                        </div> -->
-
-
-                          </tbody>
-                        </table>
-                      </td>
+                      <td>{{item.opIco}}</td>
+                      <td>{{item.obchodneMeno}}</td>
+                      <td> {{item.vypocitanyRating}}</td>
+                      <td>{{item.manualnyRating}}</td>
+                      <td>{{item.od | date:"dd.MM.yyyy"}}</td>
+                      <td>{{item.do | date:"dd.MM.yyyy"}}</td>
+                      <td>{{item.poznamka}}</td>
+                      <td>{{item.datumZmeny | date:"dd.MM.yyyy"}}</td>
+                      <td>{{item.autorZmeny}}</td>
                     </tr>
-                    <!-- <tr>
-                      <td>Mary</td>
-                      <td>Moe</td>
-                      <td>mary@example.com</td>
-                    </tr>
-                    <tr>
-                      <td>July</td>
-                      <td>Dooley</td>
-                      <td>july@example.com</td>
-                    </tr> -->
-
                   </tbody>
                 </table>
-
-
-                <!-- <div>
-                <p *ngFor="let item of content?.changeLog; let i = index" class="border">
-                  <spam>userId: {{item.userId}}</spam> |
-                  <span>referenceId: {{item.recordIdExtended}}</span> |
-                  <span>name: {{item.name}}</span> |
-                  <span>dateTime: {{item.dateTime}}</span> |
-                  <span>actionType: {{item.actionType}}</span>
-                  <span *ngIf="item.actionType==='edit'"><br/>modifiedColumns:
-                  <br/>
-                  <span *ngFor="let mi of item.modifiedColumns; let j = index">
-                    <span>columnName: {{mi.columnName}}</span> |
-                    <span>previousContent: {{mi.previousContent}}</span> |
-                    <span>updatedContent: {{mi.updatedContent}}</span>
-                    <br/>
-                  </span>
-                  </span>
-                </p>
-              </div> -->
 
               </div>
 
