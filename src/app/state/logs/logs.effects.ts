@@ -12,7 +12,7 @@ import { ajax } from 'rxjs/ajax';
 import { Store } from '@ngrx/store';
 import { AppState } from '..';
 import { StartToastr } from '../toastr/toastr.actions';
-import { getItemBasedId } from 'src/app/shared/utils/helper';
+import { getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 
 @Injectable()
 export class LogsEffects {
@@ -52,155 +52,164 @@ export class LogsEffects {
 
 
 
+  // logsSave$ = createEffect(() => this.actions$.pipe(
+  //   ofType(LOGS_SAVE),
+  //   mergeMap(
+  //     (action: LogsSave) => {
+  //       debugger;
+  //       const endPoint: any = action?.payload?.endPoint;
+  //       const originalRecords: any = action?.payload?.originalRecords;
+  //       const records: any = action?.payload?.records;
+  //       const modifiedIds: any = action?.payload?.modifiedIds;
+
+  //       const arrObs = [];
+  //       // for (const key in logs) {
+  //       const httpBody = {
+  //         // id: "id2",
+  //         recordId: 'id2',
+  //         userId: 'id1',
+  //         name: 'jozko',
+  //         dateTime: '2011-10-16'
+  //       };
+  //       // arrObs.push(this.httpBase.postCommon(`${endPoint}`, httpBody));
+  //       // }
+
+  //       // return {
+  //       //   endPoint, logs, arrObs
+  //       // };
+
+
+  //       return this.httpBase.postCommon(`${endPoint}`, httpBody).pipe(
+  //         map(
+  //           (response: any) => {
+  //             debugger;
+  //             return new LogsSaveSuccess(response);
+  //           }
+  //         ),
+  //         catchError(error => {
+  //           debugger;
+  //           return of(new LogsSaveFail(error));
+  //         })
+  //       );
+
+
+  //     }
+  //   )
+  //   // mergeMap(
+  //   //   (res: any) => {
+  //   //     return new Observable((observer: Observer<any>) => {
+  //   //       zip(...res.arrObs).subscribe(
+  //   //         (subres: any) => {
+  //   //           debugger;
+  //   //           return observer.next({
+  //   //             arrObsRes: subres,
+  //   //             endPoint: res.endPoint,
+  //   //             records: res.records,
+  //   //             modified: res.modified
+  //   //           });
+  //   //         },
+  //   //         error => throwError(error),
+  //   //         () => observer.complete()
+  //   //       );
+  //   //     })
+  //   //   }
+  //   // ),
+
+
+  //   // map(
+  //   //   res => {
+  //   //     debugger;
+  //   //     const logs = JSON.parse(JSON.stringify(res));
+
+  //   //     // for (const key in res?.modified) {
+  //   //     //   this.store.dispatch(new StartToastr({ text: `log ${key} updated`, type: 'success', duration: 5000 }));
+  //   //     // }
+  //   //     return new LogsSaveSuccess(res);
+  //   //   }
+  //   // ),
+  //   // catchError(error => {
+  //   //   debugger;
+  //   //   return of(new LogsSaveFail(error));
+  //   // })
+  // )
+  // );
+
+
+
   logsSave$ = createEffect(() => this.actions$.pipe(
     ofType(LOGS_SAVE),
-    mergeMap(
+    map(
       (action: LogsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
+        const originalRecords: any = action?.payload?.originalRecords;
         const records: any = action?.payload?.records;
-        const modified: any = action?.payload?.modified;
+        const modifiedIds: any = action?.payload?.modifiedIds;
+        const modificatorInfo: any = action?.payload?.modificatorInfo;
 
         const arrObs = [];
-        // for (const key in logs) {
-        const httpBody = {
-          // id: "id2",
-          recordId: 'id2',
-          userId: 'id1',
-          name: 'jozko',
-          dateTime: '2011-10-16'
+        for (let i = 0; i < modifiedIds.length; i++) {
+          const index = getIndexBasedId(originalRecords, modifiedIds[i]);
+          const httpBody = JSON.parse(JSON.stringify(originalRecords[index]));
+          httpBody['recordIdExtended'] = httpBody['id'];
+          delete httpBody['id'];
+          httpBody['autorZmeny'] = modificatorInfo?.name;
+          httpBody['datumZmeny'] = modificatorInfo?.date;
+          // const httpBody = {
+          //           // id: "id2",
+          //           recordId: 'id2',
+          //           userId: 'id1',
+          //           name: 'jozko',
+          //           dateTime: '2011-10-16'
+          //         };
+          arrObs.push(this.httpBase.postCommon(`${endPoint}`, httpBody));
+        }
+
+        return {
+          endPoint, originalRecords, records, arrObs, modifiedIds
         };
-        // arrObs.push(this.httpBase.postCommon(`${endPoint}`, httpBody));
-        // }
-
-        // return {
-        //   endPoint, logs, arrObs
-        // };
-
-
-        return this.httpBase.postCommon(`${endPoint}`, httpBody).pipe(
-          map(
-            (response: any) => {
-              debugger;
-              return new LogsSaveSuccess(response);
-            }
-          ),
-          catchError(error => {
-            debugger;
-            return of(new LogsSaveFail(error));
-          })
-        );
-
-
       }
-    )
-    // mergeMap(
-    //   (res: any) => {
-    //     return new Observable((observer: Observer<any>) => {
-    //       zip(...res.arrObs).subscribe(
-    //         (subres: any) => {
-    //           debugger;
-    //           return observer.next({
-    //             arrObsRes: subres,
-    //             endPoint: res.endPoint,
-    //             records: res.records,
-    //             modified: res.modified
-    //           });
-    //         },
-    //         error => throwError(error),
-    //         () => observer.complete()
-    //       );
-    //     })
-    //   }
-    // ),
+    ),
+    mergeMap(
+      (res: any) => {
+        return new Observable((observer: Observer<any>) => {
+          zip(...res.arrObs).subscribe(
+            (subres: any) => {
+              debugger;
+              return observer.next({
+                arrObsRes: subres,
+                endPoint: res.endPoint,
+                originalRecords: res.originalRecords,
+                records: res.records,
+                modifiedIds: res.modifiedIds,
+                currentUrl: res.currentUrl
+              });
+            },
+            error => throwError(error),
+            () => observer.complete()
+          );
+        });
+      }
+    ),
+    map(
+      res => {
+        debugger;
+        const originalRecords = JSON.parse(JSON.stringify(res?.originalRecords));
 
 
-    // map(
-    //   res => {
-    //     debugger;
-    //     const logs = JSON.parse(JSON.stringify(res));
+        // }
+        debugger;
 
-    //     // for (const key in res?.modified) {
-    //     //   this.store.dispatch(new StartToastr({ text: `log ${key} updated`, type: 'success', duration: 5000 }));
-    //     // }
-    //     return new LogsSaveSuccess(res);
-    //   }
-    // ),
-    // catchError(error => {
-    //   debugger;
-    //   return of(new LogsSaveFail(error));
-    // })
+        return new LogsSaveSuccess(originalRecords);
+      }
+    ),
+    catchError(error => {
+      debugger;
+      return of(new LogsSaveFail(error));
+    })
   )
   );
 
-
-
-
-
-  // recordsSave$ = createEffect(() => this.actions$.pipe(
-  //   ofType(RECORDS_SAVE),
-  //   map(
-  //     (action: RecordsSave) => {
-  //       debugger;
-  //       const endPoint: any = action?.payload?.endPoint;
-  //       const records: any = action?.payload?.records;
-  //       const modified: any = action?.payload?.modified;
-
-  //       // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
-  //       // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
-  //       const arrObs = [];
-  //       for (const key in modified) {
-  //         arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
-  //       }
-  //       // [
-  //       //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
-  //       //   this.httpBase.putCommon(`${endPoint}/id2`, record2)
-  //       // ];
-
-  //       return {
-  //         endPoint, records, arrObs, modified
-  //       };
-  //     }
-  //   ),
-  //   mergeMap(
-  //     (res: any) => {
-  //       return new Observable((observer: Observer<any>) => {
-  //         zip(...res.arrObs).subscribe(
-  //           (subres: any) => {
-  //             debugger;
-  //             return observer.next({
-  //               arrObsRes: subres,
-  //               endPoint: res.endPoint,
-  //               records: res.records,
-  //               modified: res.modified
-  //             });
-  //           },
-  //           error => throwError(error),
-  //           () => observer.complete()
-  //         );
-  //       })
-  //     }
-  //   ),
-  //   map(
-  //     res => {
-  //       debugger;
-  //       const records = JSON.parse(JSON.stringify(res?.records));
-  //       // const itemId = item?.id;
-  //       for (const key in res?.modified) {
-  //         this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
-  //       }
-  //       return new RecordsSaveSuccess(records);
-  //     }
-  //   ),
-  //   catchError(error => {
-  //     debugger;
-  //     // console.log(`${res.endPoint}`, error);
-  //     // const recordId = record.id;
-  //     // this.store.dispatch(new StartToastr({ text: `record ${recordId} did not update`, type: 'error', duration: 5000 }));
-  //     return of(new RecordsSaveFail(error));
-  //   })
-  // )
-  // );
 
 
   randomProcessState(item: any): string {

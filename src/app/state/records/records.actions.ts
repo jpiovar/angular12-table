@@ -49,7 +49,7 @@ export class RecordsLoadFail implements Action {
 
 export class RecordsSave implements Action {
   readonly type = RECORDS_SAVE;
-  constructor(public payload: { endPoint: string, records: any, modified: any, currentUrl: string }) {
+  constructor(public payload: { endPoint: string, originalRecords: any, records: any, modifiedIds: any, modificatorInfo: any, currentUrl: string }) {
     debugger;
   }
 }

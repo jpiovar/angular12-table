@@ -83,6 +83,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   exportActive: boolean = false;
 
+  user: any;
+
 
   changeDate(event) {
     console.log(event);
@@ -250,6 +252,16 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
         })
+    );
+
+    this.subscription.add(
+      this.store.select('user').subscribe((res: any) => {
+        debugger;
+        if (res) {
+          debugger;
+          this.user = res;
+        }
+      })
     );
 
 
@@ -439,7 +451,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     debugger;
     // dialog modal, get historyEndpoint/itemId
     this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}&_sort=datumZmeny&_order=asc`;
+    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}&_sort=datumZmeny&_order=desc`;
     this.recordId = item.id;
     this.tableMode = 'log';
     this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
@@ -543,14 +555,17 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    // debugger;
+    debugger;
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
+      let originalRecords = JSON.parse(JSON.stringify(this.originalRecords));
       let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
       records = this.getSetArrPropertyByValue(records, 'progressStatus', 'remove');
       let modified = {};
+      const modifiedIds = [];
       for (const key in this.recordsDiffArrObj) {
         if (this.recordsDiffArrObj.hasOwnProperty(key)) {
+          modifiedIds.push(key);
           modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (modified[key]['progressStatus'] === 'removed') {
             modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
@@ -562,8 +577,14 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       }
       debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
-      this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
+      originalRecords = this.setDatePickersToIsoString(originalRecords, ['od', 'do']);
+
+      const modificatorInfo = {
+        name: this.user?.account?.name,
+        date: new Date().toISOString()
+      }
+
+      this.store.dispatch(new RecordsSave({ endPoint: url, originalRecords, records, modifiedIds, modificatorInfo, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;
 
       this.store.dispatch(new TablesStatus({ tableExtended: 'ready' }));

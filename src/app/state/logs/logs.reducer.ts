@@ -52,7 +52,7 @@ export function reducer(state = initialState, action: LogsActions.Actions): Logs
     }
 
     case LogsActions.LOGS_SAVE_SUCCESS: {
-      // debugger;
+      debugger;
       const newState = JSON.parse(JSON.stringify(action.payload));
       return {
         ...state,

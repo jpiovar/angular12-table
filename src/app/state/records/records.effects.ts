@@ -41,7 +41,7 @@ import { ajax } from 'rxjs/ajax';
 import { Store } from '@ngrx/store';
 import { AppState } from '..';
 import { StartToastr } from '../toastr/toastr.actions';
-import { getItemBasedId } from 'src/app/shared/utils/helper';
+import { getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
 import { LogsSave } from '../logs/logs.actions';
 import { ExportStatus } from '../export/export.actions';
 
@@ -143,25 +143,31 @@ export class RecordsEffects {
       (action: RecordsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
+        const originalRecords: any = action?.payload?.originalRecords;
         const records: any = action?.payload?.records;
-        const modified: any = action?.payload?.modified;
+        const modifiedIds: any = action?.payload?.modifiedIds;
+        const modificatorInfo: any = action?.payload?.modificatorInfo;
         const currentUrl: string = action?.payload?.currentUrl;
 
         // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
         // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
         const arrObs = [];
-        for (const key in modified) {
-          if (modified.hasOwnProperty(key)) {
-            arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
-          }
+        for (let i = 0; i < modifiedIds.length; i++) {
+          const index = getIndexBasedId(records, modifiedIds[i]);
+          arrObs.push(this.httpBase.putCommon(`${endPoint}/${modifiedIds[i]}`, records[index]));
         }
+        // for (const key in modified) {
+        //   if (modified.hasOwnProperty(key)) {
+        //     arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
+        //   }
+        // }
         // [
         //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
         //   this.httpBase.putCommon(`${endPoint}/id2`, record2)
         // ];
 
         return {
-          endPoint, records, arrObs, modified, currentUrl
+          endPoint, originalRecords, records, arrObs, modifiedIds, modificatorInfo, currentUrl
         };
       }
     ),
@@ -174,8 +180,10 @@ export class RecordsEffects {
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
+                originalRecords: res.originalRecords,
                 records: res.records,
-                modified: res.modified,
+                modifiedIds: res.modifiedIds,
+                modificatorInfo: res.modificatorInfo,
                 currentUrl: res.currentUrl
               });
             },
@@ -191,15 +199,16 @@ export class RecordsEffects {
         debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
         // const itemId = item?.id;
-        for (const key in res?.modified) {
-          if (res?.modified.hasOwnProperty(key)) {
-            this.store.dispatch(new StartToastr({ text: `record ${key} updated`, type: 'success', duration: 5000 }));
-          }
+        // for (const key in res?.modified) {
+        //   if (res?.modified.hasOwnProperty(key)) {
+        for (let i = 0; i < res?.modifiedIds.length; i++) {
+          this.store.dispatch(new StartToastr({ text: `record ${res?.modifiedIds[i]} updated`, type: 'success', duration: 5000 }));
         }
+        // }
         debugger;
-        this.store.dispatch(new LogsSave({ endPoint: url, records: res?.records, modified: res?.modified }));
+        this.store.dispatch(new LogsSave({ endPoint: url, originalRecords: res?.originalRecords, records: res?.records, modifiedIds: res?.modifiedIds, modificatorInfo: res?.modificatorInfo }));
 
-        this.store.dispatch(new ExportStatus({ status: 'active'}));
+        this.store.dispatch(new ExportStatus({ status: 'active' }));
         debugger;
         const urlLoadRecords = res?.currentUrl;
         this.store.dispatch(new RecordsLoad(urlLoadRecords));
@@ -300,21 +309,21 @@ export class RecordsEffects {
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
 
-          return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(
-            map(
-              (response: any) => {
-                debugger;
-                if (response) {
-                  return new RecordsAddNewSuccess();
-                }
-              }
-            ),
-            catchError(error => {
+        return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(
+          map(
+            (response: any) => {
               debugger;
-              console.log(`${endPoint}`, error);
-              return of(new RecordsAddNewFail(error));
-            })
-          );
+              if (response) {
+                return new RecordsAddNewSuccess();
+              }
+            }
+          ),
+          catchError(error => {
+            debugger;
+            console.log(`${endPoint}`, error);
+            return of(new RecordsAddNewFail(error));
+          })
+        );
 
       }
     )
