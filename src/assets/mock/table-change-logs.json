@@ -1,138 +1,194 @@
 [
   {
     "id": "id1",
+    "recordIdBase": "id1",
     "recordIdExtended": "id1",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-12T11:01:00",
-    "actionType": "edit",
-    "modifiedColumns":[
-      {
-        "columnName": "od",
-        "previousContent": "2020-10-01T00:00:11",
-        "updatedContent": "2020-10-02T00:00:00"
-      },
-      {
-        "columnName": "poznamka",
-        "previousContent": "poznamka1",
-        "updatedContent": "poznaka11"
-      }
-    ]
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "B",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification1",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
     "id": "id2",
-    "recordIdExtended": "id2",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-11T11:01:00",
-    "actionType": "edit",
-    "modifiedColumns":[
-      {
-        "columnName": "od",
-        "previousContent": "2020-10-01T00:00:11",
-        "updatedContent": "2020-10-02T00:00:00"
-      },
-      {
-        "columnName": "poznamka",
-        "previousContent": "poznamka11",
-        "updatedContent": "poznaka112"
-      }
-    ]
-  },
-  {
-    "id": "id20",
-    "recordIdExtended": "id2",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-11T11:01:00",
-    "actionType": "edit",
-    "modifiedColumns":[
-      {
-        "columnName": "od",
-        "previousContent": "2020-10-01T00:00:11",
-        "updatedContent": "2020-10-02T00:00:00"
-      },
-      {
-        "columnName": "poznamka",
-        "previousContent": "poznamka11",
-        "updatedContent": "poznaka112"
-      }
-    ]
-  },
-  {
-    "id": "id200",
-    "recordIdExtended": "id2",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-11T11:01:00",
-    "actionType": "edit",
-    "modifiedColumns":[
-      {
-        "columnName": "od",
-        "previousContent": "2020-10-01T00:00:11",
-        "updatedContent": "2020-10-02T00:00:00"
-      },
-      {
-        "columnName": "poznamka",
-        "previousContent": "poznamka11",
-        "updatedContent": "poznaka112"
-      }
-    ]
-  },
-  {
-    "id": "id201",
-    "recordIdExtended": "id2",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-11T11:01:00",
-    "actionType": "edit",
-    "modifiedColumns":[
-      {
-        "columnName": "od",
-        "previousContent": "2020-10-01T00:00:11",
-        "updatedContent": "2020-10-02T00:00:00"
-      },
-      {
-        "columnName": "poznamka",
-        "previousContent": "poznamka11",
-        "updatedContent": "poznaka112"
-      }
-    ]
-  },
-  {
-    "id": "id202",
-    "recordIdExtended": "id2",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-11T11:01:00",
-    "actionType": "edit",
-    "modifiedColumns":[
-      {
-        "columnName": "od",
-        "previousContent": "2020-10-01T00:00:11",
-        "updatedContent": "2020-10-02T00:00:00"
-      },
-      {
-        "columnName": "poznamka",
-        "previousContent": "poznamka11",
-        "updatedContent": "poznaka112"
-      }
-    ]
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "B",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification2",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
     "id": "id3",
-    "recordIdExtended": "id2",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-10T11:01:00",
-    "actionType": "delete"
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname3",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "C",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification3",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
     "id": "id4",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname3",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "B",
+    "manualnyRating": "B",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification4",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id5",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "C",
+    "manualnyRating": "C",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification5",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id6",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "D",
+    "manualnyRating": "A",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification6",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id7",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "E",
+    "manualnyRating": "E",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification7",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id8",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "B",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification8",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id9",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "E",
+    "manualnyRating": "D",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification9",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id10",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "active",
+    "opIco": "jankofirstname1",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "D",
+    "manualnyRating": "E",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification10",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id11",
     "recordIdBase": "id3",
-    "userId": "id1",
-    "name": "jozko",
-    "dateTime": "2011-10-09T11:01:00",
-    "actionType": "create"
+    "recordIdExtended": "id33",
+    "status": "inactive",
+    "opIco": "jankofirstname3",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "A",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification11",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id12",
+    "recordIdBase": "id2",
+    "recordIdExtended": "id22",
+    "status": "inactive",
+    "opIco": "jankofirstname2",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "A",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "notification12",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   }
 ]

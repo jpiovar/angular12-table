@@ -1,0 +1,138 @@
+[
+  {
+    "id": "id1",
+    "recordIdExtended": "id1",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-12T11:01:00",
+    "actionType": "edit",
+    "modifiedColumns":[
+      {
+        "columnName": "od",
+        "previousContent": "2020-10-01T00:00:11",
+        "updatedContent": "2020-10-02T00:00:00"
+      },
+      {
+        "columnName": "poznamka",
+        "previousContent": "poznamka1",
+        "updatedContent": "poznaka11"
+      }
+    ]
+  },
+  {
+    "id": "id2",
+    "recordIdExtended": "id2",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-11T11:01:00",
+    "actionType": "edit",
+    "modifiedColumns":[
+      {
+        "columnName": "od",
+        "previousContent": "2020-10-01T00:00:11",
+        "updatedContent": "2020-10-02T00:00:00"
+      },
+      {
+        "columnName": "poznamka",
+        "previousContent": "poznamka11",
+        "updatedContent": "poznaka112"
+      }
+    ]
+  },
+  {
+    "id": "id20",
+    "recordIdExtended": "id2",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-11T11:01:00",
+    "actionType": "edit",
+    "modifiedColumns":[
+      {
+        "columnName": "od",
+        "previousContent": "2020-10-01T00:00:11",
+        "updatedContent": "2020-10-02T00:00:00"
+      },
+      {
+        "columnName": "poznamka",
+        "previousContent": "poznamka11",
+        "updatedContent": "poznaka112"
+      }
+    ]
+  },
+  {
+    "id": "id200",
+    "recordIdExtended": "id2",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-11T11:01:00",
+    "actionType": "edit",
+    "modifiedColumns":[
+      {
+        "columnName": "od",
+        "previousContent": "2020-10-01T00:00:11",
+        "updatedContent": "2020-10-02T00:00:00"
+      },
+      {
+        "columnName": "poznamka",
+        "previousContent": "poznamka11",
+        "updatedContent": "poznaka112"
+      }
+    ]
+  },
+  {
+    "id": "id201",
+    "recordIdExtended": "id2",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-11T11:01:00",
+    "actionType": "edit",
+    "modifiedColumns":[
+      {
+        "columnName": "od",
+        "previousContent": "2020-10-01T00:00:11",
+        "updatedContent": "2020-10-02T00:00:00"
+      },
+      {
+        "columnName": "poznamka",
+        "previousContent": "poznamka11",
+        "updatedContent": "poznaka112"
+      }
+    ]
+  },
+  {
+    "id": "id202",
+    "recordIdExtended": "id2",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-11T11:01:00",
+    "actionType": "edit",
+    "modifiedColumns":[
+      {
+        "columnName": "od",
+        "previousContent": "2020-10-01T00:00:11",
+        "updatedContent": "2020-10-02T00:00:00"
+      },
+      {
+        "columnName": "poznamka",
+        "previousContent": "poznamka11",
+        "updatedContent": "poznaka112"
+      }
+    ]
+  },
+  {
+    "id": "id3",
+    "recordIdExtended": "id2",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-10T11:01:00",
+    "actionType": "delete"
+  },
+  {
+    "id": "id4",
+    "recordIdBase": "id3",
+    "userId": "id1",
+    "name": "jozko",
+    "dateTime": "2011-10-09T11:01:00",
+    "actionType": "create"
+  }
+]
