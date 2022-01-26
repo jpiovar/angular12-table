@@ -144,7 +144,7 @@
     "manualnyRating": "E",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification10",
+    "poznamka": "notification101",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
@@ -167,7 +167,7 @@
   {
     "id": "id22",
     "recordIdBase": "id2",
-    "status": "inactive",
+    "status": "active",
     "opIco": "jankofirstname22",
     "obchodneMeno": "jankosurname22",
     "vypocitanyRating": "A",
