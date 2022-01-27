@@ -559,32 +559,45 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let originalRecords = JSON.parse(JSON.stringify(this.originalRecords));
-      let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-      records = this.getSetArrPropertyByValue(records, 'progressStatus', 'remove');
-      let modified = {};
+      // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+      let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'progressStatus', 'remove');
+      // let modified = {};
+      let previousStateRecords = [];
       const modifiedIds = [];
       for (const key in this.recordsDiffArrObj) {
         if (this.recordsDiffArrObj.hasOwnProperty(key)) {
+          const i = getIndexBasedId(originalRecords, key);
+
+          let action = {};
+
           modifiedIds.push(key);
-          modified[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
-          if (modified[key]['progressStatus'] === 'removed') {
-            modified[key] = this.getSetPropertyByValue(modified[key], 'status', 'inactive');
+          // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+          if (this.recordsDiffArrObj[key]['progressStatus'] === 'removed') {
+            this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'inactive');
             const index = getIndexBasedId(records, key); // itemId === key;
             records[index]['status'] = 'inactive';
+            action['actionType'] = 'deleted';
           }
-          modified[key] = this.getSetPropertyByValue(modified[key], 'progressStatus', 'remove');
+          this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'progressStatus', 'remove');
+          previousStateRecords.push({
+            ...originalRecords[i],
+            ...{ autorZmeny: this.user?.account?.name, datumZmeny: new Date().toISOString() },
+            ...action
+          });
+
         }
       }
       debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
       originalRecords = this.setDatePickersToIsoString(originalRecords, ['od', 'do']);
+      previousStateRecords = this.setDatePickersToIsoString(previousStateRecords, ['od', 'do']);
 
       const modificatorInfo = {
         name: this.user?.account?.name,
         date: new Date().toISOString()
       }
 
-      this.store.dispatch(new RecordsSave({ endPoint: url, originalRecords, records, modifiedIds, modificatorInfo, currentUrl: this.currentUrl }));
+      this.store.dispatch(new RecordsSave({ endPoint: url, previousStateRecords, records, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;
 
       this.store.dispatch(new TablesStatus({ tableExtended: 'ready' }));

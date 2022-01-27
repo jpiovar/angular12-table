@@ -143,18 +143,19 @@ export class RecordsEffects {
       (action: RecordsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
-        const originalRecords: any = action?.payload?.originalRecords;
+        // const originalRecords: any = action?.payload?.originalRecords;
         const records: any = action?.payload?.records;
-        const modifiedIds: any = action?.payload?.modifiedIds;
-        const modificatorInfo: any = action?.payload?.modificatorInfo;
+        // const modifiedIds: any = action?.payload?.modifiedIds;
+        // const modificatorInfo: any = action?.payload?.modificatorInfo;
         const currentUrl: string = action?.payload?.currentUrl;
+        const previousStateRecords: any = action?.payload?.previousStateRecords;
 
         // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
         // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
         const arrObs = [];
-        for (let i = 0; i < modifiedIds.length; i++) {
-          const index = getIndexBasedId(records, modifiedIds[i]);
-          arrObs.push(this.httpBase.putCommon(`${endPoint}/${modifiedIds[i]}`, records[index]));
+        for (let i = 0; i < previousStateRecords.length; i++) {
+          const index = getIndexBasedId(records, previousStateRecords[i].id);
+          arrObs.push(this.httpBase.putCommon(`${endPoint}/${previousStateRecords[i].id}`, records[index]));
         }
         // for (const key in modified) {
         //   if (modified.hasOwnProperty(key)) {
@@ -167,7 +168,7 @@ export class RecordsEffects {
         // ];
 
         return {
-          endPoint, originalRecords, records, arrObs, modifiedIds, modificatorInfo, currentUrl
+          endPoint, previousStateRecords, records, arrObs, currentUrl
         };
       }
     ),
@@ -180,10 +181,11 @@ export class RecordsEffects {
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
-                originalRecords: res.originalRecords,
+                previousStateRecords: res.previousStateRecords,
+                // originalRecords: res.originalRecords,
                 records: res.records,
-                modifiedIds: res.modifiedIds,
-                modificatorInfo: res.modificatorInfo,
+                // modifiedIds: res.modifiedIds,
+                // modificatorInfo: res.modificatorInfo,
                 currentUrl: res.currentUrl
               });
             },
@@ -201,12 +203,12 @@ export class RecordsEffects {
         // const itemId = item?.id;
         // for (const key in res?.modified) {
         //   if (res?.modified.hasOwnProperty(key)) {
-        for (let i = 0; i < res?.modifiedIds.length; i++) {
-          this.store.dispatch(new StartToastr({ text: `record ${res?.modifiedIds[i]} updated`, type: 'success', duration: 5000 }));
+        for (let i = 0; i < res?.previousStateRecords.length; i++) {
+          this.store.dispatch(new StartToastr({ text: `record ${res?.previousStateRecords[i].id} updated`, type: 'success', duration: 5000 }));
         }
         // }
         debugger;
-        this.store.dispatch(new LogsSave({ endPoint: url, originalRecords: res?.originalRecords, records: res?.records, modifiedIds: res?.modifiedIds, modificatorInfo: res?.modificatorInfo }));
+        this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords, records: res?.records }));
 
         this.store.dispatch(new ExportStatus({ status: 'active' }));
         debugger;

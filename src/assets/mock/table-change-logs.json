@@ -13,7 +13,12 @@
     "poznamka": "notification1",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not1"},
+      {"colName": "vypocitanyRating", "newValue": "B"}
+    ]
   },
   {
     "id": "id2",
@@ -22,14 +27,19 @@
     "status": "active",
     "opIco": "jankofirstname1",
     "obchodneMeno": "jankosurname",
-    "vypocitanyRating": "A",
+    "vypocitanyRating": "B",
     "manualnyRating": "B",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification2",
+    "poznamka": "not1",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not22"},
+      {"colName": "vypocitanyRating", "newValue": "C"}
+    ]
   },
   {
     "id": "id3",
@@ -38,14 +48,19 @@
     "status": "active",
     "opIco": "jankofirstname3",
     "obchodneMeno": "jankosurname",
-    "vypocitanyRating": "A",
+    "vypocitanyRating": "C",
     "manualnyRating": "C",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification3",
+    "poznamka": "not22",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not1"},
+      {"colName": "vypocitanyRating", "newValue": "B"}
+    ]
   },
   {
     "id": "id4",
@@ -58,10 +73,14 @@
     "manualnyRating": "B",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification4",
+    "poznamka": "not1",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not100"}
+    ]
   },
   {
     "id": "id5",
@@ -74,10 +93,14 @@
     "manualnyRating": "C",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification5",
+    "poznamka": "not100",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not1"}
+    ]
   },
   {
     "id": "id6",
@@ -90,10 +113,14 @@
     "manualnyRating": "A",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification6",
+    "poznamka": "not1",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not12"}
+    ]
   },
   {
     "id": "id7",
@@ -106,10 +133,14 @@
     "manualnyRating": "E",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification7",
+    "poznamka": "not12",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "notification8"}
+    ]
   },
   {
     "id": "id8",
@@ -125,7 +156,11 @@
     "poznamka": "notification8",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not1"}
+    ]
   },
   {
     "id": "id9",
@@ -138,10 +173,14 @@
     "manualnyRating": "D",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification9",
+    "poznamka": "not1",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not11"}
+    ]
   },
   {
     "id": "id10",
@@ -154,15 +193,19 @@
     "manualnyRating": "E",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification10",
+    "poznamka": "not11",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not1"}
+    ]
   },
   {
     "id": "id11",
-    "recordIdBase": "id3",
-    "recordIdExtended": "id33",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
     "status": "inactive",
     "opIco": "jankofirstname3",
     "obchodneMeno": "jankosurname",
@@ -170,10 +213,34 @@
     "manualnyRating": "A",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
-    "poznamka": "notification11",
+    "poznamka": "not1",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not10"}
+    ]
+  },
+  {
+    "id": "id12",
+    "recordIdBase": "id1",
+    "recordIdExtended": "id1",
+    "status": "inactive",
+    "opIco": "jankofirstname2",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "A",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
+    "poznamka": "not10",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "poznamka", "newValue": "not1"}
+    ]
   },
   {
     "id": "id12",
@@ -186,9 +253,27 @@
     "manualnyRating": "A",
     "od": "2020-01-01T00:00:00",
     "do": "2020-01-02T00:00:00",
+    "poznamka": "notification22 id22",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "deleted"
+  },
+  {
+    "id": "id12",
+    "recordIdBase": "id2",
+    "recordIdExtended": "id66",
+    "status": "inactive",
+    "opIco": "jankofirstname2",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "A",
+    "od": "2020-01-01T00:00:00",
+    "do": "2020-01-02T00:00:00",
     "poznamka": "notification12",
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
-    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "created"
   }
 ]
