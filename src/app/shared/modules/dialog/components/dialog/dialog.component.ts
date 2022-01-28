@@ -103,7 +103,7 @@ export class DialogComponent implements OnInit {
 
   dateFormat(date: string): string {
     debugger;
-    return this.datePipe.transform(date,'dd.MM.yyyy');
+    return this.datePipe?.transform(date,'dd.MM.yyyy');
   }
 
 }
