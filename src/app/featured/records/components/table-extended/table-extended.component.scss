@@ -85,4 +85,11 @@
   }
 }
 
+::ng-deep {
+  ngb-datepicker-month {
+    visibility: hidden;
+    height: 80px;
+  }
+}
+
 

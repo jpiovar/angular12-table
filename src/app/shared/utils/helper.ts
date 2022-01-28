@@ -1,5 +1,6 @@
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
+import * as _ from 'lodash';
 import { CoreModule } from 'src/app/core/core.module';
 
 export function isExplorer() {
@@ -52,3 +53,18 @@ export function ngbDateStructToIsoString(val: NgbDateStruct): string {
   return moment([val.year, val.month - 1, val.day]).format('YYYY-MM-DD[T]HH:mm:ss');
 }
 
+export function differentValueProperties(obj1: any, obj2: any): any[] {
+  debugger;
+  const res = [];
+  for (const [key, value] of Object.entries(obj1)) {
+    const obj1Val = value;
+    const obj2Val = obj2[key];
+    if (!_.isEqual(obj1Val, obj2Val)) {
+      res.push({
+        propName: key,
+        newValue: obj2Val
+      });
+    }
+  }
+  return res;
+}

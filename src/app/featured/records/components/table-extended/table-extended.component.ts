@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 
 import * as _ from 'lodash';
 
-import { compareValues, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
+import { compareValues, differentValueProperties, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
   // ChangeLogLoad, MetaLoad, MetaLocalSave,
@@ -22,7 +22,7 @@ import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions
 import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
 import { TablesStatus } from 'src/app/state/tables/tables.actions';
 import { ExportStatus } from 'src/app/state/export/export.actions';
@@ -86,8 +86,35 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   user: any;
 
 
+  tempDate: NgbDate;
+
+  // @ViewChild('d1') d1datepicker: NgbInputDatepicker;
+
+  // d1close() {
+  //   this.d1datepicker.close();
+  //   debugger;
+  // }
+
+  confirmSelection(modelName: string, prop: string) {
+    debugger;
+    this.tempDate;
+    const d1 = new Date(); // today date
+    const dtext1 = d1.toISOString();
+    if (modelName && prop) {
+      this[modelName][prop] = { day: 1, month: 1, year: 2020 }; //isoStringtoNgbDateStruct(dtext1);
+    } else if (modelName && !prop) {
+      this[modelName] = isoStringtoNgbDateStruct(dtext1);
+    }
+  }
+
+  onDateSelection(evt) {
+    debugger;
+  }
+
   changeDate(event) {
+    debugger;
     console.log(event);
+    this.tempDate = event;
   }
 
   constructor(
@@ -436,7 +463,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   removeItem(item: any) {
     // debugger;
-    item['progressStatus'] = 'removed';
+    item['progressStatus'] = 'deleted';
   }
 
   undoChange(item: any) {
@@ -566,23 +593,51 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       const modifiedIds = [];
       for (const key in this.recordsDiffArrObj) {
         if (this.recordsDiffArrObj.hasOwnProperty(key)) {
+          debugger;
+
           const i = getIndexBasedId(originalRecords, key);
+          const j = getIndexBasedId(records, key);
 
           let action = {};
+          let modifiedCols = {};
+          let modifiedProp = {};
 
           modifiedIds.push(key);
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
-          if (this.recordsDiffArrObj[key]['progressStatus'] === 'removed') {
+          if (this.recordsDiffArrObj[key]['progressStatus'] === 'deleted') {
             this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'inactive');
             const index = getIndexBasedId(records, key); // itemId === key;
             records[index]['status'] = 'inactive';
             action['actionType'] = 'deleted';
+          } else if (this.recordsDiffArrObj[key]['progressStatus'] === 'changed') {
+            debugger;
+            action['actionType'] = 'changed';
+
+
+            const diffValProp = differentValueProperties(originalRecords[i], records[j]);
+
+            modifiedCols = diffValProp.map(function (item) {
+              return {
+                colName: item.propName,
+                newValue: item.newValue
+              }
+            });
+
+            modifiedProp = {
+              modifiedColumns: modifiedCols
+            };
+
           }
+
+          debugger;
+
+
           this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'progressStatus', 'remove');
           previousStateRecords.push({
             ...originalRecords[i],
             ...{ autorZmeny: this.user?.account?.name, datumZmeny: new Date().toISOString() },
-            ...action
+            ...action,
+            ...modifiedProp
           });
 
         }
@@ -766,7 +821,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   exportToDwh() {
     debugger;
     // code logic to trigger export
-    this.store.dispatch(new ExportStatus({ status: 'inactive'}));
+    this.store.dispatch(new ExportStatus({ status: 'inactive' }));
   }
+
+  // dateSelected(event: any) {
+  //   debugger;
+  //   this.tempDate = event;
+  // }
 
 }
