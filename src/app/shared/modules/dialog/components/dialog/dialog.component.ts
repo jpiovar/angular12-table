@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
@@ -19,7 +20,8 @@ export class DialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private datePipe: DatePipe
   ) {
     dialogRef.disableClose = true;
     this.origin = environment.beOrigin;
@@ -73,5 +75,35 @@ export class DialogComponent implements OnInit {
   // }
 
 
+  itemChanged(arr: any[], colName: string): boolean {
+    let res = false;
+    if (arr?.length > 0) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i]?.colName === colName) {
+          res = true;
+          break;
+        }
+      }
+    }
+    return res;
+  }
+
+  currentValue(arr: any[], colName: string): string {
+    let res = '';
+    if (arr?.length > 0) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i]?.colName === colName) {
+          res = arr[i].newValue;
+          break;
+        }
+      }
+    }
+    return res;
+  }
+
+  dateFormat(date: string): string {
+    debugger;
+    return this.datePipe.transform(date,'dd.MM.yyyy');
+  }
 
 }

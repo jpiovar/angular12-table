@@ -611,15 +611,24 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
             modifiedCols = diffValProp.map(function (item) {
-              return {
-                colName: item.propName,
-                newValue: item.newValue
+              if (item?.propName === 'od' || item?.propName === 'do') {
+                return {
+                  colName: item.propName,
+                  newValue: ngbDateStructToIsoString(item.newValue)
+                }
+              } else {
+                return {
+                  colName: item.propName,
+                  newValue: item.newValue
+                }
               }
             });
 
             modifiedProp = {
               modifiedColumns: modifiedCols
             };
+
+
 
           }
 
