@@ -142,7 +142,6 @@ export class LogsEffects {
       (action: LogsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
-        const records: any = action?.payload?.records;
         const previousStateRecords: any = action?.payload?.previousStateRecords;
 
         const arrObs = [];
@@ -155,7 +154,7 @@ export class LogsEffects {
         }
 
         return {
-          endPoint, previousStateRecords, records, arrObs
+          endPoint, previousStateRecords, arrObs
         };
       }
     ),
@@ -168,7 +167,6 @@ export class LogsEffects {
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
-                records: res.records,
                 previousStateRecords: res.previousStateRecords
               });
             },

@@ -189,7 +189,7 @@ export class RecordsEffects {
         }
         // }
         debugger;
-        this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords, records: res?.records }));
+        this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords }));
 
         this.store.dispatch(new ExportStatus({ status: 'active' }));
         debugger;
@@ -286,17 +286,22 @@ export class RecordsEffects {
 
   recordsAddNew$ = createEffect(() => this.actions$.pipe(
     ofType(RECORDS_ADD_NEW),
-    switchMap(
+    mergeMap(
       (action: RecordsAddNew) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
+
+        const url = `${this.origin}${this.tableLogs}`;
+        const previousStateRecords = JSON.parse(JSON.stringify(action?.payload?.records));
+        previousStateRecords[0]['actionType'] = 'created';
 
         return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(
           map(
             (response: any) => {
               debugger;
               if (response) {
+                this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords }));
                 return new RecordsAddNewSuccess();
               }
             }

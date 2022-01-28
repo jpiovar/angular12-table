@@ -31,7 +31,7 @@ export class LogsLoadFail implements Action {
 
 export class LogsSave implements Action {
   readonly type = LOGS_SAVE;
-  constructor(public payload: { endPoint: string, previousStateRecords: any, records: any }) {
+  constructor(public payload: { endPoint: string, previousStateRecords: any }) {
     debugger;
   }
 }
