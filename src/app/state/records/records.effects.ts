@@ -143,29 +143,15 @@ export class RecordsEffects {
       (action: RecordsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
-        // const originalRecords: any = action?.payload?.originalRecords;
         const records: any = action?.payload?.records;
-        // const modifiedIds: any = action?.payload?.modifiedIds;
-        // const modificatorInfo: any = action?.payload?.modificatorInfo;
         const currentUrl: string = action?.payload?.currentUrl;
         const previousStateRecords: any = action?.payload?.previousStateRecords;
 
-        // const record1 = { id: 'id1', firstname: 'jopo1', lastname: 'popo1', age: 10 };
-        // const record2 = { id: 'id2', firstname: 'jopo2', lastname: 'popo2', age: 10 };
         const arrObs = [];
         for (let i = 0; i < previousStateRecords.length; i++) {
           const index = getIndexBasedId(records, previousStateRecords[i].id);
           arrObs.push(this.httpBase.putCommon(`${endPoint}/${previousStateRecords[i].id}`, records[index]));
         }
-        // for (const key in modified) {
-        //   if (modified.hasOwnProperty(key)) {
-        //     arrObs.push(this.httpBase.putCommon(`${endPoint}/${key}`, modified[key]));
-        //   }
-        // }
-        // [
-        //   this.httpBase.putCommon(`${endPoint}/id1`, record1),
-        //   this.httpBase.putCommon(`${endPoint}/id2`, record2)
-        // ];
 
         return {
           endPoint, previousStateRecords, records, arrObs, currentUrl
@@ -182,10 +168,7 @@ export class RecordsEffects {
                 arrObsRes: subres,
                 endPoint: res.endPoint,
                 previousStateRecords: res.previousStateRecords,
-                // originalRecords: res.originalRecords,
                 records: res.records,
-                // modifiedIds: res.modifiedIds,
-                // modificatorInfo: res.modificatorInfo,
                 currentUrl: res.currentUrl
               });
             },
@@ -200,9 +183,7 @@ export class RecordsEffects {
         const url = `${this.origin}${this.tableLogs}`;
         debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
-        // const itemId = item?.id;
-        // for (const key in res?.modified) {
-        //   if (res?.modified.hasOwnProperty(key)) {
+
         for (let i = 0; i < res?.previousStateRecords.length; i++) {
           this.store.dispatch(new StartToastr({ text: `record ${res?.previousStateRecords[i].id} updated`, type: 'success', duration: 5000 }));
         }

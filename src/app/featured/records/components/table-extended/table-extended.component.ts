@@ -588,21 +588,17 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       let originalRecords = JSON.parse(JSON.stringify(this.originalRecords));
       // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
       let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'progressStatus', 'remove');
-      // let modified = {};
       let previousStateRecords = [];
-      const modifiedIds = [];
       for (const key in this.recordsDiffArrObj) {
         if (this.recordsDiffArrObj.hasOwnProperty(key)) {
           debugger;
 
           const i = getIndexBasedId(originalRecords, key);
           const j = getIndexBasedId(records, key);
-
           let action = {};
           let modifiedCols = {};
           let modifiedProp = {};
 
-          modifiedIds.push(key);
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (this.recordsDiffArrObj[key]['progressStatus'] === 'deleted') {
             this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'inactive');
@@ -613,9 +609,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             debugger;
             action['actionType'] = 'changed';
 
-
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
-
             modifiedCols = diffValProp.map(function (item) {
               return {
                 colName: item.propName,
@@ -629,9 +623,6 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
           }
 
-          debugger;
-
-
           this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'progressStatus', 'remove');
           previousStateRecords.push({
             ...originalRecords[i],
@@ -644,13 +635,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       }
       debugger;
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      originalRecords = this.setDatePickersToIsoString(originalRecords, ['od', 'do']);
       previousStateRecords = this.setDatePickersToIsoString(previousStateRecords, ['od', 'do']);
-
-      const modificatorInfo = {
-        name: this.user?.account?.name,
-        date: new Date().toISOString()
-      }
 
       this.store.dispatch(new RecordsSave({ endPoint: url, previousStateRecords, records, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;

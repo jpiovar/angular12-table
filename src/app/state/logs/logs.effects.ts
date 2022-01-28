@@ -142,29 +142,15 @@ export class LogsEffects {
       (action: LogsSave) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
-        // const originalRecords: any = action?.payload?.originalRecords;
         const records: any = action?.payload?.records;
-        // const modifiedIds: any = action?.payload?.modifiedIds;
-        // const modificatorInfo: any = action?.payload?.modificatorInfo;
         const previousStateRecords: any = action?.payload?.previousStateRecords;
 
         const arrObs = [];
         for (let i = 0; i < previousStateRecords.length; i++) {
-          // const index = getIndexBasedId(originalRecords, modifiedIds[i]);
-          // const httpBody = JSON.parse(JSON.stringify(originalRecords[index]));
 
           const httpBody = JSON.parse(JSON.stringify(previousStateRecords[i]));
           httpBody['recordIdExtended'] = httpBody['id'];
           delete httpBody['id'];
-          // httpBody['autorZmeny'] = modificatorInfo?.name;
-          // httpBody['datumZmeny'] = modificatorInfo?.date;
-          // const httpBody = {
-          //           // id: "id2",
-          //           recordId: 'id2',
-          //           userId: 'id1',
-          //           name: 'jozko',
-          //           dateTime: '2011-10-16'
-          //         };
           arrObs.push(this.httpBase.postCommon(`${endPoint}`, httpBody));
         }
 
@@ -182,10 +168,7 @@ export class LogsEffects {
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
-                // originalRecords: res.originalRecords,
                 records: res.records,
-                // modifiedIds: res.modifiedIds,
-                currentUrl: res.currentUrl,
                 previousStateRecords: res.previousStateRecords
               });
             },
@@ -199,11 +182,6 @@ export class LogsEffects {
       res => {
         debugger;
         const previousStateRecords = JSON.parse(JSON.stringify(res?.previousStateRecords));
-
-
-        // }
-        debugger;
-
         return new LogsSaveSuccess(previousStateRecords);
       }
     ),
