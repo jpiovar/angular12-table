@@ -58,8 +58,8 @@
                       </td>
                       <td>
                         <!-- <span [ngClass]="{'item-changed': itemChanged(item?.modifiedColumns, 'vypocitanyRating')}">{{item.vypocitanyRating}}</span> -->
-                        <span *ngIf="itemChanged(item?.modifiedColumns, 'vypocitanynyRating'); else elseVypocitanynyRating" class='item-changed'  [ngbTooltip]="currentValue(item?.modifiedColumns, 'vypocitanyRating')">{{item.vypocitanynyRating}}</span>
-                        <ng-template #elseVypocitanyRating><span>{{item.vypocitanynyRating}}</span></ng-template>
+                        <span *ngIf="itemChanged(item?.modifiedColumns, 'vypocitanyRating'); else elseVypocitanyRating" class='item-changed'  [ngbTooltip]="currentValue(item?.modifiedColumns, 'vypocitanyRating')">{{item.vypocitanyRating}}</span>
+                        <ng-template #elseVypocitanyRating><span>{{item.vypocitanyRating}}</span></ng-template>
                       </td>
                       <td>
                         <!-- <span [ngClass]="{'item-changed': itemChanged(item?.modifiedColumns, 'manualnyRating')}">{{item.manualnyRating}}</span> -->

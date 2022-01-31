@@ -27,6 +27,7 @@ import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components
 import { TablesStatus } from 'src/app/state/tables/tables.actions';
 import { ExportStatus } from 'src/app/state/export/export.actions';
 
+import $ from 'jquery';
 
 
 @Component({
@@ -88,12 +89,33 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   tempDate: NgbDate;
 
+  btnVisible: boolean = false;
+
   // @ViewChild('d1') d1datepicker: NgbInputDatepicker;
 
   // d1close() {
   //   this.d1datepicker.close();
   //   debugger;
   // }
+
+
+
+  showHideBtn() {
+    debugger;
+    this.btnVisible = !this.btnVisible;
+    const $confirmSelectionContainer = $('#confirmSelectionContainer');
+    const $confirmSelectionBtn = $('#confirmSelection');
+    const $dropdownMenu = $('.dropdown-menu.show');
+
+    if (this.btnVisible) {
+      $($dropdownMenu).append($confirmSelectionBtn);
+      $($confirmSelectionBtn).css({ position: 'absolute', bottom: '20px', left: '40px' });
+
+    } else {
+      $($confirmSelectionContainer).append($confirmSelectionBtn);
+    }
+
+  }
 
   confirmSelection(modelName: string, prop: string) {
     debugger;
@@ -133,6 +155,14 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     this.metaAndTableDataSubscription();
     this.processGlobalSearch();
+
+
+
+  //   $( document ).ready(function() {
+  //     $( "#confirmSelection" ).on( "click", function() {
+  //       console.log( 'pppppppppppppp');
+  //     });
+  // });
   }
 
   ngOnInit(): void {

@@ -86,10 +86,13 @@
 }
 
 ::ng-deep {
-  ngb-datepicker-month {
-    // visibility: hidden;
-    // height: 80px;
+  .month-picker {
+    ngb-datepicker-month {
+      visibility: hidden;
+      height: 80px;
+    }
   }
 }
+
 
 
