@@ -76,7 +76,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
   initialSearchFilter: any = {
-    opIco: '', obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', od: '', do: '', poznamka: ''
+    opIco: '', obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: ''
   };
 
   searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
@@ -166,21 +166,31 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
-    let s_od = '';
-    let s_do = '';
+    let s_odFrom = '';
+    let s_odTo = '';
+    let s_doFrom = '';
+    let s_doTo = '';
 
     const s_opIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
     const s_obchodneMeno = this.searchFilter?.obchodneMeno?.trim() ? `&obchodneMeno_like=${this.searchFilter?.obchodneMeno?.trim()}` : '';
     const s_vypocitanyRating = this.searchFilter?.vypocitanyRating.trim() ? `&vypocitanyRating_like=${this.searchFilter?.vypocitanyRating?.trim()}` : '';
     const s_manualnyRating = this.searchFilter?.manualnyRating.trim() ? `&manualnyRating_like=${this.searchFilter?.manualnyRating?.trim()}` : '';
 
-    if (this.searchFilter?.od) {
-      let t_od = ngbDateStructToIsoString(this.searchFilter?.od);
-      s_od = t_od && `&od_gte=${t_od}`;
+    if (this.searchFilter?.odFrom) {
+      let t_odFrom = ngbDateStructToIsoString(this.searchFilter?.odFrom);
+      s_odFrom = t_odFrom && `&od_gte=${t_odFrom}`;
     }
-    if (this.searchFilter?.do) {
-      let t_do = ngbDateStructToIsoString(this.searchFilter?.do);
-      s_do = t_do && `&do_lte=${t_do}`;
+    if (this.searchFilter?.odTo) {
+      let t_odTo = ngbDateStructToIsoString(this.searchFilter?.odTo);
+      s_odTo = t_odTo && `&od_lte=${t_odTo}`;
+    }
+    if (this.searchFilter?.doFrom) {
+      let t_doFrom = ngbDateStructToIsoString(this.searchFilter?.doFrom);
+      s_doFrom = t_doFrom && `&do_gte=${t_doFrom}`;
+    }
+    if (this.searchFilter?.doTo) {
+      let t_doTo = ngbDateStructToIsoString(this.searchFilter?.doTo);
+      s_doTo = t_doTo && `&do_lte=${t_doTo}`;
     }
 
     const s_poznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
@@ -194,7 +204,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${s_opIco}${s_obchodneMeno}${s_vypocitanyRating}${s_manualnyRating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${s_opIco}${s_obchodneMeno}${s_vypocitanyRating}${s_manualnyRating}${s_odFrom}${s_odTo}${s_doFrom}${s_doTo}${s_poznamka}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
   }

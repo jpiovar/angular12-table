@@ -20,7 +20,8 @@
             </app-insert-new-btn>
           </span>
           <span [ngClass]="{'not-allowed': recordsDiffArrObj}"> Records
-            <app-status-toggle-btn ngbTooltip="Click to switch active/inactive records" [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState"
+            <app-status-toggle-btn ngbTooltip="Click to switch active/inactive records"
+              [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState"
               (click)="activeInactiveToggle($event)">
             </app-status-toggle-btn>
           </span>
@@ -117,22 +118,39 @@
                 <!-- <input type="text" [(ngModel)]="searchFilter.od" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <div class="input-group">
+                  <span class="pt-2">od: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.od" ngbDatepicker #d1="ngbDatepicker"
-                    #c1="ngModel" (ngModelChange)="changeDate($event)" (dateChange)="changeDate($event)"
-                    (dateSelect)="changeDate($event)"/>
-                    <!-- <ng-template #t let-date let-focused="focused">
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odFrom" ngbDatepicker #d1From="ngbDatepicker"
+                    #c1From="ngModel" (ngModelChange)="changeDate($event)" (dateChange)="changeDate($event)"
+                    (dateSelect)="changeDate($event)" />
+                  <!-- <ng-template #t let-date let-focused="focused">
                       <span>ok
                       </span>
                     </ng-template> -->
-                    <button class="btn btn-primary" (click)="d1.close(); confirmSelection('searchFilter','od')" type="button">
+                  <!-- <button class="btn btn-primary" (click)="d1.close(); confirmSelection('searchFilter','od')" type="button">
                       Confirm selection
-                    </button>
+                    </button> -->
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('od')" type="button">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('odFrom')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                     </button>
-                    <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                    <button class="btn btn-outline-secondary" (click)="d1From.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="input-group mt-1">
+                  <span class="pt-2">do: </span>
+                  <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odTo" ngbDatepicker #d1To="ngbDatepicker"
+                    #c1To="ngModel" (ngModelChange)="changeDate($event)" (dateChange)="changeDate($event)"
+                    (dateSelect)="changeDate($event)" />
+
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('odTo')" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
+                    </button>
+                    <button class="btn btn-outline-secondary" (click)="d1To.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -149,14 +167,30 @@
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <div class="input-group">
+                  <span class="pt-2">od: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.do" ngbDatepicker #d2="ngbDatepicker"
-                    #c1="ngModel"  (ngModelChange)="changeDate($event)" (change)="onDateSelection($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doFrom" ngbDatepicker #d2From="ngbDatepicker"
+                    #c2From="ngModel" (ngModelChange)="changeDate($event)" (change)="onDateSelection($event)" />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('do')" type="button">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('doFrom')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                     </button>
-                    <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                    <button class="btn btn-outline-secondary" (click)="d2From.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mt-1">
+                  <span class="pt-2">do: </span>
+                  <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doTo" ngbDatepicker #d2To="ngbDatepicker"
+                    #c2To="ngModel" (ngModelChange)="changeDate($event)" (change)="onDateSelection($event)" />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('doTo')" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
+                    </button>
+                    <button class="btn btn-outline-secondary" (click)="d2To.toggle()" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                     </button>
                   </div>
@@ -195,7 +229,8 @@
             </th> -->
             <th class="col-sm-1 pl-0 pr-0" id="action" [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class='partial-search'>
-                <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-outline-secondary pl-1 pr-1" (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
+                <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-outline-secondary pl-1 pr-1"
+                  (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
                   <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                 </button>
                 <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-success pl-1 pr-1" type="button"
@@ -277,9 +312,10 @@
                     </button>
                   </div>
                 </div>
-                <small *ngIf="item?.odErrorRequired">Required<br/></small>
-                <small *ngIf="item?.ErrorInterval">Od > Do !<br/></small>
-                <small *ngIf="item?.ErrorMin">{{item.datumVytvoreniaPoslednejSnimky | date:"dd.MM.yyyy" }} >= Od !<br/></small>
+                <small *ngIf="item?.odErrorRequired">Required<br /></small>
+                <small *ngIf="item?.ErrorInterval">Od > Do !<br /></small>
+                <small *ngIf="item?.ErrorMin">{{item.datumVytvoreniaPoslednejSnimky | date:"dd.MM.yyyy" }} >= Od
+                  !<br /></small>
               </span>
 
               <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.odErrorRequired}">
@@ -299,7 +335,7 @@
                   <input [disabled]="item?.status === 'inactive' || item?.progressStatus === 'deleted'"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker #d="ngbDatepicker"
-                    #c2="ngModel" (ngModelChange)="onInputChange('do', item); changeDate($event)"  />
+                    #c2="ngModel" (ngModelChange)="onInputChange('do', item); changeDate($event)" />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'deleted')}"
@@ -308,9 +344,11 @@
                     </button>
                   </div>
                 </div>
-                <small *ngIf="item?.doErrorRequired">Required<br/></small>
-                <small *ngIf="item?.ErrorInterval">Do < Od !<br/></small>
-                    <!-- <div *ngIf="item.do.dirty && item.do.invalid">
+                <small *ngIf="item?.doErrorRequired">Required<br /></small>
+                <small *ngIf="item?.ErrorInterval">Do
+                  < Od !<br />
+                </small>
+                <!-- <div *ngIf="item.do.dirty && item.do.invalid">
                   <small class="form-text text-danger" *ngIf="item.do.errors.required">
                       Your birth date is required.
                   </small>
@@ -366,7 +404,8 @@
               </span> -->
               <span (click)="removeItem(item); onInputChange('', item)"
                 [ngClass]="{'non-click': (item?.status === 'inactive' || item?.progressStatus === 'deleted')}">
-                <mat-icon aria-label="delete_forever" class="td-link ml-2" ngbTooltip="Remove record">delete_forever</mat-icon>
+                <mat-icon aria-label="delete_forever" class="td-link ml-2" ngbTooltip="Remove record">delete_forever
+                </mat-icon>
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="history" class="td-link ml-2"
@@ -374,7 +413,8 @@
               </span>
               <span>
                 <mat-icon [ngClass]="{'active-click': true}" aria-label="undo" class="td-link ml-2"
-                  (click)="undoChange(item); onInputChange('', item)" ngbTooltip="Undo changes of record">undo</mat-icon>
+                  (click)="undoChange(item); onInputChange('', item)" ngbTooltip="Undo changes of record">undo
+                </mat-icon>
               </span>
             </td>
           </tr>
@@ -385,9 +425,10 @@
   <div class="row">
     <div class="col-md-4">
       <button type="button" class="btn btn-primary"
-        [disabled]="!recordsDiffArrObj || getRecordsDiffArrObjError(recordsDiffArrObj)" (click)="saveChanges()">Save changes</button>
-        <button type="button" class="btn btn-info ml-2"
-        [disabled]="!exportActive" (click)="exportToDwh()">Export to DWH</button>
+        [disabled]="!recordsDiffArrObj || getRecordsDiffArrObjError(recordsDiffArrObj)" (click)="saveChanges()">Save
+        changes</button>
+      <button type="button" class="btn btn-info ml-2" [disabled]="!exportActive" (click)="exportToDwh()">Export to
+        DWH</button>
     </div>
     <div class="col-md-8">
       <ul class="pagination">
