@@ -7,7 +7,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 })
 export class StatusToggleBtnComponent implements OnInit, OnChanges {
 
-  @Input() toggleBtnState: 'active'|'inactive' = 'active';
+  @Input() toggleBtnState: 'ACTIVE'|'INACTIVE' = 'ACTIVE';
 
   constructor() { }
 

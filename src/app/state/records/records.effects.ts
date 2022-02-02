@@ -191,7 +191,7 @@ export class RecordsEffects {
         debugger;
         this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords }));
 
-        this.store.dispatch(new ExportStatus({ status: 'active' }));
+        this.store.dispatch(new ExportStatus({ status: 'ACTIVE' }));
         debugger;
         const urlLoadRecords = res?.currentUrl;
         this.store.dispatch(new RecordsLoad(urlLoadRecords));

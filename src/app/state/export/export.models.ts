@@ -1,3 +1,3 @@
 export interface ExportState {
-  status: 'active'|'inactive';
+  status: 'ACTIVE'|'INACTIVE';
 }

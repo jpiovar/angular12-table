@@ -2,7 +2,7 @@ import { ExportState } from './export.models';
 import * as ExportActions from './export.actions';
 
 export const initialState: ExportState = {
-  status: 'inactive'
+  status: 'INACTIVE'
 };
 
 export function reducer(state = initialState, action: ExportActions.Actions): ExportState {

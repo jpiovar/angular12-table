@@ -182,7 +182,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   //   const origin = `${this.origin}`;
   //   const endPoint = `${this.tableDataEndPoint}`;
   //   // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-  //   const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+  //   const statusLike = this.toggleBtnState === 'ACTIVE' ? `status_ne=INACTIVE` : `status_ne=ACTIVE`;
   //   const q = this.searchText ? `&q=${this.searchText}` : '';
   //   const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
   //   const order = this.direction ? `&_order=${this.direction}` : '';
@@ -394,7 +394,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       records = this.setDatePickersToIsoString(records, ['od', 'do']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'active');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'ACTIVE');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datumZmeny', dtext);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autorZmeny', this.user?.account?.name);
       this.store.dispatch(new RecordsAddNew({ endPoint: url, records }));

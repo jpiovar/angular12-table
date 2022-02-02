@@ -72,7 +72,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   minDate = { year: 2017, month: 1, day: 1 };
   maxDate = { year: 2027, month: 12, day: 1 };
 
-  toggleBtnState: 'active' | 'inactive' = 'active';
+  toggleBtnState: 'ACTIVE' | 'INACTIVE' = 'ACTIVE';
 
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
@@ -183,7 +183,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // const origin = `${this.origin}`;
     // const endPoint = `${this.tableDataEndPoint}`;
     // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    // const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    // const statusLike = this.toggleBtnState === 'ACTIVE' ? `status_ne=INACTIVE` : `status_ne=ACTIVE`;
     // const q = this.searchText ? `&q=${this.searchText}` : '';
     // const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     // const order = this.direction ? `&_order=${this.direction}` : '';
@@ -227,7 +227,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
     // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    const statusLike = this.toggleBtnState === 'active' ? `status=active` : `status=inactive`;
+    const statusLike = this.toggleBtnState === 'ACTIVE' ? `status=ACTIVE` : `status=INACTIVE`;
     // const q = this.searchText ? `&q=${this.searchText}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     const order = this.direction ? `&_order=${this.direction}` : '';
@@ -242,10 +242,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   activeInactiveToggle(event) {
     // debugger;
     event.preventDefault();
-    if (this.toggleBtnState === 'active') {
-      this.toggleBtnState = 'inactive';
+    if (this.toggleBtnState === 'ACTIVE') {
+      this.toggleBtnState = 'INACTIVE';
     } else {
-      this.toggleBtnState = 'active';
+      this.toggleBtnState = 'ACTIVE';
     }
     // const url = `${this.origin}${this.tableDataEndPoint}?status_like=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
     // this.store.dispatch(new RecordsLoad(url));
@@ -341,7 +341,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           this.store.dispatch(new StopSpinner());
 
           if (res?.status) {
-            this.exportActive = res?.status === 'active' ? true : false;
+            this.exportActive = res?.status === 'ACTIVE' ? true : false;
           }
 
         })
@@ -641,9 +641,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (this.recordsDiffArrObj[key]['progressStatus'] === 'deleted') {
-            this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'inactive');
+            this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'INACTIVE');
             const index = getIndexBasedId(records, key); // itemId === key;
-            records[index]['status'] = 'inactive';
+            records[index]['status'] = 'INACTIVE';
             action['actionType'] = 'deleted';
           } else if (this.recordsDiffArrObj[key]['progressStatus'] === 'changed') {
             debugger;
@@ -827,7 +827,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
     // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    // const statusLike = this.toggleBtnState === 'active' ? `status_ne=inactive` : `status_ne=active`;
+    // const statusLike = this.toggleBtnState === 'ACTIVE' ? `status_ne=INACTIVE` : `status_ne=ACTIVE`;
     // // const q = this.searchText ? `&q=${this.searchText}` : '';
     // const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     // const order = this.direction ? `&_order=${this.direction}` : '';
@@ -855,7 +855,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   exportToDwh() {
     debugger;
     // code logic to trigger export
-    this.store.dispatch(new ExportStatus({ status: 'inactive' }));
+    this.store.dispatch(new ExportStatus({ status: 'INACTIVE' }));
   }
 
   // dateSelected(event: any) {

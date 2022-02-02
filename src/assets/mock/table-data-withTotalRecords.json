@@ -4,7 +4,7 @@
     {
       "id": "id1",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A",
@@ -19,7 +19,7 @@
     {
       "id": "id2",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A",
@@ -34,7 +34,7 @@
     {
       "id": "id3",
       "recordIdBase": "id3",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname3",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A",
@@ -49,7 +49,7 @@
     {
       "id": "id4",
       "recordIdBase": "id3",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname3",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B",
@@ -64,7 +64,7 @@
     {
       "id": "id5",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "C",
@@ -79,7 +79,7 @@
     {
       "id": "id6",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "D",
@@ -94,7 +94,7 @@
     {
       "id": "id7",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "E",
@@ -109,7 +109,7 @@
     {
       "id": "id8",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A",
@@ -124,7 +124,7 @@
     {
       "id": "id9",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "E",
@@ -139,7 +139,7 @@
     {
       "id": "id10",
       "recordIdBase": "id1",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname1",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "D",
@@ -154,7 +154,7 @@
     {
       "id": "id11",
       "recordIdBase": "id3",
-      "status": "inactive",
+      "status": "INACTIVE",
       "opIco": "jankofirstname11",
       "obchodneMeno": "jankosurname11",
       "vypocitanyRating": "A",
@@ -169,7 +169,7 @@
     {
       "id": "id22",
       "recordIdBase": "id2",
-      "status": "active",
+      "status": "ACTIVE",
       "opIco": "jankofirstname22",
       "obchodneMeno": "jankosurname22",
       "vypocitanyRating": "A",
