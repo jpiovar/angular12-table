@@ -127,7 +127,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
             if (res.data) {
               // debugger;
-              // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
+              // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
               this.originalRecords = JSON.parse(JSON.stringify(res.data));
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
@@ -270,9 +270,9 @@ export class TableBaseComponent implements OnInit, OnDestroy {
         // }
       }
 
-      // if (colname === 'od' || colname === 'do') {
-      //   const isoDateOd = ngbDateStructToIsoString(item['od']);
-      //   const isoDateDo = ngbDateStructToIsoString(item['do']);
+      // if (colname === 'datumOd' || colname === 'datumDo') {
+      //   const isoDateOd = ngbDateStructToIsoString(item['datumOd']);
+      //   const isoDateDo = ngbDateStructToIsoString(item['datumDo']);
 
       //   if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
       //     item['ErrorInterval'] = true;

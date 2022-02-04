@@ -153,7 +153,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
             if (res.data) {
               // debugger;
-              // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
+              // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
               this.originalRecordsBE = JSON.parse(JSON.stringify(res.data));
               this.recordsBE = JSON.parse(JSON.stringify(this.originalRecordsBE));
               // }
@@ -204,8 +204,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
     for (let i = 0; i < records?.length; i++) {
       records[i]['manualnyRating'] = '';
-      records[i]['od'] = dtext1;
-      records[i]['do'] = dtext2;
+      records[i]['datumOd'] = dtext1;
+      records[i]['datumDo'] = dtext2;
       records[i]['poznamka'] = '';
     }
   }
@@ -217,7 +217,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     this.tableMode = 'load';
     // this.store.dispatch(new StartSpinner());
     this.initializeStructure(newRecords);
-    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(newRecords)), ['od', 'do']);
+    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(newRecords)), ['datumOd', 'datumDo']);
     this.records = JSON.parse(JSON.stringify(this.originalRecords));
     // this.createAndExecuteUrl();
   }
@@ -280,8 +280,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     debugger;
     for(let i=0; i<this.records.length; i++) {
       this.onInputChange('manualnyRating', this.records[i]);
-      this.onInputChange('od', this.records[i]);
-      this.onInputChange('do', this.records[i]);
+      this.onInputChange('datumOd', this.records[i]);
+      this.onInputChange('datumDo', this.records[i]);
       this.onInputChange('poznamka', this.records[i]);
     }
 
@@ -322,9 +322,9 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
         delete item[colname + 'ErrorRequired'];
       }
 
-      if (colname === 'od' || colname === 'do') {
-        const isoDateOd = ngbDateStructToIsoString(item['od']);
-        const isoDateDo = ngbDateStructToIsoString(item['do']);
+      if (colname === 'datumOd' || colname === 'datumDo') {
+        const isoDateOd = ngbDateStructToIsoString(item['datumOd']);
+        const isoDateDo = ngbDateStructToIsoString(item['datumDo']);
 
         if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
           item['ErrorInterval'] = true;
@@ -382,8 +382,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       //   }
       // }
       // // debugger;
-      // records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      // modified = this.setDatePickersToIsoString(modified, ['od', 'do']);
+      // records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
+      // modified = this.setDatePickersToIsoString(modified, ['datumOd', 'datumDo']);
       // this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
       // this.recordsDiffArrObj = null;
 
@@ -391,7 +391,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       const dtext = d.toISOString();
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records =JSON.parse(JSON.stringify(this.records));
-      records = this.setDatePickersToIsoString(records, ['od', 'do']);
+      records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'ACTIVE');

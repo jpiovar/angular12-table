@@ -208,19 +208,19 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     if (this.searchFilter?.odFrom) {
       let t_odFrom = ngbDateStructToIsoString(this.searchFilter?.odFrom);
-      s_odFrom = t_odFrom && `&od_gte=${t_odFrom}`;
+      s_odFrom = t_odFrom && `&datumOd_gte=${t_odFrom}`;
     }
     if (this.searchFilter?.odTo) {
       let t_odTo = ngbDateStructToIsoString(this.searchFilter?.odTo);
-      s_odTo = t_odTo && `&od_lte=${t_odTo}`;
+      s_odTo = t_odTo && `&datumOd_lte=${t_odTo}`;
     }
     if (this.searchFilter?.doFrom) {
       let t_doFrom = ngbDateStructToIsoString(this.searchFilter?.doFrom);
-      s_doFrom = t_doFrom && `&do_gte=${t_doFrom}`;
+      s_doFrom = t_doFrom && `&datumDo_gte=${t_doFrom}`;
     }
     if (this.searchFilter?.doTo) {
       let t_doTo = ngbDateStructToIsoString(this.searchFilter?.doTo);
-      s_doTo = t_doTo && `&do_lte=${t_doTo}`;
+      s_doTo = t_doTo && `&datumDo_lte=${t_doTo}`;
     }
 
     const s_poznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
@@ -283,8 +283,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             if (res.data) {
               // debugger;
               // if (this.tableMode !== 'log') {
-              // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['od', 'do']);
-              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['od', 'do']);
+              // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['datumOd', 'datumDo']);
+              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }
@@ -562,9 +562,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
         // }
       }
 
-      if (colname === 'od' || colname === 'do') {
-        const isoDateOd = ngbDateStructToIsoString(item['od']);
-        const isoDateDo = ngbDateStructToIsoString(item['do']);
+      if (colname === 'datumOd' || colname === 'datumDo') {
+        const isoDateOd = ngbDateStructToIsoString(item['datumOd']);
+        const isoDateDo = ngbDateStructToIsoString(item['datumDo']);
 
         if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
           item['ErrorInterval'] = true;
@@ -651,7 +651,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
             modifiedCols = diffValProp.map(function (item) {
-              if (item?.propName === 'od' || item?.propName === 'do') {
+              if (item?.propName === 'datumOd' || item?.propName === 'datumDo') {
                 return {
                   colName: item.propName,
                   newValue: ngbDateStructToIsoString(item.newValue)
@@ -683,8 +683,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
         }
       }
       debugger;
-      records = this.setDatePickersToIsoString(records, ['od', 'do']);
-      previousStateRecords = this.setDatePickersToIsoString(previousStateRecords, ['od', 'do']);
+      records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
+      previousStateRecords = this.setDatePickersToIsoString(previousStateRecords, ['datumOd', 'datumDo']);
 
       this.store.dispatch(new RecordsSave({ endPoint: url, previousStateRecords, records, currentUrl: this.currentUrl }));
       this.recordsDiffArrObj = null;

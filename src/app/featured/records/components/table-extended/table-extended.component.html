@@ -3,7 +3,7 @@
     <div class="col-md-12">
 
       <!-- <div class="d-none" id="confirmSelectionContainer">
-        <button class="btn btn-primary" id="confirmSelection" (click)="showHideBtn(); d.close(); confirmSelection('model1','od')" type="button">
+        <button class="btn btn-primary" id="confirmSelection" (click)="showHideBtn(); d.close(); confirmSelection('model1','datumOd')" type="button">
           Confirm selection
         </button>
       </div>
@@ -118,9 +118,9 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-1 pr-1" id="od" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" id="datumOd" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="partial-search" [ngClass]="{'non-click': recordsDiffArrObj}">
-                <!-- <input type="text" [(ngModel)]="searchFilter.od" [ngModelOptions]="{standalone: true}"
+                <!-- <input type="text" [(ngModel)]="searchFilter.datumOd" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <div class="input-group">
                   <span class="pt-2">od: </span>
@@ -132,7 +132,7 @@
                       <span>ok
                       </span>
                     </ng-template> -->
-                  <!-- <button class="btn btn-primary" (click)="d1.close(); confirmSelection('searchFilter','od')" type="button">
+                  <!-- <button class="btn btn-primary" (click)="d1.close(); confirmSelection('searchFilter','datumOd')" type="button">
                       Confirm selection
                     </button> -->
                   <div class="input-group-append">
@@ -161,13 +161,13 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('od')">od
-                <mat-icon *ngIf="sortByCol?.od==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.od==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumOd')">datum od
+                <mat-icon *ngIf="sortByCol?.datumOd==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datumOd==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
 
             </th>
-            <th class="col-sm-2 pl-1 pr-1" id="do" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" id="datumDo" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -201,9 +201,9 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('do')">do
-                <mat-icon *ngIf="sortByCol?.do==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.do==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumDo')">datum do
+                <mat-icon *ngIf="sortByCol?.datumDo==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datumDo==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
 
 
@@ -303,12 +303,12 @@
 
             <td class="pl-1 pr-1">
 
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                 <div class="input-group">
                   <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'deleted'"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker #d="ngbDatepicker"
-                    #c1="ngModel" (ngModelChange)="onInputChange('od', item); changeDate($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
+                    #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)" />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'deleted')}"
@@ -317,30 +317,30 @@
                     </button>
                   </div>
                 </div>
-                <small *ngIf="item?.odErrorRequired">Required<br /></small>
+                <small *ngIf="item?.datumOdErrorRequired">Required<br /></small>
                 <small *ngIf="item?.ErrorInterval">Od > Do !<br /></small>
-                <small *ngIf="item?.ErrorMin">{{item.datumVytvoreniaPoslednejSnimky | date:"dd.MM.yyyy" }} >= Od
+                <small *ngIf="item?.ErrorMin">{{item.datumVytvoreniaPoslednejSnimky | date:"dd.MM.yyyy" }} >= datum od
                   !<br /></small>
               </span>
 
-              <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+              <!-- <span *ngIf="!item.read" class="form-group record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                 <div class="input-group">
-                  <input type="text" [(ngModel)]="item.od" [ngModelOptions]="{standalone: true}"
-                    (ngModelChange)="onInputChange('od', item, i)" class="form-control">
+                  <input type="text" [(ngModel)]="item.datumOd" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('datumOd', item, i)" class="form-control">
 
                 </div>
-                <label *ngIf="item?.odErrorRequired">Required</label>
+                <label *ngIf="item?.datumOdErrorRequired">Required</label>
               </span> -->
-              <span *ngIf="item.read">{{item.od}}</span>
+              <span *ngIf="item.read">{{item.datumOd}}</span>
             </td>
             <td class="pl-1 pr-1">
 
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
                 <div class="input-group">
                   <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'deleted'"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker #d="ngbDatepicker"
-                    #c2="ngModel" (ngModelChange)="onInputChange('do', item); changeDate($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
+                    #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)" />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'deleted')}"
@@ -349,9 +349,8 @@
                     </button>
                   </div>
                 </div>
-                <small *ngIf="item?.doErrorRequired">Required<br /></small>
-                <small *ngIf="item?.ErrorInterval">Do
-                  < Od !<br />
+                <small *ngIf="item?.datumDoErrorRequired">Required<br /></small>
+                <small *ngIf="item?.ErrorInterval">datum do < datum od !<br />
                 </small>
                 <!-- <div *ngIf="item.do.dirty && item.do.invalid">
                   <small class="form-text text-danger" *ngIf="item.do.errors.required">
@@ -366,12 +365,12 @@
               </div> -->
               </span>
 
-              <!-- <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
-                <input type="text" [(ngModel)]="item.do" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('do', item, i)" class="form-control">
-                <label *ngIf="item?.doErrorRequired">Required</label>
+              <!-- <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
+                <input type="text" [(ngModel)]="item.datumDo" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('datumDo', item, i)" class="form-control">
+                <label *ngIf="item?.datumDoErrorRequired">Required</label>
               </span> -->
-              <span *ngIf="item.read">{{item.do}}</span>
+              <span *ngIf="item.read">{{item.datumDo}}</span>
             </td>
             <td class="pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">

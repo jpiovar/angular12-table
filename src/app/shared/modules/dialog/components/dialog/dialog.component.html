@@ -67,14 +67,14 @@
                         <ng-template #elseManualnyRating><span>{{item.manualnyRating}}</span></ng-template>
                       </td>
                       <td>
-                        <!-- <span [ngClass]="{'item-changed': itemChanged(item?.modifiedColumns, 'od')}">{{item.od | date:"dd.MM.yyyy"}}</span> -->
-                        <span *ngIf="itemChanged(item?.modifiedColumns, 'od'); else elseOd" class='item-changed'  [ngbTooltip]="dateFormat(currentValue(item?.modifiedColumns, 'od'))">{{dateFormat(item.od)}}</span>
-                        <ng-template #elseOd><span>{{item.od | date:"dd.MM.yyyy"}}</span></ng-template>
+                        <!-- <span [ngClass]="{'item-changed': itemChanged(item?.modifiedColumns, 'datumOd')}">{{item.datumOd | date:"dd.MM.yyyy"}}</span> -->
+                        <span *ngIf="itemChanged(item?.modifiedColumns, 'datumOd'); else elseOd" class='item-changed'  [ngbTooltip]="dateFormat(currentValue(item?.modifiedColumns, 'datumOd'))">{{dateFormat(item.datumOd)}}</span>
+                        <ng-template #elseOd><span>{{item.datumOd | date:"dd.MM.yyyy"}}</span></ng-template>
                       </td>
                       <td>
-                        <!-- <span [ngClass]="{'item-changed': itemChanged(item?.modifiedColumns, 'do')}">{{item.do | date:"dd.MM.yyyy"}}</span> -->
-                        <span *ngIf="itemChanged(item?.modifiedColumns, 'do'); else elseDo" class='item-changed'  [ngbTooltip]="dateFormat(currentValue(item?.modifiedColumns, 'do'))">{{dateFormat(item.do)}}</span>
-                        <ng-template #elseDo><span>{{item.do | date:"dd.MM.yyyy"}}</span></ng-template>
+                        <!-- <span [ngClass]="{'item-changed': itemChanged(item?.modifiedColumns, 'datumDo')}">{{item.datumDo | date:"dd.MM.yyyy"}}</span> -->
+                        <span *ngIf="itemChanged(item?.modifiedColumns, 'datumDo'); else elseDo" class='item-changed'  [ngbTooltip]="dateFormat(currentValue(item?.modifiedColumns, 'datumDo'))">{{dateFormat(item.datumDo)}}</span>
+                        <ng-template #elseDo><span>{{item.datumDo | date:"dd.MM.yyyy"}}</span></ng-template>
                       </td>
                       <td>
                         <span *ngIf="itemChanged(item?.modifiedColumns, 'poznamka'); else elsePoznamka" class='item-changed'  [ngbTooltip]="currentValue(item?.modifiedColumns, 'poznamka')">{{item.poznamka}}</span>

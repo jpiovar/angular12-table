@@ -8,7 +8,7 @@
     "actionType": "edit",
     "modifiedColumns":[
       {
-        "columnName": "od",
+        "columnName": "datumOd",
         "previousContent": "2020-10-01T00:00:11",
         "updatedContent": "2020-10-02T00:00:00"
       },
@@ -28,7 +28,7 @@
     "actionType": "edit",
     "modifiedColumns":[
       {
-        "columnName": "od",
+        "columnName": "datumOd",
         "previousContent": "2020-10-01T00:00:11",
         "updatedContent": "2020-10-02T00:00:00"
       },
@@ -48,7 +48,7 @@
     "actionType": "edit",
     "modifiedColumns":[
       {
-        "columnName": "od",
+        "columnName": "datumOd",
         "previousContent": "2020-10-01T00:00:11",
         "updatedContent": "2020-10-02T00:00:00"
       },
@@ -68,7 +68,7 @@
     "actionType": "edit",
     "modifiedColumns":[
       {
-        "columnName": "od",
+        "columnName": "datumOd",
         "previousContent": "2020-10-01T00:00:11",
         "updatedContent": "2020-10-02T00:00:00"
       },
@@ -88,7 +88,7 @@
     "actionType": "edit",
     "modifiedColumns":[
       {
-        "columnName": "od",
+        "columnName": "datumOd",
         "previousContent": "2020-10-01T00:00:11",
         "updatedContent": "2020-10-02T00:00:00"
       },
@@ -108,7 +108,7 @@
     "actionType": "edit",
     "modifiedColumns":[
       {
-        "columnName": "od",
+        "columnName": "datumOd",
         "previousContent": "2020-10-01T00:00:11",
         "updatedContent": "2020-10-02T00:00:00"
       },

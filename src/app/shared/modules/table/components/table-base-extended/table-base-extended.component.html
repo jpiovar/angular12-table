@@ -30,11 +30,11 @@
               <th class="col-sm-1 pr-1 pl-1" id="manualnyRating">
                 <span>manualny<br>rating</span>
               </th>
-              <th class="col-sm-2 pr-1 pl-1" id="od">
-                <span>od</span>
+              <th class="col-sm-2 pr-1 pl-1" id="datumOd">
+                <span>datum od</span>
               </th>
-              <th class="col-sm-2 pr-1 pl-1" id="do">
-                <span>do</span>
+              <th class="col-sm-2 pr-1 pl-1" id="datumDo">
+                <span>datum do</span>
               </th>
               <th class="col-sm-2 pr-1 pl-1" id="poznamka">
                 <span>poznamka</span>
@@ -84,19 +84,19 @@
                     <option value="" disabled>Vyberte manualny rating</option>
                     <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                   </select>
-                  <label *ngIf="item?.manualnyRatingErrorRequired">Required</label>
+                  <small *ngIf="item?.manualnyRatingErrorRequired">Required</small>
                 </span>
                 <span *ngIf="item.read">{{item.manualnyRating}}</span>
               </td>
 
               <td class="pr-1 pl-1">
 
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.odErrorRequired}">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                   <div class="input-group">
                     <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'"
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.od" ngbDatepicker #d="ngbDatepicker"
-                      #c1="ngModel" (ngModelChange)="onInputChange('od', item); changeDate($event)" />
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
+                      #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)" />
                     <div class="input-group-append">
                       <button
                         [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'removed')}"
@@ -105,21 +105,21 @@
                       </button>
                     </div>
                   </div>
-                  <small *ngIf="item?.odErrorRequired">Required </small>
+                  <small *ngIf="item?.datumOdErrorRequired">Required <br/></small>
                   <small *ngIf="item?.ErrorInterval">Od > Do !</small>
                 </span>
 
 
-                <span *ngIf="item.read">{{item.od}}</span>
+                <span *ngIf="item.read">{{item.datumOd}}</span>
               </td>
               <td class="pr-1 pl-1">
 
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.doErrorRequired}">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
                   <div class="input-group">
                     <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'"
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.do" ngbDatepicker #d="ngbDatepicker"
-                      #c2="ngModel" (ngModelChange)="onInputChange('do', item); changeDate($event)" />
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
+                      #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)" />
                     <div class="input-group-append">
                       <button
                         [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'removed')}"
@@ -128,19 +128,19 @@
                       </button>
                     </div>
                   </div>
-                  <small *ngIf="item?.doErrorRequired">Required</small>
-                  <small *ngIf="item?.ErrorInterval">Do < Od !</small>
+                  <small *ngIf="item?.datumDoErrorRequired">Required<br/></small>
+                  <small *ngIf="item?.ErrorInterval">datum do < datum od !</small>
 
                 </span>
 
-                <span *ngIf="item.read">{{item.do}}</span>
+                <span *ngIf="item.read">{{item.datumDo}}</span>
               </td>
               <td class="pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
                   <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'" type="text"
                     [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('poznamka', item)" class="form-control">
-                  <label *ngIf="item?.poznamkaErrorRequired">Required</label>
+                  <small *ngIf="item?.poznamkaErrorRequired">Required</small>
                 </span>
                 <span *ngIf="item.read">{{item.poznamka}}</span>
               </td>
@@ -171,11 +171,11 @@
               <th class="col-sm-1" id="manualnyRating">
                 <span>manualny<br>rating</span>
               </th>
-              <th class="col-sm-2" id="od">
-                <span>od</span>
+              <th class="col-sm-2" id="datumOd">
+                <span>datum od</span>
               </th>
-              <th class="col-sm-2" id="do">
-                <span>do</span>
+              <th class="col-sm-2" id="datumDo">
+                <span>datum do</span>
               </th>
               <th class="col-sm-2" id="poznamka">
                 <span>poznamka</span>
@@ -188,8 +188,8 @@
               <td>{{item.obchodneMeno}}</td>
               <td> {{item.vypocitanyRating}}</td>
               <td>{{item.manualnyRating}}</td>
-              <td>{{item.od | date:"dd.MM.yyyy" }}</td>
-              <td>{{item.do | date:"dd.MM.yyyy" }}</td>
+              <td>{{item.datumOd | date:"dd.MM.yyyy" }}</td>
+              <td>{{item.datumDo | date:"dd.MM.yyyy" }}</td>
               <td>{{item.poznamka}}</td>
             </tr>
           </tbody>
