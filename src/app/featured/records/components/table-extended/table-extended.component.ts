@@ -563,8 +563,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       }
 
       if (colname === 'datumOd' || colname === 'datumDo') {
-        const isoDateOd = ngbDateStructToIsoString(item['datumOd']);
-        const isoDateDo = ngbDateStructToIsoString(item['datumDo']);
+        const isoDateOd = item[colname] && ngbDateStructToIsoString(item['datumOd']);
+        const isoDateDo = item[colname] && ngbDateStructToIsoString(item['datumDo']);
 
         if (isoDateOd && isoDateDo && isoDateOd > isoDateDo) {
           item['ErrorInterval'] = true;
