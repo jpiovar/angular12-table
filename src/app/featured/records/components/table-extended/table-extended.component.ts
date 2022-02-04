@@ -639,6 +639,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           let modifiedCols = {};
           let modifiedProp = {};
 
+          records[j].autorZmeny = this.user?.account?.name;
+          records[j].datumZmeny = new Date().toISOString();
+
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (this.recordsDiffArrObj[key]['progressStatus'] === 'deleted') {
             this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'INACTIVE');
