@@ -262,6 +262,24 @@
   {
     "id": "id12",
     "recordIdBase": "id2",
+    "recordIdExtended": "id100",
+    "status": "ACTIVE",
+    "opIco": "jankofirstname2",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "A",
+    "datumOd": "2020-01-01T00:00:00",
+    "datumDo": "2020-01-02T00:00:00",
+    "poznamka": "notification12",
+    "datumZmeny": "2020-01-09T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "created"
+  },
+  {
+    "id": "id12",
+    "recordIdBase": "id2",
+    "recordIdExtended": "id100",
     "status": "ACTIVE",
     "opIco": "jankofirstname2",
     "obchodneMeno": "jankosurname",
@@ -273,6 +291,26 @@
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
-    "actionType": "created"
+    "actionType": "changed",
+    "modifiedColumns": [
+      {"colName": "manualnyRating", "newValue": "D"}
+    ]
+  },
+  {
+    "id": "id12",
+    "recordIdBase": "id2",
+    "recordIdExtended": "id100",
+    "status": "ACTIVE",
+    "opIco": "jankofirstname2",
+    "obchodneMeno": "jankosurname",
+    "vypocitanyRating": "A",
+    "manualnyRating": "D",
+    "datumOd": "2020-01-01T00:00:00",
+    "datumDo": "2020-01-02T00:00:00",
+    "poznamka": "notification12",
+    "datumZmeny": "2020-01-11T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00",
+    "actionType": "deleted"
   }
 ]

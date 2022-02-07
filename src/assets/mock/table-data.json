@@ -178,5 +178,20 @@
     "datumZmeny": "2020-01-10T00:00:00",
     "autorZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
+  },
+  {
+    "id": "id100",
+    "recordIdBase": "id2",
+    "status": "ACTIVE",
+    "opIco": "jankofirstname2",
+    "obchodneMeno": "jankosurname22",
+    "vypocitanyRating": "A",
+    "manualnyRating": "A",
+    "datumOd": "2020-01-01T00:00:00",
+    "datumDo": "2020-01-02T00:00:00",
+    "poznamka": "notification12",
+    "datumZmeny": "2020-01-10T00:00:00",
+    "autorZmeny": "john conor",
+    "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   }
 ]

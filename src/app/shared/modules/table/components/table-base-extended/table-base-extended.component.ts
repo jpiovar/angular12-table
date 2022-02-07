@@ -24,6 +24,8 @@ import { BehaviorSubject, Observable, Subject, Subscription, zip } from 'rxjs';
 
 import * as _ from 'lodash';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import { compareValues, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
@@ -387,13 +389,15 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       // this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
       // this.recordsDiffArrObj = null;
 
+      const uid = uuidv4();
       const d = new Date(); // today date
       const dtext = d.toISOString();
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records =JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdExtended', uid);
+      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', uid);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'ACTIVE');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datumZmeny', dtext);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autorZmeny', this.user?.account?.name);

@@ -290,11 +290,14 @@ export class RecordsEffects {
       (action: RecordsAddNew) => {
         debugger;
         const endPoint: any = action?.payload?.endPoint;
-        const records: any = action?.payload?.records;
+        const records: any = JSON.parse(JSON.stringify(action?.payload?.records));
+
+        delete records[0]['recordIdExtended'];
 
         const url = `${this.origin}${this.tableLogs}`;
         const previousStateRecords = JSON.parse(JSON.stringify(action?.payload?.records));
         previousStateRecords[0]['actionType'] = 'created';
+
 
         return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(
           map(
