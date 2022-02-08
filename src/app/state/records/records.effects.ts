@@ -292,8 +292,6 @@ export class RecordsEffects {
         const endPoint: any = action?.payload?.endPoint;
         const records: any = JSON.parse(JSON.stringify(action?.payload?.records));
 
-        delete records[0]['recordIdExtended'];
-
         const url = `${this.origin}${this.tableLogs}`;
         const previousStateRecords = JSON.parse(JSON.stringify(action?.payload?.records));
         previousStateRecords[0]['actionType'] = 'created';

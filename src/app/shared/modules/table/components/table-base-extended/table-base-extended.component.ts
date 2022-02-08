@@ -396,7 +396,6 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       let records =JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdExtended', uid);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', uid);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'ACTIVE');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datumZmeny', dtext);
