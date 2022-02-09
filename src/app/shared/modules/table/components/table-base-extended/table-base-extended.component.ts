@@ -26,7 +26,7 @@ import * as _ from 'lodash';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { compareValues, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
+import { compareValues, getIndexBasedId, getItemBasedId, isLocalHost, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
   RecordsAddNew,
@@ -396,7 +396,11 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       let records =JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
-      records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', uid);
+      if (isLocalHost()) {
+        records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', uid);
+      } else {
+        records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
+      }
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'ACTIVE');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datumZmeny', dtext);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autorZmeny', this.user?.account?.name);

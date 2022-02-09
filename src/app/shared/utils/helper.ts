@@ -68,3 +68,10 @@ export function differentValueProperties(obj1: any, obj2: any): any[] {
   }
   return res;
 }
+
+export function isLocalHost() {
+  if (['localhost', '127.0.0.1', ''].includes(window.location.hostname)) {
+    return true;
+  }
+  return false;
+}

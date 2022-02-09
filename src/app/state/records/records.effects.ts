@@ -41,7 +41,7 @@ import { ajax } from 'rxjs/ajax';
 import { Store } from '@ngrx/store';
 import { AppState } from '..';
 import { StartToastr } from '../toastr/toastr.actions';
-import { getIndexBasedId, getItemBasedId } from 'src/app/shared/utils/helper';
+import { getIndexBasedId, getItemBasedId, isLocalHost } from 'src/app/shared/utils/helper';
 import { LogsSave } from '../logs/logs.actions';
 import { ExportStatus } from '../export/export.actions';
 
@@ -189,8 +189,9 @@ export class RecordsEffects {
         }
         // }
         debugger;
-        this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords }));
-
+        if (isLocalHost()) {
+          this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords }));
+        }
         this.store.dispatch(new ExportStatus({ status: 'ACTIVE' }));
         debugger;
         const urlLoadRecords = res?.currentUrl;
@@ -302,7 +303,9 @@ export class RecordsEffects {
             (response: any) => {
               debugger;
               if (response) {
-                this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords }));
+                if (isLocalHost()) {
+                  this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords }));
+                }
                 return new RecordsAddNewSuccess();
               }
             }
