@@ -8,7 +8,7 @@ export const initialState: TablesState = {
 export function reducer(state = initialState, action: TablesActions.Actions): TablesState {
   switch (action.type) {
     case TablesActions.TABLES_STATUS: {
-      debugger;
+      // debugger;
       const newState = action.payload;
       return {
         ...state, ...newState

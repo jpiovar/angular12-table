@@ -141,7 +141,7 @@ export class RecordsEffects {
     ofType(RECORDS_SAVE),
     map(
       (action: RecordsSave) => {
-        debugger;
+        // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
         const currentUrl: string = action?.payload?.currentUrl;
@@ -163,7 +163,7 @@ export class RecordsEffects {
         return new Observable((observer: Observer<any>) => {
           zip(...res.arrObs).subscribe(
             (subres: any) => {
-              debugger;
+              // debugger;
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
@@ -181,19 +181,19 @@ export class RecordsEffects {
     map(
       res => {
         const url = `${this.origin}${this.tableLogs}`;
-        debugger;
+        // debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
 
         for (let i = 0; i < res?.previousStateRecords.length; i++) {
           this.store.dispatch(new StartToastr({ text: `record ${res?.previousStateRecords[i].id} updated`, type: 'success', duration: 5000 }));
         }
         // }
-        debugger;
+        // debugger;
         if (isLocalHost()) {
           this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: res?.previousStateRecords }));
         }
         this.store.dispatch(new ExportStatus({ status: 'ACTIVE' }));
-        debugger;
+        // debugger;
         const urlLoadRecords = res?.currentUrl;
         this.store.dispatch(new RecordsLoad(urlLoadRecords));
 
@@ -289,7 +289,7 @@ export class RecordsEffects {
     ofType(RECORDS_ADD_NEW),
     mergeMap(
       (action: RecordsAddNew) => {
-        debugger;
+        // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = JSON.parse(JSON.stringify(action?.payload?.records));
 
@@ -301,7 +301,7 @@ export class RecordsEffects {
         return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(
           map(
             (response: any) => {
-              debugger;
+              // debugger;
               if (response) {
                 if (isLocalHost()) {
                   this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords }));
@@ -311,7 +311,7 @@ export class RecordsEffects {
             }
           ),
           catchError(error => {
-            debugger;
+            // debugger;
             console.log(`${endPoint}`, error);
             return of(new RecordsAddNewFail(error));
           })

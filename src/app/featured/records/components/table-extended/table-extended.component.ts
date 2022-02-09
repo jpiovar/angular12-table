@@ -101,7 +101,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
   showHideBtn() {
-    debugger;
+    // debugger;
     this.btnVisible = !this.btnVisible;
     const $confirmSelectionContainer = $('#confirmSelectionContainer');
     const $confirmSelectionBtn = $('#confirmSelection');
@@ -118,23 +118,23 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   confirmSelection(modelName: string, prop: string) {
-    debugger;
-    this.tempDate;
+    // debugger;
+    // this.tempDate;
     const d1 = new Date(); // today date
     const dtext1 = d1.toISOString();
     if (modelName && prop) {
-      this[modelName][prop] = { day: 1, month: 1, year: 2020 }; //isoStringtoNgbDateStruct(dtext1);
+      this[modelName][prop] = { day: 1, month: 1, year: 2020 }; // isoStringtoNgbDateStruct(dtext1);
     } else if (modelName && !prop) {
       this[modelName] = isoStringtoNgbDateStruct(dtext1);
     }
   }
 
   onDateSelection(evt) {
-    debugger;
+    // debugger;
   }
 
   changeDate(event) {
-    debugger;
+    // debugger;
     console.log(event);
     this.tempDate = event;
   }
@@ -174,7 +174,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   createAndExecuteUrl(isFilter?: boolean) {
-    debugger;
+    // debugger;
     if (isFilter) {
       this.sortBy = 'opIco';
       this.direction = 'asc';
@@ -182,8 +182,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     }
     // const origin = `${this.origin}`;
     // const endPoint = `${this.tableDataEndPoint}`;
-    // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    // const statusLike = this.toggleBtnState === 'ACTIVE' ? `status_ne=INACTIVE` : `status_ne=ACTIVE`;
+    // // const statusLike = this.toggleBtnState ? `statusSlike=${this.toggleBtnState}` : '';
+    // const statusLike = this.toggleBtnState === 'ACTIVE' ? `statusSne=INACTIVE` : `statusSne=ACTIVE`;
     // const q = this.searchText ? `&q=${this.searchText}` : '';
     // const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     // const order = this.direction ? `&_order=${this.direction}` : '';
@@ -196,37 +196,37 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
-    let s_odFrom = '';
-    let s_odTo = '';
-    let s_doFrom = '';
-    let s_doTo = '';
+    let sSodFrom = '';
+    let sSodTo = '';
+    let sSdoFrom = '';
+    let sSdoTo = '';
 
-    const s_opIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
-    const s_obchodneMeno = this.searchFilter?.obchodneMeno?.trim() ? `&obchodneMeno_like=${this.searchFilter?.obchodneMeno?.trim()}` : '';
-    const s_vypocitanyRating = this.searchFilter?.vypocitanyRating.trim() ? `&vypocitanyRating_like=${this.searchFilter?.vypocitanyRating?.trim()}` : '';
-    const s_manualnyRating = this.searchFilter?.manualnyRating.trim() ? `&manualnyRating_like=${this.searchFilter?.manualnyRating?.trim()}` : '';
+    const sSopIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
+    const sSobchodneMeno = this.searchFilter?.obchodneMeno?.trim() ? `&obchodneMeno_like=${this.searchFilter?.obchodneMeno?.trim()}` : '';
+    const sSvypocitanyRating = this.searchFilter?.vypocitanyRating.trim() ? `&vypocitanyRating_like=${this.searchFilter?.vypocitanyRating?.trim()}` : '';
+    const sSmanualnyRating = this.searchFilter?.manualnyRating.trim() ? `&manualnyRating_like=${this.searchFilter?.manualnyRating?.trim()}` : '';
 
     if (this.searchFilter?.odFrom) {
-      let t_odFrom = ngbDateStructToIsoString(this.searchFilter?.odFrom);
-      s_odFrom = t_odFrom && `&datumOd_gte=${t_odFrom}`;
+      const tTodFrom = ngbDateStructToIsoString(this.searchFilter?.odFrom);
+      sSodFrom = tTodFrom && `&datumOd_gte=${tTodFrom}`;
     }
     if (this.searchFilter?.odTo) {
-      let t_odTo = ngbDateStructToIsoString(this.searchFilter?.odTo);
-      s_odTo = t_odTo && `&datumOd_lte=${t_odTo}`;
+      const tTodTo = ngbDateStructToIsoString(this.searchFilter?.odTo);
+      sSodTo = tTodTo && `&datumOd_lte=${tTodTo}`;
     }
     if (this.searchFilter?.doFrom) {
-      let t_doFrom = ngbDateStructToIsoString(this.searchFilter?.doFrom);
-      s_doFrom = t_doFrom && `&datumDo_gte=${t_doFrom}`;
+      const tTdoFrom = ngbDateStructToIsoString(this.searchFilter?.doFrom);
+      sSdoFrom = tTdoFrom && `&datumDo_gte=${tTdoFrom}`;
     }
     if (this.searchFilter?.doTo) {
-      let t_doTo = ngbDateStructToIsoString(this.searchFilter?.doTo);
-      s_doTo = t_doTo && `&datumDo_lte=${t_doTo}`;
+      const tTdoTo = ngbDateStructToIsoString(this.searchFilter?.doTo);
+      sSdoTo = tTdoTo && `&datumDo_lte=${tTdoTo}`;
     }
 
-    const s_poznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
+    const sSpoznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
 
 
-    // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
+    // const statusLike = this.toggleBtnState ? `statusSlike=${this.toggleBtnState}` : '';
     const statusLike = this.toggleBtnState === 'ACTIVE' ? `status=ACTIVE` : `status=INACTIVE`;
     // const q = this.searchText ? `&q=${this.searchText}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
@@ -234,26 +234,26 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${s_opIco}${s_obchodneMeno}${s_vypocitanyRating}${s_manualnyRating}${s_odFrom}${s_odTo}${s_doFrom}${s_doTo}${s_poznamka}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${sSopIco}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
   }
 
   activeInactiveToggle(event) {
-    // debugger;
+    // // debugger;
     event.preventDefault();
     if (this.toggleBtnState === 'ACTIVE') {
       this.toggleBtnState = 'INACTIVE';
     } else {
       this.toggleBtnState = 'ACTIVE';
     }
-    // const url = `${this.origin}${this.tableDataEndPoint}?status_like=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
+    // const url = `${this.origin}${this.tableDataEndPoint}?statusSlike=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
     // this.store.dispatch(new RecordsLoad(url));
     this.createAndExecuteUrl();
   }
 
   triggerTableLoad(): void {
-    // debugger;
+    // // debugger;
     this.tableMode = 'load';
     this.store.dispatch(new StartSpinner());
     // let url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=asc&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
@@ -269,19 +269,19 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.store.select('records')
         // .pipe(last())
         .subscribe((res: any) => {
-          // debugger;
+          // // debugger;
 
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
-            // debugger;
+            // // debugger;
             if (res?.totalRecords > -1) {
               this.totalRecords = res?.totalRecords;
               this.setPagesRecords();
             }
 
             if (res.data) {
-              // debugger;
+              // // debugger;
               // if (this.tableMode !== 'log') {
               // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['datumOd', 'datumDo']);
               this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
@@ -299,14 +299,14 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.store.select('logs')
         // .pipe(last())
         .subscribe((res: any) => {
-          // debugger;
+          // // debugger;
 
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
 
             if (res.data) {
-              // debugger;
+              // // debugger;
 
               if (this.tableMode === 'log') {
                 this.openChangeLogDialog(this.recordId, res.data[this.recordId]);
@@ -323,9 +323,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.store.select('user').subscribe((res: any) => {
-        debugger;
+        // debugger;
         if (res) {
-          debugger;
+          // debugger;
           this.user = res;
         }
       })
@@ -336,7 +336,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       this.store.select('exportState')
         // .pipe(last())
         .subscribe((res: any) => {
-          debugger;
+          // debugger;
 
           this.store.dispatch(new StopSpinner());
 
@@ -385,19 +385,19 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
   setPagesRecords() {
-    // // debugger;
+    // // // debugger;
     this.tableMode = '';
     this.pages = new Array(Math.ceil(this.totalRecords / this.recordsPerPage));
   }
 
   jumpToPage(page: number): void {
-    // debugger;
+    // // debugger;
     this.activePage = page;
     this.triggerTableLoad();
   }
 
   previousPage() {
-    // debugger;
+    // // debugger;
     if (this.activePage >= 1) {
       this.activePage--;
       this.triggerTableLoad();
@@ -405,7 +405,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   nextPage() {
-    // debugger;
+    // // debugger;
     if (this.activePage < this.pages.length - 1) {
       this.activePage++;
       this.triggerTableLoad();
@@ -413,7 +413,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   sortByColumn(colname: string) {
-    // debugger;
+    // // debugger;
     this.sortByCol = {};
     this.activePage = 0;
 
@@ -439,7 +439,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   openChangeLogDialog(id: string, changeLog) {
-    // debugger;
+    // // debugger;
     this.dialogAction = '';
     this.tableMode = '';
     // const recordDetail = getItemBasedId(this.records, id);
@@ -458,7 +458,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     });
 
     this.dialogRefChangeModal.beforeClosed().subscribe(result => {
-      // debugger;
+      // // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
       if (this.dialogAction === 'submitBtn') {
@@ -468,7 +468,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     });
 
     this.dialogRefChangeModal.afterClosed().subscribe(result => {
-      // debugger;
+      // // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
       if (this.dialogAction === 'submitBtn') {
@@ -502,12 +502,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // }
 
   removeItem(item: any) {
-    // debugger;
+    // // debugger;
     item['progressStatus'] = 'deleted';
   }
 
   undoChange(item: any) {
-    // debugger;
+    // // debugger;
     delete item['progressStatus'];
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
@@ -515,7 +515,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   showHistoryLog(item: any) {
-    debugger;
+    // debugger;
     // dialog modal, get historyEndpoint/itemId
     this.store.dispatch(new StartSpinner());
     const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}&_sort=datumZmeny&_order=desc`;
@@ -525,7 +525,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   onInputChange(colname: string, item: any) {
-    // debugger;
+    // // debugger;
     // const itemId = this.records[index]?.id;
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
@@ -593,7 +593,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
-    // debugger;
+    // // debugger;
     // const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
     // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
     const record = JSON.parse(JSON.stringify(recordsItem));
@@ -606,7 +606,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   getRecordsDiffArrObjError(obj: any): boolean {
-    // debugger;
+    // // debugger;
     let res = false;
     for (const i in obj) {
       if (obj.hasOwnProperty(i)) {
@@ -622,20 +622,20 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    debugger;
+    // debugger;
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      let originalRecords = JSON.parse(JSON.stringify(this.originalRecords));
+      const originalRecords = JSON.parse(JSON.stringify(this.originalRecords));
       // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
       let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'progressStatus', 'remove');
       let previousStateRecords = [];
       for (const key in this.recordsDiffArrObj) {
         if (this.recordsDiffArrObj.hasOwnProperty(key)) {
-          debugger;
+          // debugger;
 
           const i = getIndexBasedId(originalRecords, key);
           const j = getIndexBasedId(records, key);
-          let action = {};
+          const action = {};
           let modifiedCols = {};
           let modifiedProp = {};
 
@@ -649,21 +649,21 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             records[index]['status'] = 'INACTIVE';
             action['actionType'] = 'deleted';
           } else if (this.recordsDiffArrObj[key]['progressStatus'] === 'changed') {
-            debugger;
+            // debugger;
             action['actionType'] = 'changed';
 
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
-            modifiedCols = diffValProp.map(function (item) {
+            modifiedCols = diffValProp.map(function(item) {
               if (item?.propName === 'datumOd' || item?.propName === 'datumDo') {
                 return {
                   colName: item.propName,
                   newValue: ngbDateStructToIsoString(item.newValue)
-                }
+                };
               } else {
                 return {
                   colName: item.propName,
                   newValue: item.newValue
-                }
+                };
               }
             });
 
@@ -685,7 +685,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
         }
       }
-      debugger;
+      // debugger;
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       previousStateRecords = this.setDatePickersToIsoString(previousStateRecords, ['datumOd', 'datumDo']);
 
@@ -720,18 +720,18 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   clearAllFilters() {
-    // debugger;
+    // // debugger;
     this.globalFilter = '';
     this.searchText = '';
     this.globalSearch();
   }
 
   processGlobalSearch() {
-    // debugger;
+    // // debugger;
     this.subscription.add(
       this.searchTextChanged.pipe(debounceTime(1000)).subscribe(
         response => {
-          // debugger;
+          // // debugger;
           this.isSearching = false;
           const res = response.trim();
           if (res) {
@@ -768,7 +768,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
   insertNewRecord() {
-    // debugger;
+    // // debugger;
     const id = new Date();
     this.dialogRefNewRecordModal = this.dialog.open(DialogStepperComponent, {
       panelClass: 'new-record-dialog-class',
@@ -784,60 +784,60 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     });
 
     this.dialogRefNewRecordModal.beforeClosed().subscribe(result => {
-      // debugger;
+      // // debugger;
       console.log(`Dialog result: ${result}`);
     });
 
     this.dialogRefNewRecordModal.afterClosed().subscribe(result => {
-      // debugger;
+      // // debugger;
       console.log(`Dialog result: ${result}`);
     });
   }
 
   triggerPartialFilters() {
-    debugger;
+    // debugger;
     // const origin = `${this.origin}`;
     // const endPoint = `${this.tableDataEndPoint}`;
-    // let s_opIco = '';
-    // let s_obchodneMeno = '';
-    // let s_vypocitanyRating = '';
-    // let s_manualnyRating = '';
-    // let s_od = '';
-    // let s_do = '';
-    // let s_poznamka = '';
+    // let sSopIco = '';
+    // let sSobchodneMeno = '';
+    // let sSvypocitanyRating = '';
+    // let sSmanualnyRating = '';
+    // let sSod = '';
+    // let sSdo = '';
+    // let sSpoznamka = '';
 
     // if (this.searchFilter?.opIco) {
-    //   s_opIco = this.searchFilter?.opIco?.trim();
+    //   sSopIco = this.searchFilter?.opIco?.trim();
     // }
     // if (this.searchFilter?.obchodneMeno) {
-    //   s_obchodneMeno = this.searchFilter?.obchodneMeno?.trim();
+    //   sSobchodneMeno = this.searchFilter?.obchodneMeno?.trim();
     // }
     // if (this.searchFilter?.vypocitanyRating) {
-    //   s_vypocitanyRating = this.searchFilter?.vypocitanyRating;
+    //   sSvypocitanyRating = this.searchFilter?.vypocitanyRating;
     // }
     // if (this.searchFilter?.manualnyRating) {
-    //   s_manualnyRating = this.searchFilter?.manualnyRating;
+    //   sSmanualnyRating = this.searchFilter?.manualnyRating;
     // }
     // if (this.searchFilter?.od) {
-    //   s_od = ngbDateStructToIsoString(this.searchFilter?.od);
+    //   sSod = ngbDateStructToIsoString(this.searchFilter?.od);
     // }
     // if (this.searchFilter?.do) {
-    //   s_do = ngbDateStructToIsoString(this.searchFilter?.do);
+    //   sSdo = ngbDateStructToIsoString(this.searchFilter?.do);
     // }
     // if (this.searchFilter?.poznamka) {
-    //   s_poznamka = this.searchFilter?.poznamka?.trim();
+    //   sSpoznamka = this.searchFilter?.poznamka?.trim();
     // }
 
 
-    // // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
-    // const statusLike = this.toggleBtnState === 'ACTIVE' ? `status_ne=INACTIVE` : `status_ne=ACTIVE`;
+    // // const statusLike = this.toggleBtnState ? `statusSlike=${this.toggleBtnState}` : '';
+    // const statusLike = this.toggleBtnState === 'ACTIVE' ? `statusSne=INACTIVE` : `statusSne=ACTIVE`;
     // // const q = this.searchText ? `&q=${this.searchText}` : '';
     // const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     // const order = this.direction ? `&_order=${this.direction}` : '';
     // const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     // const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    // const url = `${origin}${endPoint}?${statusLike}${s_opIco}${s_obchodneMeno}${s_vypocitanyRating}${s_manualnyRating}${s_od}${s_do}${s_poznamka}${sort}${order}${page}${limit}`;
+    // const url = `${origin}${endPoint}?${statusLike}${sSopIco}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSod}${sSdo}${sSpoznamka}${sort}${order}${page}${limit}`;
     // this.currentUrl = url;
     // this.store.dispatch(new RecordsLoad(url));
 
@@ -845,7 +845,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   clearInput(input: string) {
-    debugger;
+    // debugger;
     if (input === 'all') {
       this.searchFilter = JSON.parse(JSON.stringify(this.initialSearchFilter));
     } else {
@@ -856,13 +856,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   exportToDwh() {
-    debugger;
+    // debugger;
     // code logic to trigger export
     this.store.dispatch(new ExportStatus({ status: 'INACTIVE' }));
   }
 
   // dateSelected(event: any) {
-  //   debugger;
+  //   // debugger;
   //   this.tempDate = event;
   // }
 

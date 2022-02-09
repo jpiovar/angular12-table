@@ -13,14 +13,14 @@ export const LOGS_SAVE_FAIL = '[Logs] Save data fail';
 export class LogsLoad implements Action {
   readonly type = LOGS_LOAD;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 
 export class LogsLoadSuccess implements Action {
   readonly type = LOGS_LOAD_SUCCESS;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 
@@ -32,21 +32,21 @@ export class LogsLoadFail implements Action {
 export class LogsSave implements Action {
   readonly type = LOGS_SAVE;
   constructor(public payload: { endPoint: string, previousStateRecords: any }) {
-    debugger;
+    // debugger;
   }
 }
 
 export class LogsSaveSuccess implements Action {
   readonly type = LOGS_SAVE_SUCCESS;
   constructor(public payload: LogsState) {
-    debugger;
+    // debugger;
   }
 }
 
 export class LogsSaveFail implements Action {
   readonly type = LOGS_SAVE_FAIL;
   constructor(public payload: any) {
-    // debugger;
+    // // debugger;
   }
 }
 

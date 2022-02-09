@@ -26,12 +26,12 @@ export class TableCompletedComponent implements OnInit, OnChanges, OnDestroy {
       this.store.select('records')
         // .pipe(last())
         .subscribe((res: any) => {
-          debugger;
+          // // // debugger;
 
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
-            // debugger;
+            // // // // debugger;
             if (res?.error) {
               this.messageCompleted = 'New record added failed';
               console.log('New record added failed ', res.error);
@@ -46,8 +46,8 @@ export class TableCompletedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    this.completedRecords;
-    debugger;
+    // this.completedRecords;
+    // // debugger;
     // this.triggerTableLoad();
   }
 

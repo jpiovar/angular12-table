@@ -44,11 +44,11 @@ export class RecordsBaseExtendedEffects {
     ofType(RECORDS_BASE_EXTENDED_LOAD),
     switchMap(
       (action: RecordsBaseExtendedLoad) => {
-        debugger;
+        // // debugger;
         const urlRecordsBaseExtended: any = action.payload;
         return this.httpBase.getCommon(`${urlRecordsBaseExtended}`).pipe(
           map((res: any) => {
-            // debugger;
+            // // debugger;
             let resExt = res;
             if (!res?.data && !res?.totalRecords) {
               resExt = {
@@ -59,7 +59,7 @@ export class RecordsBaseExtendedEffects {
             return new RecordsBaseExtendedLoadSuccess(resExt);
           }),
           catchError(error => {
-            // debugger;
+            // // debugger;
             return of(new RecordsBaseExtendedLoadFail(error));
           })
         );

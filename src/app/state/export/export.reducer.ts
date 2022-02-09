@@ -8,7 +8,7 @@ export const initialState: ExportState = {
 export function reducer(state = initialState, action: ExportActions.Actions): ExportState {
   switch (action.type) {
     case ExportActions.EXPORT_STATUS: {
-      debugger;
+      // debugger;
       const newState = action.payload;
       return {
         ...state, ...newState

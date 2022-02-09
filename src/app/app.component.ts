@@ -53,10 +53,10 @@ export class AppComponent implements OnDestroy, OnInit {
 
     this.msalService.instance.acquireTokenSilent(request).then(tokenResponse => {
       // Do something with the tokenResponse
-      debugger;
+      // debugger;
       this.storeAccessToken(tokenResponse);
     }).catch(error => {
-      // debugger;
+      // // debugger;
       if (error instanceof InteractionRequiredAuthError) {
         // fallback to interaction when silent call fails
         return this.msalService.instance.acquireTokenRedirect(request);
@@ -65,7 +65,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   storeAccessToken(res) {
-    // debugger;
+    // // debugger;
     this.store.dispatch(new UserStoreData(res));
   }
 
@@ -73,7 +73,7 @@ export class AppComponent implements OnDestroy, OnInit {
     // debugger;
     this.store.dispatch(new StartSpinner());
     this.msalService.instance.handleRedirectPromise().then(res => {
-      debugger;
+      // debugger;
       this.store.dispatch(new StopSpinner());
       if (res?.account) {
         this.msalService.instance.setActiveAccount(res.account);

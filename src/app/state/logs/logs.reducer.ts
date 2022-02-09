@@ -11,7 +11,7 @@ export const initialState: LogsState = {
 export function reducer(state = initialState, action: LogsActions.Actions): LogsState {
   switch (action.type) {
     case LogsActions.LOGS_LOAD: {
-      debugger;
+      // // debugger;
       return {
         ...state,
         loading: true,
@@ -20,7 +20,7 @@ export function reducer(state = initialState, action: LogsActions.Actions): Logs
     }
 
     case LogsActions.LOGS_LOAD_SUCCESS: {
-      debugger;
+      // debugger;
       let newStateData = JSON.parse(JSON.stringify(state.data));
       if (newStateData === null) {
         newStateData = {};
@@ -43,7 +43,7 @@ export function reducer(state = initialState, action: LogsActions.Actions): Logs
     }
 
     case LogsActions.LOGS_SAVE: {
-      // debugger;
+      // // debugger;
       return {
         ...state,
         loading: true,
@@ -52,7 +52,7 @@ export function reducer(state = initialState, action: LogsActions.Actions): Logs
     }
 
     case LogsActions.LOGS_SAVE_SUCCESS: {
-      debugger;
+      // debugger;
       const newState = JSON.parse(JSON.stringify(action.payload));
       return {
         ...state,
@@ -63,7 +63,7 @@ export function reducer(state = initialState, action: LogsActions.Actions): Logs
     }
 
     case LogsActions.LOGS_SAVE_FAIL: {
-      // debugger;
+      // // debugger;
       return {
         ...state,
         loading: false,

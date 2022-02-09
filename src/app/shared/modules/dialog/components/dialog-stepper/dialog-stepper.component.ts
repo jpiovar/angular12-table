@@ -34,7 +34,7 @@ export class DialogStepperComponent implements OnInit {
   }
 
   initializeContent() {
-    debugger;
+    // // debugger;
     this.storeInitialSize();
     this.content = this.data;
 
@@ -43,7 +43,7 @@ export class DialogStepperComponent implements OnInit {
     // this.modifiedContent = JSON.parse(JSON.stringify(this.content));
 
     this.dialogStepperRef?.afterClosed()?.subscribe(result => {
-      debugger;
+      // // debugger;
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -51,7 +51,7 @@ export class DialogStepperComponent implements OnInit {
   storeInitialSize() {
     const self = this;
     this.dialogStepperRef.afterOpened()?.subscribe(result => {
-      debugger;
+      // debugger;
       const elementId = self.dialogStepperRef.id;
       // const elr = self.elementRef.nativeElement.querySelector(`[id="${elementId}"]`);
       const element = document.getElementById(elementId);
@@ -59,11 +59,11 @@ export class DialogStepperComponent implements OnInit {
       this.currentDialogSize.step0.height = element.offsetHeight;
       this.currentDialogSize.step1.width = 1.5 * this.currentDialogSize.step0.width;
       this.currentDialogSize.step2.width = 0.7 * this.currentDialogSize.step0.width;
-    })
+    });
   }
 
   setIndex(event) {
-    debugger;
+    // debugger;
     this.selectedIndex = event.selectedIndex;
     if (event?.selectedIndex === 0) {
       this.dialogStepperRef.updateSize(`${this.currentDialogSize.step0.width}px`);
@@ -76,39 +76,39 @@ export class DialogStepperComponent implements OnInit {
   }
 
   triggerClick(event) {
-    // debugger;
+    // // debugger;
     console.log(`Selected tab index: ${this.selectedIndex}`);
   }
 
   goBack(stepper: MatStepper) {
-    // debugger;
+    // // debugger;
     stepper.previous();
   }
 
   goForward(stepper: MatStepper) {
-    // debugger;
+    // // debugger;
     stepper.next();
   }
 
 
   move(index: number) {
-    // debugger;
+    // // debugger;
     this.stepper.selectedIndex = index;
   }
 
   addItems(newItems: any) {
-    // debugger;
+    // // debugger;
     this.addItemsAndStepNext(newItems);
   }
 
   addItemsAndStepNext(items: any) {
-    // debugger;
+    // // debugger;
     this.recordsNew = items;
     this.stepper.next();
   }
 
   submitRecord() {
-    debugger;
+    // debugger;
     this.emitEventToChild();
   }
 
@@ -122,12 +122,12 @@ export class DialogStepperComponent implements OnInit {
   }
 
   submitRecordsEventParent(submittedItems) {
-    debugger;
+    // debugger;
     this.submitItemsAndStepNext(submittedItems);
   }
 
   submitItemsAndStepNext(submittedItems: any) {
-    // debugger;
+    // // debugger;
     if (submittedItems && submittedItems?.length > 0) {
       this.submittedRecords = submittedItems;
       this.stepper.next();

@@ -31,17 +31,17 @@ export class LogsEffects {
     ofType(LOGS_LOAD),
     switchMap(
       (action: LogsLoad) => {
-        debugger;
+        // // debugger;
         const urlLogs: any = action.payload.url;
         const recordId = action.payload.recordId;
         const item = null;
         return this.httpBase.getCommon(`${urlLogs}`).pipe(
           map((res: any) => {
-            debugger;
+            // // debugger;
             return new LogsLoadSuccess({ recordId, logs: res });
           }),
           catchError(error => {
-            // debugger;
+            // // // debugger;
             return of(new LogsLoadFail(error));
           })
         );
@@ -56,7 +56,7 @@ export class LogsEffects {
   //   ofType(LOGS_SAVE),
   //   mergeMap(
   //     (action: LogsSave) => {
-  //       debugger;
+  //       // debugger;
   //       const endPoint: any = action?.payload?.endPoint;
   //       const originalRecords: any = action?.payload?.originalRecords;
   //       const records: any = action?.payload?.records;
@@ -82,12 +82,12 @@ export class LogsEffects {
   //       return this.httpBase.postCommon(`${endPoint}`, httpBody).pipe(
   //         map(
   //           (response: any) => {
-  //             debugger;
+  //             // debugger;
   //             return new LogsSaveSuccess(response);
   //           }
   //         ),
   //         catchError(error => {
-  //           debugger;
+  //           // debugger;
   //           return of(new LogsSaveFail(error));
   //         })
   //       );
@@ -100,7 +100,7 @@ export class LogsEffects {
   //   //     return new Observable((observer: Observer<any>) => {
   //   //       zip(...res.arrObs).subscribe(
   //   //         (subres: any) => {
-  //   //           debugger;
+  //   //           // debugger;
   //   //           return observer.next({
   //   //             arrObsRes: subres,
   //   //             endPoint: res.endPoint,
@@ -118,7 +118,7 @@ export class LogsEffects {
 
   //   // map(
   //   //   res => {
-  //   //     debugger;
+  //   //     // debugger;
   //   //     const logs = JSON.parse(JSON.stringify(res));
 
   //   //     // for (const key in res?.modified) {
@@ -128,7 +128,7 @@ export class LogsEffects {
   //   //   }
   //   // ),
   //   // catchError(error => {
-  //   //   debugger;
+  //   //   // debugger;
   //   //   return of(new LogsSaveFail(error));
   //   // })
   // )
@@ -140,7 +140,7 @@ export class LogsEffects {
     ofType(LOGS_SAVE),
     map(
       (action: LogsSave) => {
-        debugger;
+        // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const previousStateRecords: any = action?.payload?.previousStateRecords;
 
@@ -163,7 +163,7 @@ export class LogsEffects {
         return new Observable((observer: Observer<any>) => {
           zip(...res.arrObs).subscribe(
             (subres: any) => {
-              debugger;
+              // debugger;
               return observer.next({
                 arrObsRes: subres,
                 endPoint: res.endPoint,
@@ -178,13 +178,13 @@ export class LogsEffects {
     ),
     map(
       res => {
-        debugger;
+        // debugger;
         const previousStateRecords = JSON.parse(JSON.stringify(res?.previousStateRecords));
         return new LogsSaveSuccess(previousStateRecords);
       }
     ),
     catchError(error => {
-      debugger;
+      // debugger;
       return of(new LogsSaveFail(error));
     })
   )

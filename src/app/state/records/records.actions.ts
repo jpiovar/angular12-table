@@ -50,84 +50,84 @@ export class RecordsLoadFail implements Action {
 export class RecordsSave implements Action {
   readonly type = RECORDS_SAVE;
   constructor(public payload: { endPoint: string, previousStateRecords: any, records: any, currentUrl: string }) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsSaveSuccess implements Action {
   readonly type = RECORDS_SAVE_SUCCESS;
   constructor(public payload: RecordsState) {
-    // debugger;
+    // // debugger;
   }
 }
 
 export class RecordsSaveFail implements Action {
   readonly type = RECORDS_SAVE_FAIL;
   constructor(public payload: any) {
-    // debugger;
+    // // debugger;
   }
 }
 
 export class RecordsDelete implements Action {
   readonly type = RECORDS_DELETE;
   constructor(public payload: { endPoint: string, records: any, deleted: any }) {
-    // debugger;
+    // // debugger;
   }
 }
 
 export class RecordsDeleteSuccess implements Action {
   readonly type = RECORDS_DELETE_SUCCESS;
   constructor(public payload: RecordsState) {
-    // debugger;
+    // // debugger;
   }
 }
 
 export class RecordsDeleteFail implements Action {
   readonly type = RECORDS_DELETE_FAIL;
   constructor(public payload: any) {
-    // debugger;
+    // // debugger;
   }
 }
 
 export class RecordsAddNew implements Action {
   readonly type = RECORDS_ADD_NEW;
   constructor(public payload: { endPoint: string, records: any}) {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsAddNewSuccess implements Action {
   readonly type = RECORDS_ADD_NEW_SUCCESS;
   constructor() {
-    debugger;
+    // debugger;
   }
 }
 
 export class RecordsAddNewFail implements Action {
   readonly type = RECORDS_ADD_NEW_FAIL;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 
 // export class ChangeLogLoad implements Action {
 //   readonly type = CHANGE_LOG_LOAD;
 //   constructor(public payload: { url: string; recordId: string }) {
-//     debugger;
+//     // debugger;
 //   }
 // }
 
 // export class ChangeLogLoadSuccess implements Action {
 //   readonly type = CHANGE_LOG_LOAD_SUCCESS;
 //   constructor(public payload: any) {
-//     debugger;
+//     // debugger;
 //   }
 // }
 
 // export class ChangeLogLoadFail implements Action {
 //   readonly type = CHANGE_LOG_LOAD_FAIL;
 //   constructor(public payload: any) {
-//     debugger;
+//     // debugger;
 //   }
 // }
 
@@ -135,49 +135,49 @@ export class RecordsAddNewFail implements Action {
 // export class MetaLoad implements Action {
 //   readonly type = META_LOAD;
 //   constructor(public payload: any) {
-//     // debugger;
+//     // // debugger;
 //   }
 // }
 
 // export class MetaLoadSuccess implements Action {
 //   readonly type = META_LOAD_SUCCESS;
 //   constructor(public payload: any) {
-//     // debugger;
+//     // // debugger;
 //   }
 // }
 
 // export class MetaLoadFail implements Action {
 //   readonly type = META_LOAD_FAIL;
 //   constructor(public payload: any) {
-//     // debugger;
+//     // // debugger;
 //   }
 // }
 
 // export class MetaLocalSave implements Action {
 //   readonly type = META_LOCAL_SAVE;
 //   constructor(public payload: any) {
-//     debugger;
+//     // debugger;
 //   }
 // }
 
 // export class RecordSave implements Action {
 //   readonly type = RECORD_SAVE;
 //   constructor(public payload: { endPoint: string, record: any, actionType?: string }) {
-//     // debugger;
+//     // // debugger;
 //   }
 // }
 
 // export class RecordSaveSuccess implements Action {
 //   readonly type = RECORD_SAVE_SUCCESS;
 //   constructor(public payload: { recordRow: any, actionType?: string }) {
-//     // debugger;
+//     // // debugger;
 //   }
 // }
 
 // export class RecordSaveFail implements Action {
 //   readonly type = RECORD_SAVE_FAIL;
 //   constructor(public payload: any) {
-//     // debugger;
+//     // // debugger;
 //   }
 // }
 

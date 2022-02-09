@@ -20,7 +20,7 @@ export function reducer(state = initialState, action: RecordsBaseExtendedActions
     }
 
     case RecordsBaseExtendedActions.RECORDS_BASE_EXTENDED_LOAD_SUCCESS: {
-      debugger;
+      // debugger;
       return {
         ...state,
         loading: false,

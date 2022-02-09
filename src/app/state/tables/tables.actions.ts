@@ -5,7 +5,7 @@ export const TABLES_STATUS = '[Tables] status set';
 export class TablesStatus implements Action {
   readonly type = TABLES_STATUS;
   constructor(public payload: any) {
-    debugger;
+    // debugger;
   }
 }
 

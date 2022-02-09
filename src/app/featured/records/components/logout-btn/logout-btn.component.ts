@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MsalService } from '@azure/msal-angular';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { UserStoreData } from 'src/app/state/user/user.actions';
   templateUrl: './logout-btn.component.html',
   styleUrls: ['./logout-btn.component.scss']
 })
-export class LogoutBtnComponent implements OnInit {
+export class LogoutBtnComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   tableExtendedStatus: string = 'init';
@@ -32,7 +32,7 @@ export class LogoutBtnComponent implements OnInit {
       this.store.select('tables')
         // .pipe(last())
         .subscribe((res: any) => {
-          debugger;
+          // // // debugger;
           if (res?.tableExtended) {
             this.tableExtendedStatus = res?.tableExtended;
           }
@@ -42,18 +42,18 @@ export class LogoutBtnComponent implements OnInit {
   }
 
   logout() {
-    debugger;
+    // // // debugger;
     if (this.tableExtendedStatus !== 'inprogress') {
       this.store.dispatch(new UserStoreData(null));
       this.msalService.logout();
     } else {
-      debugger;
+      // // // debugger;
       this.openLogoutDialog();
     }
   }
 
   openLogoutDialog() {
-    debugger;
+    // // // debugger;
     const id = 'logout-main';
     this.dialogAction = '';
     this.dialogRefLogoutModal = this.dialog.open(DialogComponent, {
@@ -70,14 +70,14 @@ export class LogoutBtnComponent implements OnInit {
     });
 
     this.dialogRefLogoutModal.beforeClosed().subscribe(result => {
-      // debugger;
+      // // // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
 
     });
 
     this.dialogRefLogoutModal.afterClosed().subscribe(result => {
-      // debugger;
+      // // // debugger;
       console.log(`Dialog result: ${result}`);
       this.dialogAction = result;
     });

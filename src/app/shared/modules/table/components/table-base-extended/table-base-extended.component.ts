@@ -122,7 +122,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
     this.subscription.add(
       this.submitCall.subscribe(res => {
-        debugger;
+        // // debugger;
         console.log('submitCall executed', res);
         this.triggerCheckChangesAndSave();
       })
@@ -130,9 +130,9 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
     this.subscription.add(
       this.store.select('user').subscribe((res: any) => {
-        debugger;
+        // // debugger;
         if (res) {
-          debugger;
+          // // debugger;
           this.user = res;
         }
       })
@@ -142,19 +142,19 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       this.store.select('recordsBaseExtended')
         // .pipe(last())
         .subscribe((res: any) => {
-          // debugger;
+          // // // debugger;
 
           this.store.dispatch(new StopSpinner());
 
           if (res && !res.loading) {
-            // debugger;
+            // // // debugger;
             if (res?.totalRecords > -1) {
               this.totalRecordsBE = res?.totalRecords;
 
             }
 
             if (res.data) {
-              // debugger;
+              // // // debugger;
               // this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
               this.originalRecordsBE = JSON.parse(JSON.stringify(res.data));
               this.recordsBE = JSON.parse(JSON.stringify(this.originalRecordsBE));
@@ -169,7 +169,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   ngOnChanges(): void {
-    // debugger;
+    // // // debugger;
     // this.newRecords;
     this.triggerTableLoad();
     this.triggerTableBaseExtendedLoad();
@@ -180,7 +180,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   // createAndExecuteUrl() {
-  //   debugger;
+  //   // // debugger;
   //   const origin = `${this.origin}`;
   //   const endPoint = `${this.tableDataEndPoint}`;
   //   // const statusLike = this.toggleBtnState ? `status_like=${this.toggleBtnState}` : '';
@@ -197,7 +197,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   // }
 
   initializeStructure(records: any[]) {
-    // debugger;
+    // // // debugger;
     const d1 = new Date(); // today date
     const dtext1 = d1.toISOString();
     const d2 = new Date();
@@ -214,8 +214,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
 
   triggerTableLoad(): void {
-    debugger;
-    let newRecords = JSON.parse(JSON.stringify(this.newRecords));
+    // // debugger;
+    const newRecords = JSON.parse(JSON.stringify(this.newRecords));
     this.tableMode = 'load';
     // this.store.dispatch(new StartSpinner());
     this.initializeStructure(newRecords);
@@ -225,7 +225,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   triggerTableBaseExtendedLoad() {
-    debugger;
+    // // debugger;
     this.opIco = this?.newRecords[0]?.opIco;
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
@@ -253,11 +253,11 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
-    debugger;
+    // // debugger;
     const res = JSON.parse(JSON.stringify(records));
     for (let index = 0; index < res.length; index++) {
-      if (propertyValue && propertyValue.indexOf('property_') > -1 && res[index].hasOwnProperty(propertyValue.replace('property_',''))) {
-        res[index][propertyName] = res[index][propertyValue.replace('property_','')];
+      if (propertyValue && propertyValue.indexOf('property_') > -1 && res[index].hasOwnProperty(propertyValue.replace('property_', ''))) {
+        res[index][propertyName] = res[index][propertyValue.replace('property_', '')];
       } else if (propertyValue === 'remove') {
         delete res[index][propertyName];
       } else {
@@ -279,8 +279,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
 
   triggerCheckChangesAndSave() {
-    debugger;
-    for(let i=0; i<this.records.length; i++) {
+    // debugger;
+    for (let i = 0; i < this.records.length; i++) {
       this.onInputChange('manualnyRating', this.records[i]);
       this.onInputChange('datumOd', this.records[i]);
       this.onInputChange('datumDo', this.records[i]);
@@ -295,7 +295,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
 
   onInputChange(colname: string, item: any) {
-    debugger;
+    // debugger;
     // const itemId = this.records[index]?.id;
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
@@ -310,7 +310,9 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       this.recordsDiffArrObj = { ...this.recordsDiffArrObj, ...temp };
 
     } else {
-      this.recordsDiffArrObj && delete this.recordsDiffArrObj[itemId];
+      if (this.recordsDiffArrObj) {
+        delete this.recordsDiffArrObj[itemId];
+      }
     }
     if (JSON.stringify(this.recordsDiffArrObj) === '{}') {
       this.recordsDiffArrObj = null;
@@ -342,7 +344,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
-    // debugger;
+    // // debugger;
     // const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
     // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
     const record = JSON.parse(JSON.stringify(recordsItem));
@@ -355,7 +357,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   getRecordsDiffArrObjError(obj: any): boolean {
-    // debugger;
+    // // debugger;
     let res = false;
     for (const i in obj) {
       if (obj.hasOwnProperty(i)) {
@@ -371,7 +373,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    debugger;
+    // debugger;
     if (this.recordsDiffArrObj) {
       // const url = `${this.origin}${this.tableDataEndPoint}`;
       // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
@@ -383,7 +385,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
       //   }
       // }
-      // // debugger;
+      // // // debugger;
       // records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       // modified = this.setDatePickersToIsoString(modified, ['datumOd', 'datumDo']);
       // this.store.dispatch(new RecordsSave({ endPoint: url, records, modified, currentUrl: this.currentUrl }));
@@ -393,7 +395,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       const d = new Date(); // today date
       const dtext = d.toISOString();
       const url = `${this.origin}${this.tableDataEndPoint}`;
-      let records =JSON.parse(JSON.stringify(this.records));
+      let records = JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
       if (isLocalHost()) {
@@ -426,7 +428,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   sendDataToParent(records: any) {
-    debugger;
+    // debugger;
     this.submitRecordsEvent.emit(records);
   }
 

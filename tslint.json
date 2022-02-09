@@ -20,7 +20,11 @@
     "directive-selector": [
       true,
       "attribute",
-      ["", "app", "cd"],
+      [
+        "",
+        "app",
+        "cd"
+      ],
       "camelCase"
     ],
     "component-selector": [
@@ -113,7 +117,10 @@
     "no-outputs-metadata-property": true,
     "no-string-literal": false,
     "prefer-for-of": false,
-    "semicolon": [true, "always"],
+    "semicolon": [
+      true,
+      "always"
+    ],
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "typedef-whitespace": {
@@ -135,8 +142,8 @@
       ]
     },
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
-  ,    "variable-name": {
+    "use-pipe-transform-interface": true,
+    "variable-name": {
       "options": [
         "ban-keywords",
         "check-format",
@@ -155,7 +162,7 @@
         "check-typecast"
       ]
     }
-},
+  },
   "rulesDirectory": [
     "codelyzer"
   ]
