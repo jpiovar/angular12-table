@@ -21,23 +21,23 @@ $mat-accent: (
     darker: white,
   )
 );
-$angular11-12-primary: mat.define-palette(mat.$blue-grey-palette);
-$angular11-12-accent: mat.define-palette($mat-accent, main, lighter, darker);
+$frontend-primary: mat.define-palette(mat.$blue-grey-palette);
+$frontend-accent: mat.define-palette($mat-accent, main, lighter, darker);
 
 // The warn palette is optional (defaults to red).
-$angular11-12-warn: mat.define-palette(mat.$red-palette);
+$frontend-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$angular11-12-theme: mat.define-light-theme((
+$frontend-theme: mat.define-light-theme((
   color: (
-    primary: $angular11-12-primary,
-    accent: $angular11-12-accent,
-    warn: $angular11-12-warn,
+    primary: $frontend-primary,
+    accent: $frontend-accent,
+    warn: $frontend-warn,
   )
 ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($angular11-12-theme);
+@include mat.all-component-themes($frontend-theme);

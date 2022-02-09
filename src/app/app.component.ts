@@ -20,7 +20,7 @@ import { UserStoreData } from './state/user/user.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy, OnInit {
-  title = 'angular11-12';
+  title = 'frontend';
   openedSidenav: boolean = false;
   subscription: Subscription = new Subscription();
   languageParam = { value: 'intro' };
