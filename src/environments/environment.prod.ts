@@ -9,6 +9,6 @@ export const environment = {
   beTableDataBaseEndPoint: 'table-data-base',
   redirectUrl: 'http://localhost:4200',
   cloudUrl: 'https://login.microsoftonline.com',
-  clientId: '', // set your own
-  tenantId: '' // set your own
+  clientId: process.env.CLIENT_ID,
+  tenantId: process.env.TENANT_ID
 };

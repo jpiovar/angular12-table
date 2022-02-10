@@ -15,8 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./webpack.config.js"
+            },
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -43,6 +46,9 @@
           },
           "configurations": {
             "production": {
+              "customWebpackConfig": {
+                "path": "webpack.config.js"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -73,7 +79,7 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "frontend:build"
           },
