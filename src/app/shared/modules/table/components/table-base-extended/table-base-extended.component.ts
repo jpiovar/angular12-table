@@ -72,6 +72,11 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   originalRecords: any[];
   records: any[];
 
+  sortBy: string = 'datumOd';
+  direction: 'asc' | 'desc' = 'asc';
+  activePage: number = 0;
+  recordsPerPage: number = 1000;
+
   user: any;
 
 
@@ -230,7 +235,11 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
     const opIco = this.opIco?.trim() ? `opIco=${this.opIco?.trim()}` : '';
-    const url = `${origin}${endPoint}?${opIco}`;
+    const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
+    const order = this.direction ? `&_order=${this.direction}` : '';
+    const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
+    const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
+    const url = `${origin}${endPoint}?${opIco}${sort}${order}${page}${limit}`;
     this.store.dispatch(new RecordsBaseExtendedLoad(url));
   }
 
