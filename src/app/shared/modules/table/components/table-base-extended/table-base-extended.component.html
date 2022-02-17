@@ -43,7 +43,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of records; let i = index" class="text-left"
-              [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
+              [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
 
               <td class="pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opIcoErrorRequired}">
@@ -80,7 +80,7 @@
 
                   <select class="form-control custom-select" [(ngModel)]="item.manualnyRating"
                     [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualnyRating', item)"
-                    [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'">
+                    [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'">
                     <option value="" disabled>Vyberte manualny rating</option>
                     <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                   </select>
@@ -93,13 +93,13 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                   <div class="input-group">
-                    <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'"
+                    <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                       placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
                       #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)" />
                     <div class="input-group-append">
                       <button
-                        [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'removed')}"
+                        [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"
                         class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                         <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                       </button>
@@ -116,13 +116,13 @@
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
                   <div class="input-group">
-                    <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'"
+                    <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                       placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
                       #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)" />
                     <div class="input-group-append">
                       <button
-                        [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'removed')}"
+                        [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"
                         class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                         <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
                       </button>
@@ -137,7 +137,7 @@
               </td>
               <td class="pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
-                  <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'removed'" type="text"
+                  <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'" type="text"
                     [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('poznamka', item)" class="form-control">
                   <small *ngIf="item?.poznamkaErrorRequired">Required</small>

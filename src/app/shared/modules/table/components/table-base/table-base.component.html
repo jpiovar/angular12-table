@@ -51,7 +51,7 @@
           <tr (dblclick)="doubleClick(item)" (click)="singleClick($event)"
             *ngFor="let item of records; let i = index"
             class="tr-link"
-            [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'removed', 'progress-changed': item?.progressStatus === 'changed'}">
+            [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
             <!-- 'non-click': item?.status === 'INACTIVE' , -->
             <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opIcoErrorRequired}">

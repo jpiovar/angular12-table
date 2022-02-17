@@ -249,7 +249,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
       temp[itemId] = this.records[index];
       this.recordsDiffArrObj = { ...this.recordsDiffArrObj, ...temp };
       if (colname) {
-        item['progressStatus'] = 'changed';
+        item['progressStatus'] = 'CHANGED';
       }
     } else {
       delete this.recordsDiffArrObj[itemId];

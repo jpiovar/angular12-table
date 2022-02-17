@@ -295,7 +295,7 @@ export class RecordsEffects {
 
         const url = `${this.origin}${this.tableLogs}`;
         const previousStateRecords = JSON.parse(JSON.stringify(action?.payload?.records));
-        previousStateRecords[0]['actionType'] = 'created';
+        previousStateRecords[0]['actionType'] = 'CREATED';
 
 
         return this.httpBase.postCommon(`${endPoint}`, records[0]).pipe(

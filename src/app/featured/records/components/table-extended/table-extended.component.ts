@@ -503,7 +503,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   removeItem(item: any) {
     // // debugger;
-    item['progressStatus'] = 'deleted';
+    item['progressStatus'] = 'DELETED';
   }
 
   undoChange(item: any) {
@@ -541,7 +541,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       temp[itemId] = this.records[index];
       this.recordsDiffArrObj = { ...this.recordsDiffArrObj, ...temp };
       if (colname) {
-        item['progressStatus'] = 'changed';
+        item['progressStatus'] = 'CHANGED';
       }
     } else {
       delete this.recordsDiffArrObj[itemId];
@@ -643,14 +643,14 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           records[j].datumZmeny = new Date().toISOString();
 
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
-          if (this.recordsDiffArrObj[key]['progressStatus'] === 'deleted') {
+          if (this.recordsDiffArrObj[key]['progressStatus'] === 'DELETED') {
             this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'INACTIVE');
             const index = getIndexBasedId(records, key); // itemId === key;
             records[index]['status'] = 'INACTIVE';
-            action['actionType'] = 'deleted';
-          } else if (this.recordsDiffArrObj[key]['progressStatus'] === 'changed') {
+            action['actionType'] = 'DELETED';
+          } else if (this.recordsDiffArrObj[key]['progressStatus'] === 'CHANGED') {
             // debugger;
-            action['actionType'] = 'changed';
+            action['actionType'] = 'CHANGED';
 
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
             modifiedCols = diffValProp.map(function(item) {
