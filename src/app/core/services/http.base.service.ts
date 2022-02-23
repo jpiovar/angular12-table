@@ -34,7 +34,7 @@ export class HttpBaseService {
 
     this.store.select('user').subscribe((res: any) => {
       // debugger;
-      if (res?.accessToken) {
+      if (res?.accessToken && res?.idToken) {
         this.accessToken = res.accessToken;
         this.idToken = res.idToken;
         this.headers = this.headers.set('Authorization', `Bearer ${res.idToken}`);
