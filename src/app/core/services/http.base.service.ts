@@ -37,7 +37,7 @@ export class HttpBaseService {
         this.headers = this.headers.set('Authorization', `Bearer ${res.accessToken}`);
         this.httpOptions = {
           headers: this.headers,
-          withCredentials: true
+          withCredentials: false
         };
       }
     });
