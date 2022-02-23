@@ -48,7 +48,10 @@ export class AppComponent implements OnDestroy, OnInit {
   getAccessToken() {
     // debugger;
     const request = {
-      scopes: ['user.read', 'mail.read']
+      scopes: [
+        '.default'
+        // 'user.read', 'mail.read'
+      ]
     };
 
     this.msalService.instance.acquireTokenSilent(request).then(tokenResponse => {

@@ -20,6 +20,8 @@ export class HttpBaseService {
 
   accessToken: string = '';
 
+  idToken: string = '';
+
   constructor(private httpClient: HttpClient, private store: Store<AppState>) {
 
     this.headers = this.headers.set('Content-Type', 'application/json');
@@ -34,7 +36,8 @@ export class HttpBaseService {
       // debugger;
       if (res?.accessToken) {
         this.accessToken = res.accessToken;
-        this.headers = this.headers.set('Authorization', `Bearer ${res.accessToken}`);
+        this.idToken = res.idToken;
+        this.headers = this.headers.set('Authorization', `Bearer ${res.idToken}`);
         this.httpOptions = {
           headers: this.headers,
           withCredentials: false
