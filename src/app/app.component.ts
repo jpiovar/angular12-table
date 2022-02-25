@@ -35,6 +35,7 @@ export class AppComponent implements OnDestroy, OnInit {
     private router: Router,
     // private httpBase: HttpBaseService,
   ) {
+    console.log('process.env ', process.env.FOO);
     console.log('current browser is Explorer ', plantandgo?.isExplorer());
     translate?.addLangs(['sk']);
     translate?.setDefaultLang('sk');

@@ -4,6 +4,6 @@ module.exports = {
   plugins: [
     new Dotenv({
       systemvars: true
-    }),
+    })
   ],
 };

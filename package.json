@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 8080",
+    "start:dev": "ng serve --port 8080",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --aot --base-href /",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "buildJar": "ng build --configuration=production --output-hashing=all --base-href /ui/ --output-path ../../target/dist",
@@ -19,7 +20,8 @@
     "lint:staged": "run-with-changes i -r tslint-files \"*.ts\" -r stylelint-files \"*.{scss,css}\"",
     "lint:changed": "run-with-changes iwu -r tslint-files \"*.ts\" -r stylelint-files \"*.{scss,css}\"",
     "tslint-files": "cd ./../../ && tslint",
-    "stylelint-files": "cd ./../../ && stylelint"
+    "stylelint-files": "cd ./../../ && stylelint",
+    "start": "node server.js"
   },
   "private": true,
   "dependencies": {
@@ -61,7 +63,9 @@
     "tslib": "^2.3.1",
     "uuid": "^8.3.2",
     "web-animations-js": "^2.3.2",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "serve-static": "^1.13.2",
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^12.1.3",
