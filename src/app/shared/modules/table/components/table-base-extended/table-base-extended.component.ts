@@ -22,6 +22,7 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } 
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, Subject, Subscription, zip } from 'rxjs';
 
+import moment from 'moment';
 import * as _ from 'lodash';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -203,11 +204,11 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   initializeStructure(records: any[]) {
     // // // debugger;
-    const d1 = new Date(); // today date
-    const dtext1 = d1.toISOString();
-    const d2 = new Date();
-    d2.setFullYear(new Date().getFullYear() + 1);
-    const dtext2 = d2.toISOString();
+    // const d1 = new Date(); // today date
+    const dtext1 = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // d1.toISOString();
+    // const d2 = new Date();
+    // d2.setFullYear(new Date().getFullYear() + 1);
+    const dtext2 = moment().add(1, 'years').format('YYYY-MM-DD[T]HH:mm:ss'); // d2.toISOString();
 
     for (let i = 0; i < records?.length; i++) {
       records[i]['manualnyRating'] = '';
@@ -402,7 +403,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
       const uid = uuidv4();
       const d = new Date(); // today date
-      const dtext = d.toISOString();
+      const dtext = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // d.toISOString();
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records = JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);

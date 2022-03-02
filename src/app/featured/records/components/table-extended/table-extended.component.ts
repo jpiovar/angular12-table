@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription, zip } from 'rxjs';
 
+import moment from 'moment';
 import * as _ from 'lodash';
 
 import { compareValues, differentValueProperties, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
@@ -120,8 +121,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   confirmSelection(modelName: string, prop: string) {
     // debugger;
     // this.tempDate;
-    const d1 = new Date(); // today date
-    const dtext1 = d1.toISOString();
+    // const d1 = new Date(); // today date
+    // const dtext1 = d1.toISOString();
+    const dtext1 = moment().format('YYYY-MM-DD[T]HH:mm:ss');
     if (modelName && prop) {
       this[modelName][prop] = { day: 1, month: 1, year: 2020 }; // isoStringtoNgbDateStruct(dtext1);
     } else if (modelName && !prop) {
@@ -640,7 +642,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           let modifiedProp = {};
 
           records[j].autorZmeny = this.user?.account?.name;
-          records[j].datumZmeny = new Date().toISOString();
+          records[j].datumZmeny =  moment().format('YYYY-MM-DD[T]HH:mm:ss'); // new Date().toISOString();
 
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (this.recordsDiffArrObj[key]['progressStatus'] === 'DELETED') {
@@ -678,7 +680,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'progressStatus', 'remove');
           previousStateRecords.push({
             ...originalRecords[i],
-            ...{ autorZmeny: this.user?.account?.name, datumZmeny: new Date().toISOString() },
+            ...{
+              autorZmeny: this.user?.account?.name,
+              datumZmeny: moment().format('YYYY-MM-DD[T]HH:mm:ss') // new Date().toISOString()
+            },
             ...action,
             ...modifiedProp
           });
