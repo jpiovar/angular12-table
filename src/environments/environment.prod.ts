@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  mockWayFlow: process.env.MOCK_WAY_FLOW || false,
   beOrigin: process.env.AZURE_BE_ORIGIN || 'http://localhost:3000/',
   beVersionEndPoint: process.env.AZURE_BE_VERSION || 'version',
   beTableDataEndPoint: process.env.AZURE_BE_TABLE_DATA || 'table-data',

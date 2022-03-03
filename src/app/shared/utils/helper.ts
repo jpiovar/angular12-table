@@ -2,6 +2,7 @@ import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import * as _ from 'lodash';
 import { CoreModule } from 'src/app/core/core.module';
+import { environment } from 'src/environments/environment';
 
 export function isExplorer() {
   return window.navigator.userAgent.indexOf('MSIE ') > -1 || !!window.navigator.userAgent.match(/Trident.*rv\:11\./);
@@ -69,8 +70,8 @@ export function differentValueProperties(obj1: any, obj2: any): any[] {
   return res;
 }
 
-export function isLocalHost() {
-  if (['localhost', '127.0.0.1', ''].includes(window.location.hostname)) {
+export function isLocalHostAndMockWay() {
+  if (['localhost', '127.0.0.1', ''].includes(window.location.hostname) && environment?.mockWayFlow) {
     return true;
   }
   return false;

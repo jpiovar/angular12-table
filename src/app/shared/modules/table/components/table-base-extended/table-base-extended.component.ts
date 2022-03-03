@@ -27,7 +27,7 @@ import * as _ from 'lodash';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { compareValues, getIndexBasedId, getItemBasedId, isLocalHost, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
+import { compareValues, getIndexBasedId, getItemBasedId, isLocalHostAndMockWay, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
   RecordsAddNew,
@@ -383,7 +383,6 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   saveChanges() {
     this.store.dispatch(new StartSpinner());
-    // debugger;
     if (this.recordsDiffArrObj) {
       // const url = `${this.origin}${this.tableDataEndPoint}`;
       // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
@@ -402,13 +401,13 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       // this.recordsDiffArrObj = null;
 
       const uid = uuidv4();
-      const d = new Date(); // today date
+      // const d = new Date(); // today date
       const dtext = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // d.toISOString();
       const url = `${this.origin}${this.tableDataEndPoint}`;
       let records = JSON.parse(JSON.stringify(this.records));
       records = this.setDatePickersToIsoString(records, ['datumOd', 'datumDo']);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'recordIdBase', 'property_id');
-      if (isLocalHost()) {
+      if (isLocalHostAndMockWay()) {
         records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', uid);
       } else {
         records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'id', 'remove');
