@@ -292,6 +292,7 @@ export class RecordsEffects {
         // debugger;
         const endPoint: any = action?.payload?.endPoint;
         const records: any = JSON.parse(JSON.stringify(action?.payload?.records));
+        const urlLoadRecords = action?.payload?.currentUrl;
 
         const url = `${this.origin}${this.tableLogs}`;
         const previousStateRecords = JSON.parse(JSON.stringify(action?.payload?.records));
@@ -306,6 +307,10 @@ export class RecordsEffects {
                 if (isLocalHostAndMockWay()) {
                   this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords }));
                 }
+
+
+                this.store.dispatch(new RecordsLoad(urlLoadRecords));
+
                 return new RecordsAddNewSuccess();
               }
             }

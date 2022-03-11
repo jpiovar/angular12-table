@@ -239,6 +239,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const url = `${origin}${endPoint}?${statusLike}${sSopIco}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
+    this.store.dispatch(new TablesStatus({ tableExtendedCurrentUrl: url }));
   }
 
   activeInactiveToggle(event) {

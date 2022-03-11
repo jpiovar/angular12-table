@@ -2,16 +2,18 @@ import { TablesState } from './tables.models';
 import * as TablesActions from './tables.actions';
 
 export const initialState: TablesState = {
-  tableExtended: 'init'
+  tableExtended: 'init',
+  tableExtendedCurrentUrl: ''
 };
 
 export function reducer(state = initialState, action: TablesActions.Actions): TablesState {
   switch (action.type) {
     case TablesActions.TABLES_STATUS: {
       // debugger;
-      const newState = action.payload;
+      const newStateStatus = action.payload;
       return {
-        ...state, ...newState
+        ...state,
+        ...newStateStatus
       };
     }
 

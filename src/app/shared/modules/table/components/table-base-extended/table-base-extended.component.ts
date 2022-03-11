@@ -102,6 +102,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   originalRecordsBE: any[];
   recordsBE: any[];
 
+  currentUrlTableExtended: string = '';
+
 
   changeDate(event) {
     console.log(event);
@@ -125,6 +127,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     // this.eventsSubscription = this.events.subscribe(() => {
     //   console.log('submitt new record');
     // });
+
+    this.getCurrentUrlTableExtended();
 
     this.subscription.add(
       this.submitCall.subscribe(res => {
@@ -415,11 +419,37 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'status', 'ACTIVE');
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'datumZmeny', dtext);
       records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(records)), 'autorZmeny', this.user?.account?.name);
-      this.store.dispatch(new RecordsAddNew({ endPoint: url, records }));
+
+
+      debugger;
+      this.store.dispatch(new RecordsAddNew({ endPoint: url, records, currentUrl: this.currentUrlTableExtended }));
 
       this.sendDataToParent(records);
     }
     this.store.dispatch(new StopSpinner());
+  }
+
+  getCurrentUrlTableExtended() {
+    // debugger;
+    // const origin = `${this.origin}`;
+    // const endPoint = `${this.tableDataEndPoint}`;
+    // const sort = `&_sort=datumZmeny`;
+    // const order = `&_order=asc`;
+    // const page = `&_page=1`;
+    // const limit = `&_limit=5`;
+    // const url = `${origin}${endPoint}?${sort}${order}${page}${limit}`;
+    // this.currentUrlTableExtended = url;
+
+    this.subscription.add(
+      this.store.select('tables').subscribe((res: any) => {
+        // // debugger;
+        if (res) {
+          // debugger;
+          this.currentUrlTableExtended = res.tableExtendedCurrentUrl;
+        }
+      })
+    );
+
   }
 
   setDatePickersToIsoString(arrObj: any, props: string[]) {
