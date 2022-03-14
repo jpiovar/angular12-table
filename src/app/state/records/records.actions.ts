@@ -91,7 +91,7 @@ export class RecordsDeleteFail implements Action {
 
 export class RecordsAddNew implements Action {
   readonly type = RECORDS_ADD_NEW;
-  constructor(public payload: { endPoint: string, records: any, currentUrl?: string }) {
+  constructor(public payload: { endPoint: string, records: any, currentUrl: string }) {
     // debugger;
   }
 }
