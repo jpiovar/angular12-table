@@ -78,7 +78,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // debugger;
-    this.triggerTableLoad();
+    // this.triggerTableLoad(); // initial data load into table, temporary deactivated, just to have search input
   }
 
   ngOnDestroy(): void {
@@ -351,14 +351,14 @@ export class TableBaseComponent implements OnInit, OnDestroy {
           // debugger;
           this.isSearching = false;
           const res = response.trim();
-          if (res) {
+          if (res && res?.length > 2) { // search text needs to be at least 3 chars
             this.searchText = res;
             this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               this.createAndExecuteUrl();
             }
-          } else {
+          } else if (!res) {
             this.searchText = '';
             this.sortBy = 'opIco';
             this.direction = 'asc';
