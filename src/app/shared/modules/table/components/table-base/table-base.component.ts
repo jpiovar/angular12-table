@@ -181,13 +181,13 @@ export class TableBaseComponent implements OnInit, OnDestroy {
     // debugger;
     this.tableMode = '';
     const arrLength = Math.ceil(this.totalRecords / this.recordsPerPage);
-    this.totalPages = Array.from({length: arrLength}, (_, i) => i + 1);
+    this.totalPages = Array.from({ length: arrLength }, (_, i) => i + 1);
     if (this.activePage < 5) {
-    this.pages = this.totalPages.slice(0, 10);
+      this.pages = this.totalPages.slice(0, 10);
     } else if (this.activePage > this.totalPages.length - 5) {
-      this.pages = this.totalPages.slice(this.totalPages.length -10, this.totalPages.length);
+      this.pages = this.totalPages.slice(this.totalPages.length - 10, this.totalPages.length);
     } else {
-      this.pages = this.totalPages.slice(this.activePage-5, this.activePage+5);
+      this.pages = this.totalPages.slice(this.activePage - 5, this.activePage + 5);
     }
   }
 
@@ -363,22 +363,16 @@ export class TableBaseComponent implements OnInit, OnDestroy {
           // debugger;
           this.isSearching = false;
           const res = response.trim();
+          this.activePage = 0;
+          this.sortBy = 'opIco';
+          this.direction = 'asc';
           if (res && res?.length > 2) { // search text needs to be at least 3 chars
             this.searchText = res;
-            this.activePage = 0;
-            this.sortBy = 'opIco';
-            this.direction = 'asc';
-            if (this.searchMode === 'global') {
-              this.createAndExecuteUrl();
-            }
           } else if (!res) {
             this.searchText = '';
-            this.activePage = 0;
-            this.sortBy = 'opIco';
-            this.direction = 'asc';
-            if (this.searchMode === 'global') {
-              this.createAndExecuteUrl();
-            }
+          }
+          if (this.searchMode === 'global') {
+            this.createAndExecuteUrl();
           }
           this.searchMode = 'global';
         },
