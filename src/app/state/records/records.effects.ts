@@ -122,7 +122,7 @@ export class RecordsEffects {
             if (!res?.data && !res?.totalRecords) {
               resExt = {
                 data: res,
-                totalRecords: 12
+                totalRecords: 360
               };
             }
             return new RecordsLoadSuccess(resExt);
