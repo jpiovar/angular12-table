@@ -7,13 +7,17 @@
           <div class="input-group-prepend">
             <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
           </div>
-          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" (keyup)="globalSearch()"
+          <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch"
             placeholder="Search" aria-label="Search" aria-describedby="search-addon">
           <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
         </div>
         <div class="filter-item">
-          <button class="btn btn-success" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
+          <!-- <button class="btn btn-success" type="button" ngbTooltip="Reset filter" (click)="clearAllFilters()">
             Reset filter
+          </button> -->
+          <button class="btn btn-success" type="button" ngbTooltip="Search" (click)="search()"
+          [disabled]="globalFilter?.trim().length < 3">
+            Search
           </button>
         </div>
       </div>

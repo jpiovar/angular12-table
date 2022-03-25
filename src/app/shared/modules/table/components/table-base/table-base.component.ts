@@ -336,10 +336,14 @@ export class TableBaseComponent implements OnInit, OnDestroy {
     this.searchTextChanged.next(this.globalFilter);
   }
 
-  clearAllFilters() {
-    // debugger;
-    this.globalFilter = '';
-    this.searchText = '';
+  // clearAllFilters() {
+  //   // debugger;
+  //   this.globalFilter = '';
+  //   this.searchText = '';
+  //   this.globalSearch();
+  // }
+
+  search() {
     this.globalSearch();
   }
 
