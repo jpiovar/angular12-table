@@ -365,6 +365,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
           const res = response.trim();
           if (res && res?.length > 2) { // search text needs to be at least 3 chars
             this.searchText = res;
+            this.activePage = 0;
             this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
@@ -372,6 +373,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
             }
           } else if (!res) {
             this.searchText = '';
+            this.activePage = 0;
             this.sortBy = 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
