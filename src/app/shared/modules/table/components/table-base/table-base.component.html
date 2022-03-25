@@ -100,14 +100,14 @@
     </div>
     <div class="col-md-10">
       <ul class="pagination">
-        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}" *ngIf="activePage > 0">
           <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
         </li>
         <li *ngFor="let itemP of pages; let i = index" class="page-item"
-          [ngClass]="{'active': activePage === i, 'not-allowed': recordsDiffArrObj}">
-          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="jumpToPage(i)">{{i+1}}</span>
+          [ngClass]="{'active': activePage === itemP-1, 'not-allowed': recordsDiffArrObj}">
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="jumpToPage(itemP-1)">{{itemP}}</span>
         </li>
-        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+        <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}" *ngIf="activePage < totalPages.length - 1">
           <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="nextPage()">Next</span>
         </li>
       </ul>

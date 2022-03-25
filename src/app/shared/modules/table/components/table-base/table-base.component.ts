@@ -39,6 +39,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   originalRecords: any[];
   records: any[];
 
+  totalPages: any[] = [];
   pages: any[] = [];
   activePage: number = 0;
   recordsPerPage: number = 5;
@@ -177,19 +178,27 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
 
   setPagesRecords() {
-    // // debugger;
+    // debugger;
     this.tableMode = '';
-    this.pages = new Array(Math.ceil(this.totalRecords / this.recordsPerPage));
+    const arrLength = Math.ceil(this.totalRecords / this.recordsPerPage);
+    this.totalPages = Array.from({length: arrLength}, (_, i) => i + 1);
+    if (this.activePage < 5) {
+    this.pages = this.totalPages.slice(0, 10);
+    } else if (this.activePage > this.totalPages.length - 5) {
+      this.pages = this.totalPages.slice(this.totalPages.length -10, this.totalPages.length);
+    } else {
+      this.pages = this.totalPages.slice(this.activePage-5, this.activePage+5);
+    }
   }
 
   jumpToPage(page: number): void {
-    // debugger;
+    // // debugger;
     this.activePage = page;
     this.triggerTableLoad();
   }
 
   previousPage() {
-    // debugger;
+    // // debugger;
     if (this.activePage >= 1) {
       this.activePage--;
       this.triggerTableLoad();
@@ -198,12 +207,11 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
   nextPage() {
     // debugger;
-    if (this.activePage < this.pages.length - 1) {
+    if (this.activePage < this.totalPages.length - 1) {
       this.activePage++;
       this.triggerTableLoad();
     }
   }
-
   sortByColumn(colname: string) {
     // debugger;
     this.sortByCol = {};
