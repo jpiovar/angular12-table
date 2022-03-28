@@ -6,15 +6,21 @@
         <button class="btn btn-primary" id="confirmSelection" (click)="showHideBtn(); d.close(); confirmSelection('model1','datumOd')" type="button">
           Confirm selection
         </button>
-      </div>
+      </div> -->
 
+      <div>
+        <button class="btn btn-sm btn-outline-primary mr-2" (click)="enableLast()">enableLast</button>
+        <button class="btn btn-sm btn-outline-primary mr-2" (click)="enableFirst()">enableFirst</button>
+      </div>
       <div class="input-group month-picker">
-        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model1" ngbDatepicker
-          #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="changeDate($event)" />
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model2" ngbDatepicker
+          #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="changeDate($event)" (dateSelect)="ds($event)"
+          [markDisabled]="markDisabled" (change)="changeS($event)"
+        />
         <div class="input-group-append">
           <button class="btn btn-outline-secondary calendar" (click)="d.toggle(); showHideBtn()" type="button"></button>
         </div>
-      </div> -->
+      </div>
 
       <div class="row">
         <div class="col-md-6">
@@ -125,9 +131,9 @@
                 <div class="input-group">
                   <span class="pt-2">od: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odFrom" ngbDatepicker #d1From="ngbDatepicker"
-                    #c1From="ngModel" (ngModelChange)="changeDate($event)" (dateChange)="changeDate($event)"
-                    (dateSelect)="changeDate($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odFrom" ngbDatepicker
+                    #d1From="ngbDatepicker" #c1From="ngModel" (ngModelChange)="changeDate($event)"
+                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)" />
                   <!-- <ng-template #t let-date let-focused="focused">
                       <span>ok
                       </span>
@@ -147,9 +153,9 @@
                 <div class="input-group mt-1">
                   <span class="pt-2">do: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odTo" ngbDatepicker #d1To="ngbDatepicker"
-                    #c1To="ngModel" (ngModelChange)="changeDate($event)" (dateChange)="changeDate($event)"
-                    (dateSelect)="changeDate($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odTo" ngbDatepicker
+                    #d1To="ngbDatepicker" #c1To="ngModel" (ngModelChange)="changeDate($event)"
+                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)" />
 
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('odTo')" type="button">
@@ -161,7 +167,8 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumOd')">datum od
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumOd')">datum
+                od
                 <mat-icon *ngIf="sortByCol?.datumOd==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.datumOd==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -174,8 +181,9 @@
                 <div class="input-group">
                   <span class="pt-2">od: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doFrom" ngbDatepicker #d2From="ngbDatepicker"
-                    #c2From="ngModel" (ngModelChange)="changeDate($event)" (change)="onDateSelection($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doFrom" ngbDatepicker
+                    #d2From="ngbDatepicker" #c2From="ngModel" (ngModelChange)="changeDate($event)"
+                    (change)="onDateSelection($event)" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doFrom')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
@@ -189,8 +197,9 @@
                 <div class="input-group mt-1">
                   <span class="pt-2">do: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doTo" ngbDatepicker #d2To="ngbDatepicker"
-                    #c2To="ngModel" (ngModelChange)="changeDate($event)" (change)="onDateSelection($event)" />
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doTo" ngbDatepicker
+                    #d2To="ngbDatepicker" #c2To="ngModel" (ngModelChange)="changeDate($event)"
+                    (change)="onDateSelection($event)" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doTo')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
@@ -201,7 +210,8 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumDo')">datum do
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumDo')">datum
+                do
                 <mat-icon *ngIf="sortByCol?.datumDo==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.datumDo==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -350,7 +360,8 @@
                   </div>
                 </div>
                 <small *ngIf="item?.datumDoErrorRequired">Required<br /></small>
-                <small *ngIf="item?.ErrorInterval">datum do < datum od !<br />
+                <small *ngIf="item?.ErrorInterval">datum do
+                  < datum od !<br />
                 </small>
                 <!-- <div *ngIf="item.do.dirty && item.do.invalid">
                   <small class="form-text text-danger" *ngIf="item.do.errors.required">
@@ -416,8 +427,9 @@
                   (click)="showHistoryLog(item)" ngbTooltip="Show change log of record">history</mat-icon>
               </span>
               <span>
-                <mat-icon [ngClass]="{'non-click': (item?.status === 'INACTIVE')}" aria-label="undo" class="td-link ml-2"
-                  (click)="undoChange(item); onInputChange('', item)" ngbTooltip="Undo changes of record">undo
+                <mat-icon [ngClass]="{'non-click': (item?.status === 'INACTIVE')}" aria-label="undo"
+                  class="td-link ml-2" (click)="undoChange(item); onInputChange('', item)"
+                  ngbTooltip="Undo changes of record">undo
                 </mat-icon>
               </span>
             </td>
@@ -441,7 +453,8 @@
         </li>
         <li *ngFor="let itemP of pages; let i = index" class="page-item"
           [ngClass]="{'active': activePage === itemP-1, 'not-allowed': recordsDiffArrObj}">
-          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="jumpToPage(itemP-1)">{{itemP}}</span>
+          <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}"
+            (click)="jumpToPage(itemP-1)">{{itemP}}</span>
         </li>
         <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}" *ngIf="activePage < totalPages.length - 1">
           <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="nextPage()">Next</span>

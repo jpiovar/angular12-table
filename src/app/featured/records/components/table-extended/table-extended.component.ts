@@ -71,6 +71,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // model1: NgbDateStruct = { day: this.date.getUTCDate(), month: this.date.getUTCMonth()+1, year: this.date.getUTCFullYear()};
   model1: NgbDateStruct = isoStringtoNgbDateStruct('2020-01-10T00:00:00');
 
+  model2: NgbDateStruct;
+
   minDate = { year: 2017, month: 1, day: 1 };
   maxDate = { year: 2027, month: 12, day: 1 };
 
@@ -93,6 +95,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   btnVisible: boolean = false;
 
+  markDisabled: any;
+
+
   // @ViewChild('d1') d1datepicker: NgbInputDatepicker;
 
   // d1close() {
@@ -101,6 +106,48 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // }
 
 
+  selectToday() {
+    debugger;
+    this.model2 = this.calendar.getToday();
+    this.markDisabled = (date: NgbDate) => {
+      debugger;
+      // return this.calendar.getWeekday(date) >= 4;
+      return date.before(this.model2) || date.after(this.model2);
+    };
+    // this.calendar.getWeekday(date) >= 4;
+    debugger;
+  }
+
+  enableFirst() {
+
+    this.markDisabled = (date: NgbDate) => {
+      debugger;
+      // this.calendar.getWeekday(date) >= 4;
+      // const d = new Date(date.year, date.month - 1, date.day);
+      return date.day > 1;
+      // || d.getDay() === 0 || d.getDay() === 6;
+    };
+    // (date: NgbDate) => this.calendar.getWeekday(date) >= 4;
+  }
+
+
+  enableLast() {
+
+    this.markDisabled = (date: NgbDate) => {
+      debugger;
+      // this.calendar.getWeekday(date) >= 4;
+      // const d = new Date(date.year, date.month - 1, date.day);
+      return (date.day < 31 && date.month == 1) ||
+        (date.day < 28 && date.month == 2 && date.year % 4 !== 0) || (date.day < 29 && date.month == 2 && date.year % 4 === 0) ||
+        (date.day < 31 && date.month == 3) || (date.day < 30 && date.month == 4) ||
+        (date.day < 31 && date.month == 5) || (date.day < 30 && date.month == 6) ||
+        (date.day < 31 && date.month == 7) || (date.day < 31 && date.month == 8) ||
+        (date.day < 30 && date.month == 9) || (date.day < 31 && date.month == 10) ||
+        (date.day < 30 && date.month == 11) || (date.day < 31 && date.month == 12);
+      // || d.getDay() === 0 || d.getDay() === 6;
+    };
+    // (date: NgbDate) => this.calendar.getWeekday(date) >= 4;
+  }
 
   showHideBtn() {
     // debugger;
@@ -132,14 +179,23 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     }
   }
 
+  changeS(evt) {
+    debugger;
+  }
+
   onDateSelection(evt) {
     // debugger;
   }
 
   changeDate(event) {
-    // debugger;
+    debugger;
     console.log(event);
     this.tempDate = event;
+  }
+
+  ds(event) {
+    debugger;
+    console.log(event);
   }
 
   constructor(
@@ -161,11 +217,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
 
-  //   $( document ).ready(function() {
-  //     $( "#confirmSelection" ).on( "click", function() {
-  //       console.log( 'pppppppppppppp');
-  //     });
-  // });
+    //   $( document ).ready(function() {
+    //     $( "#confirmSelection" ).on( "click", function() {
+    //       console.log( 'pppppppppppppp');
+    //     });
+    // });
   }
 
   ngOnInit(): void {
@@ -392,13 +448,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // debugger;
     this.tableMode = '';
     const arrLength = Math.ceil(this.totalRecords / this.recordsPerPage);
-    this.totalPages = Array.from({length: arrLength}, (_, i) => i + 1);
+    this.totalPages = Array.from({ length: arrLength }, (_, i) => i + 1);
     if (this.activePage < 5) {
-    this.pages = this.totalPages.slice(0, 10);
+      this.pages = this.totalPages.slice(0, 10);
     } else if (this.activePage > this.totalPages.length - 5) {
-      this.pages = this.totalPages.slice(this.totalPages.length -10, this.totalPages.length);
+      this.pages = this.totalPages.slice(this.totalPages.length - 10, this.totalPages.length);
     } else {
-      this.pages = this.totalPages.slice(this.activePage-5, this.activePage+5);
+      this.pages = this.totalPages.slice(this.activePage - 5, this.activePage + 5);
     }
   }
 
@@ -652,7 +708,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           let modifiedProp = {};
 
           records[j].autorZmeny = this.user?.account?.name;
-          records[j].datumZmeny =  moment().format('YYYY-MM-DD[T]HH:mm:ss'); // new Date().toISOString();
+          records[j].datumZmeny = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // new Date().toISOString();
 
           // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (this.recordsDiffArrObj[key]['progressStatus'] === 'DELETED') {
@@ -665,7 +721,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             action['actionType'] = 'CHANGED';
 
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
-            modifiedCols = diffValProp.map(function(item) {
+            modifiedCols = diffValProp.map(function (item) {
               if (item?.propName === 'datumOd' || item?.propName === 'datumDo') {
                 return {
                   colName: item.propName,
