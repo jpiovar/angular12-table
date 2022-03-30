@@ -8,11 +8,11 @@
         </button>
       </div> -->
 
-      <div>
+      <!-- <div>
         <button class="btn btn-sm btn-outline-primary mr-2" (click)="enableLast()">enableLast</button>
         <button class="btn btn-sm btn-outline-primary mr-2" (click)="enableFirst()">enableFirst</button>
-      </div>
-      <div class="input-group month-picker">
+      </div> -->
+      <!-- <div class="input-group month-picker">
         <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model2" ngbDatepicker
           #d="ngbDatepicker" #c1="ngModel" (ngModelChange)="changeDate($event)" (dateSelect)="ds($event)"
           [markDisabled]="markDisabled" (change)="changeS($event)"
@@ -20,7 +20,7 @@
         <div class="input-group-append">
           <button class="btn btn-outline-secondary calendar" (click)="d.toggle(); showHideBtn()" type="button"></button>
         </div>
-      </div>
+      </div> -->
 
       <div class="row">
         <div class="col-md-6">
@@ -133,7 +133,9 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odFrom" ngbDatepicker
                     #d1From="ngbDatepicker" #c1From="ngModel" (ngModelChange)="changeDate($event)"
-                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)" />
+                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)"
+                    [markDisabled]="markDisabled1"
+                  />
                   <!-- <ng-template #t let-date let-focused="focused">
                       <span>ok
                       </span>
@@ -155,7 +157,9 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odTo" ngbDatepicker
                     #d1To="ngbDatepicker" #c1To="ngModel" (ngModelChange)="changeDate($event)"
-                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)" />
+                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)"
+                    [markDisabled]="markDisabled2"
+                  />
 
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('odTo')" type="button">
@@ -183,7 +187,9 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doFrom" ngbDatepicker
                     #d2From="ngbDatepicker" #c2From="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)" />
+                    (change)="onDateSelection($event)"
+                    [markDisabled]="markDisabled1"
+                  />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doFrom')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
@@ -199,7 +205,9 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doTo" ngbDatepicker
                     #d2To="ngbDatepicker" #c2To="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)" />
+                    (change)="onDateSelection($event)"
+                    [markDisabled]="markDisabled2"
+                  />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doTo')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
@@ -318,7 +326,9 @@
                   <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
-                    #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)" />
+                    #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)"
+                    [markDisabled]="markDisabled1"
+                  />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"
@@ -350,7 +360,9 @@
                   <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
-                    #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)" />
+                    #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)"
+                    [markDisabled]="markDisabled2"
+                  />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"

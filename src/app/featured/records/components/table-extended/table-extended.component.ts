@@ -97,6 +97,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   markDisabled: any;
 
+  markDisabled1: any;
+
+  markDisabled2: any;
+
 
   // @ViewChild('d1') d1datepicker: NgbInputDatepicker;
 
@@ -128,6 +132,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       // || d.getDay() === 0 || d.getDay() === 6;
     };
     // (date: NgbDate) => this.calendar.getWeekday(date) >= 4;
+    this.markDisabled1 = (date: NgbDate) => {
+      return date.day > 1;
+    };
   }
 
 
@@ -147,6 +154,15 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       // || d.getDay() === 0 || d.getDay() === 6;
     };
     // (date: NgbDate) => this.calendar.getWeekday(date) >= 4;
+    this.markDisabled2 = (date: NgbDate) => {
+      return (date.day < 31 && date.month == 1) ||
+        (date.day < 28 && date.month == 2 && date.year % 4 !== 0) || (date.day < 29 && date.month == 2 && date.year % 4 === 0) ||
+        (date.day < 31 && date.month == 3) || (date.day < 30 && date.month == 4) ||
+        (date.day < 31 && date.month == 5) || (date.day < 30 && date.month == 6) ||
+        (date.day < 31 && date.month == 7) || (date.day < 31 && date.month == 8) ||
+        (date.day < 30 && date.month == 9) || (date.day < 31 && date.month == 10) ||
+        (date.day < 30 && date.month == 11) || (date.day < 31 && date.month == 12);
+    };
   }
 
   showHideBtn() {
@@ -215,6 +231,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.metaAndTableDataSubscription();
     this.processGlobalSearch();
 
+
+    this.enableFirst();
+    this.enableLast();
 
 
     //   $( document ).ready(function() {
