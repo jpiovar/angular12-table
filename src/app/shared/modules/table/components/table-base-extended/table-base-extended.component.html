@@ -96,7 +96,9 @@
                     <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                       placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
-                      #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)" />
+                      #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)"
+                      [markDisabled]="markDisabled1"
+                    />
                     <div class="input-group-append">
                       <button
                         [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"
@@ -119,7 +121,9 @@
                     <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                       placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
-                      #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)" />
+                      #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)"
+                      [markDisabled]="markDisabled2"
+                    />
                     <div class="input-group-append">
                       <button
                         [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"

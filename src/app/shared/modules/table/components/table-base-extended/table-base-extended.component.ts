@@ -104,6 +104,10 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   currentUrlTableExtended: string = '';
 
+  markDisabled1: any;
+
+  markDisabled2: any;
+
 
   changeDate(event) {
     console.log(event);
@@ -183,6 +187,9 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     // this.newRecords;
     this.triggerTableLoad();
     this.triggerTableBaseExtendedLoad();
+
+    this.enableFirst();
+    this.enableLast();
   }
 
   ngOnDestroy(): void {
@@ -206,13 +213,34 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
   //   this.store.dispatch(new RecordsLoad(url));
   // }
 
+
+  enableFirst() {
+    this.markDisabled1 = (date: NgbDate) => {
+      return date.day > 1;
+    };
+  }
+
+
+  enableLast() {
+    this.markDisabled2 = (date: NgbDate) => {
+      return (date.day < 31 && date.month == 1) ||
+        (date.day < 28 && date.month == 2 && date.year % 4 !== 0) || (date.day < 29 && date.month == 2 && date.year % 4 === 0) ||
+        (date.day < 31 && date.month == 3) || (date.day < 30 && date.month == 4) ||
+        (date.day < 31 && date.month == 5) || (date.day < 30 && date.month == 6) ||
+        (date.day < 31 && date.month == 7) || (date.day < 31 && date.month == 8) ||
+        (date.day < 30 && date.month == 9) || (date.day < 31 && date.month == 10) ||
+        (date.day < 30 && date.month == 11) || (date.day < 31 && date.month == 12);
+    };
+  }
+
+
   initializeStructure(records: any[]) {
-    // // // debugger;
+    // debugger;
     // const d1 = new Date(); // today date
-    const dtext1 = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // d1.toISOString();
+    const dtext1 = moment().startOf('month').format('YYYY-MM-DD[T]HH:mm:ss'); // d1.toISOString();
     // const d2 = new Date();
     // d2.setFullYear(new Date().getFullYear() + 1);
-    const dtext2 = moment().add(1, 'years').format('YYYY-MM-DD[T]HH:mm:ss'); // d2.toISOString();
+    const dtext2 = moment().endOf('month').add(1, 'years').format('YYYY-MM-DD[T]HH:mm:ss'); // d2.toISOString();
 
     for (let i = 0; i < records?.length; i++) {
       records[i]['manualnyRating'] = '';
