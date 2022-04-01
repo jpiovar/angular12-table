@@ -61,7 +61,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       redirectUri: environment.redirectUrl
     },
     cache: {
-      cacheLocation: 'localStorage',
+      cacheLocation: 'sessionStorage',
       storeAuthStateInCookie: isIE,
     }
   });
