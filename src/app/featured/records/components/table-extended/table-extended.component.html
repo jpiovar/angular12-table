@@ -31,7 +31,7 @@
             </app-insert-new-btn>
           </span>
           <span [ngClass]="{'not-allowed': recordsDiffArrObj}"> Records
-            <app-status-toggle-btn ngbTooltip="Click to switch active/inactive records"
+            <app-status-toggle-btn ngbTooltip="Click to switch active/deleted records"
               [ngClass]="{'non-click': recordsDiffArrObj}" [toggleBtnState]="toggleBtnState"
               (click)="activeInactiveToggle($event)">
             </app-status-toggle-btn>
