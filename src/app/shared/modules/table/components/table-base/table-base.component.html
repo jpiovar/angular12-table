@@ -8,7 +8,9 @@
             <mat-icon class="input-group-text" id="search-addon">search</mat-icon>
           </div>
           <input [(ngModel)]="globalFilter" type="text" class="form-control" id="globalSearch" placeholder="Search"
-            aria-label="Search" aria-describedby="search-addon">
+            aria-label="Search" aria-describedby="search-addon"
+            (keydown.enter)="globalFilter?.trim().length >= 3 && search()"
+          >
           <span *ngIf="isSearching" class="spinner-border spinner-border-sm"></span>
         </div>
         <div class="filter-item">
