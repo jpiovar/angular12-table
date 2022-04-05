@@ -57,7 +57,7 @@ export class DialogStepperComponent implements OnInit {
       const element = document.getElementById(elementId);
       this.currentDialogSize.step0.width = element.offsetWidth;
       this.currentDialogSize.step0.height = element.offsetHeight;
-      this.currentDialogSize.step1.width = 1.5 * this.currentDialogSize.step0.width;
+      this.currentDialogSize.step1.width = 2 * this.currentDialogSize.step0.width;
       this.currentDialogSize.step2.width = 0.7 * this.currentDialogSize.step0.width;
     });
   }

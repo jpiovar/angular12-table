@@ -34,14 +34,14 @@
                 <mat-icon *ngIf="sortByCol?.opIco==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th class="col-sm-4" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-6" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
-                (click)="sortByColumn('obchodneMeno')">obchodne<br>meno
+                (click)="sortByColumn('obchodneMeno')">obchodne meno
                 <mat-icon *ngIf="sortByCol?.obchodneMeno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.obchodneMeno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th class="col-sm-4" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                 (click)="sortByColumn('vypocitanyRating')">vypocitany<br>rating
                 <mat-icon *ngIf="sortByCol?.vypocitanyRating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>

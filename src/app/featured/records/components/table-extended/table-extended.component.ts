@@ -863,7 +863,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.dialogRefNewRecordModal = this.dialog.open(DialogStepperComponent, {
       panelClass: 'new-record-dialog-class',
       id: `new-record-dialog-id-${id}`,
-      width: '800px',
+      width: '1000px',
       height: 'auto',
       // minHeight: '500px',
       data: {
