@@ -9,6 +9,9 @@
   .invisible {
     visibility: hidden;
 
+    tr {
+      visibility: collapse;
+    }
     th {
       font-size: 0;
       padding: 0;

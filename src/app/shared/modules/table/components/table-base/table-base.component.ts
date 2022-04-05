@@ -42,7 +42,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   totalPages: any[] = [];
   pages: any[] = [];
   activePage: number = 0;
-  recordsPerPage: number = 5;
+  recordsPerPage: number = 20;
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 

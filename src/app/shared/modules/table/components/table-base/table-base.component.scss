@@ -72,6 +72,33 @@
   .progress-changed {
     background-color: $color6;
   }
+
+
+  .table-wrapper-fixed-head {
+    position: relative;
+  }
+  .table-wrapper {
+    max-height: 50vh;
+    width: 100%;
+    // height: 100vw;
+    overflow: auto;
+    display:inline-block;
+    // padding-right: 10px;
+
+    .invisible {
+      visibility: hidden;
+
+      tr {
+        visibility: collapse;
+      }
+      th {
+        font-size: 0;
+        padding: 0;
+        height: 0;
+      }
+    }
+  }
+
 }
 
 
