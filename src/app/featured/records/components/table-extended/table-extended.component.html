@@ -63,7 +63,7 @@
       <table class="table">
         <thead>
           <tr class="d-flex">
-            <th class="col-sm-1 pl-1 pr-1" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}"
+            <th class="col-sm-2 pl-1 pr-1" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}"
               style="margin-left: 2%;"
             >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
@@ -283,7 +283,7 @@
           <tr *ngFor="let item of records; let i = index" class="d-flex"
             [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
             <!-- 'non-click': item?.status === 'INACTIVE' , -->
-            <td class="col-sm-1 pl-1 pr-1" style="margin-left: 2%;">
+            <td class="col-sm-2 pl-1 pr-1" style="margin-left: 2%;">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opIcoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.opIco" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('opIco', item)" class="form-control">
