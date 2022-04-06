@@ -62,8 +62,10 @@
     <div class="col-md-12">
       <table class="table">
         <thead>
-          <tr>
-            <th class="col-sm-1 pl-1 pr-1" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+          <tr class="d-flex">
+            <th class="col-sm-1 pl-1 pr-1" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}"
+              style="margin-left: 2%;"
+            >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.opIco" [ngModelOptions]="{standalone: true}"
                   class="form-control">
@@ -124,7 +126,10 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-1 pr-1" id="datumOd" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <!-- col-sm-2 previously-->
+            <th class="pl-1 pr-1" id="datumOd" [ngClass]="{'not-allowed':recordsDiffArrObj}"
+              style="min-width: 200px; max-width: 200px;"
+            >
               <span class="partial-search" [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.datumOd" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -178,7 +183,10 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-1 pr-1" id="datumDo" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <!--col-sm-2 previously-->
+            <th class="pl-1 pr-1" id="datumDo" [ngClass]="{'not-allowed':recordsDiffArrObj}"
+              style="min-width: 200px; max-width: 200px;"
+            >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -226,7 +234,10 @@
 
 
             </th>
-            <th class="col-sm-2 pl-1 pr-1" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <!--col-sm-3  previously-->
+            <th class="pl-1 pr-1" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}"
+              style="width: 100%;"
+            >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
                   class="form-control">
@@ -269,10 +280,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of records; let i = index"
+          <tr *ngFor="let item of records; let i = index" class="d-flex"
             [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
             <!-- 'non-click': item?.status === 'INACTIVE' , -->
-            <td class="pl-1 pr-1">
+            <td class="col-sm-1 pl-1 pr-1" style="margin-left: 2%;">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opIcoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.opIco" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('opIco', item)" class="form-control">
@@ -280,7 +291,7 @@
               </span>
               <span *ngIf="item.read">{{item.opIco}}</span>
             </td>
-            <td class="pl-1 pr-1">
+            <td class="col-sm-2 pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodneMenoErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.obchodneMeno" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('obchodneMeno', item)" class="form-control">
@@ -288,7 +299,7 @@
               </span>
               <span *ngIf="item.read">{{item.obchodneMeno}}</span>
             </td>
-            <td class="pl-1 pr-1">
+            <td class="col-sm-1 pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit"
                 [ngClass]="{'required': item?.vypocitanyRatingErrorRequired}">
                 <!-- <input type="text" disabled [(ngModel)]="item.vypocitanyRating" [ngModelOptions]="{standalone: true}"
@@ -303,7 +314,7 @@
               </span>
               <span *ngIf="item.read">{{item.vypocitanyRating}}</span>
             </td>
-            <td class="pl-1 pr-1">
+            <td class="col-sm-1 pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.manualnyRatingErrorRequired}">
                 <!-- <input [disabled]="item?.status === 'INACTIVE'" type="text" [(ngModel)]="item.manualnyRating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualnyRating', item, i)"
@@ -319,7 +330,7 @@
               <span *ngIf="item.read">{{item.manualnyRating}}</span>
             </td>
 
-            <td class="pl-1 pr-1">
+            <td class="pl-1 pr-1" style="min-width: 200px; max-width: 200px;">
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                 <div class="input-group">
@@ -353,7 +364,7 @@
               </span> -->
               <span *ngIf="item.read">{{item.datumOd}}</span>
             </td>
-            <td class="pl-1 pr-1">
+            <td class="pl-1 pr-1" style="min-width: 200px; max-width: 200px;">
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
                 <div class="input-group">
@@ -395,7 +406,7 @@
               </span> -->
               <span *ngIf="item.read">{{item.datumDo}}</span>
             </td>
-            <td class="pl-1 pr-1">
+            <td class="pl-1 pr-1" style="width: 100%;">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
                 <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'" type="text"
                   [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
@@ -420,7 +431,7 @@
               </span>
               <span *ngIf="item.read">{{item.autorZmeny}}</span>
             </td> -->
-            <td class="pl-1 pr-1">
+            <td class="col-sm-1 pl-0 pr-0">
               <!-- <span *ngIf="item.read" (click)="switchToEditMode(item)">
                 <mat-icon aria-label="mode_edit" class="td-link">mode_edit</mat-icon>
               </span>
@@ -451,14 +462,14 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="margin-left: 2%;">
       <button type="button" class="btn btn-primary"
         [disabled]="!recordsDiffArrObj || getRecordsDiffArrObjError(recordsDiffArrObj)" (click)="saveChanges()">Save
         changes</button>
       <!-- <button type="button" class="btn btn-info ml-2" [disabled]="!exportActive" (click)="exportToDwh()">Export to
         DWH</button> -->
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <ul class="pagination">
         <li class="page-item" [ngClass]="{'not-allowed': recordsDiffArrObj}" *ngIf="activePage > 0">
           <span class="page-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="previousPage()">Previous</span>
