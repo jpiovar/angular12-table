@@ -1,6 +1,17 @@
 @import "~src/assets/scss/colors";
 
 #table-records {
+  .table-extended {
+    thead {
+      tr {
+        th {
+          display: inline-block;
+          align-self: flex-end;
+          border: 0;
+        }
+      }
+    }
+  }
   #global-search {
 
     .input-group {
