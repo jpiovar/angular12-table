@@ -4,74 +4,98 @@
     {
       "id": "id1",
       "opIco": "jankofirstname1",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A"
     },
     {
       "id": "id2",
       "opIco": "jankofirstname2",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     },
     {
       "id": "id3",
       "opIco": "jankofirstname3",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "C"
     },
     {
       "id": "id4",
       "opIco": "jankofirstname4",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A"
     },
     {
       "id": "id5",
       "opIco": "jankofirstname5",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     },
     {
       "id": "id6",
       "opIco": "jankofirstname6",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A"
     },
     {
       "id": "id7",
       "opIco": "jankofirstname7",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "A"
     },
     {
       "id": "id8",
       "opIco": "jankofirstname8",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     },
     {
       "id": "id9",
       "opIco": "jankofirstname9",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     },
     {
       "id": "id10",
       "opIco": "jankofirstname10",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     },
     {
       "id": "id11",
       "opIco": "jankofirstname11",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     },
     {
       "id": "id12",
       "opIco": "jankofirstname12",
+      "op": "stringnumericOP",
+      "ico": "stringnumericICO",
       "obchodneMeno": "jankosurname",
       "vypocitanyRating": "B"
     }
-]
+  ]
 }
