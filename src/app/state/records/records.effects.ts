@@ -142,6 +142,7 @@ export class RecordsEffects {
     map(
       (action: RecordsSave) => {
         // debugger;
+        console.log('recordsSave step1');
         const endPoint: any = action?.payload?.endPoint;
         const records: any = action?.payload?.records;
         const currentUrl: string = action?.payload?.currentUrl;
@@ -160,6 +161,7 @@ export class RecordsEffects {
     ),
     mergeMap(
       (res: any) => {
+        console.log('recordsSave step2');
         return new Observable((observer: Observer<any>) => {
           zip(...res.arrObs).subscribe(
             (subres: any) => {
@@ -180,6 +182,7 @@ export class RecordsEffects {
     ),
     map(
       res => {
+        console.log('recordsSave step3', res?.previousStateRecords);
         const url = `${this.origin}${this.tableLogs}`;
         // debugger;
         const records = JSON.parse(JSON.stringify(res?.records));
@@ -201,6 +204,7 @@ export class RecordsEffects {
       }
     ),
     catchError(error => {
+      console.log('recordsSave error', error);
       // debugger;
       // console.log(`${res.endPoint}`, error);
       // const recordId = record.id;
