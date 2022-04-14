@@ -53,7 +53,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 
-  sortBy: string = 'opIco';
+  sortBy: string = 'op'; // 'opIco';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
   dialogRefChangeModal: MatDialogRef<any>;
@@ -81,7 +81,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   ratingOptions: string[] = ['A', 'B', 'C', 'D', 'E'];
 
   initialSearchFilter: any = {
-    opIco: '', obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: ''
+    // opIco: '',
+    op: '',
+    ico: '',
+    obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: ''
   };
 
   searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
@@ -254,7 +257,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   createAndExecuteUrl(isFilter?: boolean) {
     // debugger;
     if (isFilter) {
-      this.sortBy = 'opIco';
+      this.sortBy =  'op'; // 'opIco';
       this.direction = 'asc';
       this.activePage = 0;
     }
@@ -279,7 +282,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     let sSdoFrom = '';
     let sSdoTo = '';
 
-    const sSopIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
+    // const sSopIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
+    const sSop = this.searchFilter?.op?.trim() ? `&op_like=${this.searchFilter?.op?.trim()}` : '';
+    const sSico = this.searchFilter?.ico?.trim() ? `&ico_like=${this.searchFilter?.ico?.trim()}` : '';
     const sSobchodneMeno = this.searchFilter?.obchodneMeno?.trim() ? `&obchodneMeno_like=${this.searchFilter?.obchodneMeno?.trim()}` : '';
     const sSvypocitanyRating = this.searchFilter?.vypocitanyRating.trim() ? `&vypocitanyRating_like=${this.searchFilter?.vypocitanyRating?.trim()}` : '';
     const sSmanualnyRating = this.searchFilter?.manualnyRating.trim() ? `&manualnyRating_like=${this.searchFilter?.manualnyRating?.trim()}` : '';
@@ -312,7 +317,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${sSopIco}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${sSop}${sSico}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
     this.store.dispatch(new TablesStatus({ tableExtendedCurrentUrl: url }));
@@ -826,7 +831,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           const res = response.trim();
           if (res) {
             this.searchText = res;
-            this.sortBy = 'opIco';
+            this.sortBy = 'op'; // 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               // const url = `${this.origin}${this.tableDataEndPoint}?q=${this.searchText}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
@@ -835,7 +840,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             }
           } else {
             this.searchText = '';
-            this.sortBy = 'opIco';
+            this.sortBy = 'op'; // 'opIco';
             this.direction = 'asc';
             if (this.searchMode === 'global') {
               // const url = `${this.origin}${this.tableDataEndPoint}?_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
