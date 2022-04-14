@@ -97,7 +97,8 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
 
 
-  opIco: string = '';
+  // opIco: string = '';
+  op: string = '';
   totalRecordsBE: number = 0;
   originalRecordsBE: any[];
   recordsBE: any[];
@@ -264,15 +265,17 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   triggerTableBaseExtendedLoad() {
     // // debugger;
-    this.opIco = this?.newRecords[0]?.opIco;
+    // this.opIco = this?.newRecords[0]?.opIco;
+    this.op = this?.newRecords[0]?.op;
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
-    const opIco = this.opIco?.trim() ? `opIco=${this.opIco?.trim()}` : '';
+    // const opIco = this.opIco?.trim() ? `opIco=${this.opIco?.trim()}` : '';
+    const op = this.op?.trim() ? `op=${this.op?.trim()}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     const order = this.direction ? `&_order=${this.direction}` : '';
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
-    const url = `${origin}${endPoint}?${opIco}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${op}${sort}${order}${page}${limit}`;
     this.store.dispatch(new RecordsBaseExtendedLoad(url));
   }
 

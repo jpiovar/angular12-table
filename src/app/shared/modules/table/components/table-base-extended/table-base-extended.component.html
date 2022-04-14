@@ -18,8 +18,14 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="col-sm-2 pr-1 pl-1" id="opIco">
+              <!-- <th class="col-sm-2 pr-1 pl-1" id="opIco">
                 <span>OP/ico</span>
+              </th> -->
+              <th class="col-sm-1 pr-1 pl-1" id="op">
+                <span>op</span>
+              </th>
+              <th class="col-sm-1 pr-1 pl-1" id="ico">
+                <span>ico</span>
               </th>
               <th class="col-sm-2 pr-1 pl-1" id="obchodneMeno">
                 <span>obchodne<br>meno</span>
@@ -45,13 +51,29 @@
             <tr *ngFor="let item of records; let i = index" class="text-left"
               [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
 
-              <td class="pr-1 pl-1">
+              <!-- <td class="pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opIcoErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.opIco" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('opIco', item)" class="form-control">
                   <label *ngIf="item?.opIcoErrorRequired">Required</label>
                 </span>
                 <span *ngIf="item.read">{{item.opIco}}</span>
+              </td> -->
+              <td class="pr-1 pl-1">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opErrorRequired}">
+                  <input type="text" disabled [(ngModel)]="item.op" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('op', item)" class="form-control">
+                  <label *ngIf="item?.opErrorRequired">Required</label>
+                </span>
+                <span *ngIf="item.read">{{item.op}}</span>
+              </td>
+              <td class="pr-1 pl-1">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.icoErrorRequired}">
+                  <input type="text" disabled [(ngModel)]="item.ico" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="onInputChange('ico', item)" class="form-control">
+                  <label *ngIf="item?.icoErrorRequired">Required</label>
+                </span>
+                <span *ngIf="item.read">{{item.ico}}</span>
               </td>
               <td class="pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodneMenoErrorRequired}">
@@ -163,8 +185,14 @@
         <table class="table table-hover">
           <thead class="invisible">
             <tr>
-              <th class="col-sm-2" id="opIco">
+              <!-- <th class="col-sm-2" id="opIco">
                 <span>OP/ico</span>
+              </th> -->
+              <th class="col-sm-1" id="op">
+                <span>op</span>
+              </th>
+              <th class="col-sm-1" id="ico">
+                <span>ico</span>
               </th>
               <th class="col-sm-2" id="obchodneMeno">
                 <span>obchodne<br>meno</span>
@@ -186,9 +214,11 @@
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="word-breaked">
             <tr *ngFor="let item of recordsBE; let i = index" class="text-left">
-              <td>{{item.opIco}}</td>
+              <!-- <td>{{item.opIco}}</td> -->
+              <td>{{item.op}}</td>
+              <td>{{item.ico}}</td>
               <td>{{item.obchodneMeno}}</td>
               <td> {{item.vypocitanyRating}}</td>
               <td>{{item.manualnyRating}}</td>

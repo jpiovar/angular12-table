@@ -18,6 +18,12 @@
       height: 0;
     }
   }
+
+  .word-breaked {
+    td {
+      word-break: break-all;
+    }
+  }
 }
 
 .new-records {
