@@ -90,8 +90,8 @@
   {
     "id": "id12",
     "opIco": "jankofirstname12",
-    "op": "stringnumericOP",
-    "ico": "stringnumericICO",
+    "op": "stringnumericOP100",
+    "ico": "stringnumericICO100",
     "obchodneMeno": "jankosurname",
     "vypocitanyRating": "B"
   }

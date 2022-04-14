@@ -46,7 +46,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   recordsDiffArrObj: any = null;
 
-  sortBy: string = 'opIco';
+  sortBy: string = 'op'; // 'opIco';
   sortByCol: any = {};
   direction: 'asc' | 'desc' = 'asc';
   recordId: string = '';
@@ -364,7 +364,7 @@ export class TableBaseComponent implements OnInit, OnDestroy {
           this.isSearching = false;
           const res = response.trim();
           this.activePage = 0;
-          this.sortBy = 'opIco';
+          this.sortBy = 'op'; // 'opIco';
           this.direction = 'asc';
           if (res && res?.length > 2) { // search text needs to be at least 3 chars
             this.searchText = res;
