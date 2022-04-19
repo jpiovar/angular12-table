@@ -17,6 +17,7 @@ import { InsertNewBtnComponent } from './components/insert-new-btn/insert-new-bt
 import { StatusToggleBtnComponent } from './components/status-toggle-btn/status-toggle-btn.component';
 import { DialogModule } from 'src/app/shared/modules/dialog/dialog.module';
 import { LogoModule } from 'src/app/shared/modules/logo/logo.module';
+import { InformationModule } from 'src/app/shared/modules/information/information.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LogoModule } from 'src/app/shared/modules/logo/logo.module';
     MaterialModule,
     RecordsRoutingModule,
     FormsModule,
-    LogoModule
+    LogoModule,
+    InformationModule
   ],
   providers: [
     I18n,

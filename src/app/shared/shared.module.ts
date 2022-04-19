@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from './modules/dialog/dialog.module';
 import { ButtonModule } from './modules/button/button.module';
 import { LogoModule } from './modules/logo/logo.module';
+import { InformationModule } from './modules/information/information.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LogoModule } from './modules/logo/logo.module';
     FormsModule,
     MaterialModule,
     // DialogModule,
-    ButtonModule
+    ButtonModule,
+    // InformationModule
     // LogoModule
   ],
   exports: [

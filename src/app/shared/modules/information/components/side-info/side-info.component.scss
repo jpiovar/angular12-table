@@ -1,0 +1,23 @@
+.wrapper {
+  position: fixed;
+  bottom: 50px;
+  left: 0px;
+  width: 100%;
+  padding-left: 5px;
+  // .icon {
+  //   padding-left: 3px;
+  // }
+  .popover-wrapper {
+    display: inline-block;
+
+    .info-icon {
+      position: relative;
+      background: url("~src/assets/icons/info-black-24dp.svg") 0 0 no-repeat;
+      height: 30px;
+      width: 30px;
+      display: inline-block;
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+}
