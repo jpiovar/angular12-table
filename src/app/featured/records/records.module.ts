@@ -16,6 +16,7 @@ import { TableExtendedComponent } from './components/table-extended/table-extend
 import { InsertNewBtnComponent } from './components/insert-new-btn/insert-new-btn.component';
 import { StatusToggleBtnComponent } from './components/status-toggle-btn/status-toggle-btn.component';
 import { DialogModule } from 'src/app/shared/modules/dialog/dialog.module';
+import { LogoModule } from 'src/app/shared/modules/logo/logo.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { DialogModule } from 'src/app/shared/modules/dialog/dialog.module';
     DialogModule,
     MaterialModule,
     RecordsRoutingModule,
-    FormsModule
+    FormsModule,
+    LogoModule
   ],
   providers: [
     I18n,

@@ -1,0 +1,11 @@
+.wrapper {
+  position: relative;
+  .logo {
+    position: absolute;
+    background: url("~src/assets/img/logo.svg") 0 0 no-repeat;
+    height: 50px;
+    width: 160px;
+    top: 0px;
+    left: 30px;
+  }
+}

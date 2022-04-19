@@ -6,6 +6,7 @@ import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from './modules/dialog/dialog.module';
 import { ButtonModule } from './modules/button/button.module';
+import { LogoModule } from './modules/logo/logo.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ButtonModule } from './modules/button/button.module';
     MaterialModule,
     // DialogModule,
     ButtonModule
+    // LogoModule
   ],
   exports: [
     // HamburgerButtonComponent,
