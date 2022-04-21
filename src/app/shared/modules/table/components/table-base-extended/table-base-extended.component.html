@@ -2,7 +2,7 @@
     {{itemRecordNew?.opIco}} | {{itemRecordNew?.obchodneMeno}} | {{itemRecordNew?.vypocitanyRating}}
 </p> -->
 
-<div class="container" id="table-records">
+<div class="container-fluid mx-0" id="table-records">
 
   <!-- <div class="input-group">
     <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model1" ngbDatepicker #d="ngbDatepicker"
@@ -17,7 +17,7 @@
       <div class="new-records">
         <table class="table">
           <thead>
-            <tr>
+            <tr class="d-flex">
               <!-- <th class="col-sm-2 pr-1 pl-1" id="opIco">
                 <span>OP/ico</span>
               </th> -->
@@ -27,28 +27,31 @@
               <th class="col-sm-1 pr-1 pl-1" id="ico">
                 <span>ico</span>
               </th>
-              <th class="col-sm-2 pr-1 pl-1" id="obchodneMeno">
+              <th class="col-sm-2 pr-1 pl-1" style="min-width: 230px; max-width: 230px;" id="obchodneMeno">
                 <span>obchodne<br>meno</span>
               </th>
-              <th class="col-sm-1 pr-1 pl-1" id="vypocitanyRating">
+              <th class="col-sm-1 pr-1 pl-1" style="min-width: 100px; max-width: 100px;" id="vypocitanyRating">
                 <span class="th-link">vypocitany<br>rating</span>
               </th>
-              <th class="col-sm-1 pr-1 pl-1" id="manualnyRating">
+              <th class="col-sm-1 pr-1 pl-1" style="min-width: 100px; max-width: 100px;" id="manualnyRating">
                 <span>manualny<br>rating</span>
               </th>
-              <th class="col-sm-2 pr-1 pl-1" id="datumOd">
+              <th class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;" id="datumOd">
                 <span>datum od</span>
               </th>
-              <th class="col-sm-2 pr-1 pl-1" id="datumDo">
+              <th class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;" id="datumDo">
                 <span>datum do</span>
               </th>
-              <th class="col-sm-2 pr-1 pl-1" id="poznamka">
+              <th class="col-sm-1 pr-1 pl-1" style="min-width: 160px; max-width: 160px;" id="poznamka">
                 <span>poznamka</span>
+              </th>
+              <th class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;" id="datumZmeny">
+                <span>datum zmeny</span>
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of records; let i = index" class="text-left"
+            <tr *ngFor="let item of records; let i = index" class="text-left d-flex"
               [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
 
               <!-- <td class="pr-1 pl-1">
@@ -59,7 +62,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.opIco}}</span>
               </td> -->
-              <td class="pr-1 pl-1">
+              <td class="col-sm-1 pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.op" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('op', item)" class="form-control">
@@ -67,7 +70,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.op}}</span>
               </td>
-              <td class="pr-1 pl-1">
+              <td class="col-sm-1 pr-1 pl-1">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.icoErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.ico" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('ico', item)" class="form-control">
@@ -75,7 +78,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.ico}}</span>
               </td>
-              <td class="pr-1 pl-1">
+              <td class="col-sm-2 pr-1 pl-1" style="min-width: 230px; max-width: 230px;">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodneMenoErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.obchodneMeno" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('obchodneMeno', item)" class="form-control">
@@ -83,7 +86,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.obchodneMeno}}</span>
               </td>
-              <td class="pr-1 pl-1">
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 100px; max-width: 100px;">
                 <span *ngIf="!item.read" class="record-edit"
                   [ngClass]="{'required': item?.vypocitanyRatingErrorRequired}">
                   <select class="form-control custom-select" [(ngModel)]="item.vypocitanyRating"
@@ -96,7 +99,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.vypocitanyRating}}</span>
               </td>
-              <td class="pr-1 pl-1">
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 100px; max-width: 100px;">
                 <span *ngIf="!item.read" class="record-edit"
                   [ngClass]="{'required': item?.manualnyRatingErrorRequired}">
 
@@ -111,7 +114,7 @@
                 <span *ngIf="item.read">{{item.manualnyRating}}</span>
               </td>
 
-              <td class="pr-1 pl-1">
+              <td class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                   <div class="input-group">
@@ -136,7 +139,7 @@
 
                 <span *ngIf="item.read">{{item.datumOd}}</span>
               </td>
-              <td class="pr-1 pl-1">
+              <td class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">
 
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
                   <div class="input-group">
@@ -161,7 +164,7 @@
 
                 <span *ngIf="item.read">{{item.datumDo}}</span>
               </td>
-              <td class="pr-1 pl-1">
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 160px; max-width: 160px;">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
                   <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'" type="text"
                     [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
@@ -171,6 +174,17 @@
                 <span *ngIf="item.read">{{item.poznamka}}</span>
               </td>
 
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumZmenyErrorRequired}">
+                  <input disabled
+                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumZmeny" ngbDatepicker #d="ngbDatepicker"
+                      #c3="ngModel" (ngModelChange)="onInputChange('datumZmeny', item); changeDate($event)"
+                    />
+                  <small *ngIf="item?.datumZmenyErrorRequired">Required</small>
+                </span>
+                <span *ngIf="item.read">{{item.datumZmeny}}</span>
+              </td>
 
             </tr>
           </tbody>
@@ -183,48 +197,18 @@
 
       <div class="table-wrapper" *ngIf="recordsBE?.length > 0">
         <table class="table table-hover">
-          <thead class="invisible">
-            <tr>
-              <!-- <th class="col-sm-2" id="opIco">
-                <span>OP/ico</span>
-              </th> -->
-              <th class="col-sm-1" id="op">
-                <span>op</span>
-              </th>
-              <th class="col-sm-1" id="ico">
-                <span>ico</span>
-              </th>
-              <th class="col-sm-2" id="obchodneMeno">
-                <span>obchodne<br>meno</span>
-              </th>
-              <th class="col-sm-1" id="vypocitanyRating">
-                <span class="th-link">vypocitany<br>rating</span>
-              </th>
-              <th class="col-sm-1" id="manualnyRating">
-                <span>manualny<br>rating</span>
-              </th>
-              <th class="col-sm-2" id="datumOd">
-                <span>datum od</span>
-              </th>
-              <th class="col-sm-2" id="datumDo">
-                <span>datum do</span>
-              </th>
-              <th class="col-sm-2" id="poznamka">
-                <span>poznamka</span>
-              </th>
-            </tr>
-          </thead>
           <tbody class="word-breaked">
-            <tr *ngFor="let item of recordsBE; let i = index" class="text-left">
+            <tr *ngFor="let item of recordsBE; let i = index" class="text-left d-flex">
               <!-- <td>{{item.opIco}}</td> -->
-              <td>{{item.op}}</td>
-              <td>{{item.ico}}</td>
-              <td>{{item.obchodneMeno}}</td>
-              <td> {{item.vypocitanyRating}}</td>
-              <td>{{item.manualnyRating}}</td>
-              <td>{{item.datumOd | date:"dd.MM.yyyy" }}</td>
-              <td>{{item.datumDo | date:"dd.MM.yyyy" }}</td>
-              <td>{{item.poznamka}}</td>
+              <td class="col-sm-1 pr-1 pl-1">{{item.op}}</td>
+              <td class="col-sm-1 pr-1 pl-1">{{item.ico}}</td>
+              <td class="col-sm-2 pr-1 pl-1" style="min-width: 230px; max-width: 230px;">{{item.obchodneMeno}}</td>
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 100px; max-width: 110px;"> {{item.vypocitanyRating}}</td>
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 100px; max-width: 110px;">{{item.manualnyRating}}</td>
+              <td class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumOd | date:"dd.MM.yyyy" }}</td>
+              <td class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumDo | date:"dd.MM.yyyy" }}</td>
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 160px; max-width: 160px;">{{item.poznamka}}</td>
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumZmeny | date:"dd.MM.yyyy" }}</td>
             </tr>
           </tbody>
         </table>

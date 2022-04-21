@@ -99,6 +99,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
 
   // opIco: string = '';
   op: string = '';
+  ico: string = '';
   totalRecordsBE: number = 0;
   originalRecordsBE: any[];
   recordsBE: any[];
@@ -243,11 +244,14 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     // d2.setFullYear(new Date().getFullYear() + 1);
     const dtext2 = moment().endOf('month').add(1, 'years').format('YYYY-MM-DD[T]HH:mm:ss'); // d2.toISOString();
 
+    const dtextNow = moment().format('YYYY-MM-DD[T]HH:mm:ss');
+
     for (let i = 0; i < records?.length; i++) {
       records[i]['manualnyRating'] = '';
       records[i]['datumOd'] = dtext1;
       records[i]['datumDo'] = dtext2;
       records[i]['poznamka'] = '';
+      records[i]['datumZmeny'] = dtextNow;
     }
   }
 
@@ -258,7 +262,7 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     this.tableMode = 'load';
     // this.store.dispatch(new StartSpinner());
     this.initializeStructure(newRecords);
-    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(newRecords)), ['datumOd', 'datumDo']);
+    this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(newRecords)), ['datumOd', 'datumDo', 'datumZmeny']);
     this.records = JSON.parse(JSON.stringify(this.originalRecords));
     // this.createAndExecuteUrl();
   }
@@ -267,15 +271,17 @@ export class TableBaseExtendedComponent implements OnInit, OnChanges, OnDestroy 
     // // debugger;
     // this.opIco = this?.newRecords[0]?.opIco;
     this.op = this?.newRecords[0]?.op;
+    this.ico = this?.newRecords[0]?.ico;
     const origin = `${this.origin}`;
     const endPoint = `${this.tableDataEndPoint}`;
     // const opIco = this.opIco?.trim() ? `opIco=${this.opIco?.trim()}` : '';
     const op = this.op?.trim() ? `op=${this.op?.trim()}` : '';
+    const ico = this.ico?.trim() ? `&ico=${this.ico?.trim()}` : '';
     const sort = this.sortBy ? `&_sort=${this.sortBy}` : '';
     const order = this.direction ? `&_order=${this.direction}` : '';
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
-    const url = `${origin}${endPoint}?${op}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${op}${ico}${sort}${order}${page}${limit}`;
     this.store.dispatch(new RecordsBaseExtendedLoad(url));
   }
 

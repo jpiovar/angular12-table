@@ -1,37 +1,54 @@
-.table-wrapper {
-  max-height: 50vh;
-  width: 100%;
-  // height: 100vw;
-  overflow: auto;
-  display:inline-block;
-  // padding-right: 10px;
+#table-records {
+  margin-left: 20px;
+  margin-right: 20px;
 
-  .invisible {
-    visibility: hidden;
-
-    tr {
-      visibility: collapse;
+  .table-base-extended {
+    min-width: 1200px;
+    thead {
+      tr {
+        th {
+          display: inline-block;
+          align-self: flex-end;
+          border: 0;
+        }
+      }
     }
-    th {
-      font-size: 0;
-      padding: 0;
-      height: 0;
+  }
+  .table-wrapper {
+    max-height: 50vh;
+    width: 100%;
+    // height: 100vw;
+    overflow: auto;
+    display:inline-block;
+    // padding-right: 10px;
+
+    .invisible {
+      visibility: hidden;
+
+      tr {
+        visibility: collapse;
+      }
+      th {
+        font-size: 0;
+        padding: 0;
+        height: 0;
+      }
+    }
+
+    .word-breaked {
+      td {
+        word-break: break-all;
+      }
     }
   }
 
-  .word-breaked {
-    td {
-      word-break: break-all;
-    }
+  .new-records {
+    min-height: 170px;
+    // max-height: 50vh;
+    width: 100%;
+    // height: 100vw;
+    // overflow: auto;
+    display:inline-block;
+    // padding-right: 10px;
   }
-}
-
-.new-records {
-  min-height: 170px;
-  // max-height: 50vh;
-  width: 100%;
-  // height: 100vw;
-  // overflow: auto;
-  display:inline-block;
-  // padding-right: 10px;
 }
