@@ -17,7 +17,7 @@ export class SideInfoComponent implements OnInit {
       if (!this.popover.isOpen()) {
         this.popover.open();
       }
-    });
+    }, 1000);
   }
 
 }

@@ -84,7 +84,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // opIco: '',
     op: '',
     ico: '',
-    obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: ''
+    obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: '', datumZmenyFrom: '', datumZmenyTo: '',
   };
 
   searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
@@ -281,6 +281,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     let sSodTo = '';
     let sSdoFrom = '';
     let sSdoTo = '';
+    let sSdatumZmenyFrom = '';
+    let sSdatumZmenyTo = '';
 
     // const sSopIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
     const sSop = this.searchFilter?.op?.trim() ? `&op_like=${this.searchFilter?.op?.trim()}` : '';
@@ -309,6 +311,15 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const sSpoznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
 
 
+    if (this.searchFilter?.datumZmenyFrom) {
+      const tTdatumZmenyFrom = ngbDateStructToIsoString(this.searchFilter?.datumZmenyFrom);
+      sSdatumZmenyFrom = tTdatumZmenyFrom && `&datumZmeny_gte=${tTdatumZmenyFrom}`;
+    }
+    if (this.searchFilter?.datumZmenyTo) {
+      const tTdatumZmenyTo = ngbDateStructToIsoString(this.searchFilter?.datumZmenyTo);
+      sSdatumZmenyTo = tTdatumZmenyTo && `&datumZmeny_lte=${tTdatumZmenyTo}`;
+    }
+
     // const statusLike = this.toggleBtnState ? `statusSlike=${this.toggleBtnState}` : '';
     const statusLike = this.toggleBtnState === 'ACTIVE' ? `status=ACTIVE` : `status=INACTIVE`;
     // const q = this.searchText ? `&q=${this.searchText}` : '';
@@ -317,7 +328,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${sSop}${sSico}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${sSop}${sSico}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sSdatumZmenyFrom}${sSdatumZmenyTo}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
     this.store.dispatch(new TablesStatus({ tableExtendedCurrentUrl: url }));
@@ -365,10 +376,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             }
 
             if (res.data) {
-              // // debugger;
+              debugger;
               // if (this.tableMode !== 'log') {
               // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['datumOd', 'datumDo']);
-              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
+              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo', 'datumZmeny']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }

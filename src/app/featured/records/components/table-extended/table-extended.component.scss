@@ -2,6 +2,7 @@
 
 #table-records {
   .table-extended {
+    min-width: 1600px;
     thead {
       tr {
         th {
@@ -67,6 +68,9 @@
     button {
       background-color: $color6;
     }
+  }
+  .inactive-item {
+    background-color: $color4;
   }
 
   .progress-removed {
