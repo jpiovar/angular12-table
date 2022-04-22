@@ -280,7 +280,7 @@
             </th>
 
 
-            <th class="pl-1 pr-1" id="datumZmeny" [ngClass]="{'not-allowed':recordsDiffArrObj}"
+            <th class="pl-1 pr-1" id="datumPoslednejZmeny" [ngClass]="{'not-allowed':recordsDiffArrObj}"
               style="min-width: 190px; max-width: 190px;"
             >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
@@ -289,13 +289,13 @@
                 <div class="input-group">
                   <span class="pt-2">od: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumZmenyFrom" ngbDatepicker
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyFrom" ngbDatepicker
                     #d3From="ngbDatepicker" #c3From="ngModel" (ngModelChange)="changeDate($event)"
                     (change)="onDateSelection($event)"
                     [markDisabled]="markDisabled1"
                   />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('datumZmenyFrom')" type="button">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                     </button>
                     <button class="btn btn-outline-secondary" (click)="d3From.toggle()" type="button">
@@ -307,13 +307,13 @@
                 <div class="input-group mt-1">
                   <span class="pt-2">do: </span>
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumZmenyTo" ngbDatepicker
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyTo" ngbDatepicker
                     #d3To="ngbDatepicker" #c3To="ngModel" (ngModelChange)="changeDate($event)"
                     (change)="onDateSelection($event)"
                     [markDisabled]="markDisabled2"
                   />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('datumZmenyTo')" type="button">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                     </button>
                     <button class="btn btn-outline-secondary" (click)="d3To.toggle()" type="button">
@@ -322,25 +322,25 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumZmeny')">datum zmeny
-                <mat-icon *ngIf="sortByCol?.datumZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.datumZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumPoslednejZmeny')">datum poslednej<br/>zmeny
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
 
 
             </th>
 
 
-            <!-- <th class="col-sm-1" id="datumZmeny">
-              <span class="th-link" (click)="sortByColumn('datumZmeny')">datum<br>zmeny
-                <mat-icon *ngIf="sortByCol?.datumZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.datumZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+            <!-- <th class="col-sm-1" id="datumPoslednejZmeny">
+              <span class="th-link" (click)="sortByColumn('datumPoslednejZmeny')">datum<br>zmeny
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th>
-            <th class="col-sm-2" id="autorZmeny">
-              <span class="th-link" (click)="sortByColumn('autorZmeny')">autor<br>zmeny
-                <mat-icon *ngIf="sortByCol?.autorZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.autorZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+            <th class="col-sm-2" id="autorPoslednejZmeny">
+              <span class="th-link" (click)="sortByColumn('autorPoslednejZmeny')">autor<br>zmeny
+                <mat-icon *ngIf="sortByCol?.autorPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.autorPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th> -->
             <th class="col-sm-1 pl-0 pr-0" style="min-width: 100px; max-width: 100px;"
@@ -520,12 +520,12 @@
 
             <td class="pl-1 pr-1" style="min-width: 190px; max-width: 190px;">
 
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumZmenyErrorRequired}">
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
                 <div class="input-group">
                   <input disabled
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumZmeny" ngbDatepicker #d="ngbDatepicker"
-                    #c2="ngModel" (ngModelChange)="onInputChange('datumZmeny', item); changeDate($event)"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumPoslednejZmeny" ngbDatepicker #d="ngbDatepicker"
+                    #c2="ngModel" (ngModelChange)="onInputChange('datumPoslednejZmeny', item); changeDate($event)"
                     [markDisabled]="markDisabled2"
                   />
                   <div class="input-group-append">
@@ -540,24 +540,24 @@
               </span>
 
 
-              <span *ngIf="item.read">{{item.datumZmeny}}</span>
+              <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
             </td>
 
             <!-- <td>
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumZmenyErrorRequired}" >
-                <input type="text" [(ngModel)]="item.datumZmeny" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('datumZmeny', item, i)" class="form-control">
-                <label *ngIf="item?.datumZmenyErrorRequired">Required</label>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}" >
+                <input type="text" [(ngModel)]="item.datumPoslednejZmeny" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('datumPoslednejZmeny', item, i)" class="form-control">
+                <label *ngIf="item?.datumPoslednejZmenyErrorRequired">Required</label>
               </span>
-              <span *ngIf="item.read">{{item.datumZmeny}}</span>
+              <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
             </td>
             <td>
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.autorZmenyErrorRequired}" >
-                <input type="text" [(ngModel)]="item.autorZmeny" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="onInputChange('autorZmeny', item, i)" class="form-control">
-                <label *ngIf="item?.autorZmenyErrorRequired">Required</label>
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.autorPoslednejZmenyErrorRequired}" >
+                <input type="text" [(ngModel)]="item.autorPoslednejZmeny" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="onInputChange('autorPoslednejZmeny', item, i)" class="form-control">
+                <label *ngIf="item?.autorPoslednejZmenyErrorRequired">Required</label>
               </span>
-              <span *ngIf="item.read">{{item.autorZmeny}}</span>
+              <span *ngIf="item.read">{{item.autorPoslednejZmeny}}</span>
             </td> -->
             <td class="col-sm-1 pl-0 pr-0" style="min-width: 100px; max-width: 100px;">
               <!-- <span *ngIf="item.read" (click)="switchToEditMode(item)">

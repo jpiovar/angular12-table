@@ -41,7 +41,7 @@ import { ajax } from 'rxjs/ajax';
 import { Store } from '@ngrx/store';
 import { AppState } from '..';
 import { StartToastr } from '../toastr/toastr.actions';
-import { getIndexBasedId, getItemBasedId, isLocalHostAndMockWay } from 'src/app/shared/utils/helper';
+import { getIndexBasedId, getItemBasedId, getSetArrPropertyByValue, isLocalHostAndMockWay } from 'src/app/shared/utils/helper';
 import { LogsSave } from '../logs/logs.actions';
 import { ExportStatus } from '../export/export.actions';
 
@@ -309,7 +309,12 @@ export class RecordsEffects {
               // debugger;
               if (response) {
                 if (isLocalHostAndMockWay()) {
-                  this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords }));
+                  let prevRecords = JSON.parse(JSON.stringify(previousStateRecords));
+                  prevRecords = getSetArrPropertyByValue(JSON.parse(JSON.stringify(prevRecords)), 'autorZmeny', 'property_autorPoslednejZmeny');
+                  prevRecords = getSetArrPropertyByValue(JSON.parse(JSON.stringify(prevRecords)), 'autorPoslednejZmeny', 'remove');
+                  prevRecords = getSetArrPropertyByValue(JSON.parse(JSON.stringify(prevRecords)), 'datumZmeny', 'property_datumPoslednejZmeny');
+                  prevRecords = getSetArrPropertyByValue(JSON.parse(JSON.stringify(prevRecords)), 'datumPoslednejZmeny', 'remove');
+                  this.store.dispatch(new LogsSave({ endPoint: url, previousStateRecords: prevRecords }));
                 }
 
 

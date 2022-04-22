@@ -76,3 +76,28 @@ export function isLocalHostAndMockWay() {
   }
   return false;
 }
+
+export function getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
+  // // debugger;
+  const res = JSON.parse(JSON.stringify(records));
+  for (let index = 0; index < res.length; index++) {
+    if (propertyValue && propertyValue.indexOf('property_') > -1 && res[index].hasOwnProperty(propertyValue.replace('property_', ''))) {
+      res[index][propertyName] = res[index][propertyValue.replace('property_', '')];
+    } else if (propertyValue === 'remove') {
+      delete res[index][propertyName];
+    } else {
+      res[index][propertyName] = propertyValue;
+    }
+  }
+  return res;
+}
+
+export function getSetPropertyByValue(record: any, propertyName: string, propertyValue: any) {
+  const res = JSON.parse(JSON.stringify(record));
+  if (propertyValue === 'remove') {
+    delete res[propertyName];
+  } else {
+    res[propertyName] = propertyValue;
+  }
+  return res;
+}

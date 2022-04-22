@@ -45,8 +45,8 @@
               <th class="col-sm-1 pr-1 pl-1" style="min-width: 160px; max-width: 160px;" id="poznamka">
                 <span>poznamka</span>
               </th>
-              <th class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;" id="datumZmeny">
-                <span>datum zmeny</span>
+              <th class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;" id="datumPoslednejZmeny">
+                <span>datum poslednej zmeny</span>
               </th>
             </tr>
           </thead>
@@ -175,15 +175,15 @@
               </td>
 
               <td class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumZmenyErrorRequired}">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
                   <input disabled
                       appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumZmeny" ngbDatepicker #d="ngbDatepicker"
-                      #c3="ngModel" (ngModelChange)="onInputChange('datumZmeny', item); changeDate($event)"
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumPoslednejZmeny" ngbDatepicker #d="ngbDatepicker"
+                      #c3="ngModel" (ngModelChange)="onInputChange('datumPoslednejZmeny', item); changeDate($event)"
                     />
-                  <small *ngIf="item?.datumZmenyErrorRequired">Required</small>
+                  <small *ngIf="item?.datumPoslednejZmenyErrorRequired">Required</small>
                 </span>
-                <span *ngIf="item.read">{{item.datumZmeny}}</span>
+                <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
               </td>
 
             </tr>
@@ -208,7 +208,7 @@
               <td class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumOd | date:"dd.MM.yyyy" }}</td>
               <td class="col-sm-2 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumDo | date:"dd.MM.yyyy" }}</td>
               <td class="col-sm-1 pr-1 pl-1" style="min-width: 160px; max-width: 160px;">{{item.poznamka}}</td>
-              <td class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumZmeny | date:"dd.MM.yyyy" }}</td>
+              <td class="col-sm-1 pr-1 pl-1" style="min-width: 150px; max-width: 150px;">{{item.datumPoslednejZmeny | date:"dd.MM.yyyy" }}</td>
             </tr>
           </tbody>
         </table>

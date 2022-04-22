@@ -5,7 +5,7 @@ import { BehaviorSubject, Subscription, zip } from 'rxjs';
 import moment from 'moment';
 import * as _ from 'lodash';
 
-import { compareValues, differentValueProperties, getIndexBasedId, getItemBasedId, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
+import { compareValues, differentValueProperties, getIndexBasedId, getItemBasedId, getSetArrPropertyByValue, getSetPropertyByValue, isoStringtoNgbDateStruct, ngbDateStructToIsoString } from 'src/app/shared/utils/helper';
 import { AppState } from 'src/app/state';
 import {
   // ChangeLogLoad, MetaLoad, MetaLocalSave,
@@ -84,7 +84,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // opIco: '',
     op: '',
     ico: '',
-    obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: '', datumZmenyFrom: '', datumZmenyTo: '',
+    obchodneMeno: '', vypocitanyRating: '', manualnyRating: '', odFrom: '', odTo: '', doFrom: '', doTo: '', poznamka: '', datumPoslednejZmenyFrom: '', datumPoslednejZmenyTo: '',
   };
 
   searchFilter: any = JSON.parse(JSON.stringify(this.initialSearchFilter));
@@ -281,8 +281,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     let sSodTo = '';
     let sSdoFrom = '';
     let sSdoTo = '';
-    let sSdatumZmenyFrom = '';
-    let sSdatumZmenyTo = '';
+    let sSdatumPoslednejZmenyFrom = '';
+    let sSdatumPoslednejZmenyTo = '';
 
     // const sSopIco = this.searchFilter?.opIco?.trim() ? `&opIco_like=${this.searchFilter?.opIco?.trim()}` : '';
     const sSop = this.searchFilter?.op?.trim() ? `&op_like=${this.searchFilter?.op?.trim()}` : '';
@@ -311,13 +311,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const sSpoznamka = this.searchFilter?.poznamka?.trim() ? `&poznamka_like=${this.searchFilter?.poznamka?.trim()}` : '';
 
 
-    if (this.searchFilter?.datumZmenyFrom) {
-      const tTdatumZmenyFrom = ngbDateStructToIsoString(this.searchFilter?.datumZmenyFrom);
-      sSdatumZmenyFrom = tTdatumZmenyFrom && `&datumZmeny_gte=${tTdatumZmenyFrom}`;
+    if (this.searchFilter?.datumPoslednejZmenyFrom) {
+      const tTdatumPoslednejZmenyFrom = ngbDateStructToIsoString(this.searchFilter?.datumPoslednejZmenyFrom);
+      sSdatumPoslednejZmenyFrom = tTdatumPoslednejZmenyFrom && `&datumPoslednejZmeny_gte=${tTdatumPoslednejZmenyFrom}`;
     }
-    if (this.searchFilter?.datumZmenyTo) {
-      const tTdatumZmenyTo = ngbDateStructToIsoString(this.searchFilter?.datumZmenyTo);
-      sSdatumZmenyTo = tTdatumZmenyTo && `&datumZmeny_lte=${tTdatumZmenyTo}`;
+    if (this.searchFilter?.datumPoslednejZmenyTo) {
+      const tTdatumPoslednejZmenyTo = ngbDateStructToIsoString(this.searchFilter?.datumPoslednejZmenyTo);
+      sSdatumPoslednejZmenyTo = tTdatumPoslednejZmenyTo && `&datumPoslednejZmeny_lte=${tTdatumPoslednejZmenyTo}`;
     }
 
     // const statusLike = this.toggleBtnState ? `statusSlike=${this.toggleBtnState}` : '';
@@ -328,7 +328,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const page = this.activePage > -1 ? `&_page=${this.activePage + 1}` : '';
     const limit = this.recordsPerPage > 0 ? `&_limit=${this.recordsPerPage}` : '';
 
-    const url = `${origin}${endPoint}?${statusLike}${sSop}${sSico}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sSdatumZmenyFrom}${sSdatumZmenyTo}${sort}${order}${page}${limit}`;
+    const url = `${origin}${endPoint}?${statusLike}${sSop}${sSico}${sSobchodneMeno}${sSvypocitanyRating}${sSmanualnyRating}${sSodFrom}${sSodTo}${sSdoFrom}${sSdoTo}${sSpoznamka}${sSdatumPoslednejZmenyFrom}${sSdatumPoslednejZmenyTo}${sort}${order}${page}${limit}`;
     this.currentUrl = url;
     this.store.dispatch(new RecordsLoad(url));
     this.store.dispatch(new TablesStatus({ tableExtendedCurrentUrl: url }));
@@ -378,8 +378,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             if (res.data) {
               debugger;
               // if (this.tableMode !== 'log') {
-              // this.originalRecords = this.setDatePickersToNgbStruct(this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['datumOd', 'datumDo']);
-              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo', 'datumZmeny']);
+              // this.originalRecords = this.setDatePickersToNgbStruct(getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['datumOd', 'datumDo']);
+              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo', 'datumPoslednejZmeny']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }
@@ -453,28 +453,6 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       }
     }
     return arr;
-  }
-
-  getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
-    const res = JSON.parse(JSON.stringify(records));
-    for (let index = 0; index < res.length; index++) {
-      if (propertyValue === 'remove') {
-        delete res[index][propertyName];
-      } else {
-        res[index][propertyName] = propertyValue;
-      }
-    }
-    return res;
-  }
-
-  getSetPropertyByValue(record: any, propertyName: string, propertyValue: any) {
-    const res = JSON.parse(JSON.stringify(record));
-    if (propertyValue === 'remove') {
-      delete res[propertyName];
-    } else {
-      res[propertyName] = propertyValue;
-    }
-    return res;
   }
 
 
@@ -595,11 +573,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   // removeItem(item: any) {
   //   this.store.dispatch(new StartSpinner());
   //   const url = `${this.origin}${this.tableDataEndPoint}`;
-  //   const records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+  //   const records = getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
   //   const deleted = {};
 
   //   const key = item?.id;
-  //   deleted[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
+  //   deleted[key] = getSetPropertyByValue(JSON.parse(JSON.stringify(item)), 'edit', 'remove');
   //   this.store.dispatch(new RecordsDelete({ endPoint: url, records, deleted }));
   //   this.tableMode = 'remove';
   // }
@@ -621,7 +599,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     // debugger;
     // dialog modal, get historyEndpoint/itemId
     this.store.dispatch(new StartSpinner());
-    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}&_sort=datumZmeny&_order=desc`;
+    const url = `${this.origin}${this.tableChangeLogs}?recordIdExtended=${item.id}&_sort=datumPoslednejZmeny&_order=desc`;
     this.recordId = item.id;
     this.tableMode = 'log';
     this.store.dispatch(new LogsLoad({ url, recordId: this.recordId }));
@@ -697,8 +675,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
     // // debugger;
-    // const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
-    // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
+    // const record = getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
+    // const originalRecord = getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
     const record = JSON.parse(JSON.stringify(recordsItem));
     const originalRecord = JSON.parse(JSON.stringify(originalRecordsItem));
     // if (JSON.stringify(record) != JSON.stringify(originalRecord)) {
@@ -729,8 +707,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     if (this.recordsDiffArrObj) {
       const url = `${this.origin}${this.tableDataEndPoint}`;
       const originalRecords = JSON.parse(JSON.stringify(this.originalRecords));
-      // let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
-      let records = this.getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'progressStatus', 'remove');
+      // let records = getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'edit', 'remove');
+      let records = getSetArrPropertyByValue(JSON.parse(JSON.stringify(this.records)), 'progressStatus', 'remove');
       let previousStateRecords = [];
       for (const key in this.recordsDiffArrObj) {
         if (this.recordsDiffArrObj.hasOwnProperty(key)) {
@@ -742,12 +720,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
           let modifiedCols = {};
           let modifiedProp = {};
 
-          records[j].autorZmeny = this.user?.account?.name;
-          records[j].datumZmeny = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // new Date().toISOString();
+          records[j].autorPoslednejZmeny = this.user?.account?.name;
+          records[j].datumPoslednejZmeny = moment().format('YYYY-MM-DD[T]HH:mm:ss'); // new Date().toISOString();
 
-          // this.recordsDiffArrObj[key] = this.getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
+          // this.recordsDiffArrObj[key] = getSetPropertyByValue(JSON.parse(JSON.stringify(this.recordsDiffArrObj[key])), 'edit', 'remove');
           if (this.recordsDiffArrObj[key]['progressStatus'] === 'DELETED') {
-            this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'INACTIVE');
+            this.recordsDiffArrObj[key] = getSetPropertyByValue(this.recordsDiffArrObj[key], 'status', 'INACTIVE');
             const index = getIndexBasedId(records, key); // itemId === key;
             records[index]['status'] = 'INACTIVE';
             action['actionType'] = 'DELETED';
@@ -778,7 +756,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
           }
 
-          this.recordsDiffArrObj[key] = this.getSetPropertyByValue(this.recordsDiffArrObj[key], 'progressStatus', 'remove');
+          this.recordsDiffArrObj[key] = getSetPropertyByValue(this.recordsDiffArrObj[key], 'progressStatus', 'remove');
           previousStateRecords.push({
             ...originalRecords[i],
             ...{

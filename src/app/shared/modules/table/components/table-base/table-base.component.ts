@@ -153,28 +153,6 @@ export class TableBaseComponent implements OnInit, OnDestroy {
   //   return arr;
   // }
 
-  getSetArrPropertyByValue(records: any, propertyName: string, propertyValue: any) {
-    const res = JSON.parse(JSON.stringify(records));
-    for (let index = 0; index < res.length; index++) {
-      if (propertyValue === 'remove') {
-        delete res[index][propertyName];
-      } else {
-        res[index][propertyName] = propertyValue;
-      }
-    }
-    return res;
-  }
-
-  getSetPropertyByValue(record: any, propertyName: string, propertyValue: any) {
-    const res = JSON.parse(JSON.stringify(record));
-    if (propertyValue === 'remove') {
-      delete res[propertyName];
-    } else {
-      res[propertyName] = propertyValue;
-    }
-    return res;
-  }
-
 
 
   setPagesRecords() {
@@ -297,8 +275,8 @@ export class TableBaseComponent implements OnInit, OnDestroy {
 
   recordsItemChanged(recordsItem, originalRecordsItem) {
     // debugger;
-    // const record = this.getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
-    // const originalRecord = this.getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
+    // const record = getSetPropertyByValue(JSON.parse(JSON.stringify(recordsItem)), 'edit', false);
+    // const originalRecord = getSetPropertyByValue(JSON.parse(JSON.stringify(originalRecordsItem)), 'edit', false);
     const record = JSON.parse(JSON.stringify(recordsItem));
     const originalRecord = JSON.parse(JSON.stringify(originalRecordsItem));
     // if (JSON.stringify(record) != JSON.stringify(originalRecord)) {

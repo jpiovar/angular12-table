@@ -12,8 +12,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification1",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -29,8 +29,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification2",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -46,8 +46,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification3",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -63,8 +63,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification4",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -80,8 +80,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification5",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -97,8 +97,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification6",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -114,8 +114,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification7",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -131,8 +131,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification8",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -148,8 +148,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification9",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -165,8 +165,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification101",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -182,8 +182,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification11",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -199,8 +199,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification12",
-    "datumZmeny": "2020-01-10T00:00:00",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-10T00:00:00",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   },
   {
@@ -216,8 +216,8 @@
     "datumOd": "2020-01-01T00:00:00",
     "datumDo": "2020-01-02T00:00:00",
     "poznamka": "notification12",
-    "datumZmeny": "2020-01-12T00:00:10",
-    "autorZmeny": "john conor",
+    "datumPoslednejZmeny": "2020-01-12T00:00:10",
+    "autorPoslednejZmeny": "john conor",
     "datumVytvoreniaPoslednejSnimky": "2017-01-10T00:00:00"
   }
 ]
