@@ -33,6 +33,8 @@
                   <thead>
                     <tr>
                       <!-- <th>OP/ico</th> -->
+                      <th>datum zmeny</th>
+                      <th>autor zmeny</th>
                       <th>op</th>
                       <th>ico</th>
                       <th>obchodne meno</th>
@@ -42,8 +44,6 @@
                       <th>do</th>
                       <th>poznamka</th>
                       <th>typ zmeny</th>
-                      <th>datum zmeny</th>
-                      <th>autor zmeny</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -52,6 +52,8 @@
                         <span *ngIf="itemChanged(item?.modifiedColumns, 'opIco'); else elseOpIco" class='item-changed'  [ngbTooltip]="currentValue(item?.modifiedColumns, 'opIco')">{{item.opIco}}</span>
                         <ng-template #elseOpIco><span>{{item.opIco}}</span></ng-template>
                       </td> -->
+                      <td>{{item.datumZmeny | date:"dd.MM.yyyy HH:mm"}}</td>
+                      <td>{{item.autorZmeny}}</td>
                       <td>
                         <span *ngIf="itemChanged(item?.modifiedColumns, 'op'); else elseOp" class='item-changed'  [ngbTooltip]="currentValue(item?.modifiedColumns, 'op')">{{item.op}}</span>
                         <ng-template #elseOp><span>{{item.op}}</span></ng-template>
@@ -90,8 +92,6 @@
                         <ng-template #elsePoznamka><span>{{item.poznamka}}</span></ng-template>
                       </td>
                       <td>{{item.actionType}}</td>
-                      <td>{{item.datumZmeny | date:"dd.MM.yyyy"}}</td>
-                      <td>{{item.autorZmeny}}</td>
                     </tr>
                   </tbody>
                 </table>

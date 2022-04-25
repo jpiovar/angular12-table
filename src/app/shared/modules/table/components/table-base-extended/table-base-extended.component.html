@@ -21,6 +21,9 @@
               <!-- <th class="col-sm-2 pr-1 pl-1" id="opIco">
                 <span>OP/ico</span>
               </th> -->
+              <th class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny" id="datumPoslednejZmeny">
+                <span>datum poslednej zmeny</span>
+              </th>
               <th class="col-sm-1 pr-1 pl-1 w-op" id="op">
                 <span>op</span>
               </th>
@@ -45,9 +48,6 @@
               <th class="col-sm-1 pr-1 pl-1 w-poznamka" id="poznamka">
                 <span>poznamka</span>
               </th>
-              <th class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny" id="datumPoslednejZmeny">
-                <span>datum poslednej zmeny</span>
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +62,19 @@
                 </span>
                 <span *ngIf="item.read">{{item.opIco}}</span>
               </td> -->
+
+              <td class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny">
+                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
+                  <input disabled
+                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumPoslednejZmeny" ngbDatepicker #d="ngbDatepicker"
+                      #c3="ngModel" (ngModelChange)="onInputChange('datumPoslednejZmeny', item); changeDate($event)"
+                    />
+                  <small *ngIf="item?.datumPoslednejZmenyErrorRequired">Required</small>
+                </span>
+                <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
+              </td>
+
               <td class="col-sm-1 pr-1 pl-1 w-op">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.op" [ngModelOptions]="{standalone: true}"
@@ -174,17 +187,7 @@
                 <span *ngIf="item.read">{{item.poznamka}}</span>
               </td>
 
-              <td class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny">
-                <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
-                  <input disabled
-                      appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                      placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumPoslednejZmeny" ngbDatepicker #d="ngbDatepicker"
-                      #c3="ngModel" (ngModelChange)="onInputChange('datumPoslednejZmeny', item); changeDate($event)"
-                    />
-                  <small *ngIf="item?.datumPoslednejZmenyErrorRequired">Required</small>
-                </span>
-                <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
-              </td>
+
 
             </tr>
           </tbody>
@@ -200,6 +203,7 @@
           <tbody class="word-breaked">
             <tr *ngFor="let item of recordsBE; let i = index" class="text-left d-flex">
               <!-- <td>{{item.opIco}}</td> -->
+              <td class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny">{{item.datumPoslednejZmeny | date:"dd.MM.yyyy HH:mm" }}</td>
               <td class="col-sm-1 pr-1 pl-1 w.op">{{item.op}}</td>
               <td class="col-sm-1 pr-1 pl-1 w-ico">{{item.ico}}</td>
               <td class="col-sm-2 pr-1 pl-1 w-obchodne-meno">{{item.obchodneMeno}}</td>
@@ -208,7 +212,7 @@
               <td class="col-sm-2 pr-1 pl-1 w-datum-od">{{item.datumOd | date:"dd.MM.yyyy" }}</td>
               <td class="col-sm-2 pr-1 pl-1 w-datum-do">{{item.datumDo | date:"dd.MM.yyyy" }}</td>
               <td class="col-sm-1 pr-1 pl-1 w-poznamka">{{item.poznamka}}</td>
-              <td class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny">{{item.datumPoslednejZmeny | date:"dd.MM.yyyy" }}</td>
+
             </tr>
           </tbody>
         </table>
