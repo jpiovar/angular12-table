@@ -51,4 +51,33 @@
     display:inline-block;
     // padding-right: 10px;
   }
+
+  .w-ico {
+
+  }
+  .w-op {
+
+  }
+  .w-obchodne-meno {
+    min-width: 210px;
+    max-width: 210px;
+  }
+  .w-manualny-rating,
+  .w-vypocitany-rating {
+    min-width: 100px;
+    max-width: 100px;
+  }
+  .w-poznamka {
+    min-width: 170px;
+    max-width: 170px;
+  }
+  .w-datum-od,
+  .w-datum-do {
+    min-width: 165px;
+    max-width: 165px;
+  }
+  .w-datum-poslednej-zmeny {
+    min-width: 130px;
+    max-width: 130px;
+  }
 }
