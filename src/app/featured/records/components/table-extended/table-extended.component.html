@@ -82,7 +82,7 @@
             >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.op" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
+                  class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op')">op
                 <mat-icon *ngIf="sortByCol?.op==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
@@ -94,7 +94,7 @@
             >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.ico" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
+                  class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('ico')">ico
                 <mat-icon *ngIf="sortByCol?.ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
@@ -106,7 +106,7 @@
               id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.obchodneMeno" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
+                  class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                 (click)="sortByColumn('obchodneMeno')">obchodne meno
@@ -122,7 +122,7 @@
                   [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <select class="form-control custom-select" [(ngModel)]="searchFilter.vypocitanyRating"
-                  [ngModelOptions]="{standalone: true}">
+                  [ngModelOptions]="{standalone: true}" (keydown.enter)="triggerPartialFilters()">
                   <option value=""></option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
@@ -142,7 +142,7 @@
                   [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
                 <select class="form-control custom-select" [(ngModel)]="searchFilter.manualnyRating"
-                  [ngModelOptions]="{standalone: true}">
+                  [ngModelOptions]="{standalone: true}" (keydown.enter)="triggerPartialFilters()">
                   <option value=""></option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
@@ -168,7 +168,7 @@
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odFrom" ngbDatepicker
                     #d1From="ngbDatepicker" #c1From="ngModel" (ngModelChange)="changeDate($event)"
                     (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)"
-                    [markDisabled]="markDisabled1"
+                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
                   />
                   <!-- <ng-template #t let-date let-focused="focused">
                       <span>ok
@@ -192,7 +192,7 @@
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odTo" ngbDatepicker
                     #d1To="ngbDatepicker" #c1To="ngModel" (ngModelChange)="changeDate($event)"
                     (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)"
-                    [markDisabled]="markDisabled2"
+                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
                   />
 
                   <div class="input-group-append">
@@ -225,7 +225,7 @@
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doFrom" ngbDatepicker
                     #d2From="ngbDatepicker" #c2From="ngModel" (ngModelChange)="changeDate($event)"
                     (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled1"
+                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
                   />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doFrom')" type="button">
@@ -243,7 +243,7 @@
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doTo" ngbDatepicker
                     #d2To="ngbDatepicker" #c2To="ngModel" (ngModelChange)="changeDate($event)"
                     (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled2"
+                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
                   />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doTo')" type="button">
@@ -269,7 +269,7 @@
             >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
-                  class="form-control">
+                  class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                 (click)="sortByColumn('poznamka')">poznamka
@@ -292,7 +292,7 @@
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyFrom" ngbDatepicker
                     #d3From="ngbDatepicker" #c3From="ngModel" (ngModelChange)="changeDate($event)"
                     (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled1"
+                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
                   />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')" type="button">
@@ -310,7 +310,7 @@
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyTo" ngbDatepicker
                     #d3To="ngbDatepicker" #c3To="ngModel" (ngModelChange)="changeDate($event)"
                     (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled2"
+                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
                   />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')" type="button">
