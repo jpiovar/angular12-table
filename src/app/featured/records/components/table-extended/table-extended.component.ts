@@ -29,6 +29,7 @@ import { TablesStatus } from 'src/app/state/tables/tables.actions';
 import { ExportStatus } from 'src/app/state/export/export.actions';
 
 import $ from 'jquery';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -223,7 +224,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     private httpBase: HttpBaseService,
     private httpClient: HttpClient,
     public formatter: NgbDateParserFormatter,
-    private calendar: NgbCalendar
+    private calendar: NgbCalendar,
+    private datePipe: DatePipe
   ) {
     this.origin = environment.beOrigin;
     this.tableDataEndPoint = environment.beTableDataEndPoint;
@@ -379,7 +381,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
               debugger;
               // if (this.tableMode !== 'log') {
               // this.originalRecords = this.setDatePickersToNgbStruct(getSetArrPropertyByValue(JSON.parse(JSON.stringify(res.data)), 'edit', false), ['datumOd', 'datumDo']);
-              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo', 'datumPoslednejZmeny']);
+              this.originalRecords = this.setDatePickersToNgbStruct(JSON.parse(JSON.stringify(res.data)), ['datumOd', 'datumDo']);
               this.records = JSON.parse(JSON.stringify(this.originalRecords));
               // }
             }
@@ -699,6 +701,11 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
       }
     }
     return res;
+  }
+
+  dateFormat(date: string): string {
+    // debugger;
+    return this.datePipe?.transform(date, 'dd.MM.yyyy HH:mm:ss');
   }
 
   saveChanges() {

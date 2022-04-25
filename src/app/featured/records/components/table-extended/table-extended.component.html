@@ -77,8 +77,60 @@
               </span>
 
             </th> -->
+
+            <th class="pl-1 pr-1" id="datumPoslednejZmeny" [ngClass]="{'not-allowed':recordsDiffArrObj}"
+              style="min-width: 190px; max-width: 190px; margin-left: 2%;"
+            >
+              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
+                <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
+                  class="form-control"> -->
+                <div class="input-group">
+                  <span class="pt-2">od: </span>
+                  <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyFrom" ngbDatepicker
+                    #d3From="ngbDatepicker" #c3From="ngModel" (ngModelChange)="changeDate($event)"
+                    (change)="onDateSelection($event)"
+                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
+                    </button>
+                    <button class="btn btn-outline-secondary" (click)="d3From.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="input-group mt-1">
+                  <span class="pt-2">do: </span>
+                  <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyTo" ngbDatepicker
+                    #d3To="ngbDatepicker" #c3To="ngModel" (ngModelChange)="changeDate($event)"
+                    (change)="onDateSelection($event)"
+                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
+                    </button>
+                    <button class="btn btn-outline-secondary" (click)="d3To.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </span>
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumPoslednejZmeny')">datum poslednej<br/>zmeny
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+              </span>
+
+
+            </th>
+
+
             <th class="col-sm-1 pl-1 pr-1" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}"
-              style="margin-left: 2%;"
+
             >
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.op" [ngModelOptions]="{standalone: true}"
@@ -280,55 +332,6 @@
             </th>
 
 
-            <th class="pl-1 pr-1" id="datumPoslednejZmeny" [ngClass]="{'not-allowed':recordsDiffArrObj}"
-              style="min-width: 190px; max-width: 190px;"
-            >
-              <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
-                <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
-                  class="form-control"> -->
-                <div class="input-group">
-                  <span class="pt-2">od: </span>
-                  <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyFrom" ngbDatepicker
-                    #d3From="ngbDatepicker" #c3From="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')" type="button">
-                      <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
-                    </button>
-                    <button class="btn btn-outline-secondary" (click)="d3From.toggle()" type="button">
-                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="input-group mt-1">
-                  <span class="pt-2">do: </span>
-                  <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyTo" ngbDatepicker
-                    #d3To="ngbDatepicker" #c3To="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')" type="button">
-                      <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
-                    </button>
-                    <button class="btn btn-outline-secondary" (click)="d3To.toggle()" type="button">
-                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
-                    </button>
-                  </div>
-                </div>
-              </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumPoslednejZmeny')">datum poslednej<br/>zmeny
-                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
-              </span>
-
-
-            </th>
 
 
             <!-- <th class="col-sm-1" id="datumPoslednejZmeny">
@@ -374,7 +377,37 @@
               </span>
               <span *ngIf="item.read">{{item.opIco}}</span>
             </td> -->
-            <td class="col-sm-1 pl-1 pr-1" style="margin-left: 2%;">
+
+
+            <td class="pl-1 pr-1" style="min-width: 190px; max-width: 190px; margin-left: 2%;">
+
+              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
+                <input type="text" disabled [value]="dateFormat(item.datumPoslednejZmeny)"  [ngModelOptions]="{standalone: true}"
+                  class="form-control">
+                <!-- <div class="input-group">
+                  <input disabled
+                    appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
+                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumPoslednejZmeny" ngbDatepicker #d="ngbDatepicker"
+                    #c2="ngModel" (ngModelChange)="onInputChange('datumPoslednejZmeny', item); changeDate($event)"
+                    [markDisabled]="markDisabled2"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary non-click inactive-item" (click)="d.toggle()" type="button">
+                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
+                    </button>
+                  </div>
+                </div> -->
+
+
+              </span>
+
+
+              <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
+            </td>
+
+
+            <td class="col-sm-1 pl-1 pr-1">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opErrorRequired}">
                 <input type="text" disabled [(ngModel)]="item.op" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('op', item)" class="form-control">
@@ -518,30 +551,7 @@
             </td>
 
 
-            <td class="pl-1 pr-1" style="min-width: 190px; max-width: 190px;">
 
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
-                <div class="input-group">
-                  <input disabled
-                    appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
-                    placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumPoslednejZmeny" ngbDatepicker #d="ngbDatepicker"
-                    #c2="ngModel" (ngModelChange)="onInputChange('datumPoslednejZmeny', item); changeDate($event)"
-                    [markDisabled]="markDisabled2"
-                  />
-                  <div class="input-group-append">
-                    <button
-                      class="btn btn-outline-secondary non-click inactive-item" (click)="d.toggle()" type="button">
-                      <mat-icon aria-label="material-icons-outlined" class="td-link">date_range</mat-icon>
-                    </button>
-                  </div>
-                </div>
-
-
-              </span>
-
-
-              <span *ngIf="item.read">{{item.datumPoslednejZmeny}}</span>
-            </td>
 
             <!-- <td>
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}" >
