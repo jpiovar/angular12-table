@@ -14,7 +14,9 @@ export const environment = {
   redirectUrl: process.env.AZURE_REDIRECT_URL || 'http://localhost:8080',
   cloudUrl: process.env.AZURE_CLOUD_URL || 'https://login.microsoftonline.com',
   clientId: process.env.AZURE_CLIENT_ID,
-  tenantId: process.env.AZURE_TENANT_ID
+  tenantId: process.env.AZURE_TENANT_ID,
+  infoBoxTitle: process.env.INFOBOX_TITLE || 'infoboxtitle',
+  infoBoxText: process.env.INFOBOX_TEXT || 'infoboxtext'
 };
 
 /*
