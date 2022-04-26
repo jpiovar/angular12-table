@@ -302,19 +302,23 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     const sSmanualnyRating = this.searchFilter?.manualnyRating.trim() ? `&manualnyRating_like=${this.searchFilter?.manualnyRating?.trim()}` : '';
 
     if (this.searchFilter?.odFrom) {
-      const tTodFrom = ngbDateStructToIsoString(this.searchFilter?.odFrom);
+      let tTodFrom = ngbDateStructToIsoString(this.searchFilter?.odFrom);
+      tTodFrom = moment(tTodFrom).startOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
       sSodFrom = tTodFrom && `&datumOd_gte=${tTodFrom}`;
     }
     if (this.searchFilter?.odTo) {
-      const tTodTo = ngbDateStructToIsoString(this.searchFilter?.odTo);
+      let tTodTo = ngbDateStructToIsoString(this.searchFilter?.odTo);
+      tTodTo = moment(tTodTo).endOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
       sSodTo = tTodTo && `&datumOd_lte=${tTodTo}`;
     }
     if (this.searchFilter?.doFrom) {
-      const tTdoFrom = ngbDateStructToIsoString(this.searchFilter?.doFrom);
+      let tTdoFrom = ngbDateStructToIsoString(this.searchFilter?.doFrom);
+      tTdoFrom = moment(tTdoFrom).startOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
       sSdoFrom = tTdoFrom && `&datumDo_gte=${tTdoFrom}`;
     }
     if (this.searchFilter?.doTo) {
-      const tTdoTo = ngbDateStructToIsoString(this.searchFilter?.doTo);
+      let tTdoTo = ngbDateStructToIsoString(this.searchFilter?.doTo);
+      tTdoTo = moment(tTdoTo).endOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
       sSdoTo = tTdoTo && `&datumDo_lte=${tTdoTo}`;
     }
 
@@ -322,11 +326,13 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
 
     if (this.searchFilter?.datumPoslednejZmenyFrom) {
-      const tTdatumPoslednejZmenyFrom = ngbDateStructToIsoString(this.searchFilter?.datumPoslednejZmenyFrom);
+      let tTdatumPoslednejZmenyFrom = ngbDateStructToIsoString(this.searchFilter?.datumPoslednejZmenyFrom);
+      tTdatumPoslednejZmenyFrom = moment(tTdatumPoslednejZmenyFrom).startOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
       sSdatumPoslednejZmenyFrom = tTdatumPoslednejZmenyFrom && `&datumPoslednejZmeny_gte=${tTdatumPoslednejZmenyFrom}`;
     }
     if (this.searchFilter?.datumPoslednejZmenyTo) {
-      const tTdatumPoslednejZmenyTo = ngbDateStructToIsoString(this.searchFilter?.datumPoslednejZmenyTo);
+      let tTdatumPoslednejZmenyTo = ngbDateStructToIsoString(this.searchFilter?.datumPoslednejZmenyTo);
+      tTdatumPoslednejZmenyTo = moment(tTdatumPoslednejZmenyTo).endOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
       sSdatumPoslednejZmenyTo = tTdatumPoslednejZmenyTo && `&datumPoslednejZmeny_lte=${tTdatumPoslednejZmenyTo}`;
     }
 
@@ -354,6 +360,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     }
     // const url = `${this.origin}${this.tableDataEndPoint}?statusSlike=${this.toggleBtnState}&_sort=${this.sortBy}&_order=${this.direction}&_page=${this.activePage + 1}&_limit=${this.recordsPerPage}`;
     // this.store.dispatch(new RecordsLoad(url));
+    this.activePage = 0;
     this.createAndExecuteUrl();
   }
 
