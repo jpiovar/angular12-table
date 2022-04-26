@@ -603,6 +603,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   removeItem(item: any) {
     // // debugger;
     item['progressStatus'] = 'DELETED';
+    return true;
   }
 
   undoChange(item: any) {
@@ -624,7 +625,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   }
 
   onInputChange(colname: string, item: any) {
-    // // debugger;
+    // debugger;
     // const itemId = this.records[index]?.id;
     const itemId = item?.id;
     const index = getIndexBasedId(this.records, itemId);
