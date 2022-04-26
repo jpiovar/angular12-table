@@ -12,5 +12,8 @@ export const environment = {
   clientId: process.env.AZURE_CLIENT_ID,
   tenantId: process.env.AZURE_TENANT_ID,
   infoBoxTitle: process.env.INFOBOX_TITLE || 'infoboxtitle',
-  infoBoxText: process.env.INFOBOX_TEXT || 'infoboxtext'
+  infoBoxText: process.env.INFOBOX_TEXT || 'infoboxtext',
+  deleteSubstring: process.env.DELETE_SUBSTRING || 'poz:',
+  deletePopoverTitle: process.env.DELETE_POPOVER_TITLE || 'deletePopoverTitle',
+  deletePopoverText: process.env.DELETE_POPOVER_TEXT || 'deletePopoverText'
 };

@@ -63,7 +63,7 @@
       <table class="table table-extended">
         <thead>
           <tr class="d-flex justify-content-center">
-          <!-- <tr class="row mx-0"> -->
+            <!-- <tr class="row mx-0"> -->
             <!-- <th class="col-sm-2 pl-1 pr-1" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}"
               style="margin-left: 2%;"
             >
@@ -79,8 +79,7 @@
             </th> -->
 
             <th class="pl-1 pr-1" id="datumPoslednejZmeny" [ngClass]="{'not-allowed':recordsDiffArrObj}"
-              style="min-width: 190px; max-width: 190px; margin-left: 2%;"
-            >
+              style="min-width: 190px; max-width: 190px; margin-left: 2%;">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -89,11 +88,11 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyFrom" ngbDatepicker
                     #d3From="ngbDatepicker" #c3From="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
-                  />
+                    (change)="onDateSelection($event)" [markDisabled]="markDisabled1"
+                    (keydown.enter)="triggerPartialFilters()" />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')" type="button">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')"
+                      type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                     </button>
                     <button class="btn btn-outline-secondary" (click)="d3From.toggle()" type="button">
@@ -107,11 +106,11 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyTo" ngbDatepicker
                     #d3To="ngbDatepicker" #c3To="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
-                  />
+                    (change)="onDateSelection($event)" [markDisabled]="markDisabled2"
+                    (keydown.enter)="triggerPartialFilters()" />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')" type="button">
+                    <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')"
+                      type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
                     </button>
                     <button class="btn btn-outline-secondary" (click)="d3To.toggle()" type="button">
@@ -120,18 +119,18 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumPoslednejZmeny')">datum poslednej<br/>zmeny
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
+                (click)="sortByColumn('datumPoslednejZmeny')">datum poslednej<br />zmeny
                 <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
-                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
+                <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down
+                </mat-icon>
               </span>
 
 
             </th>
 
 
-            <th class="col-sm-1 pl-1 pr-1" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}"
-
-            >
+            <th class="col-sm-1 pl-1 pr-1" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.op" [ngModelOptions]="{standalone: true}"
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
@@ -142,8 +141,7 @@
               </span>
 
             </th>
-            <th class="col-sm-1 pl-1 pr-1" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}"
-            >
+            <th class="col-sm-1 pl-1 pr-1" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.ico" [ngModelOptions]="{standalone: true}"
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
@@ -154,8 +152,8 @@
               </span>
 
             </th>
-            <th class="col-sm-2 pl-1 pr-1" style="min-width: 230px; max-width: 230px;"
-              id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-2 pl-1 pr-1" style="min-width: 230px; max-width: 230px;" id="obchodneMeno"
+              [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.obchodneMeno" [ngModelOptions]="{standalone: true}"
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
@@ -167,8 +165,8 @@
               </span>
 
             </th>
-            <th class="col-sm-1 pl-1 pr-1" style="min-width: 100px; max-width: 100px;"
-              id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-1 pl-1 pr-1" style="min-width: 100px; max-width: 100px;" id="vypocitanyRating"
+              [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.vypocitanyRating"
                   [ngModelOptions]="{standalone: true}"
@@ -187,8 +185,8 @@
               </span>
 
             </th>
-            <th class="col-sm-1 pl-1 pr-1" style="min-width: 100px; max-width: 100px;"
-              id="manualnyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+            <th class="col-sm-1 pl-1 pr-1" style="min-width: 100px; max-width: 100px;" id="manualnyRating"
+              [ngClass]="{'not-allowed':recordsDiffArrObj}">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.manualnyRating"
                   [ngModelOptions]="{standalone: true}"
@@ -209,8 +207,7 @@
             </th>
             <!-- col-sm-2 previously-->
             <th class="pl-1 pr-1" id="datumOd" [ngClass]="{'not-allowed':recordsDiffArrObj}"
-              style="min-width: 190px; max-width: 190px;"
-            >
+              style="min-width: 190px; max-width: 190px;">
               <span class="partial-search" [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.datumOd" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -219,9 +216,8 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odFrom" ngbDatepicker
                     #d1From="ngbDatepicker" #c1From="ngModel" (ngModelChange)="changeDate($event)"
-                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)"
-                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
-                  />
+                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)" [markDisabled]="markDisabled1"
+                    (keydown.enter)="triggerPartialFilters()" />
                   <!-- <ng-template #t let-date let-focused="focused">
                       <span>ok
                       </span>
@@ -243,9 +239,8 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.odTo" ngbDatepicker
                     #d1To="ngbDatepicker" #c1To="ngModel" (ngModelChange)="changeDate($event)"
-                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)"
-                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
-                  />
+                    (dateChange)="changeDate($event)" (dateSelect)="changeDate($event)" [markDisabled]="markDisabled2"
+                    (keydown.enter)="triggerPartialFilters()" />
 
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('odTo')" type="button">
@@ -266,8 +261,7 @@
             </th>
             <!--col-sm-2 previously-->
             <th class="pl-1 pr-1" id="datumDo" [ngClass]="{'not-allowed':recordsDiffArrObj}"
-              style="min-width: 190px; max-width: 190px;"
-            >
+              style="min-width: 190px; max-width: 190px;">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <!-- <input type="text" [(ngModel)]="searchFilter.do" [ngModelOptions]="{standalone: true}"
                   class="form-control"> -->
@@ -276,9 +270,8 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doFrom" ngbDatepicker
                     #d2From="ngbDatepicker" #c2From="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled1" (keydown.enter)="triggerPartialFilters()"
-                  />
+                    (change)="onDateSelection($event)" [markDisabled]="markDisabled1"
+                    (keydown.enter)="triggerPartialFilters()" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doFrom')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
@@ -294,9 +287,8 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.doTo" ngbDatepicker
                     #d2To="ngbDatepicker" #c2To="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)"
-                    [markDisabled]="markDisabled2" (keydown.enter)="triggerPartialFilters()"
-                  />
+                    (change)="onDateSelection($event)" [markDisabled]="markDisabled2"
+                    (keydown.enter)="triggerPartialFilters()" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('doTo')" type="button">
                       <mat-icon aria-label="material-icons-outlined" class="td-link">clear</mat-icon>
@@ -317,8 +309,7 @@
             </th>
             <!--col-sm-3  previously-->
             <th class="pl-1 pr-1" id="poznamka" [ngClass]="{'not-allowed':recordsDiffArrObj}"
-              style="min-width: 200px; max-width: 200px; width: 100%;"
-            >
+              style="min-width: 200px; max-width: 200px; width: 100%;">
               <span class='partial-search' [ngClass]="{'non-click': recordsDiffArrObj}">
                 <input type="text" [(ngModel)]="searchFilter.poznamka" [ngModelOptions]="{standalone: true}"
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
@@ -346,8 +337,8 @@
                 <mat-icon *ngIf="sortByCol?.autorPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
             </th> -->
-            <th class="col-sm-1 pl-0 pr-0" style="min-width: 100px; max-width: 100px;"
-              id="action" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+            <th class="col-sm-1 pl-0 pr-0" style="min-width: 100px; max-width: 100px;" id="action"
+              [ngClass]="{'not-allowed': recordsDiffArrObj}">
               <span class='partial-search'>
                 <button [ngClass]="{'non-click': recordsDiffArrObj}" class="btn btn-outline-secondary pl-1 pr-1"
                   (click)="clearInput('all')" type="button" ngbTooltip="Clear filter">
@@ -381,9 +372,10 @@
 
             <td class="pl-1 pr-1" style="min-width: 190px; max-width: 190px; margin-left: 2%;">
 
-              <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
-                <input type="text" disabled [value]="dateFormat(item.datumPoslednejZmeny)"  [ngModelOptions]="{standalone: true}"
-                  class="form-control">
+              <span *ngIf="!item.read" class="record-edit"
+                [ngClass]="{'required': item?.datumPoslednejZmenyErrorRequired}">
+                <input type="text" disabled [value]="dateFormat(item.datumPoslednejZmeny)"
+                  [ngModelOptions]="{standalone: true}" class="form-control">
                 <!-- <div class="input-group">
                   <input disabled
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
@@ -470,8 +462,7 @@
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
                     #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)"
-                    [markDisabled]="markDisabled1"
-                  />
+                    [markDisabled]="markDisabled1" />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"
@@ -504,8 +495,7 @@
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
                     #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)"
-                    [markDisabled]="markDisabled2"
-                  />
+                    [markDisabled]="markDisabled2" />
                   <div class="input-group-append">
                     <button
                       [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}"
@@ -578,10 +568,13 @@
               }">
                 <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
               </span> -->
-              <span (click)="removeItem(item); onInputChange('', item)"
-                [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED' || item?.progressStatus === 'CHANGED')}">
-                <mat-icon aria-label="delete_forever" class="td-link ml-2" ngbTooltip="Remove record">delete_forever
-                </mat-icon>
+              <span (click)="checkSubstring(item) && removeItem(item) && onInputChange('', item)"
+                [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}">
+                <span class="popover-wrapper" placement="left" #popoverD="ngbPopover" [ngbPopover]="deletePopoverText"
+                  [popoverTitle]="deletePopoverTitle" triggers="manual">
+                  <mat-icon aria-label="delete_forever" class="td-link ml-2" ngbTooltip="Delete item" (click)="!checkSubstring(item) && popoverD.open()">delete_forever
+                  </mat-icon>
+                </span>
               </span>
               <span>
                 <mat-icon [ngClass]="{'non-click': false}" aria-label="history" class="td-link ml-2"

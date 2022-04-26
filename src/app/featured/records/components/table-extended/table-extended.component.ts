@@ -23,7 +23,7 @@ import { StartSpinner, StopSpinner } from 'src/app/state/spinner/spinner.actions
 import { UserStoreData } from 'src/app/state/user/user.actions';
 import { MsalService } from '@azure/msal-angular';
 import { LogsLoad } from 'src/app/state/logs/logs.actions';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbInputDatepicker, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { DialogStepperComponent } from 'src/app/shared/modules/dialog/components/dialog-stepper/dialog-stepper.component';
 import { TablesStatus } from 'src/app/state/tables/tables.actions';
 import { ExportStatus } from 'src/app/state/export/export.actions';
@@ -46,6 +46,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   currentUrl: string = '';
   originalRecords: any[];
   records: any[];
+
+  deleteSubstring: string = '';
+  deletePopoverTitle: string = '';
+  deletePopoverText: string = '';
 
   totalPages: any[] = [];
   pages: any[] = [];
@@ -232,6 +236,10 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.tableChangeLogs = environment.beTableChangeLogs;
     this.tableMode = 'init';
     this.searchMode = 'init';
+
+    this.deleteSubstring = environment.deleteSubstring;
+    this.deletePopoverTitle = environment.deletePopoverTitle;
+    this.deletePopoverText = environment.deletePopoverText;
 
     this.metaAndTableDataSubscription();
     this.processGlobalSearch();
@@ -583,6 +591,14 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   //   this.store.dispatch(new RecordsDelete({ endPoint: url, records, deleted }));
   //   this.tableMode = 'remove';
   // }
+
+  checkSubstring(item: any) {
+    const content = item?.poznamka?.trim();
+    if (content?.indexOf(this.deleteSubstring) > -1 && content?.startsWith(this.deleteSubstring)) {
+      return true;
+    }
+    return false;
+  }
 
   removeItem(item: any) {
     // // debugger;
