@@ -88,7 +88,7 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyFrom" ngbDatepicker
                     #d3From="ngbDatepicker" #c3From="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)" [markDisabled]="markDisabled1"
+                    (change)="onDateSelection($event)"
                     (keydown.enter)="triggerPartialFilters()" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyFrom')"
@@ -106,7 +106,7 @@
                   <input appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="searchFilter.datumPoslednejZmenyTo" ngbDatepicker
                     #d3To="ngbDatepicker" #c3To="ngModel" (ngModelChange)="changeDate($event)"
-                    (change)="onDateSelection($event)" [markDisabled]="markDisabled2"
+                    (change)="onDateSelection($event)"
                     (keydown.enter)="triggerPartialFilters()" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" (click)="clearInput('datumPoslednejZmenyTo')"

@@ -30,7 +30,7 @@
       <div class="table-wrapper-fixed-head">
         <table class="table table-hover table-link">
           <thead>
-            <tr>
+            <tr class="d-flex justify-content-center">
               <!-- <th class="col-sm-4" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('opIco')">OP/ico
@@ -38,28 +38,28 @@
                   <mat-icon *ngIf="sortByCol?.opIco==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th> -->
-              <th class="col-sm-2" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              <th class="col-sm-2 w-op" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('op')">op
                   <mat-icon *ngIf="sortByCol?.op==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.op==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-2" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              <th class="col-sm-2 w-ico" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('ico')">ico
                   <mat-icon *ngIf="sortByCol?.ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-7" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <th class="col-sm-6 w-obchodne-meno" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('obchodneMeno')">obchodne meno
                   <mat-icon *ngIf="sortByCol?.obchodneMeno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.obchodneMeno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-1" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <th class="col-sm-2 w-vypocitany-rating" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                   (click)="sortByColumn('vypocitanyRating')">vypocitany<br>rating
                   <mat-icon *ngIf="sortByCol?.vypocitanyRating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
@@ -73,37 +73,37 @@
       </div>
       <div class="table-wrapper">
         <table class="table table-hover table-link">
-          <thead class="invisible">
-            <tr>
-              <!-- <th class="col-sm-4" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+          <!-- <thead class="invisible">
+            <tr class="d-flex">
+              <th class="col-sm-4" id="opIco" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('opIco')">OP/ico
                   <mat-icon *ngIf="sortByCol?.opIco==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.opIco==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
-              </th> -->
-              <th class="col-sm-2" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              </th>
+              <th class="col-sm-2 w-op" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('op')">op
                   <mat-icon *ngIf="sortByCol?.op==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.op==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-2" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
+              <th class="col-sm-2 w-ico" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('ico')">ico
                   <mat-icon *ngIf="sortByCol?.ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-7" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <th class="col-sm-6 w-obchodne-meno" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
                   (click)="sortByColumn('obchodneMeno')">obchodne meno
                   <mat-icon *ngIf="sortByCol?.obchodneMeno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.obchodneMeno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
-              <th class="col-sm-1" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
+              <th class="col-sm-2 w-vypocitany-rating" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
                   (click)="sortByColumn('vypocitanyRating')">vypocitany<br>rating
                   <mat-icon *ngIf="sortByCol?.vypocitanyRating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
@@ -112,10 +112,10 @@
                 </span>
               </th>
             </tr>
-          </thead>
+          </thead> -->
           <tbody>
             <tr (dblclick)="doubleClick(item)" (click)="singleClick($event)" *ngFor="let item of records; let i = index"
-              class="tr-link"
+              class="tr-link d-flex justify-content-center"
               [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
               <!-- 'non-click': item?.status === 'INACTIVE' , -->
               <!-- <td>
@@ -126,7 +126,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.opIco}}</span>
               </td> -->
-              <td>
+              <td class="w-op">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.opErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.op" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('op', item)" class="form-control">
@@ -134,7 +134,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.op}}</span>
               </td>
-              <td>
+              <td class="w-ico">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.icoErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.ico" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('ico', item)" class="form-control">
@@ -142,7 +142,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.ico}}</span>
               </td>
-              <td>
+              <td class="w-obchodne-meno">
                 <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.obchodneMenoErrorRequired}">
                   <input type="text" disabled [(ngModel)]="item.obchodneMeno" [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="onInputChange('obchodneMeno', item)" class="form-control">
@@ -150,7 +150,7 @@
                 </span>
                 <span *ngIf="item.read">{{item.obchodneMeno}}</span>
               </td>
-              <td>
+              <td class="w-vypocitany-rating">
                 <span *ngIf="!item.read" class="record-edit"
                   [ngClass]="{'required': item?.vypocitanyRatingErrorRequired}">
                   <!-- <input type="text" disabled [(ngModel)]="item.vypocitanyRating" [ngModelOptions]="{standalone: true}"

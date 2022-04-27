@@ -76,6 +76,15 @@
 
   .table-wrapper-fixed-head {
     position: relative;
+    thead {
+      tr {
+        th {
+          display: inline-block;
+          align-self: flex-end;
+          border: 0;
+        }
+      }
+    }
   }
   .table-wrapper {
     max-height: 50vh;
@@ -97,6 +106,23 @@
         height: 0;
       }
     }
+  }
+
+  .w-op {
+    min-width: 15%;
+    max-width: 15%;
+  }
+  .w-ico {
+    min-width: 15%;
+    max-width: 15%;
+  }
+  .w-obchodne-meno {
+    min-width: 60%;
+    max-width: 60%;
+  }
+  .w-vypocitany-rating {
+    min-width: 100px;
+    max-width: 100px;
   }
 
 }
