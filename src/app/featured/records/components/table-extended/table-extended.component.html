@@ -120,7 +120,7 @@
                 </div>
               </span>
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                (click)="sortByColumn('datumPoslednejZmeny')">datum poslednej<br />zmeny
+                (click)="sortByColumn('datumPoslednejZmeny')">Date Time
                 <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.datumPoslednejZmeny==='desc'" aria-label="down icon">arrow_drop_down
                 </mat-icon>
@@ -135,7 +135,7 @@
                 <input type="text" [(ngModel)]="searchFilter.op" [ngModelOptions]="{standalone: true}"
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
-              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op')">op
+              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('op')">OP
                 <mat-icon *ngIf="sortByCol?.op==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.op==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -146,7 +146,7 @@
                 <input type="text" [(ngModel)]="searchFilter.ico" [ngModelOptions]="{standalone: true}"
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
-              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('ico')">ico
+              <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}" (click)="sortByColumn('ico')">IČO
                 <mat-icon *ngIf="sortByCol?.ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -159,7 +159,7 @@
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
               <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
-                (click)="sortByColumn('obchodneMeno')">obchodne meno
+                (click)="sortByColumn('obchodneMeno')">Business Name
                 <mat-icon *ngIf="sortByCol?.obchodneMeno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.obchodneMeno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -178,7 +178,7 @@
                 </select>
               </span>
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                (click)="sortByColumn('vypocitanyRating')">vypocitany<br>rating
+                (click)="sortByColumn('vypocitanyRating')">Rating<br/>DWH
                 <mat-icon *ngIf="sortByCol?.vypocitanyRating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.vypocitanyRating==='desc'" aria-label="down icon">arrow_drop_down
                 </mat-icon>
@@ -198,7 +198,7 @@
                 </select>
               </span>
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                (click)="sortByColumn('manualnyRating')">manualny<br>rating
+                (click)="sortByColumn('manualnyRating')">Rating<br/>NEW
                 <mat-icon *ngIf="sortByCol?.manualnyRating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.manualnyRating==='desc'" aria-label="down icon">arrow_drop_down
                 </mat-icon>
@@ -252,8 +252,7 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumOd')">datum
-                od
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumOd')">Date from
                 <mat-icon *ngIf="sortByCol?.datumOd==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.datumOd==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -299,8 +298,7 @@
                   </div>
                 </div>
               </span>
-              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumDo')">datum
-                do
+              <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}" (click)="sortByColumn('datumDo')">Date to
                 <mat-icon *ngIf="sortByCol?.datumDo==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.datumDo==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>
@@ -315,7 +313,7 @@
                   class="form-control" (keydown.enter)="triggerPartialFilters()">
               </span>
               <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                (click)="sortByColumn('poznamka')">poznamka
+                (click)="sortByColumn('poznamka')">Note
                 <mat-icon *ngIf="sortByCol?.poznamka==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                 <mat-icon *ngIf="sortByCol?.poznamka==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
               </span>

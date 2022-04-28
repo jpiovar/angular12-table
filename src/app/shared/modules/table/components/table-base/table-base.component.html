@@ -40,28 +40,28 @@
               </th> -->
               <th class="col-sm-2 w-op" id="op" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
-                  (click)="sortByColumn('op')">op
+                  (click)="sortByColumn('op')">OP
                   <mat-icon *ngIf="sortByCol?.op==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.op==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
               <th class="col-sm-2 w-ico" id="ico" [ngClass]="{'not-allowed': recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
-                  (click)="sortByColumn('ico')">ico
+                  (click)="sortByColumn('ico')">IČO
                   <mat-icon *ngIf="sortByCol?.ico==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.ico==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
               <th class="col-sm-6 w-obchodne-meno" id="obchodneMeno" [ngClass]="{'not-allowed':recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click': recordsDiffArrObj}"
-                  (click)="sortByColumn('obchodneMeno')">obchodne meno
+                  (click)="sortByColumn('obchodneMeno')">Business Name
                   <mat-icon *ngIf="sortByCol?.obchodneMeno==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.obchodneMeno==='desc'" aria-label="down icon">arrow_drop_down</mat-icon>
                 </span>
               </th>
               <th class="col-sm-2 w-vypocitany-rating" id="vypocitanyRating" [ngClass]="{'not-allowed':recordsDiffArrObj}">
                 <span class="th-link" [ngClass]="{'non-click':recordsDiffArrObj}"
-                  (click)="sortByColumn('vypocitanyRating')">vypocitany<br>rating
+                  (click)="sortByColumn('vypocitanyRating')">Rating<br/>DWH
                   <mat-icon *ngIf="sortByCol?.vypocitanyRating==='asc'" aria-label="up icon">arrow_drop_up</mat-icon>
                   <mat-icon *ngIf="sortByCol?.vypocitanyRating==='desc'" aria-label="down icon">arrow_drop_down
                   </mat-icon>

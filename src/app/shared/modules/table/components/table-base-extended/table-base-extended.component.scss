@@ -52,6 +52,19 @@
     // padding-right: 10px;
   }
 
+  .table-wrapper-fixed-head {
+    position: relative;
+    thead {
+      tr {
+        th {
+          display: inline-block;
+          align-self: flex-end;
+          border: 0;
+        }
+      }
+    }
+  }
+
   .w-ico {
 
   }
