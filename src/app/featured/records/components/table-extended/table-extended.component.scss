@@ -12,6 +12,9 @@
         }
       }
     }
+    .input-group-append {
+      z-index: 0;
+    }
   }
   #global-search {
 
@@ -43,8 +46,11 @@
   }
   .pagination {
     float: right;
-    .page-link {
-      cursor: pointer;
+    .page-item {
+      z-index: 0;
+      .page-link {
+        cursor: pointer;
+      }
     }
   }
 
