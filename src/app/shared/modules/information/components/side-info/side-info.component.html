@@ -1,5 +1,8 @@
 <div class="wrapper">
-  <span class="popover-wrapper" placement="right" #popover1="ngbPopover"  [ngbPopover]="infoBoxText"
+  <ng-template #popContent>
+    <span [innerHtml]="infoBoxText"></span>
+  </ng-template>
+  <span class="popover-wrapper" placement="right" #popover1="ngbPopover"  [ngbPopover]="popContent"
     [popoverTitle]="infoBoxTitle">
     <!-- <mat-icon aria-label="material-icons-outlined" class="icon">info</mat-icon> -->
     <span class="info-icon"></span>
