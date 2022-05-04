@@ -51,7 +51,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of records; let i = index" class="text-left d-flex"
+            <tr *ngFor="let item of records; let i = index" class="text-left d-flex justify-content-center"
               [ngClass]="{'inactive': item?.status === 'INACTIVE', 'progress-removed': item?.progressStatus === 'DELETED', 'progress-changed': item?.progressStatus === 'CHANGED'}">
 
               <!-- <td class="pr-1 pl-1">
@@ -201,10 +201,10 @@
       <div class="table-wrapper" *ngIf="recordsBE?.length > 0">
         <table class="table table-hover">
           <tbody class="word-breaked">
-            <tr *ngFor="let item of recordsBE; let i = index" class="text-left d-flex">
+            <tr *ngFor="let item of recordsBE; let i = index" class="text-left d-flex justify-content-center">
               <!-- <td>{{item.opIco}}</td> -->
               <td class="col-sm-1 pr-1 pl-1 w-datum-poslednej-zmeny">{{item.datumPoslednejZmeny | date:"dd.MM.yyyy HH:mm" }}</td>
-              <td class="col-sm-1 pr-1 pl-1 w.op">{{item.op}}</td>
+              <td class="col-sm-1 pr-1 pl-1 w-op">{{item.op}}</td>
               <td class="col-sm-1 pr-1 pl-1 w-ico">{{item.ico}}</td>
               <td class="col-sm-2 pr-1 pl-1 w-obchodne-meno">{{item.obchodneMeno}}</td>
               <td class="col-sm-1 pr-1 pl-1 w-vypocitany-rating"> {{item.vypocitanyRating}}</td>
