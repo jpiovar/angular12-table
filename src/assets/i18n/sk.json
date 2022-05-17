@@ -1,8 +1,8 @@
 {
   "MAIN": {
-    "APP-NAME": "frontend {{value}}"
+    "APP-NAME": "frontend {{value}} sk"
   },
   "HOME": {
-    "main": "welcome home"
+    "main": "welcome home sk"
   }
 }

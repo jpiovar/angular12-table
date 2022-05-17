@@ -1,0 +1,8 @@
+{
+  "MAIN": {
+    "APP-NAME": "frontend {{value}} en"
+  },
+  "HOME": {
+    "main": "welcome home en"
+  }
+}

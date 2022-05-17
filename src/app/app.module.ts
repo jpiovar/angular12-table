@@ -42,10 +42,10 @@ import { RecordsBaseEffects } from './state/records-base/records-base.effects';
 import { RecordsBaseExtendedEffects } from './state/records-base-extended/records-base-extended.effects';
 
 import { AppState } from './state';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InteractionType, IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { MsalInterceptor, MsalInterceptorConfiguration, MsalModule, MsalService, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG } from '@azure/msal-angular';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 

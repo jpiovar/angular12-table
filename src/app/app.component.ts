@@ -25,10 +25,11 @@ export class AppComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   languageParam = { value: 'intro' };
   translation: any;
+  tt: string = '';
 
   constructor(
     private store: Store<AppState>,
-    private translate: TranslateService,
+    public translate: TranslateService,
     private msalService: MsalService,
     private httpClient: HttpClient,
     // private titleService: Title,
@@ -37,7 +38,7 @@ export class AppComponent implements OnDestroy, OnInit {
   ) {
     console.log('process.env ', process.env.FOO);
     console.log('current browser is Explorer ', plantandgo?.isExplorer());
-    translate?.addLangs(['sk']);
+    translate?.addLangs(['sk', 'en']);
     translate?.setDefaultLang('sk');
     const browserLang = translate?.getBrowserLang();
     translate?.use(browserLang.match(/sk/) ? browserLang : 'sk');
@@ -45,6 +46,17 @@ export class AppComponent implements OnDestroy, OnInit {
     this.translationSubscribe();
 
   }
+
+  translateLanguageTo(lang: string) {
+    debugger;
+    this.translate.use(lang);
+    // this.tt = this.translate.instant('HOME.main');
+    this.translate.get(['HOME.main']).subscribe(res => {
+      this.tt = res['HOME.main'];
+    })
+  }
+
+
 
   getAccessToken() {
     // debugger;
