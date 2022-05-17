@@ -18,6 +18,13 @@ import { StatusToggleBtnComponent } from './components/status-toggle-btn/status-
 import { DialogModule } from 'src/app/shared/modules/dialog/dialog.module';
 import { LogoModule } from 'src/app/shared/modules/logo/logo.module';
 import { InformationModule } from 'src/app/shared/modules/information/information.module';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/records/', '.json');
+}
 
 
 @NgModule({
@@ -38,12 +45,21 @@ import { InformationModule } from 'src/app/shared/modules/information/informatio
     RecordsRoutingModule,
     FormsModule,
     LogoModule,
-    InformationModule
+    InformationModule,
+    TranslateModule.forChild({
+      defaultLanguage: 'sk',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      },
+      isolate: true
+    })
   ],
   providers: [
     I18n,
-    {provide: NgbDateParserFormatter, useValue: new MomentDateFormatter},
-    {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}
-   ]
+    { provide: NgbDateParserFormatter, useValue: new MomentDateFormatter },
+    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }
+  ]
 })
 export class RecordsModule { }

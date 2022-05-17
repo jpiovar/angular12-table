@@ -120,12 +120,17 @@ export class AppComponent implements OnDestroy, OnInit {
     // currently just for example of usage
     this.subscription.add(
       this.translate?.get('MAIN.APP-NAME', this.languageParam).subscribe((res: string) => {
-        console.log(res);
+        debugger;
+        console.log('app MAIN.APP-NAME', res);
       })
     );
 
     this.subscription.add(
-      this.translate?.get('HOME').subscribe(obj => this.translation = obj)
+      this.translate?.get('HOME').subscribe(obj => {
+        debugger;
+        this.translation = obj;
+        console.log('app HOME', obj);
+      })
     );
   }
 
