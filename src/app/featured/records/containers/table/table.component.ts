@@ -12,6 +12,7 @@ export class TableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   languageParam = { value: 'intro' };
   translation: any;
+  tt: string = '';
 
   constructor(
     private translate: TranslateService
@@ -37,6 +38,16 @@ export class TableComponent implements OnInit, OnDestroy {
         console.log('TableComponent RECORDS', obj);
       })
     );
+  }
+
+  translateLanguageTo(lang: string) {
+    debugger;
+    this.translate.use(lang);
+    // this.tt = this.translate.instant('HOME.main');
+    this.translate.get(['RECORDS']).subscribe(res => {
+      debugger;
+      this.tt = res['RECORDS'].main;
+    })
   }
 
   ngOnDestroy(): void {

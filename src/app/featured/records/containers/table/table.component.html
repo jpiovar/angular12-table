@@ -1,5 +1,12 @@
 <div>
   <p>
+    <span (click)="translateLanguageTo('sk')">SK</span> | <span (click)="translateLanguageTo('en')">EN</span>
+    <br/>
+    <span>{{'RECORDS.main' | translate}}</span>
+    <br/>
+    <span>ok {{translation?.main}} and {{tt}}</span>
+  </p>
+  <p>
     <app-logout-btn></app-logout-btn>
   </p>
   <p>
