@@ -765,7 +765,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             action['actionType'] = 'CHANGED';
 
             const diffValProp = differentValueProperties(originalRecords[i], records[j]);
-            modifiedCols = diffValProp.map(function (item) {
+            modifiedCols = diffValProp.map(function(item) {
               if (item?.propName === 'datumOd' || item?.propName === 'datumDo') {
                 return {
                   colName: item.propName,

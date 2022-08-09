@@ -47,7 +47,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.translate.get(['RECORDS']).subscribe(res => {
       debugger;
       this.tt = res['RECORDS'].main;
-    })
+    });
   }
 
   ngOnDestroy(): void {

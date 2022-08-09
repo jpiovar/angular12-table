@@ -7,6 +7,6 @@ import DOMPurify from 'dompurify';
 })
 export class BreakOnPipe implements PipeTransform {
   public transform(value: string, ...args: any[]): any {
-    return value.replace(/,|;/g, '<br>'); //replace all ',' and ';' with <br>
+    return value.replace(/,|;/g, '<br>'); // replace all ',' and ';' with <br>
   }
 }
