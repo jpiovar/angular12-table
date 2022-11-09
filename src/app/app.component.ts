@@ -83,6 +83,7 @@ export class AppComponent implements OnDestroy, OnInit {
   storeAccessToken(res) {
     // // debugger;
     this.store.dispatch(new UserStoreData(res));
+    // console.log('UserStoreData ', res);
   }
 
   ngOnInit(): void {
