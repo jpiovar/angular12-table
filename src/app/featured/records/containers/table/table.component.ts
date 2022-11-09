@@ -45,8 +45,8 @@ export class TableComponent implements OnInit, OnDestroy {
     this.translate.use(lang);
     // this.tt = this.translate.instant('HOME.main');
     this.translate.get(['RECORDS']).subscribe(res => {
-      debugger;
-      this.tt = res['RECORDS'].main;
+      // debugger;
+      // this.tt = res['RECORDS'].main;
     })
   }
 

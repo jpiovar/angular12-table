@@ -52,7 +52,7 @@ export class AppComponent implements OnDestroy, OnInit {
     this.translate.use(lang);
     // this.tt = this.translate.instant('HOME.main');
     this.translate.get(['HOME.main']).subscribe(res => {
-      this.tt = res['HOME.main'];
+      // this.tt = res['HOME.main'];
     })
   }
 
