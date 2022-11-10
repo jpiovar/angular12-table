@@ -21,6 +21,12 @@ export class LogoutBtnComponent implements OnInit, OnDestroy {
 
   dialogAction: string = '';
 
+  userAccount: any = {};
+
+  roles: any[] = [];
+  
+  userRole: any;
+
   constructor(
     private msalService: MsalService,
     private store: Store<AppState>,
@@ -39,6 +45,34 @@ export class LogoutBtnComponent implements OnInit, OnDestroy {
 
         })
     );
+    this.subscription.add(
+      this.store.select('user')
+        // .pipe(last())
+        .subscribe((res: any) => {
+          debugger;
+          this.userAccount = res?.account?.idTokenClaims;
+          if (this.roles?.length > 0 && this.userAccount) {
+            this.getUserRoleDetails(this.roles, this.userAccount);
+          }
+        })
+    );
+    this.subscription.add(
+      this.store.select('roles')
+        // .pipe(last())
+        .subscribe((res: any) => {
+          debugger;
+          this.roles = res?.data;
+          if (this.roles?.length > 0 && this.userAccount) {
+            this.userRole = this.getUserRoleDetails(this.roles, this.userAccount);
+          }
+        })
+    );
+
+    
+  }
+
+  getUserRoleDetails(roles, user) {
+    return roles.find(item => item.value === user.roles[0]) ;
   }
 
   logout() {

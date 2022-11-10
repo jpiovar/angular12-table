@@ -8,8 +8,12 @@
     </div>
     <div class="col-md-3 text-right">
       <button ngbTooltip="Logout" class="btn btn-primary" (click)="logout()">Logout</button>
-      <br/>
-      <span>user role: </span>
+      <p class="mt-5 mb-5">
+        User name: {{userAccount?.name}}
+        <br/>
+        User role: {{userRole?.displayName}}
+      </p>
+      
     </div>
   </div>
 </div>

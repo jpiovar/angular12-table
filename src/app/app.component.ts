@@ -14,6 +14,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InteractionRequiredAuthError } from '@azure/msal-browser';
 import { UserStoreData } from './state/user/user.actions';
+import { RolesLoad } from './state/roles/roles.actions';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,6 +28,8 @@ export class AppComponent implements OnDestroy, OnInit {
   languageParam = { value: 'intro' };
   translation: any;
   tt: string = '';
+  rolesEndPoint: string;
+  origin: string;
 
   constructor(
     private store: Store<AppState>,
@@ -44,6 +48,9 @@ export class AppComponent implements OnDestroy, OnInit {
     translate?.use(browserLang.match(/sk/) ? browserLang : 'sk');
 
     this.translationSubscribe();
+
+    this.origin = environment.beOrigin;
+    this.rolesEndPoint = environment.roles;
 
   }
 
@@ -84,6 +91,9 @@ export class AppComponent implements OnDestroy, OnInit {
     // // debugger;
     this.store.dispatch(new UserStoreData(res));
     // console.log('UserStoreData ', res);
+
+    const url = `${this.origin}${this.rolesEndPoint}`;
+    this.store.dispatch(new RolesLoad(url));
   }
 
   ngOnInit(): void {

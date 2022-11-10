@@ -15,5 +15,6 @@ export const environment = {
   infoBoxText: process.env.INFOBOX_TEXT || 'infoboxtext',
   deleteSubstring: process.env.DELETE_SUBSTRING || 'poz:',
   deletePopoverTitle: process.env.DELETE_POPOVER_TITLE || 'deletePopoverTitle',
-  deletePopoverText: process.env.DELETE_POPOVER_TEXT || 'deletePopoverText'
+  deletePopoverText: process.env.DELETE_POPOVER_TEXT || 'deletePopoverText',
+  roles: 'roles'
 };

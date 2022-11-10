@@ -31,6 +31,7 @@ import { reducer as toastr } from './state/toastr/toastr.reducer';
 import { reducer as records } from './state/records/records.reducer';
 import { reducer as user } from './state/user/user.reducer';
 import { reducer as logs } from './state/logs/logs.reducer';
+import { reducer as roles } from './state/roles/roles.reducer';
 import { reducer as recordsBase } from './state/records-base/records-base.reducer';
 import { reducer as tables } from './state/tables/tables.reducer';
 import { reducer as exportState } from './state/export/export.reducer';
@@ -38,6 +39,7 @@ import { reducer as recordsBaseExtended } from './state/records-base-extended/re
 
 import { RecordsEffects } from './state/records/records.effects';
 import { LogsEffects } from './state/logs/logs.effects';
+import { RolesEffects } from './state/roles/roles.effects';
 import { RecordsBaseEffects } from './state/records-base/records-base.effects';
 import { RecordsBaseExtendedEffects } from './state/records-base-extended/records-base-extended.effects';
 
@@ -107,6 +109,7 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
       records,
       user,
       logs,
+      roles,
       recordsBase,
       tables,
       exportState,
@@ -115,6 +118,7 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     EffectsModule.forRoot([
       RecordsEffects,
       LogsEffects,
+      RolesEffects,
       RecordsBaseEffects,
       RecordsBaseExtendedEffects
     ]),

@@ -1,0 +1,26 @@
+[
+    {
+        "displayName": "Readers",
+        "description": "Read only users",
+        "allowedMemeberType": "Users/Groups",
+        "value": "per-access-dwh-rating-reader"
+    },
+    {
+        "displayName": "Trace users",
+        "description": "User allowed to view content",
+        "allowedMemeberType": "Users/Groups",
+        "value": "per-access-dwh-rating-trace-reader"
+    },
+    {
+        "displayName": "Default dwh rating user",
+        "description": "default access role",
+        "allowedMemeberType": "Users/Groups",
+        "value": "per-access-dwh-rating-default"
+    },
+    {
+        "displayName": "Risk assessment",
+        "description": "Users allowed to setup values",
+        "allowedMemeberType": "Users/Groups",
+        "value": "per-access-dwh-rating-risk-assessment"
+    }
+]
