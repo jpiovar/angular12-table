@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/shared/modules/dialog/components/dialog/dialog.component';
 import { AppState } from 'src/app/state';
 import { UserStoreData } from 'src/app/state/user/user.actions';
+import availableRoles from 'src/assets/roles/definitions';
 
 @Component({
   selector: 'app-logout-btn',
@@ -51,22 +52,30 @@ export class LogoutBtnComponent implements OnInit, OnDestroy {
         .subscribe((res: any) => {
           debugger;
           this.userAccount = res?.account?.idTokenClaims;
-          if (this.roles?.length > 0 && this.userAccount) {
-            this.getUserRoleDetails(this.roles, this.userAccount);
+          if (this.userAccount?.roles?.length > 0) {
+            console.log('user has roles ', this.userAccount?.roles);
+            for (let i = 0; i < this.userAccount?.roles?.length; i++) {
+              if (availableRoles.indexOf(this.userAccount?.roles[i]) > -1) {
+                console.log('role ', this.userAccount?.roles[i], ' fits in availableRoles');
+              }
+            }
           }
+          // if (this.roles?.length > 0 && this.userAccount) {
+          //   this.getUserRoleDetails(this.roles, this.userAccount);
+          // }
         })
     );
-    this.subscription.add(
-      this.store.select('roles')
-        // .pipe(last())
-        .subscribe((res: any) => {
-          debugger;
-          this.roles = res?.data;
-          if (this.roles?.length > 0 && this.userAccount) {
-            this.userRole = this.getUserRoleDetails(this.roles, this.userAccount);
-          }
-        })
-    );
+    // this.subscription.add(
+    //   this.store.select('roles')
+    //     // .pipe(last())
+    //     .subscribe((res: any) => {
+    //       debugger;
+    //       this.roles = res?.data;
+    //       if (this.roles?.length > 0 && this.userAccount) {
+    //         this.userRole = this.getUserRoleDetails(this.roles, this.userAccount);
+    //       }
+    //     })
+    // );
 
     
   }

@@ -30,6 +30,7 @@ import { ExportStatus } from 'src/app/state/export/export.actions';
 
 import $ from 'jquery';
 import { DatePipe } from '@angular/common';
+import availableRoles from 'src/assets/roles/definitions';
 
 
 @Component({
@@ -108,6 +109,8 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
   markDisabled1: any;
 
   markDisabled2: any;
+
+  userAccount: any;
 
 
   // @ViewChild('d1') d1datepicker: NgbInputDatepicker;
@@ -376,7 +379,7 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
     this.createAndExecuteUrl();
   }
 
-  metaAndTableDataSubscription() {
+  metaAndTableDataSubscription() {    
     this.subscription.add(
       this.store.select('records')
         // .pipe(last())
@@ -439,6 +442,16 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
         if (res) {
           // debugger;
           this.user = res;
+        }
+
+        this.userAccount = res?.account?.idTokenClaims;
+        if (this.userAccount?.roles?.length > 0) {
+          console.log('user has roles ', this.userAccount?.roles);
+          for (let i = 0; i < this.userAccount?.roles?.length; i++) {
+            if (availableRoles.indexOf(this.userAccount?.roles[i]) > -1) {
+              console.log('table role ', this.userAccount?.roles[i], ' fits in availableRoles');
+            }
+          }
         }
       })
     );
