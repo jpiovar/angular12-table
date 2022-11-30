@@ -112,9 +112,9 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   userAccount: any;
 
-  insertBtnInactive: boolean = false;
+  insertBtnInactive: boolean = true;
 
-  editInactive: boolean = false;
+  editInactive: boolean = true;
 
   changeLogsInactive: boolean = true;
 
