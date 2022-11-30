@@ -27,7 +27,8 @@
         </div>
         <div class="col-md-6 text-right">
           <span class="mr-2" [ngClass]="{'not-allowed': recordsDiffArrObj}">
-            <app-insert-new-btn (click)="insertNewRecord()" [ngClass]="{'non-click': recordsDiffArrObj}">
+            <app-insert-new-btn (click)="insertNewRecord()" [ngClass]="{'non-click': recordsDiffArrObj || insertBtnInactive}"
+            [btnDisabled]="insertBtnInactive">
             </app-insert-new-btn>
           </span>
           <span [ngClass]="{'not-allowed': recordsDiffArrObj}"> Records
@@ -443,7 +444,7 @@
                   class="form-control"> -->
                 <select class="form-control custom-select" [(ngModel)]="item.manualnyRating"
                   [ngModelOptions]="{standalone: true}" (ngModelChange)="onInputChange('manualnyRating', item)"
-                  [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'">
+                  [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED' || editInactive">
                   <option value="" disabled>Vyberte manualny rating</option>
                   <option *ngFor="let itemV of ratingOptions" [ngValue]="itemV">{{itemV}}</option>
                 </select>
@@ -456,7 +457,7 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumOdErrorRequired}">
                 <div class="input-group">
-                  <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
+                  <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED' || editInactive"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumOd" ngbDatepicker #d="ngbDatepicker"
                     #c1="ngModel" (ngModelChange)="onInputChange('datumOd', item); changeDate($event)"
@@ -489,7 +490,7 @@
 
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.datumDoErrorRequired}">
                 <div class="input-group">
-                  <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'"
+                  <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED' || editInactive"
                     appNgbDatepickerI18nTitle [minDate]="minDate" [maxDate]="maxDate" class="form-control"
                     placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="item.datumDo" ngbDatepicker #d="ngbDatepicker"
                     #c2="ngModel" (ngModelChange)="onInputChange('datumDo', item); changeDate($event)"
@@ -530,7 +531,7 @@
 
             <td class="pl-1 pr-1" style="min-width: 200px; max-width: 200px; width: 100%;">
               <span *ngIf="!item.read" class="record-edit" [ngClass]="{'required': item?.poznamkaErrorRequired}">
-                <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED'" type="text"
+                <input [disabled]="item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED' || editInactive" type="text"
                   [(ngModel)]="item.poznamka" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="onInputChange('poznamka', item)" class="form-control">
                 <label *ngIf="item?.poznamkaErrorRequired">Required</label>
@@ -567,7 +568,7 @@
                 <mat-icon aria-label="edit_off" class="td-link">edit_off</mat-icon>
               </span> -->
               <span (click)="checkSubstring(item) && removeItem(item) && onInputChange('', item)"
-                [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED')}">
+                [ngClass]="{'non-click': (item?.status === 'INACTIVE' || item?.progressStatus === 'DELETED' || editInactive)}">
                 <span class="popover-wrapper" placement="left" #popoverD="ngbPopover" [ngbPopover]="deletePopoverText"
                   [popoverTitle]="deletePopoverTitle" triggers="manual">
                   <mat-icon aria-label="delete_forever" class="td-link ml-2" ngbTooltip="Delete item" (click)="!checkSubstring(item) && popoverD.open()">delete_forever
@@ -575,11 +576,11 @@
                 </span>
               </span>
               <span>
-                <mat-icon [ngClass]="{'non-click': false}" aria-label="history" class="td-link ml-2"
+                <mat-icon [ngClass]="{'non-click': changeLogsInactive}" aria-label="history" class="td-link ml-2"
                   (click)="showHistoryLog(item)" ngbTooltip="Show change log of record">history</mat-icon>
               </span>
               <span>
-                <mat-icon [ngClass]="{'non-click': (item?.status === 'INACTIVE')}" aria-label="undo"
+                <mat-icon [ngClass]="{'non-click': (item?.status === 'INACTIVE' || editInactive)}" aria-label="undo"
                   class="td-link ml-2" (click)="undoChange(item); onInputChange('', item)"
                   ngbTooltip="Undo changes of record">undo
                 </mat-icon>
@@ -593,7 +594,7 @@
   <div class="row">
     <div class="col-md-4" style="margin-left: 2%;">
       <button type="button" class="btn btn-primary"
-        [disabled]="!recordsDiffArrObj || getRecordsDiffArrObjError(recordsDiffArrObj)" (click)="saveChanges()">Save
+        [disabled]="!recordsDiffArrObj || getRecordsDiffArrObjError(recordsDiffArrObj || editInactive)" (click)="saveChanges()">Save
         changes</button>
       <!-- <button type="button" class="btn btn-info ml-2" [disabled]="!exportActive" (click)="exportToDwh()">Export to
         DWH</button> -->

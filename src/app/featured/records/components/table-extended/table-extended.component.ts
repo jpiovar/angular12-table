@@ -112,6 +112,12 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
 
   userAccount: any;
 
+  insertBtnInactive: boolean = false;
+
+  editInactive: boolean = false;
+
+  changeLogsInactive: boolean = true;
+
 
   // @ViewChild('d1') d1datepicker: NgbInputDatepicker;
 
@@ -451,6 +457,17 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
             if (availableRoles.indexOf(this.userAccount?.roles[i]) > -1) {
               console.log('table role ', this.userAccount?.roles[i], ' fits in availableRoles');
             }
+          }
+          if (this.userAccount?.roles.indexOf('per-access-dwh-rating-reader') > -1) {
+            this.insertBtnInactive = true;
+            this.editInactive = true;
+          }
+          if (this.userAccount?.roles.indexOf('per-access-dwh-rating-risk-assessment') > -1) {
+            this.insertBtnInactive = false;
+            this.editInactive = false;
+          }
+          if (this.userAccount?.roles.indexOf('per-access-dwh-rating-trace-reader') > -1) {
+            this.changeLogsInactive = false;
           }
         }
       })
