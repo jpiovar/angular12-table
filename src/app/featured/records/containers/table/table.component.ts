@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { indexOf } from 'lodash';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/state';
 import { StopSpinner } from 'src/app/state/spinner/spinner.actions';
-import availableRoles from 'src/assets/roles/definitions';
+import { availableRoles, userRoles } from 'src/assets/roles/definitions';
+
 
 @Component({
   selector: 'app-table',
@@ -39,11 +41,14 @@ export class TableComponent implements OnInit, OnDestroy {
           console.log('user has roles ', this.userAccount?.roles);
           for (let i = 0; i < this.userAccount?.roles?.length; i++) {
             if (availableRoles.indexOf(this.userAccount?.roles[i]) > -1) {
-              console.log('table container role ', this.userAccount?.roles[i], ' fits in availableRoles');
-              if (this.userAccount?.roles[i] === 'per-access-dwh-rating-reader') {
-                this.mainTableVisible = true;
-              }
+              console.log('table container user roles subscription ', this.userAccount?.roles[i], ' fits in availableRoles');
+              // if (this.userAccount?.roles[i] === userRoles.Readers.value) {
+              //   this.mainTableVisible = true;
+              // }
             }
+          }
+          if (this.userAccount?.roles.indexOf(userRoles.Readers.value) > -1) {
+            this.mainTableVisible = true;
           }
         }
 

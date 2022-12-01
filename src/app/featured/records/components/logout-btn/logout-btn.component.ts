@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { DialogComponent } from 'src/app/shared/modules/dialog/components/dialog/dialog.component';
 import { AppState } from 'src/app/state';
 import { UserStoreData } from 'src/app/state/user/user.actions';
-import availableRoles from 'src/assets/roles/definitions';
+import { availableRoles } from 'src/assets/roles/definitions';
 
 @Component({
   selector: 'app-logout-btn',
@@ -56,7 +56,7 @@ export class LogoutBtnComponent implements OnInit, OnDestroy {
             console.log('user has roles ', this.userAccount?.roles);
             for (let i = 0; i < this.userAccount?.roles?.length; i++) {
               if (availableRoles.indexOf(this.userAccount?.roles[i]) > -1) {
-                console.log('role ', this.userAccount?.roles[i], ' fits in availableRoles');
+                console.log('logoutBtn user roles subscription ', this.userAccount?.roles[i], ' fits in availableRoles');
               }
             }
           }

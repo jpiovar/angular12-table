@@ -30,7 +30,7 @@ import { ExportStatus } from 'src/app/state/export/export.actions';
 
 import $ from 'jquery';
 import { DatePipe } from '@angular/common';
-import availableRoles from 'src/assets/roles/definitions';
+import { availableRoles, userRoles } from 'src/assets/roles/definitions';
 
 
 @Component({
@@ -458,15 +458,15 @@ export class TableExtendedComponent implements OnInit, OnDestroy {
               console.log('table role ', this.userAccount?.roles[i], ' fits in availableRoles');
             }
           }
-          if (this.userAccount?.roles.indexOf('per-access-dwh-rating-reader') > -1) {
+          if (this.userAccount?.roles.indexOf(userRoles.Readers.value) > -1) {
             this.insertBtnInactive = true;
             this.editInactive = true;
           }
-          if (this.userAccount?.roles.indexOf('per-access-dwh-rating-risk-assessment') > -1) {
+          if (this.userAccount?.roles.indexOf(userRoles.RiskAssessments.value) > -1) {
             this.insertBtnInactive = false;
             this.editInactive = false;
           }
-          if (this.userAccount?.roles.indexOf('per-access-dwh-rating-trace-reader') > -1) {
+          if (this.userAccount?.roles.indexOf(userRoles.TraceUsers.value) > -1) {
             this.changeLogsInactive = false;
           }
         }
